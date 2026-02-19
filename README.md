@@ -62,14 +62,23 @@
    ```
 
 2. **패키지 설치**
+
+   ```bash
    pnpm install
+   ```
 
 3. **환경 변수 세팅 (.env.local)**
+
+   ```bash
    NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
 
 4. **로컬 서버 실행**
+
+   ```bash
    pnpm dev
+   ```
 
 ---
 
@@ -81,3 +90,11 @@
 ---
 
 © 2026 M-DEENO. All rights reserved.
+
+```
+
+```
+
+```
+
+```
