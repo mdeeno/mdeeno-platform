@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import styles from './page.module.css';
 import { supabase } from '@/lib/supabase';
+import { sendGAEvent } from '@next/third-parties/google';
 
 export default function PropLogicMvp() {
   const [inputs, setInputs] = useState({
@@ -44,7 +45,9 @@ export default function PropLogicMvp() {
           });
 
           const data = await response.json();
-          if (response.ok) setResult(data);
+          if (response.ok) {
+            setResult(data);
+          }
         } catch (error) {
           console.error('계산 에러:', error);
         }
@@ -66,12 +69,16 @@ export default function PropLogicMvp() {
   };
 
   const handleSubscribe = async () => {
-    if (!email) return alert('이메일을 입력해 주세요.');
+    if (!email) {
+      return alert('이메일을 입력해 주세요.');
+    }
     const { error } = await supabase
       .from('expert_requests')
       .insert([{ email, ...inputs, score: result.score }]);
-    if (error) alert('오류: ' + error.message);
-    else {
+    if (error) {
+      alert('오류: ' + error.message);
+    } else {
+      sendGAEvent({ event: 'generate_lead', value: 'expert_report_request' });
       alert('신청 완료! 전문가 리포트를 곧 보내드립니다.');
       setEmail('');
     }
