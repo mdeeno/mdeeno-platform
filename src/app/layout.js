@@ -9,7 +9,9 @@ export const metadata = {
   description:
     '감이나 소문이 아닌, Prop-Logic 알고리즘으로 가장 확실한 부동산 전략을 세우세요.',
   verification: {
-    naver: '905d72e9887519789a9582161fb78f72480e8152',
+    other: {
+      'naver-site-verification': ['905d72e9887519789a9582161fb78f72480e8152'],
+    },
   },
   openGraph: {
     title: 'M-DEENO Prop-Logic | Master Digital Economic Innovation',
@@ -35,8 +37,8 @@ export default function RootLayout({ children }) {
         <Header />
         <main>{children}</main>
         <Footer />
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
       </body>
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
     </html>
   );
 }
