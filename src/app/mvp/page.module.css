@@ -1,0 +1,408 @@
+/* 기본 컨테이너 */
+.labContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  font-family:
+    'Pretendard',
+    -apple-system,
+    sans-serif;
+  color: #1e293b;
+}
+
+/* 텍스트 스타일 공통 */
+.colorBlue {
+  color: #1e40af;
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.introSection {
+  margin: 40px 0;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  border-left: 5px solid #1e40af;
+  padding-left: 12px;
+  margin: 40px 0 20px;
+}
+
+.labP1 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #334155;
+  margin-bottom: 8px;
+}
+
+.labP3 {
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.labText {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #334155;
+  margin-bottom: 12px;
+}
+
+.labSmallText {
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.subtleLabel {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #1e40af;
+  margin-bottom: 15px;
+}
+
+.helperText {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-top: 6px;
+}
+
+/* 수식 박스 레이아웃 */
+.labFormulaBox {
+  background: #f8fafc;
+  padding: 30px;
+  border-radius: 16px;
+  margin: 30px 0;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+}
+
+.formulaTitle {
+  color: #1e40af;
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.labFormulaText {
+  font-size: clamp(1rem, 4vw, 1.4rem);
+  background-color: #ffffff;
+  padding: 15px;
+  margin: 15px 0;
+  color: #0f172a;
+  font-weight: 800;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.labFormulaCaption {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* 메인 엔진 (입력 폼 영역) */
+.labEngineContainer {
+  margin-top: 50px;
+}
+
+.engineTitle {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin-bottom: 24px;
+}
+
+.labInputGroup {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.stepLabel {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 15px;
+}
+
+.labGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.labLabel {
+  display: block;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.flexBox {
+  display: flex;
+  gap: 8px;
+}
+
+.labInput {
+  padding: 12px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  color: #0f172a;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.labInput:focus {
+  border-color: #1e40af;
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+.scenarioGuide {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f1f5f9;
+  border-radius: 8px;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px dashed #cbd5e1;
+  margin: 30px 0;
+}
+
+/* 슬라이더 제어기 */
+.costHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.costNumber {
+  width: 100px;
+  padding: 8px;
+  border: 2px solid #1e40af;
+  border-radius: 8px;
+  text-align: right;
+  font-weight: 800;
+  color: #1e40af;
+  font-size: 1.1rem;
+  outline: none;
+}
+
+.costSlider {
+  width: 100%;
+  cursor: pointer;
+  accent-color: #1e40af;
+  margin-top: 10px;
+}
+
+/* 시나리오 카드 */
+.scenarioCard {
+  background: #f8fafc;
+}
+
+.scenarioGrid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.scenarioOption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #64748b;
+  transition: all 0.2s;
+}
+
+.activeScenario {
+  background: #1e40af;
+  color: #ffffff;
+  border-color: #1e40af;
+}
+
+.scenarioGuideBox {
+  background: #eff6ff;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+/* 결과 포커스 창 */
+.labResultFocus {
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  padding: 40px 20px;
+  box-shadow: 0 10px 30px rgba(30, 64, 175, 0.08);
+  margin-top: 40px;
+  transition: border-color 0.3s;
+}
+
+.resultSubtitle {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #475569;
+  margin-bottom: 20px;
+}
+
+.labScoreDisplay {
+  font-size: clamp(4rem, 10vw, 5.5rem);
+  font-weight: 900;
+  margin: 15px 0;
+  line-height: 1;
+  transition: color 0.3s;
+}
+
+.scoreUnit {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-left: 5px;
+}
+
+.statusMessage {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.detailDescription {
+  font-size: 0.95rem;
+  color: #64748b;
+}
+
+/* 이메일 리드 폼 */
+.leadFormBox {
+  background: #eff6ff;
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid #bfdbfe;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.leadTitle {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #1e40af;
+  margin-bottom: 10px;
+}
+
+.leadDesc {
+  font-size: 0.9rem;
+  color: #475569;
+  margin-bottom: 20px;
+}
+
+.emailForm {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.emailInput {
+  flex: 1;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  outline: none;
+  font-size: 1rem;
+}
+
+.emailBtn {
+  background: #1e40af;
+  color: #ffffff;
+  border: none;
+  padding: 0 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.emailBtn:hover {
+  background: #1e3a8a;
+}
+
+/* 하단 CTA 구역 */
+.labCtaSection {
+  margin-top: 50px;
+  text-align: center;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 40px;
+}
+
+.ctaWarn {
+  color: #ea580c;
+  font-weight: 800;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.labBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 30px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  border-radius: 10px;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.labBtnCta {
+  background: #f97316;
+}
+
+.labBtnCta:hover {
+  background: #ea580c;
+  transform: translateY(-2px);
+}
+
+/* 모바일 화면 대응 */
+@media (max-width: 600px) {
+  .labGrid {
+    grid-template-columns: 1fr;
+  }
+  .scenarioGrid3 {
+    grid-template-columns: 1fr;
+  }
+  .emailForm {
+    flex-direction: column;
+  }
+  .emailBtn {
+    padding: 14px;
+  }
+}
