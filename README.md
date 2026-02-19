@@ -56,6 +56,28 @@
 ## ⚙️ 실행 방법 (Local Development)
 
 1. 저장소 클론
+
    ```bash
-   git clone [https://github.com/대표님의아이디/mdeeno-platform.git](https://github.com/대표님의아이디/mdeeno-platform.git)
+   git clone [https://github.com/mdeeno/mdeeno-platform.git](https://github.com/mdeeno/mdeeno-platform.git)
    ```
+
+2. **패키지 설치**
+   pnpm install
+
+3. **환경 변수 세팅 (.env.local)**
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+4. **로컬 서버 실행**
+   pnpm dev
+
+---
+
+## 👤 Author
+
+- **M-DEENO Official** ([mdeeno.com](https://mdeeno.com))
+- 정비사업 및 부동산 의사결정 구조 연구소
+
+---
+
+© 2026 M-DEENO. All rights reserved.
