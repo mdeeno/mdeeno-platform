@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📊 M-DEENO Prop-Logic Platform (MVP)
 
-## Getting Started
+> **"재건축 분담금 리스크를 데이터로 진단하다."** > 도시공학 시나리오와 공사비 변수를 결합한 실시간 사업성 시뮬레이션 플랫폼
 
-First, run the development server:
+[![Next.js](https://img.shields.io/badge/Next.js-15.0-black?logo=next.js)](https://nextjs.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-DB-green?logo=supabase)](https://supabase.com/)
+[![Render](https://img.shields.io/badge/Backend-Render-blue?logo=render)](https://render.com/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 프로젝트 개요
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+**Prop-Logic**은 정비사업(재건축/재개발) 과정에서 조합원이 겪는 분담금 불확실성을 해결하기 위한 도구입니다. 복잡한 수식을 배제하고 핵심 변수인 **'공사비'**와 **'자산가치'**를 제어하여 누구나 직관적으로 사업 안정성을 점검할 수 있도록 설계되었습니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🧪 주요 기능
 
-## Learn More
+- **실시간 구조 분석 엔진**: 슬라이더를 통해 평당 공사비 변화에 따른 사업 안정성(Prop-Logic Index) 실시간 산출
+- **시장 환경 시나리오**: 현재 평균, 최악 가정, 최고 구간 등 3가지 거시경제 시나리오 적용
+- **데이터 기반 리드 수집**: 분석 결과를 바탕으로 전문가 정밀 검증 보고서 신청 프로세스 구현
+- **반응형 UX**: 모바일과 데스크탑 어디서든 쾌적하게 시뮬레이션 가능한 대시보드 UI
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠 Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Frontend
 
-## Deploy on Vercel
+- **Framework**: Next.js 15 (App Router)
+- **Styling**: CSS Modules (Custom Laboratory Theme)
+- **Deployment**: Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Backend & Database
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Logic Engine**: Python FastAPI (Deployed on Render)
+- **Database**: Supabase (PostgreSQL)
+- **Authentication/Security**: Supabase RLS (Row Level Security)
+
+---
+
+## 🏗 아키텍처 및 보안 (Architecture & Security)
+
+### 1. API Route Proxying
+
+브라우저의 CORS 이슈를 방지하고 백엔드 보안을 강화하기 위해 Next.js 내부 API Route를 프록시로 사용하여 서버 간 통신(S2S) 구조를 구축했습니다.
+
+### 2. Debouncing Optimization
+
+사용자의 빈번한 입력 변화(Slider 드래그 등)로 인한 불필요한 API 호출을 방지하기 위해 500ms 디바운싱 로직을 적용, 서버 부하를 최소화했습니다.
+
+### 3. Supabase RLS (Row Level Security)
+
+`expert_requests` 테이블에 대해 익명 사용자의 `INSERT` 권한만 허용하고, 외부에서의 `SELECT`를 원천 차단하여 사용자 이메일 등 리드 데이터를 안전하게 보호합니다.
+
+---
+
+## ⚙️ 실행 방법 (Local Development)
+
+1. 저장소 클론
+   ```bash
+   git clone [https://github.com/대표님의아이디/mdeeno-platform.git](https://github.com/대표님의아이디/mdeeno-platform.git)
+   ```
