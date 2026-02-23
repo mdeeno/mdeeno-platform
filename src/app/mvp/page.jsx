@@ -146,10 +146,14 @@ export default function PropLogicMvp() {
 
     try {
       // 2. Supabase에 리드 저장 (DB 저장은 무조건 실행!)
-      const { error: dbError } = await supabase
+const { error: dbError } = await supabase
         .from('expert_requests')
         .insert([{ email, ...inputs, score: result.score }]);
-      if (dbError) console.error('DB 저장 에러:', dbError);
+      
+      if (dbError) {
+        console.error('DB 저장 에러:', dbError);
+        throw new Error('데이터베이스 통신 오류');
+      }
 
       // =================================================================
       // 🚨 [추후 복구용 주석] 6월 이후 자동화 / 유료화 시 아래 주석만 해제하세요!
