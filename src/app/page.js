@@ -20,7 +20,7 @@ export default function Home() {
             <Link href="/mvp" className={styles.primaryBtn}>
               내 분담금 무료 계산하기
             </Link>
-            <a href="#sample-report" className={styles.secondaryBtn}>
+            <a href="/sample-report" className={styles.secondaryBtn}>
               📄 리포트 샘플 보기
             </a>
           </div>

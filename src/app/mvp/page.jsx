@@ -8,13 +8,14 @@ import { sendGAEvent } from '@next/third-parties/google';
 export default function PropLogicMvp() {
   // 1. 단계 관리를 위한 state 추가
   const [step, setStep] = useState(1);
+  const [isGenerating, setIsGenerating] = useState(false); // 로딩상태
 
   // 2. 입력 폼 대폭 확장 (기본 + PDF용 추가 정보)
   const [inputs, setInputs] = useState({
     // Step 1 기본 정보
-    area: 5000,
+    area: 55000,
     unit: 'py',
-    assetValue: 250,
+    assetValue: 6400,
     cost: 900,
     scenario: 'base',
     // Step 2 추가 정보
@@ -55,6 +56,9 @@ export default function PropLogicMvp() {
               asset_value: inputs.assetValue,
               cost: inputs.cost,
               scenario: inputs.scenario,
+              // [Data Asset] B2B 데이터 축적을 위해 비식별 정보(지역, 단지명)도 함께 전송
+              location: inputs.location,
+              complex_name: inputs.complexName,
             }),
           });
 
@@ -82,19 +86,118 @@ export default function PropLogicMvp() {
     }));
   };
 
-  const handleSubscribe = async () => {
-    if (!email) {
-      return alert('이메일을 입력해 주세요.');
+  // 1단계 -> 2단계 이동 시 유효성 검사
+  const handleStep1Next = () => {
+    if (
+      !inputs.area ||
+      inputs.area <= 0 ||
+      !inputs.assetValue ||
+      inputs.assetValue <= 0
+    ) {
+      alert(
+        "정확한 계산을 위해 '건축 연면적'과 '종전자산 평가액'을 입력해 주세요.",
+      );
+      return;
     }
-    const { error } = await supabase
-      .from('expert_requests')
-      .insert([{ email, ...inputs, score: result.score }]);
-    if (error) {
-      alert('오류: ' + error.message);
-    } else {
-      sendGAEvent({ event: 'generate_lead', value: 'expert_report_request' });
-      alert('신청 완료! 전문가 리포트를 곧 보내드립니다.');
+    setStep(2);
+    setTimeout(
+      () =>
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth',
+        }),
+      100,
+    );
+  };
+
+  // 2단계 -> 3단계 이동 시 유효성 검사
+  const handleNextStep = () => {
+    if (
+      !inputs.complexName ||
+      !inputs.location ||
+      !inputs.households ||
+      !inputs.avgSize
+    ) {
+      alert('정밀 분석을 위해 필수 정보(*)를 모두 입력해 주세요.');
+      return;
+    }
+    setStep(3);
+    setTimeout(
+      () =>
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth',
+        }),
+      100,
+    );
+  };
+
+  // 리포트 신청 및 다운로드 로직
+  // 3단계: 리포트 생성 및 다운로드 API 호출
+  // 🚀 3단계: 리포트 신청 (컨시어지 MVP 모드 - 자동 다운로드 임시 주석)
+  const handleSubscribe = async () => {
+    // 1. 이메일 정규식 검사
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      return alert('올바른 이메일 주소를 입력해 주세요.');
+    }
+
+    setIsGenerating(true); // 버튼 비활성화 & 로딩 시작
+
+    try {
+      // 2. Supabase에 리드 저장 (DB 저장은 무조건 실행!)
+      const { error: dbError } = await supabase
+        .from('expert_requests')
+        .insert([{ email, ...inputs, score: result.score }]);
+      if (dbError) console.error('DB 저장 에러:', dbError);
+
+      // =================================================================
+      // 🚨 [추후 복구용 주석] 6월 이후 자동화 / 유료화 시 아래 주석만 해제하세요!
+      // =================================================================
+      /*
+      const areaValue =
+        inputs.unit === 'm2' ? (inputs.area * 0.3025).toFixed(2) : inputs.area;
+      const response = await fetch('/api/report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...inputs,
+          area: areaValue,
+          email,
+          score: result.score,
+          complexName: inputs.complexName,
+          avgSize: inputs.avgSize,
+          households: inputs.households,
+        }),
+      });
+
+      if (!response.ok) throw new Error('서버에서 리포트를 만들지 못했습니다.');
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `M-DEENO_분석리포트_${inputs.complexName}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+      */
+      // =================================================================
+
+      // 구글 애널리틱스 이벤트 전송
+      sendGAEvent({ event: 'generate_report', value: 'success' });
+
+      // 3. 유저 안내 메시지 (수동 발송 안내)
+      alert(
+        '✅ 리포트 신청이 완료되었습니다.\n\nM-DEENO 전문가가 입력하신 데이터를 1차 검증한 후, 24시간 내에 기재해주신 이메일로 분석 리포트(PDF)를 발송해 드립니다.',
+      );
       setEmail('');
+    } catch (err) {
+      console.error('리포트 신청 실패:', err);
+      alert('리포트 신청 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+    } finally {
+      setIsGenerating(false); // 로딩 해제
     }
   };
 
@@ -282,8 +385,16 @@ export default function PropLogicMvp() {
         <p className={styles.statusMessage} style={{ color: result.color }}>
           {result.status}
         </p>
-        <p className={styles.detailDescription}>{result.description}</p>
-
+        <p>
+          <span>{result.description}</span>
+        </p>
+        <br />
+        <p className={styles.detailDescription}>
+          * 본 서비스(Prop-Logic)의 분석 결과는 추정치이며, 조합의 공식 결과와
+          다를 수 있습니다.
+          <br />* 본 자료는 법적 분쟁의 증거로 사용될 수 없으며, 의사결정의
+          참고용으로만 활용하시기 바랍니다.
+        </p>
         {/* Step 1일 때만 '다음 단계' 버튼 표시 */}
         {step === 1 && (
           <div style={{ textAlign: 'center', marginTop: '40px' }}>
@@ -291,17 +402,7 @@ export default function PropLogicMvp() {
               📌 위 점수는 단순 가정을 통한 ‘판단의 출발점’일 뿐입니다.
             </p>
             <button
-              onClick={() => {
-                setStep(2);
-                setTimeout(
-                  () =>
-                    window.scrollTo({
-                      top: document.body.scrollHeight,
-                      behavior: 'smooth',
-                    }),
-                  100,
-                );
-              }}
+              onClick={handleStep1Next}
               className={`${styles.labBtn} ${styles.labBtnCta}`}
             >
               📄 조합 제출용 상세 리포트 신청하기 →
@@ -415,17 +516,7 @@ export default function PropLogicMvp() {
           {step === 2 && (
             <div style={{ textAlign: 'center', marginTop: '30px' }}>
               <button
-                onClick={() => {
-                  setStep(3);
-                  setTimeout(
-                    () =>
-                      window.scrollTo({
-                        top: document.body.scrollHeight,
-                        behavior: 'smooth',
-                      }),
-                    100,
-                  );
-                }}
+                onClick={handleNextStep}
                 className={styles.labBtn}
                 style={{ background: '#1e40af' }}
               >
@@ -451,6 +542,49 @@ export default function PropLogicMvp() {
             실제 조합 및 총회에 제출할 수 있는 수준의 상세 분석 리포트(PDF)가
             발송됩니다.
           </p>
+
+          {/* 링크 및 클릭 유도 UI 적용 */}
+          <div className={styles.thumbnailWrapper}>
+            <a
+              href="/sample-report"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: 'none', transition: 'transform 0.2s' }}
+              onMouseOver={(e) =>
+                (e.currentTarget.style.transform = 'scale(1.05)')
+              }
+              onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+            >
+              <div
+                className={styles.fakePdf}
+                style={{ cursor: 'pointer', border: '2px solid #1e40af' }}
+              >
+                <div className={styles.fakePdfHeader}></div>
+                <div className={styles.fakePdfBody}></div>
+                <div className={styles.fakePdfBodyShort}></div>
+                {/* 클릭 유도 텍스트로 변경 */}
+                <p
+                  className={styles.fakePdfText}
+                  style={{ fontSize: '0.8rem' }}
+                >
+                  🔍 리포트 샘플 보기
+                </p>
+              </div>
+            </a>
+          </div>
+          <p
+            style={{
+              textAlign: 'center',
+              fontSize: '0.8rem',
+              color: '#1e40af',
+              marginTop: '-20px',
+              marginBottom: '20px',
+              fontWeight: '700',
+            }}
+          >
+            👆 이미지를 클릭하면 샘플을 볼 수 있습니다.
+          </p>
+
           <div className={styles.emailForm}>
             <input
               type="email"
@@ -458,13 +592,23 @@ export default function PropLogicMvp() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={styles.emailInput}
+              disabled={isGenerating}
             />
+
+            {/* =================================================================
+                🚨 [추후 복구용 주석] 6월 이후 자동화 시 아래 텍스트로 원복하세요!
+                {isGenerating ? 'PDF 굽는 중... ⏳' : '리포트 즉시 다운로드'}
+                ================================================================= */}
             <button
               onClick={handleSubscribe}
               className={styles.emailBtn}
-              style={{ background: '#f97316' }}
+              style={{
+                background: isGenerating ? '#94a3b8' : '#f97316',
+                cursor: isGenerating ? 'not-allowed' : 'pointer',
+              }}
+              disabled={isGenerating}
             >
-              리포트 신청 완료
+              {isGenerating ? '신청 접수 중... ⏳' : '전문가 검증 리포트 신청'}
             </button>
           </div>
           <p
