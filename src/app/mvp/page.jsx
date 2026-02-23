@@ -6,13 +6,27 @@ import { supabase } from '@/lib/supabase';
 import { sendGAEvent } from '@next/third-parties/google';
 
 export default function PropLogicMvp() {
+  // 1. 단계 관리를 위한 state 추가
+  const [step, setStep] = useState(1);
+
+  // 2. 입력 폼 대폭 확장 (기본 + PDF용 추가 정보)
   const [inputs, setInputs] = useState({
+    // Step 1 기본 정보
     area: 5000,
     unit: 'py',
     assetValue: 250,
     cost: 900,
     scenario: 'base',
+    // Step 2 추가 정보
+    complexName: '', // 단지명
+    location: '', // 위치(구)
+    households: '', // 세대수
+    avgSize: '', // 기존 평균 평형
+    salePrice: '', // 일반분양가 가정
+    generalRatio: '', // 일반분양 비율
+    applicantName: '', // 신청자 이름
   });
+
   const [result, setResult] = useState({
     score: '0.00',
     color: '#1e40af',
@@ -84,14 +98,6 @@ export default function PropLogicMvp() {
     }
   };
 
-  const generateMailLink = (type = 'soft') => {
-    const level = type === 'hard' ? '정밀 검증 요청' : '1차 구조 검토 요청';
-    const body = encodeURIComponent(
-      `[요청 유형] ${level}\n안정성 점수: ${result.score}점\n현재 설정 기준으로 분석을 요청합니다.`,
-    );
-    window.location.href = `mailto:mdeeno.official@gmail.com?subject=[Prop-Logic 분석]&body=${body}`;
-  };
-
   return (
     <div className={styles.labContainer}>
       {/* 1. 실험실 헤더 */}
@@ -141,7 +147,9 @@ export default function PropLogicMvp() {
         </p>
       </div>
 
-      {/* 4. 엔진 컨테이너 */}
+      {/* ========================================================= */}
+      {/* [STEP 1] 기본 분석 엔진 (항상 보임) */}
+      {/* ========================================================= */}
       <div className={styles.labEngineContainer}>
         <h3 className={styles.engineTitle}>📊 실시간 구조 분석 엔진 v1.1</h3>
 
@@ -233,7 +241,6 @@ export default function PropLogicMvp() {
         </div>
       </div>
 
-      {/* 5. 시나리오 선택 */}
       <div className={`${styles.labInputGroup} ${styles.scenarioCard}`}>
         <p className={styles.subtleLabel}>📍 시장 환경 시나리오 (가정 비교)</p>
         <div className={styles.scenarioGrid3}>
@@ -260,25 +267,9 @@ export default function PropLogicMvp() {
             </label>
           ))}
         </div>
-        <div className={styles.scenarioGuideBox}>
-          <ul
-            className={styles.labSmallText}
-            style={{ paddingLeft: '20px', marginBottom: '10px' }}
-          >
-            <li>
-              <strong>현재 평균</strong> · 수도권 일반적 사업 구조
-            </li>
-            <li>
-              <strong>최악 가정</strong> · 금리·공사비 리스크 동시 발생
-            </li>
-            <li>
-              <strong>최고 구간</strong> · 고분양가 + 고사양 리스크 동반 상승
-            </li>
-          </ul>
-        </div>
       </div>
 
-      {/* 6. 결과창 */}
+      {/* 결과창 (Step 1의 끝) */}
       <div
         className={`${styles.labFormulaBox} ${styles.labResultFocus}`}
         style={{ borderTop: `5px solid ${result.color}` }}
@@ -292,45 +283,199 @@ export default function PropLogicMvp() {
           {result.status}
         </p>
         <p className={styles.detailDescription}>{result.description}</p>
+
+        {/* Step 1일 때만 '다음 단계' 버튼 표시 */}
+        {step === 1 && (
+          <div style={{ textAlign: 'center', marginTop: '40px' }}>
+            <p className={styles.ctaWarn} style={{ marginBottom: '15px' }}>
+              📌 위 점수는 단순 가정을 통한 ‘판단의 출발점’일 뿐입니다.
+            </p>
+            <button
+              onClick={() => {
+                setStep(2);
+                setTimeout(
+                  () =>
+                    window.scrollTo({
+                      top: document.body.scrollHeight,
+                      behavior: 'smooth',
+                    }),
+                  100,
+                );
+              }}
+              className={`${styles.labBtn} ${styles.labBtnCta}`}
+            >
+              📄 조합 제출용 상세 리포트 신청하기 →
+            </button>
+          </div>
+        )}
       </div>
 
-      {/* 7. 리드 수집 폼 & CTA */}
-      <div className={styles.leadFormBox}>
-        <h3 className={styles.leadTitle}>✉️ 전문가 정밀 검증 리포트 신청</h3>
-        <p className={styles.leadDesc}>
-          입력하신 {inputs.area}평 단지 기준으로 정밀 시뮬레이션을 진행해
-          드립니다.
-        </p>
-        <div className={styles.emailForm}>
-          <input
-            type="email"
-            placeholder="결과를 받으실 이메일 주소"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={styles.emailInput}
-          />
-          <button onClick={handleSubscribe} className={styles.emailBtn}>
-            무료 신청하기
-          </button>
-        </div>
-      </div>
-
-      <div className={styles.labCtaSection}>
-        <p className={styles.ctaWarn}>
-          📌 이 점수는 ‘판단의 출발점’일 뿐입니다.
-        </p>
-        <p className={styles.labSmallText}>
-          * 실제 단지 여건에 따라 결과는 크게 달라질 수 있습니다.
-        </p>
-        <div style={{ textAlign: 'center', marginTop: '30px' }}>
-          <button
-            onClick={() => generateMailLink('hard')}
-            className={`${styles.labBtn} ${styles.labBtnCta}`}
+      {/* ========================================================= */}
+      {/* [STEP 2] 추가 정보 입력 (Step 2 이상일 때만 렌더링) */}
+      {/* ========================================================= */}
+      {step >= 2 && (
+        <div
+          className={styles.labInputGroup}
+          style={{ marginTop: '30px', border: '2px solid #1e40af' }}
+        >
+          <h3
+            className={styles.sectionTitle}
+            style={{
+              margin: '10px 0 20px',
+              borderLeft: 'none',
+              textAlign: 'center',
+            }}
           >
-            {result.cta_text || '점수 기준으로 전문가 검증하기'}
-          </button>
+            📝 정밀 분석을 위한 추가 정보
+          </h3>
+          <p
+            className={styles.labSmallText}
+            style={{
+              textAlign: 'center',
+              marginBottom: '30px',
+              color: '#ea580c',
+            }}
+          >
+            * 입력하신 정보는 리포트 생성에만 사용되며 외부에 절대 공개되지
+            않습니다.
+          </p>
+
+          <div className={styles.labGrid}>
+            <div>
+              <label className={styles.labLabel}>단지명 *</label>
+              <input
+                type="text"
+                name="complexName"
+                value={inputs.complexName || ''}
+                onChange={handleChange}
+                className={styles.labInput}
+                placeholder="예: 마포 래미안 푸르지오"
+              />
+            </div>
+            <div>
+              <label className={styles.labLabel}>위치(구/동) *</label>
+              <input
+                type="text"
+                name="location"
+                value={inputs.location || ''}
+                onChange={handleChange}
+                className={styles.labInput}
+                placeholder="예: 마포구 아현동"
+              />
+            </div>
+            <div>
+              <label className={styles.labLabel}>총 세대수 *</label>
+              <input
+                type="number"
+                name="households"
+                value={inputs.households || ''}
+                onChange={handleChange}
+                className={styles.labInput}
+                placeholder="예: 3885"
+              />
+            </div>
+            <div>
+              <label className={styles.labLabel}>기존 평균 평형 *</label>
+              <input
+                type="number"
+                name="avgSize"
+                value={inputs.avgSize || ''}
+                onChange={handleChange}
+                className={styles.labInput}
+                placeholder="예: 34"
+              />
+            </div>
+            <div>
+              <label className={styles.labLabel}>
+                일반분양가 예상 (평당 만원)
+              </label>
+              <input
+                type="number"
+                name="salePrice"
+                value={inputs.salePrice || ''}
+                onChange={handleChange}
+                className={styles.labInput}
+                placeholder="예: 4500 (선택)"
+              />
+            </div>
+            <div>
+              <label className={styles.labLabel}>신청자 이름 (선택)</label>
+              <input
+                type="text"
+                name="applicantName"
+                value={inputs.applicantName || ''}
+                onChange={handleChange}
+                className={styles.labInput}
+                placeholder="예: 홍길동"
+              />
+            </div>
+          </div>
+
+          {/* Step 2일 때만 '다음 단계' 버튼 표시 */}
+          {step === 2 && (
+            <div style={{ textAlign: 'center', marginTop: '30px' }}>
+              <button
+                onClick={() => {
+                  setStep(3);
+                  setTimeout(
+                    () =>
+                      window.scrollTo({
+                        top: document.body.scrollHeight,
+                        behavior: 'smooth',
+                      }),
+                    100,
+                  );
+                }}
+                className={styles.labBtn}
+                style={{ background: '#1e40af' }}
+              >
+                다음 단계로 →
+              </button>
+            </div>
+          )}
         </div>
-      </div>
+      )}
+
+      {/* ========================================================= */}
+      {/* [STEP 3] 이메일 수집 및 최종 신청 (Step 3일 때만 렌더링) */}
+      {/* ========================================================= */}
+      {step === 3 && (
+        <div
+          className={styles.leadFormBox}
+          style={{ border: '2px solid #f97316' }}
+        >
+          <h3 className={styles.leadTitle}>
+            📩 리포트를 받아보실 이메일을 입력해 주세요
+          </h3>
+          <p className={styles.leadDesc}>
+            실제 조합 및 총회에 제출할 수 있는 수준의 상세 분석 리포트(PDF)가
+            발송됩니다.
+          </p>
+          <div className={styles.emailForm}>
+            <input
+              type="email"
+              placeholder="결과를 받으실 이메일 주소"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={styles.emailInput}
+            />
+            <button
+              onClick={handleSubscribe}
+              className={styles.emailBtn}
+              style={{ background: '#f97316' }}
+            >
+              리포트 신청 완료
+            </button>
+          </div>
+          <p
+            className={styles.helperText}
+            style={{ marginTop: '20px', fontSize: '0.85rem' }}
+          >
+            (현재 베타 기간 한정 <strong>무료</strong> 제공 중입니다. 추후
+            39,000원에 유료 전환될 예정입니다.)
+          </p>
+        </div>
+      )}
     </div>
   );
 }

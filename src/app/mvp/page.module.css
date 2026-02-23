@@ -391,6 +391,14 @@
   transform: translateY(-2px);
 }
 
+.comment {
+  text-align: center;
+  padding: 3rem 1rem;
+  font-size: 0.85rem;
+  color: #888;
+  word-break: keep-all;
+}
+
 /* 모바일 화면 대응 */
 @media (max-width: 600px) {
   .labGrid {
