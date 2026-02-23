@@ -9,7 +9,7 @@ export async function POST(req) {
     const backendUrl =
       process.env.NODE_ENV === 'development'
         ? 'http://127.0.0.1:8000/v1/report'
-        : 'https://https://prop-logic-engine-v2.onrender.com/v1/report';
+        : 'https://prop-logic-engine-v2.onrender.com/v1/report';
 
     const response = await fetch(backendUrl, {
       method: 'POST',
