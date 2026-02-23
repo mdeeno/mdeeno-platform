@@ -6,18 +6,19 @@ export async function POST(req) {
 
     const origin = req.headers.get('origin') || 'https://mdeeno.com';
 
-    const response = await fetch(
-      'https://prop-logic-engine.onrender.com/v1/calc',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Origin: origin,
-        },
-        body: JSON.stringify(body),
-        cache: 'no-store',
+    const backendUrl =
+      process.env.NODE_ENV === 'development'
+        ? 'http://127.0.0.1:8000/v1/report'
+        : 'https://prop-logic-engine-v2.onrender.com/v1/report';
+    const response = await fetch(backendUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Origin: origin,
       },
-    );
+      body: JSON.stringify(body),
+      cache: 'no-store',
+    });
 
     if (!response.ok) {
       const errorText = await response.text();

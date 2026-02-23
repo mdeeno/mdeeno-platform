@@ -6,9 +6,10 @@ export async function POST(req) {
     const origin = req.headers.get('origin') || 'https://mdeeno.com';
 
     // 로컬 테스트 환경이면 로컬 파이썬 서버로, 아니면 Render 서버로 요청
-    const backendUrl = process.env.NODE_ENV === 'development' 
-      ? 'http://127.0.0.1:8000/v1/report' 
-      : 'https://prop-logic-engine.onrender.com/v1/report';
+    const backendUrl =
+      process.env.NODE_ENV === 'development'
+        ? 'http://127.0.0.1:8000/v1/report'
+        : 'https://https://prop-logic-engine-v2.onrender.com/v1/report';
 
     const response = await fetch(backendUrl, {
       method: 'POST',
@@ -25,7 +26,7 @@ export async function POST(req) {
       console.error('🚨 파이썬 백엔드 에러:', response.status, errorText);
       return NextResponse.json(
         { error: '리포트 생성 실패', details: errorText },
-        { status: response.status }
+        { status: response.status },
       );
     }
 
