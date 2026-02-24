@@ -146,7 +146,7 @@ export default function PropLogicMvp() {
 
     try {
       // 2. Supabase에 리드 저장 (DB 저장은 무조건 실행!)
-const { error: dbError } = await supabase
+      const { error: dbError } = await supabase
         .from('expert_requests')
         .insert([{ email, ...inputs, score: result.score }]);
       
