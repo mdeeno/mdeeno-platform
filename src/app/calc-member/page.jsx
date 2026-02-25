@@ -118,6 +118,7 @@ export default function MemberCalc() {
           type="number"
           value={inputs.assetValue}
           onChange={(e) => setInputs({ ...inputs, assetValue: e.target.value })}
+          placeholder="예: 숫자를 입력해주세요(단위 : 억원)"
         />
 
         <label>현재 예상 추가 분담금 (억원)</label>
@@ -127,6 +128,7 @@ export default function MemberCalc() {
           onChange={(e) =>
             setInputs({ ...inputs, expectedExtra: e.target.value })
           }
+          placeholder="예: 숫자를 입력해주세요(단위 : 억원)"
         />
 
         <label>공사비 상승률: {inputs.costRate * 100}%</label>
@@ -142,6 +144,7 @@ export default function MemberCalc() {
               costRate: Number(e.target.value) / 100,
             })
           }
+          placeholder="예: 숫자를 입력해주세요(단위 : %)"
         />
       </div>
 
