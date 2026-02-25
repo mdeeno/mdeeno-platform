@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata = {
+  metadataBase: new URL('https://mdeeno.com'),
   title: 'M-DEENO | 데이터 기반 프롭테크 플랫폼',
   description:
     '감이나 소문이 아닌, Prop-Logic 알고리즘으로 가장 확실한 부동산 전략을 세우세요.',
