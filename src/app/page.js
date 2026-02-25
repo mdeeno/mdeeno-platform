@@ -17,9 +17,15 @@ export default function Home() {
             <strong>조합 제출용 근거 리포트</strong>를 받아보세요.
           </p>
           <div className={styles.btnGroup}>
-            <Link href="/mvp" className={styles.primaryBtn}>
-              내 분담금 무료 계산하기
-            </Link>
+            <div className={styles.btnGroup}>
+              <Link href="/calc-member" className={styles.primaryBtn}>
+                👤 조합원용 계산기
+              </Link>
+
+              <Link href="/mvp" className={styles.secondaryBtn}>
+                🏢 조합장 / 업체용 분석
+              </Link>
+            </div>
             <a href="/sample-report" className={styles.secondaryBtn}>
               📄 리포트 샘플 보기
             </a>

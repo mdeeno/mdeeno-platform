@@ -21,16 +21,22 @@ export default function Header() {
 
         {/* 데스크톱 메뉴 */}
         <nav className={styles.nav}>
-          <Link href="/mvp" className={styles.navLink}>
-            재건축 분담금 진단
-          </Link>
+          <nav className={styles.nav}>
+            <Link href="/calc-member" className={styles.navLink}>
+              조합원 분담금 계산
+            </Link>
+
+            <Link href="/mvp" className={styles.navLink}>
+              조합장 사업성 분석
+            </Link>
+          </nav>
           <a
             href={TECH_URL}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.navLink}
           >
-            전문가 리포트 ↗
+            전문가 부동산 리포트 ↗
           </a>
         </nav>
 
@@ -61,11 +67,17 @@ export default function Header() {
         className={`${styles.mobileMenu} ${isMenuOpen ? styles.menuOpen : ''}`}
       >
         <nav className={styles.mobileNav}>
-          <Link href="/mvp" onClick={toggleMenu}>
-            재건축 분담금 진단
-          </Link>
+          <nav className={styles.nav}>
+            <Link href="/calc-member" className={styles.navLink}>
+              조합원 분담금 계산
+            </Link>
+
+            <Link href="/mvp" className={styles.navLink}>
+              조합장 사업성 분석
+            </Link>
+          </nav>
           <a href={TECH_URL} onClick={toggleMenu}>
-            전문가 리포트 ↗
+            전문가 부동산 리포트 ↗
           </a>
           <hr className={styles.divider} />
           <Link href="/login" onClick={toggleMenu}>
