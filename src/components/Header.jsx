@@ -23,11 +23,11 @@ export default function Header() {
         <nav className={styles.nav}>
           <nav className={styles.nav}>
             <Link href="/calc-member" className={styles.navLink}>
-              조합원 분담금 계산
+              개인 리스크 진단
             </Link>
 
-            <Link href="/mvp" className={styles.navLink}>
-              조합장 사업성 분석
+            <Link href="/calc-pro" className={styles.navLink}>
+              사업 구조 분석
             </Link>
           </nav>
           <a
@@ -45,7 +45,7 @@ export default function Header() {
           <Link href="/login" className={styles.loginBtn}>
             로그인
           </Link>
-          <Link href="/mvp" className={styles.startBtn}>
+          <Link href="/calc-prop" className={styles.startBtn}>
             무료로 시작하기
           </Link>
         </div>
@@ -72,7 +72,7 @@ export default function Header() {
               조합원 분담금 계산
             </Link>
 
-            <Link href="/mvp" className={styles.navLink}>
+            <Link href="/calc-prop" className={styles.navLink}>
               조합장 사업성 분석
             </Link>
           </nav>
@@ -84,7 +84,7 @@ export default function Header() {
             로그인
           </Link>
           <Link
-            href="/mvp"
+            href="/calc-pro"
             className={styles.mobileStartBtn}
             onClick={toggleMenu}
           >

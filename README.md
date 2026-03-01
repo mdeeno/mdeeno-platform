@@ -1,6 +1,6 @@
-# 📊 M-DEENO Prop-Logic Platform (MVP)
+# 📊 M-DEENO Prop-Logic™
 
-> **"재건축 분담금 리스크를 데이터로 진단하다."** > 도시공학 시나리오와 공사비 변수를 결합한 실시간 사업성 시뮬레이션 플랫폼
+> **"정비사업 사업성 리스크를 정량화하는 데이터 분석 엔진"** > 도시공학 시나리오와 공사비 변수를 결합한 실시간 사업성 시뮬레이션 플랫폼
 
 [![Next.js](https://img.shields.io/badge/Next.js-15.0-black?logo=next.js)](https://nextjs.org/)
 [![Supabase](https://img.shields.io/badge/Supabase-DB-green?logo=supabase)](https://supabase.com/)
@@ -11,6 +11,7 @@
 ## 🚀 프로젝트 개요
 
 **Prop-Logic**은 정비사업(재건축/재개발) 과정에서 조합원이 겪는 분담금 불확실성을 해결하기 위한 도구입니다. 복잡한 수식을 배제하고 핵심 변수인 **'공사비'**와 **'자산가치'**를 제어하여 누구나 직관적으로 사업 안정성을 점검할 수 있도록 설계되었습니다.
+본 플랫폼은 조합원 단위 리스크 진단과 동시에, 단지 단위 구조 데이터를 축적하는 민간 데이터 레이어 구축을 목표로 합니다.
 
 ### 🧪 주요 기능
 

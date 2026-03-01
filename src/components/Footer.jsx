@@ -12,6 +12,8 @@ export default function Footer() {
         <div className={styles.links}>
           <Link href="/terms">이용약관</Link>
           <Link href="/privacy">개인정보처리방침</Link>
+          <a href="mailto:contact@mdeeno.com">데이터 제휴 문의</a>
+          <a href="mailto:contact@mdeeno.com">엔진 라이선스 문의</a>
         </div>
       </div>
       <div className={styles.copyright}>

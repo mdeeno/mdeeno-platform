@@ -5,7 +5,7 @@ import styles from './page.module.css';
 import { supabase } from '@/lib/supabase';
 import { sendGAEvent } from '@next/third-parties/google';
 
-export default function PropLogicMvp() {
+export default function PropLogicCalcPro() {
   // 1. 단계 관리를 위한 state 추가
   const [step, setStep] = useState(1);
   const [isGenerating, setIsGenerating] = useState(false); // 로딩상태
@@ -134,7 +134,7 @@ export default function PropLogicMvp() {
 
   // 리포트 신청 및 다운로드 로직
   // 3단계: 리포트 생성 및 다운로드 API 호출
-  // 🚀 3단계: 리포트 신청 (컨시어지 MVP 모드 - 자동 다운로드 임시 주석)
+  // 🚀 3단계: 리포트 신청 (컨시어지 모드 - 자동 다운로드 임시 주석)
   const handleSubscribe = async () => {
     // 1. 이메일 정규식 검사
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -149,7 +149,7 @@ export default function PropLogicMvp() {
       const { error: dbError } = await supabase
         .from('expert_requests')
         .insert([{ email, ...inputs, score: result.score }]);
-      
+
       if (dbError) {
         console.error('DB 저장 에러:', dbError);
         throw new Error('데이터베이스 통신 오류');
@@ -209,13 +209,11 @@ export default function PropLogicMvp() {
     <div className={styles.labContainer}>
       {/* 1. 실험실 헤더 */}
       <div className={styles.labFormulaBox}>
-        <h2 className={styles.colorBlue}>💻 Prop-Logic Laboratory</h2>
-        <p className={styles.labP1}>
-          공사비 변화에 따른 사업 안정성 체험 시뮬레이터
-        </p>
+        <h2 className={styles.colorBlue}>Prop-Logic™ Engine v1.1</h2>
+        <p className={styles.labP1}>정비사업 사업안전도 분석 시스템</p>
         <p className={styles.labP3}>
-          도시공학 및 정비사업 사업성 검토에서 실제 사용되는 수익·비용 구조를
-          기반으로 설계되었습니다.
+          실제 정비사업 수익·비용 구조 모델을 기반으로 공사비 민감도를 정량
+          분석합니다.
         </p>
       </div>
 

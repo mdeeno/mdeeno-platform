@@ -69,7 +69,7 @@ export default function MemberCalc() {
       value: result.burden_ratio,
     });
 
-    router.push('/mvp');
+    router.push('/calc-prop');
   };
 
   const getRiskMessage = () => {
@@ -109,7 +109,7 @@ export default function MemberCalc() {
           <br />
           <span>내 분담금은 얼마나 늘어날까?</span>
         </h1>
-        <p>조합이 말하지 않는 ‘내 돈’ 기준으로 계산해보세요.</p>
+        <p>조합 안내 수치가 아닌, ‘내 자산 기준’으로 구조를 점검해보세요.</p>
       </div>
 
       <div className={styles.formBox}>
@@ -150,7 +150,11 @@ export default function MemberCalc() {
 
       {result && (
         <div className={styles.resultBox}>
-          <h2>📊 예상 결과</h2>
+          <h2>
+            🚨 공사비 {inputs.costRate * 100}% 상승 시,
+            <br />
+            당신의 순자산이 줄어들기 시작합니다.
+          </h2>
 
           <div className={styles.resultGrid}>
             <div>

@@ -8,22 +8,26 @@ export default function Home() {
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <h1 className={styles.title}>
-            조합의 공사비 인상 요구, <br />
-            <span className={styles.highlight}>내 분담금은 얼마나 오를까?</span>
+            정비사업(재건축, 재개발),
+            <br />
+            <span className={styles.highlight}>
+              감이 아니라 구조로 판단하십시오.
+            </span>
           </h1>
           <p className={styles.subtitle}>
-            단톡방 소문이나 감으로 불안해하지 마세요. <br />
-            Prop-Logic™으로 공사비 변동 시나리오를 계산하고{' '}
-            <strong>조합 제출용 근거 리포트</strong>를 받아보세요.
+            Prop-Logic™ 엔진은 공사비 변화에 따른 사업 안전도를 수치화합니다.
+            <br />
+            조합원 진단부터 조합·시행사 사업성 분석까지, 데이터 기반 구조 검증을
+            제공합니다.
           </p>
           <div className={styles.btnGroup}>
             <div className={styles.btnGroup}>
               <Link href="/calc-member" className={styles.primaryBtn}>
-                👤 조합원용 계산기
+                📊 내 단지 리스크 진단하기
               </Link>
 
-              <Link href="/mvp" className={styles.secondaryBtn}>
-                🏢 조합장 / 업체용 분석
+              <Link href="/calc-pro" className={styles.secondaryBtn}>
+                🏗 사업 구조 정밀 분석
               </Link>
             </div>
             <a href="/sample-report" className={styles.secondaryBtn}>
