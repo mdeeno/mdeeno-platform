@@ -1,0 +1,63 @@
+.wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.shock {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.shock h1 {
+  font-size: 2.2rem;
+  font-weight: 900;
+}
+
+.shock span {
+  color: #dc2626;
+}
+
+.damageBox {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #dc2626;
+  margin: 20px 0;
+}
+
+.problem ul,
+.contents ul {
+  margin-top: 20px;
+  line-height: 1.8;
+}
+
+.pricing {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.original {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+.beta {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #111827;
+}
+
+.cta {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.cta button {
+  background: #111827;
+  color: white;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}

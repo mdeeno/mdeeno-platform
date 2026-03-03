@@ -48,7 +48,7 @@ export default function PropLogicCalcPro() {
               ? (inputs.area * 0.3025).toFixed(2)
               : inputs.area;
 
-          const response = await fetch('/api/calc', {
+          const response = await fetch('/api/engine', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -161,7 +161,7 @@ export default function PropLogicCalcPro() {
       /*
       const areaValue =
         inputs.unit === 'm2' ? (inputs.area * 0.3025).toFixed(2) : inputs.area;
-      const response = await fetch('/api/report', {
+      const response = await fetch('/api/enterprise/report', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

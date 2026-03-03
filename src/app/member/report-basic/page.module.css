@@ -1,0 +1,289 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.hero h1 {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.hero span {
+  color: var(--primary);
+}
+
+.formBox {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formBox input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  font-size: 1rem;
+}
+
+.resultBox {
+  background: #eff6ff;
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid #bfdbfe;
+}
+
+.resultGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.resultGrid span {
+  display: block;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.resultGrid strong {
+  font-size: 1.2rem;
+}
+
+.risk {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.riskMessage {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.ctaBox {
+  margin-top: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.ctaButton {
+  background: #f97316;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.ctaButton:hover {
+  background: #ea580c;
+}
+
+.benefitList {
+  text-align: left;
+  margin: 15px 0;
+  padding-left: 20px;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.priceBox {
+  margin: 20px 0;
+}
+
+.price {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #111827;
+}
+
+.badge {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 0.8rem;
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.purchaseBtn {
+  background: #f97316;
+  color: white;
+  padding: 14px 22px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.purchaseBtn:hover {
+  background: #ea580c;
+}
+
+.shockBox {
+  background: #fff1f2;
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.shockBox h1 {
+  font-size: 2rem;
+  color: #dc2626;
+  margin: 10px 0;
+}
+
+.lockedBox {
+  background: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  padding: 20px;
+  margin-top: 30px;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.unlockBtn {
+  background: #111827;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.priceNote {
+  font-size: 0.8rem;
+  margin-top: 10px;
+  color: #6b7280;
+}
+
+.bridgeBox {
+  margin-top: 40px;
+  padding: 20px;
+  border-top: 1px solid #e5e7eb;
+  text-align: center;
+}
+
+.proBtn {
+  background: #1e40af;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.premiumWarning {
+  margin-top: 40px;
+  padding: 20px;
+  background: #fef2f2;
+  border: 2px solid #dc2626;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.premiumBtn {
+  margin-top: 15px;
+  padding: 12px 24px;
+  background: #111827;
+  color: white;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.basicBox {
+  margin-top: 40px;
+  padding: 20px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.basicBtn {
+  margin-top: 15px;
+  padding: 12px 24px;
+  background: #111827;
+  color: white;
+  border-radius: 6px;
+  border: none;
+}
+
+.softPremium {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.softBtn {
+  padding: 10px 20px;
+  background: #2563eb;
+  color: white;
+  border-radius: 6px;
+  border: none;
+}
+
+.premiumBox {
+  margin-top: 40px;
+  padding: 25px;
+  background: #fff7ed;
+  border: 2px solid #f97316;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.premiumBtn {
+  margin-top: 15px;
+  padding: 14px 28px;
+  background: #ea580c;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+}
+
+.urgentBox {
+  margin-top: 40px;
+  padding: 30px;
+  background: #fef2f2;
+  border: 2px solid #dc2626;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.urgentBtn {
+  margin-top: 15px;
+  padding: 16px 32px;
+  background: #991b1b;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  border: none;
+}
+
+.basicSub {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+}

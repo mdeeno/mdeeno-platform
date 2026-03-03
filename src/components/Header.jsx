@@ -21,15 +21,13 @@ export default function Header() {
 
         {/* 데스크톱 메뉴 */}
         <nav className={styles.nav}>
-          <nav className={styles.nav}>
-            <Link href="/calc-member" className={styles.navLink}>
-              개인 리스크 진단
-            </Link>
+          <Link href="/member" className={styles.primaryBtn}>
+            📊 무료 구조 진단
+          </Link>
 
-            <Link href="/calc-pro" className={styles.navLink}>
-              사업 구조 분석
-            </Link>
-          </nav>
+          <Link href="/member/report-basic" className={styles.secondaryBtn}>
+            📄 리포트 상품 보기
+          </Link>
           <a
             href={TECH_URL}
             target="_blank"
@@ -45,7 +43,7 @@ export default function Header() {
           <Link href="/login" className={styles.loginBtn}>
             로그인
           </Link>
-          <Link href="/calc-prop" className={styles.startBtn}>
+          <Link href="/enterprise" className={styles.startBtn}>
             무료로 시작하기
           </Link>
         </div>
@@ -67,15 +65,13 @@ export default function Header() {
         className={`${styles.mobileMenu} ${isMenuOpen ? styles.menuOpen : ''}`}
       >
         <nav className={styles.mobileNav}>
-          <nav className={styles.nav}>
-            <Link href="/calc-member" className={styles.navLink}>
-              조합원 분담금 계산
-            </Link>
+          <Link href="/member" className={styles.primaryBtn}>
+            📊 무료 구조 진단
+          </Link>
 
-            <Link href="/calc-prop" className={styles.navLink}>
-              조합장 사업성 분석
-            </Link>
-          </nav>
+          <Link href="/member/report-basic" className={styles.secondaryBtn}>
+            📄 리포트 상품 보기
+          </Link>
           <a href={TECH_URL} onClick={toggleMenu}>
             전문가 부동산 리포트 ↗
           </a>
@@ -84,7 +80,7 @@ export default function Header() {
             로그인
           </Link>
           <Link
-            href="/calc-pro"
+            href="/enterprise"
             className={styles.mobileStartBtn}
             onClick={toggleMenu}
           >

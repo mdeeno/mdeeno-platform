@@ -21,19 +21,20 @@ export async function POST(req) {
     });
 
     if (!response.ok) {
-      throw new Error('PDF 생성 실패');
+      return NextResponse.json({ error: 'PDF 생성 실패' }, { status: 500 });
     }
 
     const pdfBuffer = await response.arrayBuffer();
 
     return new NextResponse(pdfBuffer, {
-      status: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': `attachment; filename="M-DEENO_개인리포트.pdf"`,
+        'Content-Disposition':
+          'attachment; filename="M-DEENO_Member_Report.pdf"',
       },
     });
   } catch (error) {
-    return NextResponse.json({ error: '리포트 생성 실패' }, { status: 500 });
+    console.error(error);
+    return NextResponse.json({ error: '서버 오류' }, { status: 500 });
   }
 }

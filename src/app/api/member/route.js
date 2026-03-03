@@ -7,8 +7,8 @@ export async function POST(req) {
 
     const backendUrl =
       process.env.NODE_ENV === 'development'
-        ? 'http://127.0.0.1:8000/v1/calc-member'
-        : 'https://prop-logic-engine-v2.onrender.com/v1/calc-member';
+        ? 'http://127.0.0.1:8000/v1/individual'
+        : 'https://prop-logic-engine-v2.onrender.com/v1/individual';
 
     const response = await fetch(backendUrl, {
       method: 'POST',
@@ -21,8 +21,10 @@ export async function POST(req) {
     });
 
     const data = await response.json();
+
     return NextResponse.json(data);
   } catch (error) {
-    return NextResponse.json({ error: '연결 실패' }, { status: 500 });
+    console.error('Member API error:', error);
+    return NextResponse.json({ error: '서버 오류' }, { status: 500 });
   }
 }
