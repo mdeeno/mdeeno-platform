@@ -39,6 +39,8 @@ export default function ShockCalculatorPage() {
   const [pdfLoading, setPdfLoading] = useState(false);
   const [pdfDone, setPdfDone]     = useState(false);
   const [pdfError, setPdfError]   = useState(null);
+  const [reportId, setReportId]   = useState(null);
+  const [shareCopied, setShareCopied] = useState(false);
   const [emailModalOpen, setEmailModalOpen] = useState(false);
   const [email, setEmail]                   = useState('');
   const [emailError, setEmailError]         = useState('');
@@ -91,7 +93,7 @@ export default function ShockCalculatorPage() {
     setPdfLoading(true);
 
     try {
-      await downloadPdf(
+      const id = await downloadPdf(
         '/api/member-premium-report',
         {
           asset_value:    Number(form.asset_value),
@@ -104,6 +106,7 @@ export default function ShockCalculatorPage() {
         },
         'M-DEENO_프리미엄전략리포트.pdf',
       );
+      if (id) setReportId(id);
       setPdfDone(true);
     } catch (err) {
       setPdfError(err.message ?? 'PDF 생성에 실패했습니다. 잠시 후 다시 시도해 주세요.');
@@ -354,7 +357,51 @@ export default function ShockCalculatorPage() {
             <p className={styles.savingsNote}>전략 리포트 적용 시 최대 절감 가능 금액</p>
           </div>
 
-          {/* 3 + 4. Strategy Preview + CTA */}
+          {/* 3. Strategy Simulation Preview */}
+          {(() => {
+            const negotiation = result.expected_contribution - result.comparison_contribution;
+            const assembly    = Math.round(negotiation * 0.4 * 100) / 100;
+            const appraisal   = Math.round(negotiation * 0.2 * 100) / 100;
+            const strategies  = [
+              {
+                title:  '협상 전략',
+                desc:   '공사비 원가 검증 및 시공사 협상 실행',
+                saving: negotiation,
+              },
+              {
+                title:  '총회 대응 전략',
+                desc:   '총회 발언·집단 대응으로 인상안 저지',
+                saving: assembly,
+              },
+              {
+                title:  '감정평가 대응',
+                desc:   '종전자산 재평가 요구로 분담금 구조 개선',
+                saving: appraisal,
+              },
+            ];
+            return (
+              <div className={styles.simSection}>
+                <p className={styles.simLabel}>전략별 예상 절감 효과</p>
+                <p className={styles.simNote}>
+                  M-DEENO 전략 엔진이 귀하의 위험 등급({result.risk_level})을 기반으로 시뮬레이션한 결과입니다.
+                </p>
+                <div className={styles.simGrid}>
+                  {strategies.map((s) => (
+                    <div key={s.title} className={styles.simCard}>
+                      <p className={styles.simCardTitle}>{s.title}</p>
+                      <p className={styles.simCardDesc}>{s.desc}</p>
+                      <p className={styles.simCardSaving}>
+                        -{formatAmount(s.saving)}
+                        <span className={styles.simCardSavingNote}> 절감 가능</span>
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* 4. Strategy Blur + CTA */}
           <div className={styles.strategyWrap}>
             <div className={styles.strategyBlur} aria-hidden="true">
               <p className={styles.strategyBlurTitle}>M-DEENO 맞춤 전략 분석</p>
@@ -401,6 +448,30 @@ export default function ShockCalculatorPage() {
                   ? '다운로드 폴더를 확인해 주세요.'
                   : 'PDF 즉시 다운로드 · 생성까지 약 30초'}
               </p>
+
+              {pdfDone && reportId && (
+                <div className={styles.shareUrlBox}>
+                  <p className={styles.shareUrlLabel}>리포트 공유 링크</p>
+                  <div className={styles.shareUrlRow}>
+                    <span className={styles.shareUrlText}>
+                      {typeof window !== 'undefined'
+                        ? `${window.location.origin}/report/${reportId}`
+                        : `/report/${reportId}`}
+                    </span>
+                    <button
+                      className={styles.shareUrlCopyBtn}
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText(`${window.location.origin}/report/${reportId}`);
+                        setShareCopied(true);
+                        setTimeout(() => setShareCopied(false), 2500);
+                      }}
+                    >
+                      {shareCopied ? '복사됨 ✓' : '복사'}
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 

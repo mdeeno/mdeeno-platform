@@ -1,238 +1,259 @@
 'use client';
 
-import { useState } from 'react';
-import { downloadPdf } from '@/lib/download-pdf';
+import { useState, useEffect } from 'react';
 import styles from './page.module.css';
 
-const INITIAL_FORM = {
-  member_name: '',
-  complex_name: '',
-  location: '',
-  asset_value: '',
-  expected_extra: '',
-  cost: '900',
-};
+// ── 구매 핸들러 (베타: 이메일 수집) ──────────────────────────────────────────
+async function submitPremiumLead(email) {
+  await fetch('/api/lead-submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, product_type: 'premium' }),
+  });
+}
 
-export default function PremiumReportPage() {
-  const [form, setForm] = useState(INITIAL_FORM);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [done, setDone] = useState(false);
+// R3 기본 협상 절감률 (shock_engine 기준)
+const NEGOTIATION_REDUCTION = 0.22;
+const COST_INCREASE_RATE    = 0.10;
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-    if (error) setError(null);
-    if (done) setDone(false);
+function calcSavings(expectedExtra) {
+  const expected_contribution    = expectedExtra * (1 + COST_INCREASE_RATE);
+  const comparison_contribution  = expected_contribution * (1 - NEGOTIATION_REDUCTION);
+  return Math.round((expected_contribution - comparison_contribution) * 10000); // 만원
+}
+
+export default function PremiumReportPaywall() {
+  const [email, setEmail]           = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [submitted, setSubmitted]   = useState(false);
+  const [loading, setLoading]       = useState(false);
+  const [savings, setSavings]       = useState(null); // 만원 단위
+  const [shareCopied, setShareCopied] = useState(false);
+
+  // ── 공유 링크 생성 ───────────────────────────────────────────
+  // 프리미엄 페이지는 개인화 데이터 없음 — 리포트 유형 정보만 공유
+  function handleShare() {
+    const id = crypto.randomUUID();
+    localStorage.setItem(`share_${id}`, JSON.stringify({ type: 'premium' }));
+    const url = `${window.location.origin}/report/share/${id}`;
+    navigator.clipboard.writeText(url).then(() => {
+      setShareCopied(true);
+      setTimeout(() => setShareCopied(false), 2500);
+    });
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setError(null);
-    setDone(false);
-    setLoading(true);
-
-    const payload = {
-      member_name:    form.member_name.trim(),
-      complex_name:   form.complex_name.trim(),
-      location:       form.location.trim() || '해당 지역',
-      asset_value:    Number(form.asset_value),
-      expected_extra: Number(form.expected_extra),
-      cost:           Number(form.cost) || 900,
-    };
-
+  useEffect(() => {
     try {
-      await downloadPdf(
-        '/api/member-premium-report',
-        payload,
-        'M-DEENO_총회전략패키지.pdf',
-      );
-      setDone(true);
-    } catch (err) {
-      setError(err);
+      const raw = localStorage.getItem('memberPrefill');
+      if (!raw) return;
+      const { expectedExtra } = JSON.parse(raw);
+      if (expectedExtra && Number(expectedExtra) > 0) {
+        setSavings(calcSavings(Number(expectedExtra)));
+      }
+    } catch {
+      // localStorage 없음 또는 파싱 실패 — 무시
+    }
+  }, []);
+
+  async function handlePurchase(e) {
+    e.preventDefault();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setEmailError('올바른 이메일 주소를 입력해 주세요.');
+      return;
+    }
+    setLoading(true);
+    try {
+      await submitPremiumLead(email.trim());
+      setSubmitted(true);
     } finally {
       setLoading(false);
     }
   }
 
-  const isValid =
-    form.asset_value !== '' &&
-    Number(form.asset_value) > 0 &&
-    form.expected_extra !== '' &&
-    Number(form.expected_extra) >= 0;
-
   return (
     <div className={styles.wrapper}>
-      <div className={styles.header}>
+
+      {/* ── Section 1: 소개 ───────────────────────────────────────────── */}
+      <section className={styles.intro}>
         <p className={styles.eyebrow}>M-DEENO Prop-Logic™</p>
-        <h1 className={styles.title}>총회 대응 전략 패키지</h1>
+        <h1 className={styles.title}>프리미엄 전략 리포트</h1>
         <p className={styles.subtitle}>
-          귀하의 자산 정보를 입력하면 맞춤형 전략 리포트 PDF를 즉시 생성합니다.
+          30페이지 심층 분석 · 협상 전략 · 총회 발언 스크립트 · 행동 타임라인
         </p>
-      </div>
 
-      <form className={styles.form} onSubmit={handleSubmit} noValidate>
-        {/* ── 선택 필드 ── */}
-        <div className={styles.section}>
-          <p className={styles.sectionLabel}>기본 정보 (선택)</p>
+        <ul className={styles.featureList}>
+          <li>공사비 시나리오별 자산 잠식 구간 정밀 분석</li>
+          <li>위험등급 기반 협상 절감 시뮬레이션</li>
+          <li>총회 발언 스크립트 및 대응 질문 리스트</li>
+          <li>조합원 행동 타임라인 (30일 플랜)</li>
+          <li>전문가 수준의 McKinsey 스타일 보고서 형식</li>
+        </ul>
+      </section>
 
-          <div className={styles.field}>
-            <label className={styles.label} htmlFor="member_name">
-              성함
-            </label>
-            <input
-              className={styles.input}
-              id="member_name"
-              name="member_name"
-              type="text"
-              value={form.member_name}
-              onChange={handleChange}
-              placeholder="홍길동"
-              autoComplete="name"
-            />
-          </div>
+      {/* ── Section 1.5: 콘텐츠 소개 + 절감 하이라이트 ─────────────────── */}
+      <section className={styles.contentSection}>
+        <p className={styles.contentSectionLabel}>Premium 리포트에서 확인할 수 있는 내용</p>
+        <ul className={styles.contentList}>
+          <li>총회 발언 스크립트</li>
+          <li>공사비 협상 전략</li>
+          <li>사업 구조 분석</li>
+          <li>조합 대응 전략</li>
+          <li>행동 로드맵</li>
+        </ul>
 
-          <div className={styles.field}>
-            <label className={styles.label} htmlFor="complex_name">
-              단지명
-            </label>
-            <input
-              className={styles.input}
-              id="complex_name"
-              name="complex_name"
-              type="text"
-              value={form.complex_name}
-              onChange={handleChange}
-              placeholder="○○아파트"
-            />
-          </div>
-
-          <div className={styles.field}>
-            <label className={styles.label} htmlFor="location">
-              지역
-            </label>
-            <input
-              className={styles.input}
-              id="location"
-              name="location"
-              type="text"
-              value={form.location}
-              onChange={handleChange}
-              placeholder="예: 서울 강남구"
-            />
-          </div>
-        </div>
-
-        {/* ── 필수 필드 ── */}
-        <div className={styles.section}>
-          <p className={styles.sectionLabel}>자산 정보 (필수)</p>
-
-          <div className={styles.field}>
-            <label className={styles.label} htmlFor="asset_value">
-              종전자산 <span className={styles.required}>*</span>
-            </label>
-            <div className={styles.inputWrapper}>
-              <input
-                className={styles.input}
-                id="asset_value"
-                name="asset_value"
-                type="number"
-                value={form.asset_value}
-                onChange={handleChange}
-                placeholder="5"
-                min="0.1"
-                step="0.1"
-                required
-              />
-              <span className={styles.unit}>억원</span>
-            </div>
-          </div>
-
-          <div className={styles.field}>
-            <label className={styles.label} htmlFor="expected_extra">
-              예상 추가 분담금 <span className={styles.required}>*</span>
-            </label>
-            <div className={styles.inputWrapper}>
-              <input
-                className={styles.input}
-                id="expected_extra"
-                name="expected_extra"
-                type="number"
-                value={form.expected_extra}
-                onChange={handleChange}
-                placeholder="1.2"
-                min="0"
-                step="0.1"
-                required
-              />
-              <span className={styles.unit}>억원</span>
-            </div>
-          </div>
-
-          <div className={styles.field}>
-            <label className={styles.label} htmlFor="cost">
-              현재 평당 공사비
-            </label>
-            <div className={styles.inputWrapper}>
-              <input
-                className={styles.input}
-                id="cost"
-                name="cost"
-                type="number"
-                value={form.cost}
-                onChange={handleChange}
-                placeholder="900"
-                min="1"
-                step="10"
-              />
-              <span className={styles.unit}>만원</span>
-            </div>
-          </div>
-        </div>
-
-        {/* ── 에러 메시지 ── */}
-        {error && (
-          <div className={styles.errorBox}>
-            <strong>{error.message ?? 'PDF 생성에 실패했습니다.'}</strong>
-            {error.fields && error.fields.length > 0 && (
-              <ul className={styles.errorFields}>
-                {error.fields.map((f, i) => (
-                  <li key={i}>
-                    <span className={styles.errorField}>{f.field}</span>: {f.message}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        )}
-
-        {/* ── 성공 메시지 ── */}
-        {done && (
-          <div className={styles.successBox}>
-            리포트 PDF가 다운로드되었습니다.
-          </div>
-        )}
-
-        {/* ── 제출 버튼 ── */}
-        <button
-          className={styles.submitBtn}
-          type="submit"
-          disabled={loading || !isValid}
-        >
-          {loading ? (
-            <span className={styles.loadingInner}>
-              <span className={styles.spinner} />
-              리포트 생성 중...
-            </span>
+        <div className={styles.savingsBlock}>
+          {savings !== null ? (
+            <>
+              <p className={styles.savingsLabel}>협상 전략 적용 시 예상 절감액</p>
+              <div className={styles.savingsNumber}>
+                -{savings.toLocaleString()}만원
+              </div>
+              <p className={styles.savingsNote}>
+                공사비 10% 상승 시나리오 기준 · 협상 성공 시 22% 절감 적용
+              </p>
+            </>
           ) : (
-            '전략 리포트 PDF 생성하기'
+            <>
+              <p className={styles.savingsLabel}>협상 전략 적용 시 예상 절감율</p>
+              <div className={styles.savingsNumber}>최대 22%</div>
+              <p className={styles.savingsNote}>
+                내 분담금을 입력하면 실제 절감액을 계산해 드립니다
+              </p>
+            </>
           )}
-        </button>
+        </div>
+      </section>
 
-        <p className={styles.notice}>
-          * 표시 항목은 필수입니다. 입력 정보는 리포트 생성에만 사용됩니다.
+      {/* ── Section 2: 공개 미리보기 (2페이지) ──────────────────────────── */}
+      <section className={styles.previewSection}>
+        <p className={styles.previewLabel}>리포트 미리보기</p>
+
+        {/* P1 — 표지 (다크) */}
+        <div className={`${styles.reportPage} ${styles.reportPageDark}`}>
+          <div className={styles.accentBar} />
+          <p className={styles.pageLogoLight}>M — DEENO · Prop-Logic™</p>
+          <p className={styles.pageEyebrowLight}>조합원 전략 리포트</p>
+          <h2 className={styles.pageTitleLight}>
+            재건축 공사비 리스크<br />총회 대응 전략 패키지
+          </h2>
+          <div className={styles.pageMeta}>
+            <span>분석 단지: OO아파트</span>
+            <span>수신인: 홍길동 조합원</span>
+            <span>발행일: 2026.03.05</span>
+          </div>
+          <span className={`${styles.riskBadge} ${styles.badgeR3}`}>
+            R3 — 고위험
+          </span>
+        </div>
+
+        {/* P2 — 핵심 위험 지표 */}
+        <div className={styles.reportPage}>
+          <p className={styles.pageEyebrow}>EXECUTIVE SUMMARY</p>
+          <h3 className={styles.pageSectionTitle}>핵심 위험 지표</h3>
+          <div className={styles.shockNumber}>+1,200만원</div>
+          <p className={styles.shockLabel}>공사비 10% 상승 시 추가 예상 손실</p>
+          <div className={styles.metricRow}>
+            <div className={styles.metric}>
+              <span className={styles.metricLabel}>자산 잠식률</span>
+              <span className={`${styles.metricValue} ${styles.valueDanger}`}>24.0%</span>
+            </div>
+            <div className={styles.metric}>
+              <span className={styles.metricLabel}>위험 등급</span>
+              <span className={`${styles.metricValue} ${styles.valueWarn}`}>R3</span>
+            </div>
+            <div className={styles.metric}>
+              <span className={styles.metricLabel}>협상 절감 가능</span>
+              <span className={`${styles.metricValue} ${styles.valueSafe}`}>~264만원</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 3: 잠긴 미리보기 ─────────────────────────────────────── */}
+      <section className={styles.lockedSection}>
+        <div className={`${styles.reportPage} ${styles.reportPageBlur}`}>
+          <div className={styles.blurContent}>
+            <p className={styles.pageEyebrow}>SECTION 02</p>
+            <h3 className={styles.pageSectionTitle}>시나리오별 분담금 구조 분석</h3>
+            <div className={styles.blurLine} />
+            <div className={styles.blurLine} />
+            <div className={styles.blurLineShort} />
+          </div>
+          <div className={styles.blurOverlay}>
+            <p className={styles.blurOverlayText}>
+              전체 전략 리포트는 구매 후 확인 가능합니다.
+            </p>
+          </div>
+        </div>
+
+        <div className={`${styles.reportPage} ${styles.reportPageBlur}`}>
+          <div className={styles.blurContent}>
+            <p className={styles.pageEyebrow}>SECTION 03</p>
+            <h3 className={styles.pageSectionTitle}>총회 발언 스크립트 및 행동 타임라인</h3>
+            <div className={styles.blurLine} />
+            <div className={styles.blurLine} />
+            <div className={styles.blurLineShort} />
+          </div>
+          <div className={styles.blurOverlay}>
+            <p className={styles.blurOverlayText}>
+              전체 전략 리포트는 구매 후 확인 가능합니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 공유 ────────────────────────────────────────────────────────── */}
+      <section className={styles.shareSection}>
+        <p className={styles.shareDesc}>
+          이 분석 결과를 다른 조합원과 공유해보세요.
         </p>
-      </form>
+        <button className={styles.shareBtn} onClick={handleShare}>
+          {shareCopied ? '링크가 복사되었습니다 ✓' : '분석 결과 공유하기'}
+        </button>
+      </section>
+
+      {/* ── CTA ──────────────────────────────────────────────────────────── */}
+      <section className={styles.ctaSection}>
+        {submitted ? (
+          <div className={styles.successBox}>
+            베타 신청이 접수되었습니다. 6/15 정식 오픈 시 리포트를 발송해드립니다.
+          </div>
+        ) : (
+          <form className={styles.ctaForm} onSubmit={handlePurchase} noValidate>
+            <h2 className={styles.ctaTitle}>Premium 전략 리포트 구매하기</h2>
+            <p className={styles.ctaDesc}>
+              베타 기간 무료 — 이메일을 남기시면 6/15 정식 오픈 시 우선 발송됩니다.
+            </p>
+
+            <div className={styles.ctaInputRow}>
+              <input
+                className={`${styles.ctaInput}${emailError ? ` ${styles.ctaInputError}` : ''}`}
+                type="email"
+                placeholder="이메일 주소"
+                value={email}
+                onChange={(e) => { setEmail(e.target.value); setEmailError(''); }}
+                autoComplete="email"
+              />
+              <button
+                className={styles.ctaBtn}
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? '처리 중...' : 'Premium 전략 리포트 구매하기'}
+              </button>
+            </div>
+
+            {emailError && (
+              <p className={styles.ctaError}>{emailError}</p>
+            )}
+
+            <p className={styles.ctaNote}>
+              99,000원 (베타 무료) · 결제 시스템은 6/15 이후 활성화됩니다.
+            </p>
+          </form>
+        )}
+      </section>
+
     </div>
   );
 }

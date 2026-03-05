@@ -1,0 +1,232 @@
+.wrapper {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 60px 20px 80px;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+.header {
+  margin-bottom: 48px;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #dc2626;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.desc {
+  font-size: 0.95rem;
+  color: #475569;
+  line-height: 1.75;
+  max-width: 640px;
+}
+
+/* ── Section Title ────────────────────────────────────────── */
+.sectionTitle {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 20px;
+}
+
+/* ── Metrics ──────────────────────────────────────────────── */
+.metricsSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.metricCard {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.metricLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+}
+
+.metricValue {
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1;
+}
+
+.metricUnit {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.metricSub {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.danger {
+  color: #e63946;
+}
+
+/* ── Trend Chart ──────────────────────────────────────────── */
+.trendSection {
+  margin-bottom: 48px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 28px 24px;
+}
+
+.trendChart {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  height: 140px;
+}
+
+.trendBar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.trendBarFill {
+  width: 100%;
+  background: linear-gradient(180deg, #e63946 0%, #0f2d6b 100%);
+  border-radius: 4px 4px 0 0;
+  min-height: 8px;
+  transition: height 0.3s ease;
+}
+
+.trendBarValue {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #374151;
+}
+
+.trendBarYear {
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+
+/* ── Risk Section ─────────────────────────────────────────── */
+.riskSection {
+  margin-bottom: 48px;
+}
+
+.riskList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.riskItem {
+  font-size: 0.9rem;
+  color: #374151;
+  line-height: 1.6;
+  padding: 14px 16px 14px 44px;
+  background: #fff1f2;
+  border-left: 4px solid #e63946;
+  border-radius: 0 8px 8px 0;
+  position: relative;
+}
+
+.riskItem::before {
+  content: '⚠';
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  color: #e63946;
+}
+
+/* ── CTA ──────────────────────────────────────────────────── */
+.ctaSection {
+  background: #0f172a;
+  border-radius: 14px;
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.ctaTitle {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #f1f5f9;
+  margin-bottom: 12px;
+}
+
+.ctaDesc {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 28px;
+  line-height: 1.65;
+}
+
+.ctaBtn {
+  display: inline-block;
+  padding: 14px 32px;
+  background: #e63946;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 800;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.ctaBtn:hover {
+  background: #c1121f;
+}
+
+/* ── Mobile ───────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .metricsSection {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .metricValue {
+    font-size: 1.4rem;
+  }
+
+  .ctaSection {
+    padding: 28px 20px;
+  }
+
+  .ctaTitle {
+    font-size: 1.2rem;
+  }
+}

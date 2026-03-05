@@ -17,6 +17,22 @@ export default function MemberCalc() {
 
   const [result, setResult] = useState(null);
   const [loadingReport, setLoadingReport] = useState(false);
+  const [shareCopied, setShareCopied] = useState(false);
+
+  // ── 공유 링크 생성 ───────────────────────────────────────────
+  function handleShare() {
+    const id = crypto.randomUUID();
+    // 민감 정보(자산액, 분담금)는 저장하지 않음 — 위험 등급과 잠식률만 저장
+    localStorage.setItem(
+      `share_${id}`,
+      JSON.stringify({ risk_grade: result.risk_grade, burden_ratio: result.burden_ratio, type: 'basic' }),
+    );
+    const url = `${window.location.origin}/report/share/${id}`;
+    navigator.clipboard.writeText(url).then(() => {
+      setShareCopied(true);
+      setTimeout(() => setShareCopied(false), 2500);
+    });
+  }
 
   // ── 자동 계산 (디바운스 400ms) ──────────────────────────────
   useEffect(() => {
@@ -24,13 +40,14 @@ export default function MemberCalc() {
 
     const timer = setTimeout(async () => {
       try {
-        const res = await fetch('/api/member', {
+        const res = await fetch('/api/shock-calc', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             asset_value: Number(inputs.assetValue),
             expected_extra: Number(inputs.expectedExtra),
-            cost_rate: inputs.costRate,
+            cost_increase_rate: Math.round(inputs.costRate * 100),
+            project_stage: 'approval',
           }),
         });
 
@@ -41,17 +58,30 @@ export default function MemberCalc() {
           return;
         }
 
-        setResult(data);
+        // shock-calc 응답을 UI 필드로 변환
+        const RISK_COLORS = { R1: '#16a34a', R2: '#d97706', R3: '#e63946', R4: '#b91c1c' };
+        const assetVal = Number(inputs.assetValue);
+        const extraVal = Number(inputs.expectedExtra);
+        const result = {
+          risk_grade:    data.risk_level,
+          burden_ratio:  assetVal > 0 ? Math.round((extraVal / assetVal) * 100 * 10) / 10 : 0,
+          new_extra:     data.expected_contribution,
+          increase_amount: data.expected_contribution - extraVal,
+          color:         RISK_COLORS[data.risk_level] ?? '#64748b',
+          shock_message: data.shock_message,
+        };
 
-        if (data?.burden_ratio !== undefined) {
+        setResult(result);
+
+        if (result.burden_ratio !== undefined) {
           sendGAEvent({
             event: 'member_calc_executed',
-            value: data.burden_ratio,
+            value: result.burden_ratio,
           });
-          if (data.burden_ratio >= 40) {
+          if (result.burden_ratio >= 40) {
             sendGAEvent({
               event: 'member_high_risk_detected',
-              value: data.burden_ratio,
+              value: result.burden_ratio,
             });
           }
         }
@@ -104,7 +134,7 @@ export default function MemberCalc() {
       );
 
       /* 🔥 6/15 이후 주석 해제 — 이메일 수집 대신 직접 PDF 다운로드
-      const res = await fetch('/api/member-report', {
+      const res = await fetch('/api/member-basic-report', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -144,7 +174,7 @@ export default function MemberCalc() {
       }),
     );
     sendGAEvent({ event: 'member_to_pro_click', value: result.burden_ratio });
-    router.push('/enterprise');
+    router.push('/member/report-premium');
   };
 
   // ── 프리미엄 베타 신청 ────────────────────────────────────────
@@ -375,6 +405,26 @@ export default function MemberCalc() {
             </p>
             <button onClick={handleReportClick} className={styles.proBtn}>
               단지 구조 분석 보기 →
+            </button>
+          </div>
+
+          {/* Premium 업셀 */}
+          <div className={styles.upsellBox}>
+            <p className={styles.upsellTitle}>
+              전략 분석까지 포함된 Premium 리포트를 확인하세요
+            </p>
+            <Link href="/member/report-premium" className={styles.upsellBtn}>
+              Premium 리포트 보기
+            </Link>
+          </div>
+
+          {/* 공유 */}
+          <div className={styles.shareBox}>
+            <p className={styles.shareDesc}>
+              이 분석 결과를 다른 조합원과 공유해보세요.
+            </p>
+            <button className={styles.shareBtn} onClick={handleShare}>
+              {shareCopied ? '링크가 복사되었습니다 ✓' : '분석 결과 공유하기'}
             </button>
           </div>
         </div>

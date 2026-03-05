@@ -43,7 +43,7 @@ export default function Header() {
           <Link href="/login" className={styles.loginBtn}>
             로그인
           </Link>
-          <Link href="/enterprise" className={styles.startBtn}>
+          <Link href="/member" className={styles.startBtn}>
             무료로 시작하기
           </Link>
         </div>
@@ -80,7 +80,7 @@ export default function Header() {
             로그인
           </Link>
           <Link
-            href="/enterprise"
+            href="/member"
             className={styles.mobileStartBtn}
             onClick={toggleMenu}
           >

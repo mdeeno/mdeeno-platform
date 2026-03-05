@@ -28,7 +28,7 @@
  * @param {string} apiPath   — Next.js route, e.g. "/api/member-report"
  * @param {object} payload   — request body (MemberReportRequest fields)
  * @param {string} filename  — downloaded file name
- * @returns {Promise<void>}
+ * @returns {Promise<string|null>} report_id from X-Report-Id header, or null if not present
  * @throws {ApiError}
  */
 export async function downloadPdf(apiPath, payload, filename) {
@@ -49,6 +49,8 @@ export async function downloadPdf(apiPath, payload, filename) {
     throw errorBody.error ?? { code: 'DOWNLOAD_ERROR', message: 'PDF 다운로드에 실패했습니다', status: res.status };
   }
 
+  const reportId = res.headers.get('X-Report-Id') ?? null;
+
   const blob = await res.blob();
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -58,4 +60,6 @@ export async function downloadPdf(apiPath, payload, filename) {
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+
+  return reportId;
 }

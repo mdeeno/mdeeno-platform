@@ -668,6 +668,126 @@
   line-height: 1.7;
 }
 
+/* ── Share URL Box ── */
+.shareUrlBox {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  text-align: left;
+}
+
+.shareUrlLabel {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.shareUrlRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shareUrlText {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  word-break: break-all;
+  flex: 1;
+}
+
+.shareUrlCopyBtn {
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #f1f5f9;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.shareUrlCopyBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Strategy Simulation Preview ── */
+.simSection {
+  margin-bottom: 20px;
+  padding: 22px 20px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.simLabel {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+.simNote {
+  font-size: 0.78rem;
+  color: #64748b;
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+
+.simGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.simCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.simCardTitle {
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: #0f172a;
+  white-space: nowrap;
+  min-width: 90px;
+}
+
+.simCardDesc {
+  font-size: 0.78rem;
+  color: #64748b;
+  line-height: 1.45;
+  flex: 1;
+}
+
+.simCardSaving {
+  font-size: 1rem;
+  font-weight: 900;
+  color: #16a34a;
+  white-space: nowrap;
+}
+
+.simCardSavingNote {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
 /* ── Mobile ── */
 @media (max-width: 480px) {
   .page {
@@ -698,5 +818,15 @@
   .urgencyBanner {
     flex-wrap: wrap;
     gap: 8px;
+  }
+
+  .simCard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .simCardTitle {
+    min-width: unset;
   }
 }

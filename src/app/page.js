@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from './page.module.css';
+import ReportSamplesSection from './ReportSamplesSection';
 
 export default function Home() {
   return (
@@ -24,7 +25,7 @@ export default function Home() {
               📊 무료 리스크 진단 시작하기
             </Link>
 
-            <Link href="/sample-report" className={styles.secondaryBtn}>
+            <Link href="#report-samples" className={styles.secondaryBtn}>
               📄 리포트 샘플 보기
             </Link>
           </div>
@@ -56,6 +57,68 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── 실제 재건축 사례 분석 ── */}
+      <section className={styles.cases}>
+        <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>실제 재건축 사례 분석</h2>
+
+          <div className={styles.caseGrid}>
+            <div className={styles.caseCard}>
+              <p className={styles.caseRegion}>서울 ○○아파트</p>
+              <div className={styles.caseStats}>
+                <div className={styles.caseStat}>
+                  <span className={styles.caseStatLabel}>공사비 상승</span>
+                  <span className={`${styles.caseStatValue} ${styles.caseStatDanger}`}>+18%</span>
+                </div>
+                <div className={styles.caseStat}>
+                  <span className={styles.caseStatLabel}>조합원 평균 손실</span>
+                  <span className={styles.caseStatValue}>1.2억원</span>
+                </div>
+              </div>
+              <p className={styles.caseNote}>
+                총회 전 대응 전략 없이 원안 가결 — 조합원당 평균 1.2억 추가 분담 확정
+              </p>
+            </div>
+
+            <div className={styles.caseCard}>
+              <p className={styles.caseRegion}>경기 ○○재건축</p>
+              <div className={styles.caseStats}>
+                <div className={styles.caseStat}>
+                  <span className={styles.caseStatLabel}>공사비 상승</span>
+                  <span className={`${styles.caseStatValue} ${styles.caseStatDanger}`}>+23%</span>
+                </div>
+                <div className={styles.caseStat}>
+                  <span className={styles.caseStatLabel}>조합원 평균 손실</span>
+                  <span className={styles.caseStatValue}>2.1억원</span>
+                </div>
+              </div>
+              <p className={styles.caseNote}>
+                공사비 원가 검증 요청 없이 시공사 단가 그대로 승인 — 순자산 감소 확정
+              </p>
+            </div>
+
+            <div className={styles.caseCard}>
+              <p className={styles.caseRegion}>서울 ○○주택재개발</p>
+              <div className={styles.caseStats}>
+                <div className={styles.caseStat}>
+                  <span className={styles.caseStatLabel}>공사비 상승</span>
+                  <span className={`${styles.caseStatValue} ${styles.caseStatDanger}`}>+31%</span>
+                </div>
+                <div className={styles.caseStat}>
+                  <span className={styles.caseStatLabel}>조합원 평균 손실</span>
+                  <span className={styles.caseStatValue}>3.4억원</span>
+                </div>
+              </div>
+              <p className={styles.caseNote}>
+                협상 전략 없이 연속 총회 패배 — 분양가 조정 불가 상태에서 분담금 폭증
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <ReportSamplesSection />
     </div>
   );
 }

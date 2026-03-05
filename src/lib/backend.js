@@ -147,5 +147,7 @@ export async function fetchPdfFromBackend(endpoint, payload, origin) {
     throw await parseBackendError(response);
   }
 
-  return response.arrayBuffer();
+  const reportId = response.headers.get('X-Report-Id') ?? null;
+  const buffer   = await response.arrayBuffer();
+  return { buffer, reportId };
 }

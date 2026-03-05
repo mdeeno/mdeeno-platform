@@ -15,15 +15,15 @@ export async function POST(req) {
   const origin = req.headers.get('origin') ?? 'https://mdeeno.com';
 
   try {
-    const pdfBuffer = await fetchPdfFromBackend('/v1/member-premium-report', body, origin);
+    const { buffer, reportId } = await fetchPdfFromBackend('/v1/member-premium-report', body, origin);
 
-    return new NextResponse(pdfBuffer, {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/pdf',
-        'Content-Disposition': "attachment; filename*=UTF-8''M-DEENO_%ED%94%84%EB%A6%AC%EB%AF%B8%EC%97%84%EC%A0%84%EB%9E%B5%ED%8C%A8%ED%82%A4%EC%A7%80.pdf",
-      },
-    });
+    const responseHeaders = {
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': "attachment; filename*=UTF-8''M-DEENO_%ED%94%84%EB%A6%AC%EB%AF%B8%EC%97%84%EC%A0%84%EB%9E%B5%ED%8C%A8%ED%82%A4%EC%A7%80.pdf",
+    };
+    if (reportId) responseHeaders['X-Report-Id'] = reportId;
+
+    return new NextResponse(buffer, { status: 200, headers: responseHeaders });
   } catch (err) {
     const status = err.status ?? 500;
     return NextResponse.json({ error: err }, { status });

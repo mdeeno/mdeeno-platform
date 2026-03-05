@@ -1,0 +1,192 @@
+.wrapper {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 60px 20px 80px;
+}
+
+/* ── Loading / Not Found ─────────────────────────────────── */
+.loadingBox {
+  text-align: center;
+  padding: 80px 0;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+.notFound {
+  text-align: center;
+  padding: 60px 0;
+}
+
+.notFoundTitle {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.notFoundDesc {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+.header {
+  margin-bottom: 32px;
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #dc2626;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: #475569;
+  margin-bottom: 4px;
+}
+
+.date {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+/* ── Risk Badge ───────────────────────────────────────────── */
+.riskRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.riskBadge {
+  display: inline-block;
+  padding: 4px 14px;
+  font-size: 0.9rem;
+  font-weight: 900;
+  border: 2px solid;
+  border-radius: 4px;
+}
+
+.riskLabel {
+  font-size: 0.875rem;
+  color: #475569;
+  font-weight: 600;
+}
+
+/* ── Metrics ──────────────────────────────────────────────── */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.metricCard {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.metricLabel {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #94a3b8;
+}
+
+.metricValue {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1;
+}
+
+.metricUnit {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.metricSafe {
+  color: #16a34a;
+}
+
+/* ── CTA ──────────────────────────────────────────────────── */
+.ctaBox {
+  background: #0f172a;
+  border-radius: 12px;
+  padding: 32px 24px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.ctaTitle {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #f1f5f9;
+  margin-bottom: 10px;
+}
+
+.ctaDesc {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.ctaBtn {
+  display: inline-block;
+  padding: 12px 28px;
+  background: #e63946;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.ctaBtn:hover {
+  background: #c1121f;
+}
+
+/* ── Disclaimer ───────────────────────────────────────────── */
+.disclaimer {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ── Mobile ───────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 40px 16px 60px;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .metricValue {
+    font-size: 1.15rem;
+  }
+}
