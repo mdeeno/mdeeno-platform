@@ -1,627 +1,321 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
+import { downloadPdf } from '@/lib/download-pdf';
 import styles from './page.module.css';
-import { supabase } from '@/lib/supabase';
-import { sendGAEvent } from '@next/third-parties/google';
 
-export default function PropLogicCalcPro() {
-  // 1. 단계 관리를 위한 state 추가
-  const [step, setStep] = useState(1);
-  const [isGenerating, setIsGenerating] = useState(false); // 로딩상태
+const STAGE_OPTIONS = [
+  { value: 'planning',     label: '기본계획 수립 단계' },
+  { value: 'approval',     label: '사업시행인가 단계' },
+  { value: 'management',   label: '관리처분인가 단계' },
+  { value: 'construction', label: '착공 / 공사 진행 단계' },
+];
 
-  // 2. 입력 폼 대폭 확장 (기본 + PDF용 추가 정보)
-  const [inputs, setInputs] = useState({
-    // Step 1 기본 정보
-    area: 55000,
-    unit: 'py',
-    assetValue: 6400,
-    cost: 900,
-    scenario: 'base',
-    // Step 2 추가 정보
-    complexName: '', // 단지명
-    location: '', // 위치(구)
-    households: '', // 세대수
-    avgSize: '', // 기존 평균 평형
-    salePrice: '', // 일반분양가 가정
-    generalRatio: '', // 일반분양 비율
-    applicantName: '', // 신청자 이름
-  });
+const INITIAL_FORM = {
+  expected_extra:     '',
+  asset_value:        '',
+  cost_increase_rate: '10',
+  project_stage:      'approval',
+};
 
-  const [result, setResult] = useState({
-    score: '0.00',
-    color: '#1e40af',
-    status: '데이터 분석 대기 중...',
-    description: '',
-    cta_text: '점수 기준으로 전문가 검증하기',
-  });
-  const [email, setEmail] = useState('');
+function formatAmount(eokValue) {
+  if (eokValue == null) return '—';
+  const manwon = Math.round(eokValue * 10000);
+  if (manwon >= 10000) return `${eokValue.toFixed(1)}억 원`;
+  return `${manwon.toLocaleString()}만 원`;
+}
 
-  // 기존 calculate와 useEffect를 하나로 합친 깔끔한 구조
-  useEffect(() => {
-    // 디바운싱 적용: 사용자가 입력을 멈춘 후 500ms 뒤에 API 호출
-    const timer = setTimeout(() => {
-      const fetchCalc = async () => {
-        try {
-          const areaValue =
-            inputs.unit === 'm2'
-              ? (inputs.area * 0.3025).toFixed(2)
-              : inputs.area;
+const RISK_LABELS = { R1: '안정', R2: '중위험', R3: '고위험', R4: '최고위험' };
 
-          const response = await fetch('/api/engine', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              area: areaValue,
-              asset_value: inputs.assetValue,
-              cost: inputs.cost,
-              scenario: inputs.scenario,
-              // [Data Asset] B2B 데이터 축적을 위해 비식별 정보(지역, 단지명)도 함께 전송
-              location: inputs.location,
-              complex_name: inputs.complexName,
-            }),
-          });
+export default function ShockCalculatorPage() {
+  const [form, setForm]           = useState(INITIAL_FORM);
+  const [loading, setLoading]     = useState(false);
+  const [result, setResult]       = useState(null);
+  const [error, setError]         = useState(null);
+  const [pdfLoading, setPdfLoading] = useState(false);
+  const [pdfDone, setPdfDone]     = useState(false);
+  const [pdfError, setPdfError]   = useState(null);
 
-          const data = await response.json();
-          if (response.ok) {
-            setResult(data);
-          }
-        } catch (error) {
-          console.error('계산 에러:', error);
-        }
-      };
-
-      fetchCalc();
-    }, 500);
-
-    // cleanup 함수: inputs가 변경되면 이전 타이머를 취소
-    return () => clearTimeout(timer);
-  }, [inputs]); // inputs가 바뀔 때만 안전하게 실행됨
-
-  const handleChange = (e) => {
+  function handleChange(e) {
     const { name, value } = e.target;
-    setInputs((prev) => ({
-      ...prev,
-      [name]: name === 'cost' ? Number(value) : value,
-    }));
-  };
+    setForm((prev) => ({ ...prev, [name]: value }));
+    if (error) setError(null);
+  }
 
-  // 1단계 -> 2단계 이동 시 유효성 검사
-  const handleStep1Next = () => {
-    if (
-      !inputs.area ||
-      inputs.area <= 0 ||
-      !inputs.assetValue ||
-      inputs.assetValue <= 0
-    ) {
-      alert(
-        "정확한 계산을 위해 '건축 연면적'과 '종전자산 평가액'을 입력해 주세요.",
-      );
-      return;
-    }
-    setStep(2);
-    setTimeout(
-      () =>
-        window.scrollTo({
-          top: document.body.scrollHeight,
-          behavior: 'smooth',
-        }),
-      100,
-    );
-  };
+  const isValid =
+    form.expected_extra !== '' && Number(form.expected_extra) > 0 &&
+    form.asset_value    !== '' && Number(form.asset_value)    > 0 &&
+    form.cost_increase_rate !== '' && Number(form.cost_increase_rate) >= 0;
 
-  // 2단계 -> 3단계 이동 시 유효성 검사
-  const handleNextStep = () => {
-    if (
-      !inputs.complexName ||
-      !inputs.location ||
-      !inputs.households ||
-      !inputs.avgSize
-    ) {
-      alert('정밀 분석을 위해 필수 정보(*)를 모두 입력해 주세요.');
-      return;
-    }
-    setStep(3);
-    setTimeout(
-      () =>
-        window.scrollTo({
-          top: document.body.scrollHeight,
-          behavior: 'smooth',
-        }),
-      100,
-    );
-  };
-
-  // 리포트 신청 및 다운로드 로직
-  // 3단계: 리포트 생성 및 다운로드 API 호출
-  // 🚀 3단계: 리포트 신청 (컨시어지 모드 - 자동 다운로드 임시 주석)
-  const handleSubscribe = async () => {
-    // 1. 이메일 정규식 검사
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email || !emailRegex.test(email)) {
-      return alert('올바른 이메일 주소를 입력해 주세요.');
-    }
-
-    setIsGenerating(true); // 버튼 비활성화 & 로딩 시작
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
 
     try {
-      // 2. Supabase에 리드 저장 (DB 저장은 무조건 실행!)
-      const { error: dbError } = await supabase
-        .from('expert_requests')
-        .insert([{ email, ...inputs, score: result.score }]);
-
-      if (dbError) {
-        console.error('DB 저장 에러:', dbError);
-        throw new Error('데이터베이스 통신 오류');
-      }
-
-      // =================================================================
-      // 🚨 [추후 복구용 주석] 6월 이후 자동화 / 유료화 시 아래 주석만 해제하세요!
-      // =================================================================
-      /*
-      const areaValue =
-        inputs.unit === 'm2' ? (inputs.area * 0.3025).toFixed(2) : inputs.area;
-      const response = await fetch('/api/enterprise/report', {
-        method: 'POST',
+      const res = await fetch('/api/shock-calc', {
+        method:  'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...inputs,
-          area: areaValue,
-          email,
-          score: result.score,
-          complexName: inputs.complexName,
-          avgSize: inputs.avgSize,
-          households: inputs.households,
+          expected_extra:     Number(form.expected_extra),
+          asset_value:        Number(form.asset_value),
+          cost_increase_rate: Number(form.cost_increase_rate),
+          project_stage:      form.project_stage,
         }),
       });
 
-      if (!response.ok) throw new Error('서버에서 리포트를 만들지 못했습니다.');
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? '분석에 실패했습니다.');
 
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `M-DEENO_분석리포트_${inputs.complexName}.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      window.URL.revokeObjectURL(url);
-      */
-      // =================================================================
-
-      // 구글 애널리틱스 이벤트 전송
-      sendGAEvent({ event: 'generate_report', value: 'success' });
-
-      // 3. 유저 안내 메시지 (수동 발송 안내)
-      alert(
-        '✅ 리포트 신청이 완료되었습니다.\n\nM-DEENO 전문가가 입력하신 데이터를 1차 검증한 후, 24시간 내에 기재해주신 이메일로 분석 리포트(PDF)를 발송해 드립니다.',
-      );
-      setEmail('');
+      setResult(data);
+      setTimeout(() => {
+        document.getElementById('shock-result')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     } catch (err) {
-      console.error('리포트 신청 실패:', err);
-      alert('리포트 신청 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+      setError(err.message);
     } finally {
-      setIsGenerating(false); // 로딩 해제
+      setLoading(false);
     }
-  };
+  }
+
+  async function handleDownloadReport() {
+    setPdfError(null);
+    setPdfDone(false);
+    setPdfLoading(true);
+
+    try {
+      await downloadPdf(
+        '/api/member-premium-report',
+        {
+          asset_value:    Number(form.asset_value),
+          expected_extra: Number(form.expected_extra),
+          cost:           900,
+        },
+        'M-DEENO_프리미엄전략리포트.pdf',
+      );
+      setPdfDone(true);
+    } catch (err) {
+      setPdfError(err.message ?? 'PDF 생성에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+    } finally {
+      setPdfLoading(false);
+    }
+  }
 
   return (
-    <div className={styles.labContainer}>
-      {/* 1. 실험실 헤더 */}
-      <div className={styles.labFormulaBox}>
-        <h2 className={styles.colorBlue}>Prop-Logic™ Engine v1.1</h2>
-        <p className={styles.labP1}>정비사업 사업안전도 분석 시스템</p>
-        <p className={styles.labP3}>
-          실제 정비사업 수익·비용 구조 모델을 기반으로 공사비 민감도를 정량
-          분석합니다.
+    <div className={styles.page}>
+
+      {/* ── Header ── */}
+      <div className={styles.header}>
+        <p className={styles.eyebrow}>M-DEENO Prop-Logic™</p>
+        <h1 className={styles.title}>
+          내 자산이 얼마나<br />위험한지 지금 확인하세요
+        </h1>
+        <p className={styles.subtitle}>
+          추가 분담금 규모와 사업 단계를 입력하면<br />
+          M-DEENO가 귀하의 자산 위험도를 즉시 분석합니다.
         </p>
       </div>
 
-      {/* 2. 시뮬레이터 개요 */}
-      <div className={styles.introSection}>
-        <h3 className={styles.sectionTitle}>🧪 시뮬레이터 개요 및 목적</h3>
-        <p className={styles.labText}>
-          본 시뮬레이터는 <strong>&apos;공사비 변화&apos;</strong>가{' '}
-          <strong>&apos;조합원 분담금&apos;</strong>에{' '}
-          <strong>&apos;어떤 영향&apos;</strong>을 주는지를 한눈에 체감할 수
-          있도록 설계되었습니다.
-        </p>
-        <p className={styles.labText}>
-          <strong>&apos;실제 정비사업 실무&apos;</strong>에서 사용되는{' '}
-          <strong>&apos;사업성 검토 구조&apos;</strong>를 바탕으로 핵심 가정만
-          단순화해 반영했습니다.
-        </p>
-        <p className={styles.labSmallText} style={{ marginTop: '15px' }}>
-          ※ 현재 평균 기준(Base 시나리오): 서울 외곽 및 수도권 주요 주거지의
-          일반적인 재건축 사업 구조 기준
-        </p>
-      </div>
+      {/* ── Input Form ── */}
+      <form className={styles.form} onSubmit={handleSubmit} noValidate>
+        <div className={styles.formCard}>
+          <p className={styles.formSectionLabel}>자산 정보 입력</p>
 
-      {/* 3. 수식 박스 */}
-      <div className={styles.labFormulaBox}>
-        <h2 className={styles.formulaTitle}>
-          Prop-Logic:
-          <br /> 우리 단지 사업안전도 분석기
-        </h2>
-        <div className={styles.labFormulaText}>
-          점수(R) = (분양수익 - 총공사비) / 종전자산가치 × 100
-        </div>
-        <p className={styles.labFormulaCaption}>
-          * <strong>점수(R)가 100 미만</strong>으로 떨어지면 내가 내야 할
-          돈(추가 분담금)이 생길 가능성이 커집니다.
-        </p>
-      </div>
-
-      {/* ========================================================= */}
-      {/* [STEP 1] 기본 분석 엔진 (항상 보임) */}
-      {/* ========================================================= */}
-      <div className={styles.labEngineContainer}>
-        <h3 className={styles.engineTitle}>📊 실시간 구조 분석 엔진 v1.1</h3>
-
-        <div className={styles.labInputGroup}>
-          <p className={styles.stepLabel}>1️⃣ 우리 단지 정보 입력</p>
-          <div className={styles.labGrid}>
-            <div>
-              <label htmlFor="areaInput" className={styles.labLabel}>
-                건축 연면적
+          <div className={styles.fieldGrid}>
+            <div className={styles.field}>
+              <label className={styles.label} htmlFor="asset_value">
+                종전자산 평가액 <span className={styles.req}>*</span>
               </label>
-              <div className={styles.flexBox}>
+              <div className={styles.inputWrap}>
                 <input
-                  id="areaInput"
+                  className={styles.input}
+                  id="asset_value"
+                  name="asset_value"
                   type="number"
-                  name="area"
-                  value={inputs.area}
+                  value={form.asset_value}
                   onChange={handleChange}
-                  className={styles.labInput}
-                  style={{ flex: 1 }}
+                  placeholder="5"
+                  min="0.1"
+                  step="0.1"
                 />
-                <select
-                  name="unit"
-                  value={inputs.unit}
+                <span className={styles.unit}>억원</span>
+              </div>
+            </div>
+
+            <div className={styles.field}>
+              <label className={styles.label} htmlFor="expected_extra">
+                예상 추가 분담금 <span className={styles.req}>*</span>
+              </label>
+              <div className={styles.inputWrap}>
+                <input
+                  className={styles.input}
+                  id="expected_extra"
+                  name="expected_extra"
+                  type="number"
+                  value={form.expected_extra}
                   onChange={handleChange}
-                  className={styles.labInput}
-                  style={{ width: '80px' }}
-                >
-                  <option value="py">평</option>
-                  <option value="m2">㎡</option>
-                </select>
+                  placeholder="1.2"
+                  min="0.1"
+                  step="0.1"
+                />
+                <span className={styles.unit}>억원</span>
               </div>
-              <p className={styles.helperText}>
-                * 지상층 + 지하층 합계 총 연면적 기준
-              </p>
             </div>
-            <div>
-              <label htmlFor="assetValueInput" className={styles.labLabel}>
-                종전자산 평가액 (억원)
+
+            <div className={styles.field}>
+              <label className={styles.label} htmlFor="cost_increase_rate">
+                예상 공사비 상승률
               </label>
-              <input
-                id="assetValueInput"
-                type="number"
-                name="assetValue"
-                value={inputs.assetValue}
-                onChange={handleChange}
-                className={styles.labInput}
-              />
-              <p className={styles.helperText}>
-                * 가치(종전자산): 현재 단지 내 땅과 건물의 전체 평가액
-              </p>
+              <div className={styles.inputWrap}>
+                <input
+                  className={styles.input}
+                  id="cost_increase_rate"
+                  name="cost_increase_rate"
+                  type="number"
+                  value={form.cost_increase_rate}
+                  onChange={handleChange}
+                  placeholder="10"
+                  min="0"
+                  max="100"
+                  step="1"
+                />
+                <span className={styles.unit}>%</span>
+              </div>
             </div>
-          </div>
 
-          <div className={styles.scenarioGuide}>
-            <p className={styles.labSmallText}>
-              💡 <strong>입력 팁:</strong> 단지 정보를 잘 모르신다면? <br />-
-              네이버 부동산 <strong>&apos;단지정보&apos;</strong> 탭의 면적별
-              정보 확인 <br />- 종전자산 평가는 현재 KB시세의 80~90% 수준으로
-              가입력
-            </p>
-          </div>
-
-          <hr className={styles.divider} />
-
-          <div className={styles.costHeader}>
-            <label htmlFor="costInput" className={styles.stepLabel}>
-              2️⃣ 평당 공사비 설정 (만원)
-            </label>
-            <input
-              id="costInput"
-              type="number"
-              name="cost"
-              value={inputs.cost}
-              onChange={handleChange}
-              className={styles.costNumber}
-            />
-          </div>
-          <input
-            aria-label="평당 공사비 조절 슬라이더"
-            type="range"
-            name="cost"
-            min="500"
-            max="1500"
-            step="10"
-            value={inputs.cost}
-            onChange={handleChange}
-            className={styles.costSlider}
-          />
-        </div>
-      </div>
-
-      <div className={`${styles.labInputGroup} ${styles.scenarioCard}`}>
-        <p className={styles.subtleLabel}>📍 시장 환경 시나리오 (가정 비교)</p>
-        <div className={styles.scenarioGrid3}>
-          {['base', 'stress', 'high'].map((scen) => (
-            <label
-              key={scen}
-              className={`${styles.scenarioOption} ${inputs.scenario === scen ? styles.activeScenario : ''}`}
-            >
-              <input
-                type="radio"
-                name="scenario"
-                value={scen}
-                checked={inputs.scenario === scen}
-                onChange={handleChange}
-                style={{ display: 'none' }}
-              />
-              <span>
-                {scen === 'base'
-                  ? '현재 평균 기준'
-                  : scen === 'stress'
-                    ? '최악의 상황 가정'
-                    : '분양가 최고 구간'}
-              </span>
-            </label>
-          ))}
-        </div>
-      </div>
-
-      {/* 결과창 (Step 1의 끝) */}
-      <div
-        className={`${styles.labFormulaBox} ${styles.labResultFocus}`}
-        style={{ borderTop: `5px solid ${result.color}` }}
-      >
-        <p className={styles.resultSubtitle}>📊 사업 안정성 점수</p>
-        <div className={styles.labScoreDisplay} style={{ color: result.color }}>
-          {result.score}
-          <span className={styles.scoreUnit}> 점</span>
-        </div>
-        <p className={styles.statusMessage} style={{ color: result.color }}>
-          {result.status}
-        </p>
-        <p>
-          <span>{result.description}</span>
-        </p>
-        <br />
-        <p className={styles.detailDescription}>
-          * 본 서비스(Prop-Logic)의 분석 결과는 추정치이며, 조합의 공식 결과와
-          다를 수 있습니다.
-          <br />* 본 자료는 법적 분쟁의 증거로 사용될 수 없으며, 의사결정의
-          참고용으로만 활용하시기 바랍니다.
-        </p>
-        {/* Step 1일 때만 '다음 단계' 버튼 표시 */}
-        {step === 1 && (
-          <div style={{ textAlign: 'center', marginTop: '40px' }}>
-            <p className={styles.ctaWarn} style={{ marginBottom: '15px' }}>
-              📌 위 점수는 단순 가정을 통한 ‘판단의 출발점’일 뿐입니다.
-            </p>
-            <button
-              onClick={handleStep1Next}
-              className={`${styles.labBtn} ${styles.labBtnCta}`}
-            >
-              📄 조합 제출용 상세 리포트 신청하기 →
-            </button>
-          </div>
-        )}
-      </div>
-
-      {/* ========================================================= */}
-      {/* [STEP 2] 추가 정보 입력 (Step 2 이상일 때만 렌더링) */}
-      {/* ========================================================= */}
-      {step >= 2 && (
-        <div
-          className={styles.labInputGroup}
-          style={{ marginTop: '30px', border: '2px solid #1e40af' }}
-        >
-          <h3
-            className={styles.sectionTitle}
-            style={{
-              margin: '10px 0 20px',
-              borderLeft: 'none',
-              textAlign: 'center',
-            }}
-          >
-            📝 정밀 분석을 위한 추가 정보
-          </h3>
-          <p
-            className={styles.labSmallText}
-            style={{
-              textAlign: 'center',
-              marginBottom: '30px',
-              color: '#ea580c',
-            }}
-          >
-            * 입력하신 정보는 리포트 생성에만 사용되며 외부에 절대 공개되지
-            않습니다.
-          </p>
-
-          <div className={styles.labGrid}>
-            <div>
-              <label className={styles.labLabel}>단지명 *</label>
-              <input
-                type="text"
-                name="complexName"
-                value={inputs.complexName || ''}
-                onChange={handleChange}
-                className={styles.labInput}
-                placeholder="예: 마포 래미안 푸르지오"
-              />
-            </div>
-            <div>
-              <label className={styles.labLabel}>위치(구/동) *</label>
-              <input
-                type="text"
-                name="location"
-                value={inputs.location || ''}
-                onChange={handleChange}
-                className={styles.labInput}
-                placeholder="예: 마포구 아현동"
-              />
-            </div>
-            <div>
-              <label className={styles.labLabel}>총 세대수 *</label>
-              <input
-                type="number"
-                name="households"
-                value={inputs.households || ''}
-                onChange={handleChange}
-                className={styles.labInput}
-                placeholder="예: 3885"
-              />
-            </div>
-            <div>
-              <label className={styles.labLabel}>기존 평균 평형 *</label>
-              <input
-                type="number"
-                name="avgSize"
-                value={inputs.avgSize || ''}
-                onChange={handleChange}
-                className={styles.labInput}
-                placeholder="예: 34"
-              />
-            </div>
-            <div>
-              <label className={styles.labLabel}>
-                일반분양가 예상 (평당 만원)
+            <div className={styles.field}>
+              <label className={styles.label} htmlFor="project_stage">
+                현재 사업 단계
               </label>
-              <input
-                type="number"
-                name="salePrice"
-                value={inputs.salePrice || ''}
+              <select
+                className={styles.input}
+                id="project_stage"
+                name="project_stage"
+                value={form.project_stage}
                 onChange={handleChange}
-                className={styles.labInput}
-                placeholder="예: 4500 (선택)"
-              />
-            </div>
-            <div>
-              <label className={styles.labLabel}>신청자 이름 (선택)</label>
-              <input
-                type="text"
-                name="applicantName"
-                value={inputs.applicantName || ''}
-                onChange={handleChange}
-                className={styles.labInput}
-                placeholder="예: 홍길동"
-              />
-            </div>
-          </div>
-
-          {/* Step 2일 때만 '다음 단계' 버튼 표시 */}
-          {step === 2 && (
-            <div style={{ textAlign: 'center', marginTop: '30px' }}>
-              <button
-                onClick={handleNextStep}
-                className={styles.labBtn}
-                style={{ background: '#1e40af' }}
               >
-                다음 단계로 →
-              </button>
+                {STAGE_OPTIONS.map((o) => (
+                  <option key={o.value} value={o.value}>{o.label}</option>
+                ))}
+              </select>
             </div>
+          </div>
+        </div>
+
+        {error && <div className={styles.errorBox}>{error}</div>}
+
+        <button className={styles.submitBtn} type="submit" disabled={loading || !isValid}>
+          {loading ? (
+            <span className={styles.loadingInner}>
+              <span className={styles.spinner} />
+              분석 중...
+            </span>
+          ) : (
+            '내 자산 위험도 즉시 분석하기'
           )}
-        </div>
-      )}
+        </button>
+      </form>
 
-      {/* ========================================================= */}
-      {/* [STEP 3] 이메일 수집 및 최종 신청 (Step 3일 때만 렌더링) */}
-      {/* ========================================================= */}
-      {step === 3 && (
-        <div
-          className={styles.leadFormBox}
-          style={{ border: '2px solid #f97316' }}
-        >
-          <h3 className={styles.leadTitle}>
-            📩 리포트를 받아보실 이메일을 입력해 주세요
-          </h3>
-          <p className={styles.leadDesc}>
-            실제 조합 및 총회에 제출할 수 있는 수준의 상세 분석 리포트(PDF)가
-            발송됩니다.
-          </p>
+      {/* ── Shock Result ── */}
+      {result && (
+        <div id="shock-result" className={styles.resultSection}>
 
-          {/* 링크 및 클릭 유도 UI 적용 */}
-          <div className={styles.thumbnailWrapper}>
-            <a
-              href="/sample-report"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ textDecoration: 'none', transition: 'transform 0.2s' }}
-              onMouseOver={(e) =>
-                (e.currentTarget.style.transform = 'scale(1.05)')
-              }
-              onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-            >
-              <div
-                className={styles.fakePdf}
-                style={{ cursor: 'pointer', border: '2px solid #1e40af' }}
+          {/* 1. Shock */}
+          <div className={styles.riskBadgeRow}>
+            <span className={`${styles.riskBadge} ${styles[`riskBadge${result.risk_level}`]}`}>
+              {result.risk_level}
+            </span>
+            <span className={styles.riskBadgeLabel}>
+              {RISK_LABELS[result.risk_level]} — 위험 등급
+            </span>
+          </div>
+
+          <div className={styles.shockBox}>
+            <p className={styles.shockLead}>현재 구조라면</p>
+            <p className={styles.shockAmount}>{formatAmount(result.expected_contribution)}</p>
+            <p className={styles.shockSub}>의 추가 분담금이 발생할 가능성이 매우 높습니다.</p>
+            <p className={styles.shockMessage}>{result.shock_message}</p>
+          </div>
+
+          {/* 2. Comparison */}
+          <div className={styles.comparisonGrid}>
+            <div className={styles.comparisonCard}>
+              <p className={styles.comparisonLabel}>현재 구조</p>
+              <p className={styles.comparisonValueRed}>{formatAmount(result.expected_contribution)}</p>
+              <p className={styles.comparisonNote}>아무 행동도 하지 않을 경우</p>
+            </div>
+            <div className={styles.comparisonDivider}>VS</div>
+            <div className={styles.comparisonCard}>
+              <p className={styles.comparisonLabel}>전략 적용</p>
+              <p className={styles.comparisonValueBlue}>{formatAmount(result.comparison_contribution)}</p>
+              <p className={styles.comparisonNote}>협상 전략 실행 후</p>
+            </div>
+          </div>
+
+          <div className={styles.savingsHighlight}>
+            <p className={styles.savingsLabel}>예상 절감액</p>
+            <p className={styles.savingsAmount}>
+              {formatAmount(result.expected_contribution - result.comparison_contribution)}
+            </p>
+            <p className={styles.savingsNote}>전략 리포트 적용 시 최대 절감 가능 금액</p>
+          </div>
+
+          {/* 3 + 4. Strategy Preview + CTA */}
+          <div className={styles.strategyWrap}>
+            <div className={styles.strategyBlur} aria-hidden="true">
+              <p className={styles.strategyBlurTitle}>M-DEENO 맞춤 전략 분석</p>
+              <ul className={styles.strategyList}>
+                <li className={styles.strategyItem}>공사비 협상 전략</li>
+                <li className={styles.strategyItem}>총회 발언 스크립트</li>
+                <li className={styles.strategyItem}>사업 구조 분석</li>
+                <li className={styles.strategyItem}>협상 포인트</li>
+                <li className={styles.strategyItem}>총회 대응 전략</li>
+              </ul>
+            </div>
+            <div className={styles.strategyOverlay}>
+              <p className={styles.ctaTitle}>
+                총회 전 내 자산을 지키는<br />
+                30페이지 전략 리포트 보기
+              </p>
+              <p className={styles.ctaPrice}>
+                <span className={styles.ctaPriceBeta}>베타가 99,000원</span>
+              </p>
+
+              {pdfError && (
+                <p className={styles.ctaError}>{pdfError}</p>
+              )}
+
+              <button
+                className={styles.ctaBtn}
+                onClick={handleDownloadReport}
+                disabled={pdfLoading}
               >
-                <div className={styles.fakePdfHeader}></div>
-                <div className={styles.fakePdfBody}></div>
-                <div className={styles.fakePdfBodyShort}></div>
-                {/* 클릭 유도 텍스트로 변경 */}
-                <p
-                  className={styles.fakePdfText}
-                  style={{ fontSize: '0.8rem' }}
-                >
-                  🔍 리포트 샘플 보기
-                </p>
-              </div>
-            </a>
-          </div>
-          <p
-            style={{
-              textAlign: 'center',
-              fontSize: '0.8rem',
-              color: '#1e40af',
-              marginTop: '-20px',
-              marginBottom: '20px',
-              fontWeight: '700',
-            }}
-          >
-            👆 이미지를 클릭하면 샘플을 볼 수 있습니다.
-          </p>
+                {pdfLoading ? (
+                  <span className={styles.ctaBtnInner}>
+                    <span className={styles.ctaSpinner} />
+                    조합원님의 전략 리포트를 생성 중입니다...
+                  </span>
+                ) : pdfDone ? (
+                  'PDF 다운로드 완료'
+                ) : (
+                  '전략 리포트 지금 받기 →'
+                )}
+              </button>
 
-          <div className={styles.emailForm}>
-            <input
-              type="email"
-              placeholder="결과를 받으실 이메일 주소"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={styles.emailInput}
-              disabled={isGenerating}
-            />
-
-            {/* =================================================================
-                🚨 [추후 복구용 주석] 6월 이후 자동화 시 아래 텍스트로 원복하세요!
-                {isGenerating ? 'PDF 굽는 중... ⏳' : '리포트 즉시 다운로드'}
-                ================================================================= */}
-            <button
-              onClick={handleSubscribe}
-              className={styles.emailBtn}
-              style={{
-                background: isGenerating ? '#94a3b8' : '#f97316',
-                cursor: isGenerating ? 'not-allowed' : 'pointer',
-              }}
-              disabled={isGenerating}
-            >
-              {isGenerating ? '신청 접수 중... ⏳' : '전문가 검증 리포트 신청'}
-            </button>
+              <p className={styles.ctaNote}>
+                {pdfDone
+                  ? '다운로드 폴더를 확인해 주세요.'
+                  : 'PDF 즉시 다운로드 · 생성까지 약 30초'}
+              </p>
+            </div>
           </div>
-          <p
-            className={styles.helperText}
-            style={{ marginTop: '20px', fontSize: '0.85rem' }}
-          >
-            (현재 베타 기간 한정 <strong>무료</strong> 제공 중입니다. 추후
-            39,000원에 유료 전환될 예정입니다.)
-          </p>
+
         </div>
       )}
+
+      <p className={styles.disclaimer}>
+        * 본 분석 결과는 입력값 기반 시뮬레이션으로, 법적 증거로 사용될 수 없습니다.
+      </p>
     </div>
   );
 }

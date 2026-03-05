@@ -1,40 +1,31 @@
 import { NextResponse } from 'next/server';
+import { fetchPdfFromBackend } from '@/lib/backend';
 
 export async function POST(req) {
+  let body;
   try {
-    const body = await req.json();
-    const origin = req.headers.get('origin') || 'https://mdeeno.com';
+    body = await req.json();
+  } catch {
+    return NextResponse.json(
+      { error: { code: 'INVALID_JSON', message: '요청 형식이 올바르지 않습니다', status: 400 } },
+      { status: 400 },
+    );
+  }
 
-    const backendUrl =
-      process.env.NODE_ENV === 'development'
-        ? 'http://127.0.0.1:8000/v1/member-report'
-        : 'https://prop-logic-engine-v2.onrender.com/v1/member-report';
+  const origin = req.headers.get('origin') ?? 'https://mdeeno.com';
 
-    const response = await fetch(backendUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Origin: origin,
-      },
-      body: JSON.stringify(body),
-      cache: 'no-store',
-    });
-
-    if (!response.ok) {
-      return NextResponse.json({ error: 'PDF 생성 실패' }, { status: 500 });
-    }
-
-    const pdfBuffer = await response.arrayBuffer();
+  try {
+    const pdfBuffer = await fetchPdfFromBackend('/v1/member-report', body, origin);
 
     return new NextResponse(pdfBuffer, {
+      status: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition':
-          'attachment; filename="M-DEENO_Member_Report.pdf"',
+        'Content-Disposition': "attachment; filename*=UTF-8''M-DEENO_%EA%B8%B0%EB%B3%B8%EB%A6%AC%ED%8F%AC%ED%8A%B8.pdf",
       },
     });
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error: '서버 오류' }, { status: 500 });
+  } catch (err) {
+    const status = err.status ?? 500;
+    return NextResponse.json({ error: err }, { status });
   }
 }

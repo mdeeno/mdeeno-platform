@@ -16,7 +16,9 @@ export default function MemberCalc() {
   });
 
   const [result, setResult] = useState(null);
+  const [loadingReport, setLoadingReport] = useState(false);
 
+  // ── 자동 계산 (디바운스 400ms) ──────────────────────────────
   useEffect(() => {
     if (!inputs.assetValue || !inputs.expectedExtra) return;
 
@@ -34,22 +36,18 @@ export default function MemberCalc() {
 
         const data = await res.json();
 
-        // 🚨 핵심 방어 로직: data가 아예 없거나 백엔드 에러를 뱉으면 화면을 멈추고 크래시 방지
         if (!data || data.error) {
-          console.warn('API 응답에 문제가 있습니다:', data);
+          console.warn('API 응답 오류:', data);
           return;
         }
 
         setResult(data);
 
-        // 1️⃣ 계산 실행 이벤트 (데이터가 안전할 때만 GA 전송)
         if (data?.burden_ratio !== undefined) {
           sendGAEvent({
             event: 'member_calc_executed',
             value: data.burden_ratio,
           });
-
-          // 2️⃣ 고위험 탐지 이벤트
           if (data.burden_ratio >= 40) {
             sendGAEvent({
               event: 'member_high_risk_detected',
@@ -65,10 +63,78 @@ export default function MemberCalc() {
     return () => clearTimeout(timer);
   }, [inputs]);
 
-  const handleReportClick = () => {
+  // ── 위험 메시지 ──────────────────────────────────────────────
+  const getRiskMessage = () => {
+    const ratio = result?.burden_ratio || 0;
+    if (ratio < 20)
+      return '현재는 방어 가능하지만, 공사비 5% 추가 상승 시 손익분기점에 도달합니다.';
+    if (ratio < 40)
+      return '공사비가 한 번 더 오르면 자산 감소 구간에 진입합니다.';
+    return '이미 자산 잠식 구간입니다. 다음 총회 전 구조 점검이 필요합니다.';
+  };
+
+  // ── 리포트 다운로드 (베타: 이메일 수집) ──────────────────────
+  // 🔒 결제 활성화 후: /api/member-report POST → PDF FileResponse 직접 다운로드
+  const handlePurchase = async () => {
     if (!result) return;
 
-    // 3️⃣ Pro로 데이터 넘기기
+    // ✅ FIX: inputs.assetValue, inputs.expectedExtra, result.risk_grade 사용
+    const email = prompt('리포트를 받을 이메일을 입력해주세요.');
+    if (!email) return;
+
+    setLoadingReport(true);
+
+    try {
+      await fetch('/api/lead-submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          product_type: 'basic',
+          asset_value: Number(inputs.assetValue), // ✅ inputs에서 참조
+          expected_extra: Number(inputs.expectedExtra), // ✅ inputs에서 참조
+          burden_ratio: result.burden_ratio,
+          risk_grade: result.risk_grade, // ✅ result에서 참조
+        }),
+      });
+
+      sendGAEvent({ event: 'basic_lead_submit', value: result.burden_ratio });
+      alert(
+        '베타 신청이 접수되었습니다. 6/15 정식 오픈 시 리포트를 발송해드립니다.',
+      );
+
+      /* 🔥 6/15 이후 주석 해제 — 이메일 수집 대신 직접 PDF 다운로드
+      const res = await fetch('/api/member-report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          asset_value:    Number(inputs.assetValue),
+          expected_extra: Number(inputs.expectedExtra),
+          cost:           900,
+          location:       '',
+          complex_name:   '',
+        }),
+      });
+      if (!res.ok) throw new Error('리포트 생성 실패');
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'M-DEENO_기본분담금리포트.pdf';
+      a.click();
+      URL.revokeObjectURL(url);
+      */
+    } catch (err) {
+      console.error('리포트 요청 실패:', err);
+      alert('오류가 발생했습니다. 다시 시도해 주세요.');
+    } finally {
+      setLoadingReport(false);
+    }
+  };
+
+  // ── Pro 페이지 이동 ───────────────────────────────────────────
+  const handleReportClick = () => {
+    if (!result) return;
     localStorage.setItem(
       'memberPrefill',
       JSON.stringify({
@@ -77,30 +143,13 @@ export default function MemberCalc() {
         burdenRatio: result.burden_ratio,
       }),
     );
-
-    sendGAEvent({
-      event: 'member_to_pro_click',
-      value: result.burden_ratio,
-    });
-
+    sendGAEvent({ event: 'member_to_pro_click', value: result.burden_ratio });
     router.push('/enterprise');
   };
 
-  const getRiskMessage = () => {
-    // result가 null일 때를 대비한 방어 체인(?.) 추가
-    const ratio = result?.burden_ratio || 0;
-
-    if (ratio < 20) {
-      return '현재는 방어 가능하지만, 공사비 5% 추가 상승 시 손익분기점에 도달합니다.';
-    }
-    if (ratio < 40) {
-      return '공사비가 한 번 더 오르면 자산 감소 구간에 진입합니다.';
-    }
-    return '이미 자산 잠식 구간입니다. 다음 총회 전 구조 점검이 필요합니다.';
-  };
-
-  const handlePurchase = async () => {
-    const email = prompt('리포트를 받을 이메일을 입력해주세요.');
+  // ── 프리미엄 베타 신청 ────────────────────────────────────────
+  const handlePremiumPurchase = async () => {
+    const email = prompt('프리미엄 베타 신청 이메일을 입력하세요.');
     if (!email) return;
 
     await fetch('/api/lead-submit', {
@@ -108,47 +157,21 @@ export default function MemberCalc() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email,
-        product_type: 'basic',
-        asset_value,
-        expected_extra,
-        score,
-        risk_grade,
+        product_type: 'premium',
+        asset_value: Number(inputs.assetValue),
+        expected_extra: Number(inputs.expectedExtra),
+        risk_grade: result?.risk_grade,
       }),
     });
-    // 🔥 6월 15일 이후 활성화
-    /*
-const handlePayment = async () => {
-  const res = await fetch('/api/create-payment', {
-    method: 'POST'
-  })
 
-  const { url } = await res.json()
-  window.location.href = url
-}
-*/
+    sendGAEvent({ event: 'premium_lead_submit', value: result?.burden_ratio });
+    alert('베타 신청이 접수되었습니다. 6/15 정식 오픈 시 안내드립니다.');
 
-    const handlePremiumPurchase = async () => {
-      // 🔒 6/14까지는 이메일 수집
-      await fetch('/api/beta-apply', {
-        method: 'POST',
-        body: JSON.stringify({
-          asset_value: inputs.assetValue,
-          expected_extra: inputs.expectedExtra,
-          risk: result.risk_grade,
-        }),
-      });
-
-      alert('베타 신청이 접수되었습니다. 6/15 정식 오픈 시 안내드립니다.');
-
-      /*
-  // 6/15 이후 주석 해제
-  const res = await fetch('/api/premium-checkout', { method: 'POST' })
-  const data = await res.json()
-  window.location.href = data.url
-  */
-    };
-
-    alert('베타 신청이 접수되었습니다.');
+    /* 🔥 6/15 이후 주석 해제
+    const res = await fetch('/api/premium-checkout', { method: 'POST' });
+    const data = await res.json();
+    window.location.href = data.url;
+    */
   };
 
   return (
@@ -159,7 +182,7 @@ const handlePayment = async () => {
           <br />
           <span>당신의 순자산은 줄어듭니다.</span>
         </h1>
-        <p>조합 안내 수치가 아닌, ‘내 자산 기준’으로 구조를 점검해보세요.</p>
+        <p>조합 안내 수치가 아닌, <span>내 자산 기준</span>으로 구조를 점검해보세요.</p>
       </div>
 
       <div className={styles.formBox}>
@@ -189,12 +212,8 @@ const handlePayment = async () => {
           step="1"
           value={inputs.costRate * 100}
           onChange={(e) =>
-            setInputs({
-              ...inputs,
-              costRate: Number(e.target.value) / 100,
-            })
+            setInputs({ ...inputs, costRate: Number(e.target.value) / 100 })
           }
-          placeholder="예: 숫자를 입력해주세요(단위 : %)"
         />
       </div>
 
@@ -224,14 +243,9 @@ const handlePayment = async () => {
           <p className={styles.risk} style={{ color: result.color }}>
             위험도: {result.risk_grade}
           </p>
-
           <p className={styles.riskMessage}>{getRiskMessage()}</p>
 
-          {/* =========================
-   📌 단계형 판매 구조
-========================= */}
-
-          {/* 🔹 R1 */}
+          {/* R1 */}
           {result.burden_ratio < 20 && (
             <div className={styles.basicBox}>
               <h3>📄 현재는 안정 구간입니다</h3>
@@ -247,7 +261,7 @@ const handlePayment = async () => {
             </div>
           )}
 
-          {/* 🔹 R2 */}
+          {/* R2 */}
           {result.burden_ratio >= 20 && result.burden_ratio < 40 && (
             <>
               <div className={styles.basicBox}>
@@ -259,7 +273,6 @@ const handlePayment = async () => {
                   </button>
                 </Link>
               </div>
-
               <div className={styles.softPremium}>
                 <p>보다 정밀한 총회 대응 전략이 필요하신가요?</p>
                 <Link href="/member/report-premium">
@@ -271,19 +284,19 @@ const handlePayment = async () => {
             </>
           )}
 
-          {/* 🔹 R3 */}
+          {/* R3 */}
           {result.burden_ratio >= 40 && result.burden_ratio < 60 && (
             <>
               <div className={styles.premiumBox}>
                 <h3>⚠ 고위험 구간 진입</h3>
                 <p>총회 전 대응 전략 없이 참석하면 협상력이 없습니다.</p>
-                <Link href="/member/report-premium">
-                  <button className={styles.premiumBtn}>
-                    총회 대응 전략 패키지 보기 (99,000원 베타) →
-                  </button>
-                </Link>
+                <button
+                  className={styles.premiumBtn}
+                  onClick={handlePremiumPurchase}
+                >
+                  총회 대응 전략 패키지 보기 (99,000원 베타) →
+                </button>
               </div>
-
               <div className={styles.basicSub}>
                 <Link href="/member/report-basic">
                   기본 구조 검증 리포트 보기 (39,000원)
@@ -292,7 +305,7 @@ const handlePayment = async () => {
             </>
           )}
 
-          {/* 🔹 R4 */}
+          {/* R4 */}
           {result.burden_ratio >= 60 && (
             <div className={styles.urgentBox}>
               <h3>🚨 자산 잠식 심각 구간</h3>
@@ -300,14 +313,16 @@ const handlePayment = async () => {
                 현재 구조는 조합원에게 매우 불리한 상태입니다. 대응 전략 없이
                 총회에 참석하는 것은 위험합니다.
               </p>
-              <Link href="/member/report-premium">
-                <button className={styles.urgentBtn}>
-                  즉시 대응 전략 확인 (99,000원 베타) →
-                </button>
-              </Link>
+              <button
+                className={styles.urgentBtn}
+                onClick={handlePremiumPurchase}
+              >
+                즉시 대응 전략 확인 (99,000원 베타) →
+              </button>
             </div>
           )}
 
+          {/* 자산 잠식 시점 (잠금 상태) */}
           <div className={styles.lockedBox}>
             <h3>🔒 자산 잠식 예상 시점</h3>
             <p>
@@ -315,52 +330,50 @@ const handlePayment = async () => {
               <br />
               당신의 순자산은 감소 구간에 진입합니다.
             </p>
-            <button onClick={handlePurchase} className={styles.unlockBtn}>
-              잠식 시점 확인하기 →
+            <button
+              onClick={handlePurchase}
+              className={styles.unlockBtn}
+              disabled={loadingReport}
+            >
+              {loadingReport ? '처리 중...' : '잠식 시점 확인하기 →'}
             </button>
           </div>
 
+          {/* 리포트 CTA */}
           <div className={styles.ctaBox}>
             <h3>📄 내 분담금 방어 전략 리포트</h3>
-
             <ul className={styles.benefitList}>
-              <li>✔ 공사비 5%,10%,20% 민감도 표</li>
+              <li>✔ 공사비 5%, 10%, 20% 민감도 표</li>
               <li>✔ 내 자산 잠식 시점 계산</li>
               <li>✔ 총회 질문 리스트 5개 제공</li>
               <li>✔ 조합 대응 체크리스트</li>
             </ul>
-
             <div className={styles.priceBox}>
               <span className={styles.price}>39,000원</span>
               <span className={styles.badge}>6월 한정 베타 29,000원</span>
             </div>
-
-            <button onClick={handlePurchase} className={styles.purchaseBtn}>
-              내 자산 방어 전략 확인하기 →
+            <button
+              onClick={handlePurchase}
+              className={styles.purchaseBtn}
+              disabled={loadingReport}
+            >
+              {loadingReport ? '처리 중...' : '내 자산 방어 전략 확인하기 →'}
             </button>
-
             <p className={styles.priceNote}>
               6/15 정식 오픈 예정
               <br />
               현재는 베타 신청자에게 개별 안내 후 발송됩니다.
             </p>
           </div>
+
+          {/* Pro 브릿지 */}
           <div className={styles.bridgeBox}>
             <h3>🏗 우리 단지 전체 구조도 확인해보시겠습니까?</h3>
             <p>
               개인 리스크뿐 아니라 단지 전체 사업 안정성 점수도 확인할 수
               있습니다.
             </p>
-            <button
-              onClick={() => {
-                sendGAEvent({
-                  event: 'member_to_pro_click',
-                  value: result.burden_ratio,
-                });
-                router.push('/enterprise');
-              }}
-              className={styles.proBtn}
-            >
+            <button onClick={handleReportClick} className={styles.proBtn}>
               단지 구조 분석 보기 →
             </button>
           </div>

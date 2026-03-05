@@ -1,7 +1,7 @@
 export const metadata = {
-  title: '조합원 분담금 계산기 | 공사비 상승 시 추가 부담 예측',
+  title: '총회 대응 전략 패키지 | M-DEENO',
   description:
-    '공사비 상승률에 따라 내 분담금이 얼마나 늘어나는지 계산해보세요.',
+    '자산 정보를 입력하면 공사비 리스크 분석 및 총회 대응 전략 리포트 PDF를 즉시 생성합니다.',
 };
 
 export default function CalcMemberLayout({ children }) {

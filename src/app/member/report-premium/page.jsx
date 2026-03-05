@@ -1,137 +1,238 @@
 'use client';
 
 import { useState } from 'react';
+import { downloadPdf } from '@/lib/download-pdf';
 import styles from './page.module.css';
 
-export default function PremiumPage() {
+const INITIAL_FORM = {
+  member_name: '',
+  complex_name: '',
+  location: '',
+  asset_value: '',
+  expected_extra: '',
+  cost: '900',
+};
+
+export default function PremiumReportPage() {
+  const [form, setForm] = useState(INITIAL_FORM);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [done, setDone] = useState(false);
 
-  const handleBetaRequest = async () => {
-    const email = prompt('베타 신청 이메일을 입력하세요.');
-    if (!email) return;
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    if (error) setError(null);
+    if (done) setDone(false);
+  }
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setError(null);
+    setDone(false);
     setLoading(true);
 
-    await fetch('/api/lead-submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email,
-        product_type: 'premium',
-      }),
-    });
+    const payload = {
+      member_name:    form.member_name.trim(),
+      complex_name:   form.complex_name.trim(),
+      location:       form.location.trim() || '해당 지역',
+      asset_value:    Number(form.asset_value),
+      expected_extra: Number(form.expected_extra),
+      cost:           Number(form.cost) || 900,
+    };
 
-    alert('베타 신청 완료. 6/15 정식 오픈 시 안내드립니다.');
-    setLoading(false);
-  };
+    try {
+      await downloadPdf(
+        '/api/member-premium-report',
+        payload,
+        'M-DEENO_총회전략패키지.pdf',
+      );
+      setDone(true);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const isValid =
+    form.asset_value !== '' &&
+    Number(form.asset_value) > 0 &&
+    form.expected_extra !== '' &&
+    Number(form.expected_extra) >= 0;
 
   return (
     <div className={styles.wrapper}>
-      {/* 1️⃣ Shock Section */}
-      <section className={styles.shock}>
-        <h1>
-          총회는 감정이 아니라
-          <br />
-          <span>숫자로 싸우는 자리입니다.</span>
-        </h1>
-        <p>
-          공사비 인상은 협상입니다.
-          <br />
-          준비하지 않으면 불리합니다.
+      <div className={styles.header}>
+        <p className={styles.eyebrow}>M-DEENO Prop-Logic™</p>
+        <h1 className={styles.title}>총회 대응 전략 패키지</h1>
+        <p className={styles.subtitle}>
+          귀하의 자산 정보를 입력하면 맞춤형 전략 리포트 PDF를 즉시 생성합니다.
         </p>
-      </section>
+      </div>
 
-      {/* 2️⃣ 손실 강조 */}
-      <section className={styles.damage}>
-        <h2>조합원 평균 추가 부담</h2>
-        <div className={styles.damageBox}>5,000만 ~ 1억 이상</div>
-        <p>전략 준비 비용: 99,000원 (베타가)</p>
-      </section>
+      <form className={styles.form} onSubmit={handleSubmit} noValidate>
+        {/* ── 선택 필드 ── */}
+        <div className={styles.section}>
+          <p className={styles.sectionLabel}>기본 정보 (선택)</p>
 
-      {/* 3️⃣ 문제 제기 */}
-      <section className={styles.problem}>
-        <h3>이런 상황이 반복됩니다</h3>
-        <ul>
-          <li>✔ 공사비 인상 근거를 이해 못함</li>
-          <li>✔ 총회에서 질문 못함</li>
-          <li>✔ 분위기에 휩쓸려 찬성</li>
-          <li>✔ 나중에 분담금 폭탄 체감</li>
-        </ul>
-      </section>
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="member_name">
+              성함
+            </label>
+            <input
+              className={styles.input}
+              id="member_name"
+              name="member_name"
+              type="text"
+              value={form.member_name}
+              onChange={handleChange}
+              placeholder="홍길동"
+              autoComplete="name"
+            />
+          </div>
 
-      {/* 4️⃣ 해결책 */}
-      <section className={styles.solution}>
-        <h3>총회 대응 전략 패키지</h3>
-        <p>감정이 아니라 구조로 대응하십시오.</p>
-      </section>
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="complex_name">
+              단지명
+            </label>
+            <input
+              className={styles.input}
+              id="complex_name"
+              name="complex_name"
+              type="text"
+              value={form.complex_name}
+              onChange={handleChange}
+              placeholder="○○아파트"
+            />
+          </div>
 
-      {/* 5️⃣ 구성 */}
-      <section className={styles.contents}>
-        <ul>
-          <li>1️⃣ 사업 구조 재해석</li>
-          <li>2️⃣ 일반분양가 vs 공사비 역산 분석</li>
-          <li>3️⃣ 타 단지 비교 지표</li>
-          <li>4️⃣ 총회 발언 스크립트</li>
-          <li>5️⃣ 공사비 적정성 분석</li>
-          <li>6️⃣ 협상 포인트 제안</li>
-          <li>7️⃣ 3단계 리스크 대응 시나리오</li>
-        </ul>
-      </section>
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="location">
+              지역
+            </label>
+            <input
+              className={styles.input}
+              id="location"
+              name="location"
+              type="text"
+              value={form.location}
+              onChange={handleChange}
+              placeholder="예: 서울 강남구"
+            />
+          </div>
+        </div>
 
-      <section className={styles.compare}>
-        <h2>기본 vs 전략 패키지 비교</h2>
+        {/* ── 필수 필드 ── */}
+        <div className={styles.section}>
+          <p className={styles.sectionLabel}>자산 정보 (필수)</p>
 
-        <table>
-          <thead>
-            <tr>
-              <th>항목</th>
-              <th>기본 (39,000)</th>
-              <th>전략 (149,000)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>구조 검증</td>
-              <td>✔</td>
-              <td>✔</td>
-            </tr>
-            <tr>
-              <td>공사비 역산 분석</td>
-              <td>✔</td>
-              <td>✔</td>
-            </tr>
-            <tr>
-              <td>총회 발언 스크립트</td>
-              <td>-</td>
-              <td>✔</td>
-            </tr>
-            <tr>
-              <td>협상 전략</td>
-              <td>-</td>
-              <td>✔</td>
-            </tr>
-            <tr>
-              <td>리스크 대응 시나리오</td>
-              <td>-</td>
-              <td>✔</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="asset_value">
+              종전자산 <span className={styles.required}>*</span>
+            </label>
+            <div className={styles.inputWrapper}>
+              <input
+                className={styles.input}
+                id="asset_value"
+                name="asset_value"
+                type="number"
+                value={form.asset_value}
+                onChange={handleChange}
+                placeholder="5"
+                min="0.1"
+                step="0.1"
+                required
+              />
+              <span className={styles.unit}>억원</span>
+            </div>
+          </div>
 
-      {/* 6️⃣ 가격 앵커링 */}
-      <section className={styles.pricing}>
-        <p className={styles.original}>정식가 149,000원</p>
-        <p className={styles.beta}>6월 베타가 99,000원</p>
-        <p className={styles.note}>6/15 정식 오픈 후 가격 인상</p>
-      </section>
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="expected_extra">
+              예상 추가 분담금 <span className={styles.required}>*</span>
+            </label>
+            <div className={styles.inputWrapper}>
+              <input
+                className={styles.input}
+                id="expected_extra"
+                name="expected_extra"
+                type="number"
+                value={form.expected_extra}
+                onChange={handleChange}
+                placeholder="1.2"
+                min="0"
+                step="0.1"
+                required
+              />
+              <span className={styles.unit}>억원</span>
+            </div>
+          </div>
 
-      {/* 7️⃣ CTA */}
-      <section className={styles.cta}>
-        <button onClick={handleBetaRequest} disabled={loading}>
-          {loading ? '신청 접수 중...' : '베타 신청하기'}
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="cost">
+              현재 평당 공사비
+            </label>
+            <div className={styles.inputWrapper}>
+              <input
+                className={styles.input}
+                id="cost"
+                name="cost"
+                type="number"
+                value={form.cost}
+                onChange={handleChange}
+                placeholder="900"
+                min="1"
+                step="10"
+              />
+              <span className={styles.unit}>만원</span>
+            </div>
+          </div>
+        </div>
+
+        {/* ── 에러 메시지 ── */}
+        {error && (
+          <div className={styles.errorBox}>
+            <strong>{error.message ?? 'PDF 생성에 실패했습니다.'}</strong>
+            {error.fields && error.fields.length > 0 && (
+              <ul className={styles.errorFields}>
+                {error.fields.map((f, i) => (
+                  <li key={i}>
+                    <span className={styles.errorField}>{f.field}</span>: {f.message}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+
+        {/* ── 성공 메시지 ── */}
+        {done && (
+          <div className={styles.successBox}>
+            리포트 PDF가 다운로드되었습니다.
+          </div>
+        )}
+
+        {/* ── 제출 버튼 ── */}
+        <button
+          className={styles.submitBtn}
+          type="submit"
+          disabled={loading || !isValid}
+        >
+          {loading ? (
+            <span className={styles.loadingInner}>
+              <span className={styles.spinner} />
+              리포트 생성 중...
+            </span>
+          ) : (
+            '전략 리포트 PDF 생성하기'
+          )}
         </button>
-      </section>
+
+        <p className={styles.notice}>
+          * 표시 항목은 필수입니다. 입력 정보는 리포트 생성에만 사용됩니다.
+        </p>
+      </form>
     </div>
   );
 }
