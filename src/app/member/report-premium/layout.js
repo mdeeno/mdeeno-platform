@@ -5,5 +5,5 @@ export const metadata = {
 };
 
 export default function CalcMemberLayout({ children }) {
-  return children;
+  return <>{children}</>;
 }

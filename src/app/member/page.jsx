@@ -16,6 +16,10 @@ const INITIAL_FORM = {
   asset_value:        '',
   cost_increase_rate: '10',
   project_stage:      'approval',
+  member_name:        '',
+  complex_name:       '',
+  location:           '',
+  construction_cost:  '900',
 };
 
 function formatAmount(eokValue) {
@@ -35,6 +39,9 @@ export default function ShockCalculatorPage() {
   const [pdfLoading, setPdfLoading] = useState(false);
   const [pdfDone, setPdfDone]     = useState(false);
   const [pdfError, setPdfError]   = useState(null);
+  const [emailModalOpen, setEmailModalOpen] = useState(false);
+  const [email, setEmail]                   = useState('');
+  const [emailError, setEmailError]         = useState('');
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -78,7 +85,7 @@ export default function ShockCalculatorPage() {
     }
   }
 
-  async function handleDownloadReport() {
+  async function handleDownloadReport(emailAddress) {
     setPdfError(null);
     setPdfDone(false);
     setPdfLoading(true);
@@ -89,7 +96,11 @@ export default function ShockCalculatorPage() {
         {
           asset_value:    Number(form.asset_value),
           expected_extra: Number(form.expected_extra),
-          cost:           900,
+          member_name:    form.member_name.trim(),
+          complex_name:   form.complex_name.trim(),
+          location:       form.location.trim() || '해당 지역',
+          cost:           Number(form.construction_cost) || 900,
+          email:          emailAddress,
         },
         'M-DEENO_프리미엄전략리포트.pdf',
       );
@@ -99,6 +110,16 @@ export default function ShockCalculatorPage() {
     } finally {
       setPdfLoading(false);
     }
+  }
+
+  function handleModalSubmit(e) {
+    e.preventDefault();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setEmailError('올바른 이메일 주소를 입력해 주세요.');
+      return;
+    }
+    setEmailModalOpen(false);
+    handleDownloadReport(email.trim());
   }
 
   return (
@@ -202,6 +223,79 @@ export default function ShockCalculatorPage() {
           </div>
         </div>
 
+        {/* ── Personalization Fields ── */}
+        <div className={styles.formCard}>
+          <p className={styles.formSectionLabel}>리포트 개인화 (선택)</p>
+
+          <div className={styles.fieldGrid}>
+            <div className={styles.field}>
+              <label className={styles.label} htmlFor="member_name">
+                조합원 이름
+              </label>
+              <input
+                className={styles.input}
+                id="member_name"
+                name="member_name"
+                type="text"
+                value={form.member_name}
+                onChange={handleChange}
+                placeholder="홍길동"
+                autoComplete="name"
+              />
+            </div>
+
+            <div className={styles.field}>
+              <label className={styles.label} htmlFor="complex_name">
+                아파트 단지명
+              </label>
+              <input
+                className={styles.input}
+                id="complex_name"
+                name="complex_name"
+                type="text"
+                value={form.complex_name}
+                onChange={handleChange}
+                placeholder="○○아파트"
+              />
+            </div>
+
+            <div className={styles.field}>
+              <label className={styles.label} htmlFor="location">
+                사업장 지역
+              </label>
+              <input
+                className={styles.input}
+                id="location"
+                name="location"
+                type="text"
+                value={form.location}
+                onChange={handleChange}
+                placeholder="예: 서울 강남구"
+              />
+            </div>
+
+            <div className={styles.field}>
+              <label className={styles.label} htmlFor="construction_cost">
+                평당 공사비 (만원)
+              </label>
+              <div className={styles.inputWrap}>
+                <input
+                  className={styles.input}
+                  id="construction_cost"
+                  name="construction_cost"
+                  type="number"
+                  value={form.construction_cost}
+                  onChange={handleChange}
+                  placeholder="900"
+                  min="1"
+                  step="10"
+                />
+                <span className={styles.unit}>만원</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {error && <div className={styles.errorBox}>{error}</div>}
 
         <button className={styles.submitBtn} type="submit" disabled={loading || !isValid}>
@@ -287,7 +381,7 @@ export default function ShockCalculatorPage() {
 
               <button
                 className={styles.ctaBtn}
-                onClick={handleDownloadReport}
+                onClick={() => setEmailModalOpen(true)}
                 disabled={pdfLoading}
               >
                 {pdfLoading ? (
@@ -316,6 +410,56 @@ export default function ShockCalculatorPage() {
       <p className={styles.disclaimer}>
         * 본 분석 결과는 입력값 기반 시뮬레이션으로, 법적 증거로 사용될 수 없습니다.
       </p>
+
+      {/* ── Email Gate Modal ── */}
+      {emailModalOpen && (
+        <div
+          className={styles.modalBackdrop}
+          onClick={() => setEmailModalOpen(false)}
+        >
+          <div
+            className={styles.modal}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <p className={styles.modalTitle}>리포트를 받을 이메일</p>
+            <p className={styles.modalDesc}>
+              베타 참여자로 등록되며 리포트가 즉시 생성됩니다.
+            </p>
+
+            <form onSubmit={handleModalSubmit} noValidate>
+              <div className={styles.modalField}>
+                <label className={styles.modalLabel} htmlFor="modal_email">
+                  이메일 주소
+                </label>
+                <input
+                  className={styles.modalInput}
+                  id="modal_email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => { setEmail(e.target.value); setEmailError(''); }}
+                  placeholder="your@email.com"
+                  autoComplete="email"
+                  autoFocus
+                />
+                {emailError && (
+                  <p className={styles.modalError}>{emailError}</p>
+                )}
+              </div>
+
+              <button className={styles.modalSubmitBtn} type="submit">
+                리포트 생성하기
+              </button>
+              <button
+                className={styles.modalCancelBtn}
+                type="button"
+                onClick={() => setEmailModalOpen(false)}
+              >
+                취소
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
