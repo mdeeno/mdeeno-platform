@@ -129,6 +129,88 @@
   color: #16a34a;
 }
 
+/* ── Share Box ────────────────────────────────────────────── */
+.shareBox {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 12px;
+  padding: 24px 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.shareMessage {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.shareButtons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.kakaoBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 18px;
+  background: #FFE812;
+  color: #3A1D1D;
+  font-size: 0.875rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.kakaoBtn:hover {
+  opacity: 0.85;
+}
+
+.kakaoBtnIcon {
+  display: flex;
+  align-items: center;
+}
+
+.copyBtn {
+  padding: 11px 18px;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+  min-width: 90px;
+}
+
+.copyBtn:hover {
+  background: #e2e8f0;
+}
+
+.printBtn {
+  padding: 11px 18px;
+  background: #0f172a;
+  color: #f1f5f9;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.printBtn:hover {
+  background: #1e293b;
+}
+
 /* ── CTA ──────────────────────────────────────────────────── */
 .ctaBox {
   background: #0f172a;
@@ -188,5 +270,34 @@
 
   .metricValue {
     font-size: 1.15rem;
+  }
+
+  .shareButtons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .kakaoBtn,
+  .copyBtn,
+  .printBtn {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* ── Print ────────────────────────────────────────────────── */
+@media print {
+  .shareBox,
+  .ctaBox {
+    display: none;
+  }
+
+  .wrapper {
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .metricsGrid {
+    break-inside: avoid;
   }
 }

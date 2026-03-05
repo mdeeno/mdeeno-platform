@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { downloadPdf } from '@/lib/download-pdf';
 import styles from './page.module.css';
 
@@ -44,6 +44,12 @@ export default function ShockCalculatorPage() {
   const [emailModalOpen, setEmailModalOpen] = useState(false);
   const [email, setEmail]                   = useState('');
   const [emailError, setEmailError]         = useState('');
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const cn = params.get('complex_name');
+    if (cn) setForm((prev) => ({ ...prev, complex_name: cn }));
+  }, []);
 
   function handleChange(e) {
     const { name, value } = e.target;

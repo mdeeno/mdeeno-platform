@@ -6,6 +6,20 @@ import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import styles from './page.module.css';
 
+function loadKakaoSdk(appKey) {
+  return new Promise((resolve) => {
+    if (window.Kakao) { resolve(); return; }
+    const script = document.createElement('script');
+    script.src = 'https://t1.kakaocdn.net/kakaojs/2.7.4/kakao.min.js';
+    script.crossOrigin = 'anonymous';
+    script.onload = () => {
+      if (window.Kakao && !window.Kakao.isInitialized()) window.Kakao.init(appKey);
+      resolve();
+    };
+    document.head.appendChild(script);
+  });
+}
+
 const RISK_LABELS = { R1: '안정', R2: '중위험', R3: '고위험', R4: '최고위험' };
 const RISK_COLORS = { R1: '#16a34a', R2: '#d97706', R3: '#e63946', R4: '#b91c1c' };
 
@@ -21,6 +35,43 @@ export default function ReportSharePage() {
   const [record, setRecord] = useState(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    const appKey = process.env.NEXT_PUBLIC_KAKAO_APP_KEY;
+    if (appKey) loadKakaoSdk(appKey);
+  }, []);
+
+  function handleCopyUrl() {
+    navigator.clipboard.writeText(window.location.href);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  }
+
+  function handleKakaoShare() {
+    const url = window.location.href;
+    if (window.Kakao?.Share) {
+      window.Kakao.Share.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: 'M-DEENO 분담금 리스크 분석 결과',
+          description: record
+            ? `위험 등급 ${record.risk_level} · 예상 추가 분담금 ${formatAmount(record.expected_contribution)}`
+            : 'M-DEENO 전략 리포트',
+          link: { mobileWebUrl: url, webUrl: url },
+        },
+        buttons: [{
+          title: '내 자산도 진단하기',
+          link: {
+            mobileWebUrl: `${window.location.origin}/member`,
+            webUrl: `${window.location.origin}/member`,
+          },
+        }],
+      });
+    } else {
+      handleCopyUrl();
+    }
+  }
 
   useEffect(() => {
     if (!report_id) return;
@@ -109,6 +160,30 @@ export default function ReportSharePage() {
           <span className={styles.metricValue} style={{ color: riskColor }}>
             {record.shock_score}<span className={styles.metricUnit}>/100</span>
           </span>
+        </div>
+      </div>
+
+      {/* Share */}
+      <div className={styles.shareBox}>
+        <p className={styles.shareMessage}>
+          이 리포트를 같은 단지 조합원에게 공유하세요.
+        </p>
+        <div className={styles.shareButtons}>
+          <button className={styles.kakaoBtn} onClick={handleKakaoShare}>
+            <span className={styles.kakaoBtnIcon}>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <ellipse cx="9" cy="8.5" rx="8" ry="7" fill="#3A1D1D"/>
+                <path d="M9 4C5.686 4 3 6.01 3 8.5c0 1.553.97 2.921 2.45 3.742L4.8 14l2.37-1.57C7.69 12.48 8.337 12.5 9 12.5c3.314 0 6-2.01 6-4.5S12.314 4 9 4z" fill="#FFE812"/>
+              </svg>
+            </span>
+            카카오톡 공유
+          </button>
+          <button className={styles.copyBtn} onClick={handleCopyUrl}>
+            {copied ? '복사됨 ✓' : 'URL 복사'}
+          </button>
+          <button className={styles.printBtn} onClick={() => window.print()}>
+            PDF 다운로드
+          </button>
         </div>
       </div>
 

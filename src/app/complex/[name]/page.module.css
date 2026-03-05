@@ -48,108 +48,176 @@
   line-height: 1.6;
 }
 
-/* ── Benchmark ────────────────────────────────────────────── */
-.benchmarkSection {
+.danger {
+  color: #e63946;
+}
+
+/* ── Data Sections (shared wrapper) ───────────────────────── */
+.dataSection {
   margin-bottom: 48px;
 }
 
-.benchmarkGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.benchmarkCard {
+/* ── 1. 공사비 비교 ───────────────────────────────────────── */
+.costCompare {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   padding: 22px 20px;
+}
+
+.costRow {
+  display: grid;
+  grid-template-columns: 72px 1fr 130px;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.costRow:last-of-type {
+  margin-bottom: 0;
+}
+
+.costRowLabel {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.costBarWrap {
+  height: 12px;
+  background: #e2e8f0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.costBar {
+  height: 100%;
+  background: #94a3b8;
+  border-radius: 6px;
+  transition: width 0.4s ease;
+}
+
+.costBarHighlight {
+  background: linear-gradient(90deg, #0f2d6b 0%, #e63946 100%);
+}
+
+.costRowVal {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #0f172a;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.costNote {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #e2e8f0;
+  line-height: 1.5;
+}
+
+/* ── 2. 사업 단계 위험도 ──────────────────────────────────── */
+.stageRiskGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.stageRiskCard {
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 16px 16px 14px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
-.benchmarkHighlight {
-  background: #fff1f2;
-  border-color: #fecaca;
+.stageRiskBadge {
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
 }
 
-.benchmarkLabel {
-  font-size: 0.7rem;
+.stageRiskName {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.stageRiskDesc {
+  font-size: 0.75rem;
+  color: #475569;
+  line-height: 1.5;
+}
+
+/* ── 3. 예상 분담금 범위 ──────────────────────────────────── */
+.rangeBox {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px 20px 18px;
+}
+
+.rangeValues {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.rangeEnd {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.rangeEndLabel {
+  font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   color: #94a3b8;
 }
 
-.benchmarkValue {
-  font-size: 1.75rem;
+.rangeEndVal {
+  font-size: 1.6rem;
   font-weight: 900;
   color: #0f172a;
   line-height: 1;
 }
 
-.benchmarkUnit {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #64748b;
-  margin-left: 2px;
-}
-
-.benchmarkSub {
-  font-size: 0.75rem;
-  color: #94a3b8;
-}
-
-.danger {
-  color: #e63946;
-}
-
-/* ── Stage Bar Chart ──────────────────────────────────────── */
-.stageList {
+.rangeTrack {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 20px 20px;
-}
-
-.stageRow {
-  display: grid;
-  grid-template-columns: 140px 1fr 120px;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
 }
 
-.stageLabel {
-  font-size: 0.8rem;
+.rangeTrackFill {
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(90deg, #16a34a 0%, #d97706 50%, #e63946 100%);
+  border-radius: 4px;
+}
+
+.rangeTrackLabel {
+  font-size: 0.68rem;
+  color: #94a3b8;
   font-weight: 600;
-  color: #475569;
   white-space: nowrap;
 }
 
-.stageBarWrap {
-  height: 10px;
-  background: #e2e8f0;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-.stageBar {
-  height: 100%;
-  background: linear-gradient(90deg, #0f2d6b 0%, #e63946 100%);
-  border-radius: 5px;
-  transition: width 0.3s ease;
-}
-
-.stageCost {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #374151;
-  text-align: right;
+.rangeNote {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  line-height: 1.55;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 14px;
 }
 
 /* ── Risk Section ─────────────────────────────────────────── */
@@ -218,6 +286,90 @@
   line-height: 1.65;
 }
 
+/* ── Participation Section ────────────────────────────────── */
+.participationSection {
+  margin-bottom: 48px;
+  background: #f0f4ff;
+  border: 1px solid #c7d7fd;
+  border-radius: 14px;
+  padding: 28px 28px 20px;
+}
+
+.participationHeader {
+  margin-bottom: 24px;
+}
+
+.participationEyebrow {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #3b6bdb;
+  margin-bottom: 6px;
+}
+
+.participationTitle {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.participationStats {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #ffffff;
+  border: 1px solid #dbeafe;
+  border-radius: 10px;
+  padding: 24px 20px;
+  margin-bottom: 14px;
+}
+
+.statCard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.statValue {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1;
+}
+
+.statUnit {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #64748b;
+  margin-top: -2px;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+.statRisk {
+  color: #d97706;
+}
+
+.statDivider {
+  width: 1px;
+  height: 48px;
+  background: #e2e8f0;
+  flex-shrink: 0;
+}
+
+.participationNote {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
 /* ── CTA ──────────────────────────────────────────────────── */
 .ctaSection {
   background: #0f172a;
@@ -263,26 +415,26 @@
     font-size: 1.5rem;
   }
 
-  .benchmarkGrid {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .benchmarkValue {
-    font-size: 1.4rem;
-  }
-
-  .stageRow {
-    grid-template-columns: 110px 1fr 100px;
+  .costRow {
+    grid-template-columns: 60px 1fr 100px;
     gap: 8px;
   }
 
-  .stageLabel {
-    font-size: 0.72rem;
+  .costRowVal {
+    font-size: 0.75rem;
   }
 
-  .stageCost {
-    font-size: 0.72rem;
+  .stageRiskGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .stageRiskName {
+    font-size: 0.82rem;
+  }
+
+  .rangeEndVal {
+    font-size: 1.3rem;
   }
 
   .ctaSection {
