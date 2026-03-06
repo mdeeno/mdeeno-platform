@@ -424,6 +424,94 @@
   color: #94a3b8;
 }
 
+/* ── Top CTA Button ───────────────────────────────────────── */
+.ctaBtnTop {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 14px 24px;
+  background: #e63946;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.ctaBtnTop:hover {
+  background: #c1121f;
+  transform: translateY(-1px);
+}
+
+/* ── Overview Section ─────────────────────────────────────── */
+.overviewGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.overviewItem {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.overviewLabel {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+}
+
+.overviewValue {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.3;
+}
+
+/* ── Stage Active Card ────────────────────────────────────── */
+.stageRiskCardActive {
+  box-shadow: 0 0 0 2px currentColor;
+}
+
+.currentBadge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+/* ── Sub-section helpers ──────────────────────────────────── */
+.riskSubSection {
+  margin-top: 28px;
+}
+
+.strategySubSection {
+  margin-top: 28px;
+}
+
+.subSectionTitle {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 14px;
+}
+
+/* ── Range Box Label ──────────────────────────────────────── */
+.rangeBoxLabel {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  margin-bottom: 16px;
+}
+
 /* ── CTA ──────────────────────────────────────────────────── */
 .ctaSection {
   background: #0f172a;
@@ -468,6 +556,15 @@
 @media (max-width: 480px) {
   .wrapper {
     padding: 40px 16px 60px;
+  }
+
+  .ctaBtnTop {
+    display: block;
+    text-align: center;
+  }
+
+  .overviewGrid {
+    grid-template-columns: 1fr 1fr;
   }
 
   .ctaSection {

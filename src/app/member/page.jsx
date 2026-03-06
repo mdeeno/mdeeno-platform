@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { downloadPdf } from '@/lib/download-pdf';
 import styles from './page.module.css';
 
@@ -83,6 +84,16 @@ export default function ShockCalculatorPage() {
       if (!res.ok) throw new Error(data.error ?? '분석에 실패했습니다.');
 
       setResult(data);
+
+      // Save context for /member/report-basic (no re-entry needed there)
+      try {
+        localStorage.setItem('basicReportContext', JSON.stringify({
+          assetValue:    form.asset_value,
+          expectedExtra: form.expected_extra,
+          riskGrade:     data.risk_level,
+        }));
+      } catch {}
+
       setTimeout(() => {
         document.getElementById('shock-result')?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
@@ -175,6 +186,28 @@ export default function ShockCalculatorPage() {
             </div>
           </li>
         </ul>
+      </div>
+
+      {/* ── Trust Section ── */}
+      <div className={styles.trustSection}>
+        <p className={styles.trustEyebrow}>이미 분석된 실제 사례</p>
+        <div className={styles.trustGrid}>
+          <div className={styles.trustCard}>
+            <p className={styles.trustCause}>공사비 상승</p>
+            <p className={styles.trustAmount}>+1.2억</p>
+            <p className={styles.trustLabel}>추가 분담금</p>
+          </div>
+          <div className={styles.trustCard}>
+            <p className={styles.trustCause}>사업 지연</p>
+            <p className={styles.trustAmount}>+8,000만</p>
+            <p className={styles.trustLabel}>추가 분담금</p>
+          </div>
+          <div className={styles.trustCard}>
+            <p className={styles.trustCause}>설계 변경</p>
+            <p className={styles.trustAmount}>+1.5억</p>
+            <p className={styles.trustLabel}>추가 분담금</p>
+          </div>
+        </div>
       </div>
 
       {/* ── Input Form ── */}
@@ -371,6 +404,10 @@ export default function ShockCalculatorPage() {
             <p className={styles.shockMessage}>{result.shock_message}</p>
           </div>
 
+          <p className={styles.urgencyNote}>
+            공사비가 5%만 올라가도 분담금은 크게 변합니다.
+          </p>
+
           {/* 2. Comparison */}
           <div className={styles.comparisonGrid}>
             <div className={styles.comparisonCard}>
@@ -451,10 +488,14 @@ export default function ShockCalculatorPage() {
               </ul>
             </div>
             <div className={styles.strategyOverlay}>
-              <p className={styles.ctaTitle}>
-                총회 전 내 자산을 지키는<br />
-                30페이지 전략 리포트 보기
+              <p className={styles.premiumHeadline}>
+                총회에서 이길 전략까지<br />제공합니다
               </p>
+              <ul className={styles.upsellList}>
+                <li className={styles.upsellItem}>협상 질문 리스트</li>
+                <li className={styles.upsellItem}>총회 발언 스크립트</li>
+                <li className={styles.upsellItem}>시공사 대응 전략</li>
+              </ul>
               <p className={styles.ctaPrice}>
                 <span className={styles.ctaPriceBeta}>베타 99,000원 · 정가 149,000원</span>
               </p>
@@ -510,6 +551,14 @@ export default function ShockCalculatorPage() {
                 </div>
               )}
             </div>
+          </div>
+
+          {/* 5. Basic Report CTA */}
+          <div className={styles.basicReportCta}>
+            <p className={styles.basicReportCtaLabel}>더 간단한 리포트가 필요하신가요?</p>
+            <Link href="/member/report-basic" className={styles.basicReportCtaBtn}>
+              기본 리포트 보기 (베타 29,000원) →
+            </Link>
           </div>
 
         </div>

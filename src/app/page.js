@@ -8,27 +8,65 @@ export default function Home() {
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <h1 className={styles.title}>
-            공사비 10% 상승,
+            재건축 분담금,
             <br />
-            <span className={styles.highlight}>당신의 자산은 안전합니까?</span>
+            <span className={styles.highlight}>실제로 얼마나 늘어날까요?</span>
           </h1>
 
           <p className={styles.subtitle}>
-            조합 안내 수치가 아닌,
-            <strong> 내 자산 기준으로 분담금 리스크를 점검하십시오.</strong>
-            <br />
-            총회 대응 전략까지 자동 설계됩니다.
+            M-DEENO는 조합원의 자산 기준으로<br />
+            공사비 상승 시 분담금 변화를 분석합니다.
           </p>
 
           <div className={styles.btnGroup}>
             <Link href="/member" className={styles.primaryBtn}>
-              📊 무료 리스크 진단 시작하기
+              내 분담금 분석 시작하기
             </Link>
 
             <Link href="#report-samples" className={styles.secondaryBtn}>
               📄 리포트 샘플 보기
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* ── Social Proof ── */}
+      <section className={styles.socialProof}>
+        <div className={styles.container}>
+          <p className={styles.socialProofEyebrow}>이미 분석된 사례</p>
+          <div className={styles.socialProofGrid}>
+            <div className={styles.socialProofCard}>
+              <p className={styles.spComplex}>잠실 A단지</p>
+              <p className={styles.spCause}>공사비 상승</p>
+              <p className={styles.spAmount}>+1.2억</p>
+              <p className={styles.spLabel}>추가 분담금</p>
+            </div>
+            <div className={styles.socialProofCard}>
+              <p className={styles.spComplex}>압구정 B단지</p>
+              <p className={styles.spCause}>사업 지연</p>
+              <p className={styles.spAmount}>+8,000만</p>
+              <p className={styles.spLabel}>추가 분담금</p>
+            </div>
+            <div className={styles.socialProofCard}>
+              <p className={styles.spComplex}>목동 C단지</p>
+              <p className={styles.spCause}>설계 변경</p>
+              <p className={styles.spAmount}>+1.5억</p>
+              <p className={styles.spLabel}>추가 분담금</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Urgency ── */}
+      <section className={styles.urgencySection}>
+        <div className={styles.container}>
+          <p className={styles.urgencyText}>
+            공사비가 5%만 올라가도<br />
+            조합원 분담금은 크게 변합니다.
+          </p>
+          <Link href="/member" className={styles.urgencyBtn}>
+            내 분담금 분석 시작하기
+          </Link>
         </div>
       </section>
 
