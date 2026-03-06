@@ -216,13 +216,13 @@ export default function PremiumReportPaywall() {
       <section className={styles.ctaSection}>
         {submitted ? (
           <div className={styles.successBox}>
-            베타 신청이 접수되었습니다. 6/15 정식 오픈 시 리포트를 발송해드립니다.
+            베타 신청이 접수되었습니다. 베타 가격 적용 중 — 리포트를 곧 발송해드립니다.
           </div>
         ) : (
           <form className={styles.ctaForm} onSubmit={handlePurchase} noValidate>
             <h2 className={styles.ctaTitle}>Premium 전략 리포트 구매하기</h2>
             <p className={styles.ctaDesc}>
-              베타 기간 무료 — 이메일을 남기시면 6/15 정식 오픈 시 우선 발송됩니다.
+              베타 가격 적용 중 — 이메일을 남기시면 리포트를 우선 발송해드립니다.
             </p>
 
             <div className={styles.ctaInputRow}>
@@ -248,7 +248,7 @@ export default function PremiumReportPaywall() {
             )}
 
             <p className={styles.ctaNote}>
-              99,000원 (베타 무료) · 결제 시스템은 6/15 이후 활성화됩니다.
+              정가 149,000원 · 베타 가격 적용 중 99,000원
             </p>
           </form>
         )}

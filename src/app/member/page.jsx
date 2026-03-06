@@ -456,7 +456,7 @@ export default function ShockCalculatorPage() {
                 30페이지 전략 리포트 보기
               </p>
               <p className={styles.ctaPrice}>
-                <span className={styles.ctaPriceBeta}>베타가 99,000원</span>
+                <span className={styles.ctaPriceBeta}>베타 99,000원 · 정가 149,000원</span>
               </p>
 
               {pdfError && (

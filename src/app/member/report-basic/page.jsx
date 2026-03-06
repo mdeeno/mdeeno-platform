@@ -130,7 +130,7 @@ export default function MemberCalc() {
 
       sendGAEvent({ event: 'basic_lead_submit', value: result.burden_ratio });
       alert(
-        '베타 신청이 접수되었습니다. 6/15 정식 오픈 시 리포트를 발송해드립니다.',
+        '베타 신청이 접수되었습니다. 베타 가격 적용 중 — 리포트를 곧 발송해드립니다.',
       );
 
       /* 🔥 6/15 이후 주석 해제 — 이메일 수집 대신 직접 PDF 다운로드
@@ -195,7 +195,7 @@ export default function MemberCalc() {
     });
 
     sendGAEvent({ event: 'premium_lead_submit', value: result?.burden_ratio });
-    alert('베타 신청이 접수되었습니다. 6/15 정식 오픈 시 안내드립니다.');
+    alert('베타 신청이 접수되었습니다. 베타 가격 적용 중 — 곧 안내드립니다.');
 
     /* 🔥 6/15 이후 주석 해제
     const res = await fetch('/api/premium-checkout', { method: 'POST' });
@@ -285,7 +285,7 @@ export default function MemberCalc() {
               </p>
               <Link href="/member/report-basic">
                 <button className={styles.basicBtn}>
-                  구조 검증 리포트 보기 (39,000원) →
+                  구조 검증 리포트 보기 (29,000원) →
                 </button>
               </Link>
             </div>
@@ -299,7 +299,7 @@ export default function MemberCalc() {
                 <p>공사비 5%만 더 오르면 손익분기점에 도달할 수 있습니다.</p>
                 <Link href="/member/report-basic">
                   <button className={styles.basicBtn}>
-                    구조 검증 리포트 보기 (39,000원) →
+                    구조 검증 리포트 보기 (29,000원) →
                   </button>
                 </Link>
               </div>
@@ -324,12 +324,12 @@ export default function MemberCalc() {
                   className={styles.premiumBtn}
                   onClick={handlePremiumPurchase}
                 >
-                  총회 대응 전략 패키지 보기 (99,000원 베타) →
+                  총회 대응 전략 패키지 보기 (99,000원) →
                 </button>
               </div>
               <div className={styles.basicSub}>
                 <Link href="/member/report-basic">
-                  기본 구조 검증 리포트 보기 (39,000원)
+                  기본 구조 검증 리포트 보기 (29,000원)
                 </Link>
               </div>
             </>
@@ -347,7 +347,7 @@ export default function MemberCalc() {
                 className={styles.urgentBtn}
                 onClick={handlePremiumPurchase}
               >
-                즉시 대응 전략 확인 (99,000원 베타) →
+                즉시 대응 전략 확인 (99,000원) →
               </button>
             </div>
           )}
@@ -380,7 +380,7 @@ export default function MemberCalc() {
             </ul>
             <div className={styles.priceBox}>
               <span className={styles.price}>39,000원</span>
-              <span className={styles.badge}>6월 한정 베타 29,000원</span>
+              <span className={styles.badge}>베타 29,000원</span>
             </div>
             <button
               onClick={handlePurchase}
@@ -390,9 +390,7 @@ export default function MemberCalc() {
               {loadingReport ? '처리 중...' : '내 자산 방어 전략 확인하기 →'}
             </button>
             <p className={styles.priceNote}>
-              6/15 정식 오픈 예정
-              <br />
-              현재는 베타 신청자에게 개별 안내 후 발송됩니다.
+              베타 가격 적용 중 · 개별 안내 후 발송됩니다.
             </p>
           </div>
 

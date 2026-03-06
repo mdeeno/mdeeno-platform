@@ -343,8 +343,18 @@
 
 .betaTag {
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #dc2626;
+  background: #fff1f2;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.officialPrice {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #94a3b8;
+  text-decoration: line-through;
 }
 
 .sampleCardDesc {

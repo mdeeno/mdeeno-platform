@@ -187,8 +187,9 @@ export default function ReportSamplesSection() {
               <div className={styles.sampleCardBody}>
                 <p className={styles.sampleCardLabel}>기본 리포트</p>
                 <p className={styles.sampleCardPrice}>
+                  <span className={styles.officialPrice}>39,000원</span>{' '}
                   29,000원{' '}
-                  <span className={styles.betaTag}>(베타 무료)</span>
+                  <span className={styles.betaTag}>베타 가격 적용 중</span>
                 </p>
                 <p className={styles.sampleCardDesc}>
                   공사비 시나리오 분석 · 분담금 위험도 진단 · 총회 대응 질문 리스트
@@ -213,8 +214,9 @@ export default function ReportSamplesSection() {
               <div className={styles.sampleCardBody}>
                 <p className={styles.sampleCardLabel}>프리미엄 전략 리포트</p>
                 <p className={styles.sampleCardPrice}>
+                  <span className={styles.officialPrice}>149,000원</span>{' '}
                   99,000원{' '}
-                  <span className={styles.betaTag}>(베타 무료)</span>
+                  <span className={styles.betaTag}>베타 가격 적용 중</span>
                 </p>
                 <p className={styles.sampleCardDesc}>
                   30페이지 심층 분석 · 협상 전략 · 총회 발언 스크립트 · 행동 타임라인
