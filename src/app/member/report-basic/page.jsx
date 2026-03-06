@@ -1,8 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { sendGAEvent } from '@next/third-parties/google';
+import { downloadPdf } from '@/lib/download-pdf';
+import { isBetaMode } from '@/lib/feature-flags';
 import styles from './page.module.css';
 
 const RISK_COLOR = { R1: '#16a34a', R2: '#d97706', R3: '#e63946', R4: '#b91c1c' };
@@ -17,38 +20,75 @@ const REPORT_CONTENTS = [
 ];
 
 export default function ReportBasicPage() {
+  const router = useRouter();
   const [context, setContext] = useState(null);
   const [loading, setLoading]  = useState(false);
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [isPrivacyAgreed, setIsPrivacyAgreed] = useState(false);
+  const [isRefundAgreed, setIsRefundAgreed] = useState(false);
 
   useEffect(() => {
     try {
       const raw = localStorage.getItem('basicReportContext');
-      if (raw) setContext(JSON.parse(raw));
+      if (raw) {
+        setContext(JSON.parse(raw));
+      } else {
+        alert('먼저 무료 계산을 진행해주세요.');
+        router.push('/member');
+      }
     } catch {}
   }, []);
 
   const handlePurchase = async () => {
-    const email = prompt('리포트를 받을 이메일을 입력해주세요.');
-    if (!email) return;
-
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setEmailError('올바른 이메일 주소를 입력해 주세요.');
+      return;
+    }
     setLoading(true);
+
+    const payload = {
+      email:          email.trim(),
+      asset_value:    context ? Number(context.assetValue)    : 0,
+      expected_extra: context ? Number(context.expectedExtra) : 0,
+    };
+
+    sendGAEvent({ event: 'basic_lead_submit' });
+
+    if (isBetaMode()) {
+      try {
+        await fetch('/api/lead-submit', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email:          email.trim(),
+            product_type:   'basic_beta',
+            asset_value:    context?.assetValue    ?? null,
+            expected_extra: context?.expectedExtra ?? null,
+            beta:           true,
+          }),
+        });
+        alert('베타 테스터 신청이 완료되었습니다.\n\n6월 15일 정식 출시 시 베타 가격으로 결제 링크를 보내드립니다.');
+      } catch {
+        alert('신청 중 오류가 발생했습니다. 다시 시도해 주세요.');
+      } finally {
+        setLoading(false);
+      }
+      return;
+    }
+
+    // 정식 출시 이후 — 즉시 PDF 다운로드
+    fetch('/api/lead-submit', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...payload, product_type: 'basic', risk_grade: context?.riskGrade ?? null }),
+    }).catch(() => {});
+
     try {
-      await fetch('/api/lead-submit', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email,
-          product_type:   'basic',
-          asset_value:    context ? Number(context.assetValue) : null,
-          expected_extra: context ? Number(context.expectedExtra) : null,
-          risk_grade:     context?.riskGrade ?? null,
-        }),
-      });
-      sendGAEvent({ event: 'basic_lead_submit' });
-      alert('베타 신청이 접수되었습니다. 베타 가격 적용 중 — 리포트를 곧 발송해드립니다.');
+      await downloadPdf('/api/member-basic-report', payload, 'M-DEENO_기본리포트.pdf');
+      alert('리포트 다운로드가 완료되었습니다.');
     } catch (err) {
-      console.error('리포트 요청 실패:', err);
-      alert('오류가 발생했습니다. 다시 시도해 주세요.');
+      alert(err.message || '리포트 생성에 실패했습니다.');
     } finally {
       setLoading(false);
     }
@@ -108,20 +148,61 @@ export default function ReportBasicPage() {
 
       {/* ── Pricing + CTA ── */}
       <div className={styles.ctaBox}>
+        {isBetaMode() && (
+          <div className={styles.betaBadge}>
+            🚧 BETA 테스트 진행 중 · 6월 15일 정식 출시 예정
+          </div>
+        )}
         <div className={styles.priceBox}>
           <span className={styles.badge}>베타 29,000원</span>
           <span className={styles.price}>정가 39,000원</span>
         </div>
+        <input
+          className={`${styles.emailInput}${emailError ? ` ${styles.emailInputError}` : ''}`}
+          type="email"
+          placeholder="이메일 주소"
+          value={email}
+          onChange={(e) => { setEmail(e.target.value); setEmailError(''); }}
+          autoComplete="email"
+        />
+        {emailError && <p className={styles.emailError}>{emailError}</p>}
+
+        <div className={styles.consentBox}>
+          <label className={styles.consentLabel}>
+            <input
+              type="checkbox"
+              checked={isPrivacyAgreed}
+              onChange={(e) => setIsPrivacyAgreed(e.target.checked)}
+            />
+            <span>[필수] 개인정보 수집 및 이용에 동의합니다. (이메일: 리포트 발송 목적)</span>
+          </label>
+          <label className={styles.consentLabel}>
+            <input
+              type="checkbox"
+              checked={isRefundAgreed}
+              onChange={(e) => setIsRefundAgreed(e.target.checked)}
+            />
+            <span>[필수] 디지털 상품(PDF) 특성상 생성/다운로드 이후 환불이 불가함에 동의합니다.</span>
+          </label>
+        </div>
+
         <button
           onClick={handlePurchase}
           className={styles.purchaseBtn}
-          disabled={loading}
+          disabled={loading || !isPrivacyAgreed || !isRefundAgreed || !email.trim()}
         >
-          {loading ? '처리 중...' : '기본 리포트 신청하기 →'}
+          {loading ? '처리 중...' : isBetaMode() ? '베타 테스터 신청하기' : '기본 리포트 다운로드 →'}
         </button>
         <p className={styles.priceNote}>
-          베타 가격 적용 중 · 이메일 확인 후 개별 발송됩니다.
+          {isBetaMode()
+            ? '정가 39,000원 → 베타가 29,000원 · 정식 출시(6/15) 이후 결제 가능'
+            : '베타 가격 적용 중 · 결제 완료 즉시 PDF가 자동 다운로드됩니다.'}
         </p>
+        <div className={styles.disclaimer}>
+          <p>※ 본 리포트는 공개 자료와 사용자가 입력한 정보를 기반으로 생성된 참고용 분석 자료입니다. 투자, 법률, 세무 자문이 아니며 실제 사업 결과는 달라질 수 있습니다.</p>
+          <p>※ 본 서비스는 디지털 콘텐츠로 제공되며 리포트 발송 이후 환불이 제한될 수 있습니다.</p>
+          <p>※ 입력하신 이메일은 리포트 발송 및 서비스 안내 목적으로만 사용됩니다.</p>
+        </div>
       </div>
 
       {/* ── Back / Upsell ── */}

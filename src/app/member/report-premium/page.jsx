@@ -1,6 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { downloadPdf } from '@/lib/download-pdf';
+import { isBetaMode } from '@/lib/feature-flags';
 import styles from './page.module.css';
 
 // ── 구매 핸들러 (베타: 이메일 수집) ──────────────────────────────────────────
@@ -23,12 +26,16 @@ function calcSavings(expectedExtra) {
 }
 
 export default function PremiumReportPaywall() {
-  const [email, setEmail]           = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [submitted, setSubmitted]   = useState(false);
-  const [loading, setLoading]       = useState(false);
-  const [savings, setSavings]       = useState(null); // 만원 단위
+  const router = useRouter();
+  const [email, setEmail]                   = useState('');
+  const [emailError, setEmailError]         = useState('');
+  const [submitted, setSubmitted]           = useState(false);
+  const [loading, setLoading]               = useState(false);
+  const [isPrivacyAgreed, setIsPrivacyAgreed] = useState(false);
+  const [isRefundAgreed, setIsRefundAgreed]   = useState(false);
+  const [savings, setSavings]         = useState(null); // 만원 단위
   const [shareCopied, setShareCopied] = useState(false);
+  const [context, setContext]         = useState(null); // basicReportContext (asset_value + expected_extra)
 
   // ── 공유 링크 생성 ───────────────────────────────────────────
   // 프리미엄 페이지는 개인화 데이터 없음 — 리포트 유형 정보만 공유
@@ -45,14 +52,25 @@ export default function PremiumReportPaywall() {
   useEffect(() => {
     try {
       const raw = localStorage.getItem('memberPrefill');
-      if (!raw) return;
-      const { expectedExtra } = JSON.parse(raw);
-      if (expectedExtra && Number(expectedExtra) > 0) {
-        setSavings(calcSavings(Number(expectedExtra)));
+      if (raw) {
+        const { expectedExtra } = JSON.parse(raw);
+        if (expectedExtra && Number(expectedExtra) > 0) {
+          setSavings(calcSavings(Number(expectedExtra)));
+        }
       }
     } catch {
       // localStorage 없음 또는 파싱 실패 — 무시
     }
+
+    try {
+      const raw = localStorage.getItem('basicReportContext');
+      if (raw) {
+        setContext(JSON.parse(raw));
+      } else {
+        alert('먼저 무료 계산을 진행해주세요.');
+        router.push('/member');
+      }
+    } catch {}
   }, []);
 
   async function handlePurchase(e) {
@@ -62,9 +80,44 @@ export default function PremiumReportPaywall() {
       return;
     }
     setLoading(true);
+
+    const payload = {
+      email:          email.trim(),
+      asset_value:    context ? Number(context.assetValue)    : 0,
+      expected_extra: context ? Number(context.expectedExtra) : 0,
+    };
+
+    if (isBetaMode()) {
+      try {
+        await fetch('/api/lead-submit', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email:          email.trim(),
+            product_type:   'premium_beta',
+            asset_value:    context?.assetValue    ?? null,
+            expected_extra: context?.expectedExtra ?? null,
+            beta:           true,
+          }),
+        });
+        alert('베타 테스터 신청이 완료되었습니다.\n\n6월 15일 정식 출시 시 베타 가격으로 결제 링크를 보내드립니다.');
+      } catch {
+        alert('신청 중 오류가 발생했습니다. 다시 시도해 주세요.');
+      } finally {
+        setLoading(false);
+      }
+      return;
+    }
+
+    // 정식 출시 이후 — 즉시 PDF 다운로드
+    submitPremiumLead(email.trim()).catch(() => {});
+
     try {
-      await submitPremiumLead(email.trim());
+      await downloadPdf('/api/member-premium-report', payload, 'M-DEENO_프리미엄전략리포트.pdf');
       setSubmitted(true);
+      alert('리포트 다운로드가 완료되었습니다.');
+    } catch (err) {
+      alert(err.message || '리포트 생성에 실패했습니다.');
     } finally {
       setLoading(false);
     }
@@ -220,9 +273,18 @@ export default function PremiumReportPaywall() {
           </div>
         ) : (
           <form className={styles.ctaForm} onSubmit={handlePurchase} noValidate>
-            <h2 className={styles.ctaTitle}>Premium 전략 리포트 구매하기</h2>
+            {isBetaMode() && (
+              <div className={styles.betaBadge}>
+                🚧 BETA 테스트 진행 중 · 6월 15일 정식 출시 예정
+              </div>
+            )}
+            <h2 className={styles.ctaTitle}>
+              {isBetaMode() ? '프리미엄 베타 신청' : 'Premium 전략 리포트 다운로드'}
+            </h2>
             <p className={styles.ctaDesc}>
-              베타 가격 적용 중 — 이메일을 남기시면 리포트를 우선 발송해드립니다.
+              {isBetaMode()
+                ? '정가 149,000원 → 베타가 99,000원 · 정식 출시(6/15) 이후 결제 가능'
+                : '베타 가격 적용 중 — 결제 완료 즉시 PDF가 자동 다운로드됩니다.'}
             </p>
 
             <div className={styles.ctaInputRow}>
@@ -237,15 +299,34 @@ export default function PremiumReportPaywall() {
               <button
                 className={styles.ctaBtn}
                 type="submit"
-                disabled={loading}
+                disabled={loading || !isPrivacyAgreed || !isRefundAgreed}
               >
-                {loading ? '처리 중...' : 'Premium 전략 리포트 구매하기'}
+                {loading ? '처리 중...' : isBetaMode() ? '프리미엄 베타 신청하기' : 'Premium 전략 리포트 다운로드 →'}
               </button>
             </div>
 
             {emailError && (
               <p className={styles.ctaError}>{emailError}</p>
             )}
+
+            <div className={styles.consentBox}>
+              <label className={styles.consentLabel}>
+                <input
+                  type="checkbox"
+                  checked={isPrivacyAgreed}
+                  onChange={(e) => setIsPrivacyAgreed(e.target.checked)}
+                />
+                <span>[필수] 개인정보 수집 및 이용에 동의합니다. (이메일: 리포트 발송 목적)</span>
+              </label>
+              <label className={styles.consentLabel}>
+                <input
+                  type="checkbox"
+                  checked={isRefundAgreed}
+                  onChange={(e) => setIsRefundAgreed(e.target.checked)}
+                />
+                <span>[필수] 디지털 상품(PDF) 특성상 생성/다운로드 이후 환불이 불가함에 동의합니다.</span>
+              </label>
+            </div>
 
             <p className={styles.ctaNote}>
               정가 149,000원 · 베타 가격 적용 중 99,000원
