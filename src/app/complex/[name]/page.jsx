@@ -230,7 +230,7 @@ export default function ComplexPage({ params }) {
           href={`/member?complex_name=${encodeURIComponent(complexName)}`}
           className={styles.ctaBtn}
         >
-          우리 단지 기준으로 분담금 계산하기
+          내 분담금 분석 시작하기
         </Link>
       </section>
 

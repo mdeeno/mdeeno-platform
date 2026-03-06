@@ -19,15 +19,15 @@
 }
 
 .title {
-  font-size: 1.9rem;
+  font-size: var(--font-h1);
   font-weight: 900;
   color: #0f172a;
-  line-height: 1.2;
+  line-height: 1.15;
   margin-bottom: 16px;
 }
 
 .desc {
-  font-size: 0.95rem;
+  font-size: var(--font-body);
   color: #475569;
   line-height: 1.75;
   max-width: 640px;
@@ -35,7 +35,7 @@
 
 /* ── Section ──────────────────────────────────────────────── */
 .sectionTitle {
-  font-size: 1.1rem;
+  font-size: var(--font-h2);
   font-weight: 800;
   color: #0f172a;
   margin-bottom: 8px;
@@ -240,7 +240,7 @@
 }
 
 .rangeBigVal {
-  font-size: 2.4rem;
+  font-size: var(--font-number);
   font-weight: 900;
   color: #0f172a;
   line-height: 1;
@@ -449,26 +449,44 @@
 
 .ctaBtn {
   display: inline-block;
-  padding: 14px 32px;
+  padding: 16px 28px;
   background: #e63946;
   color: #ffffff;
   font-size: 1rem;
   font-weight: 800;
-  border-radius: 8px;
+  border-radius: 10px;
   text-decoration: none;
-  transition: background 0.15s;
+  transition: background 0.15s, transform 0.1s;
 }
 
 .ctaBtn:hover {
   background: #c1121f;
+  transform: translateY(-1px);
 }
 
 /* ── Mobile ───────────────────────────────────────────────── */
-@media (max-width: 600px) {
-  .title {
-    font-size: 1.5rem;
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 40px 16px 60px;
   }
 
+  .ctaSection {
+    padding: 28px 20px;
+  }
+
+  .ctaTitle {
+    font-size: 1.05rem;
+  }
+
+  .ctaBtn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 600px) {
   .costCards {
     grid-template-columns: 1fr 1fr;
     gap: 10px;

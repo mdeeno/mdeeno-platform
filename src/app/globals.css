@@ -1,15 +1,31 @@
 /* app/globals.css */
 :root {
   /* M-DEENO 브랜드 컬러 (신뢰감 있는 블루/네이비 톤) */
-  --primary: #1e40af; /* 진한 블루 */
-  --primary-hover: #1e3a8a; /* 더 진한 블루 */
-  --secondary: #eff6ff; /* 연한 블루 배경용 */
+  --primary: #1e40af;
+  --primary-hover: #1e3a8a;
+  --secondary: #eff6ff;
 
-  --text-main: #111827; /* 거의 검은색 (가독성) */
-  --text-muted: #4b5563; /* 짙은 회색 (설명글) */
+  --text-main: #111827;
+  --text-muted: #4b5563;
   --bg-white: #ffffff;
   --bg-light: #f9fafb;
   --border-color: #e5e7eb;
+
+  /* ── Typography scale — desktop ── */
+  --font-h1: 42px;
+  --font-h2: 28px;
+  --font-body: 17px;
+  --font-number: 44px;
+}
+
+/* ── Typography scale — mobile ─────────────────────────────── */
+@media (max-width: 768px) {
+  :root {
+    --font-h1: 30px;
+    --font-h2: 22px;
+    --font-body: 15px;
+    --font-number: 32px;
+  }
 }
 
 * {

@@ -105,7 +105,7 @@ export default function ReportSharePage() {
         <div className={styles.notFound}>
           <p className={styles.notFoundTitle}>리포트를 찾을 수 없습니다</p>
           <p className={styles.notFoundDesc}>링크가 만료되었거나 존재하지 않는 리포트입니다.</p>
-          <Link href="/member" className={styles.ctaBtn}>내 자산 진단하기</Link>
+          <Link href="/member" className={styles.ctaBtn}>내 분담금 분석 시작하기</Link>
         </div>
       </div>
     );
@@ -194,7 +194,7 @@ export default function ReportSharePage() {
           M-DEENO는 귀하의 자산 기준으로 분담금 위험도와 협상 전략을 자동 분석합니다.
         </p>
         <Link href="/member" className={styles.ctaBtn}>
-          무료 위험도 계산하기
+          내 분담금 분석 시작하기
         </Link>
       </div>
 

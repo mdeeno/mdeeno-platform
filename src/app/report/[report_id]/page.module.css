@@ -45,15 +45,15 @@
 }
 
 .title {
-  font-size: 1.7rem;
+  font-size: var(--font-h1);
   font-weight: 900;
   color: #0f172a;
-  line-height: 1.2;
+  line-height: 1.15;
   margin-bottom: 8px;
 }
 
 .subtitle {
-  font-size: 0.875rem;
+  font-size: var(--font-body);
   color: #475569;
   margin-bottom: 4px;
 }
@@ -113,7 +113,7 @@
 }
 
 .metricValue {
-  font-size: 1.35rem;
+  font-size: var(--font-number);
   font-weight: 900;
   color: #0f172a;
   line-height: 1;
@@ -221,33 +221,34 @@
 }
 
 .ctaTitle {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 900;
   color: #f1f5f9;
   margin-bottom: 10px;
 }
 
 .ctaDesc {
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.55);
   line-height: 1.65;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .ctaBtn {
   display: inline-block;
-  padding: 12px 28px;
+  padding: 16px 28px;
   background: #e63946;
   color: #ffffff;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 800;
-  border-radius: 8px;
+  border-radius: 10px;
   text-decoration: none;
-  transition: background 0.15s;
+  transition: background 0.15s, transform 0.1s;
 }
 
 .ctaBtn:hover {
   background: #c1121f;
+  transform: translateY(-1px);
 }
 
 /* ── Disclaimer ───────────────────────────────────────────── */
@@ -264,12 +265,22 @@
     padding: 40px 16px 60px;
   }
 
-  .title {
-    font-size: 1.4rem;
+  .metricsGrid {
+    gap: 8px;
   }
 
-  .metricValue {
-    font-size: 1.15rem;
+  .metricCard {
+    padding: 14px 12px;
+  }
+
+  .ctaBox {
+    padding: 28px 20px;
+  }
+
+  .ctaBtn {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
   }
 
   .shareButtons {
