@@ -63,10 +63,30 @@ export default function ComplexPage({ params }) {
         </p>
       </section>
 
-      {/* ── 1. 공사비 비교 ── */}
+      {/* ── 1. 공사비 분석 ── */}
       <section className={styles.dataSection}>
-        <h2 className={styles.sectionTitle}>공사비 비교</h2>
-        <p className={styles.sectionDesc}>서울 평균 대비 {complexName}의 예상 공사비 수준입니다.</p>
+        <h2 className={styles.sectionTitle}>공사비 분석</h2>
+        <p className={styles.sectionDesc}>서울 평균 공사비 대비 {complexName}의 예상 공사비 수준입니다.</p>
+
+        <div className={styles.costCards}>
+          <div className={styles.costCard}>
+            <span className={styles.costCardEyebrow}>서울 평균 공사비</span>
+            <span className={styles.costCardValue}>{SEOUL_AVG_COST.toLocaleString()}</span>
+            <span className={styles.costCardUnit}>만원/평</span>
+            <span className={styles.costCardSub}>한국부동산원 기준 (2025)</span>
+          </div>
+          <div className={`${styles.costCard} ${complexCost > SEOUL_AVG_COST ? styles.costCardDanger : styles.costCardSafe}`}>
+            <span className={styles.costCardEyebrow}>해당 단지 예상 공사비</span>
+            <span className={`${styles.costCardValue} ${complexCost > SEOUL_AVG_COST ? styles.danger : ''}`}>
+              {complexCost.toLocaleString()}
+            </span>
+            <span className={styles.costCardUnit}>만원/평</span>
+            <span className={styles.costCardSub}>
+              {costRatio > 0 ? `서울 평균 +${costRatio}%` : costRatio < 0 ? `서울 평균 ${costRatio}%` : '서울 평균과 동일'}
+            </span>
+          </div>
+        </div>
+
         <div className={styles.costCompare}>
           <div className={styles.costRow}>
             <span className={styles.costRowLabel}>서울 평균</span>
@@ -76,7 +96,7 @@ export default function ComplexPage({ params }) {
                 style={{ width: `${Math.round((SEOUL_AVG_COST / Math.max(complexCost, SEOUL_AVG_COST)) * 88)}%` }}
               />
             </div>
-            <span className={styles.costRowVal}>{SEOUL_AVG_COST.toLocaleString()}만원/평</span>
+            <span className={styles.costRowVal}>{SEOUL_AVG_COST.toLocaleString()}만원</span>
           </div>
           <div className={styles.costRow}>
             <span className={styles.costRowLabel}>해당 단지</span>
@@ -87,7 +107,7 @@ export default function ComplexPage({ params }) {
               />
             </div>
             <span className={`${styles.costRowVal} ${complexCost > SEOUL_AVG_COST ? styles.danger : ''}`}>
-              {complexCost.toLocaleString()}만원/평
+              {complexCost.toLocaleString()}만원
             </span>
           </div>
           <p className={styles.costNote}>
@@ -100,7 +120,32 @@ export default function ComplexPage({ params }) {
         </div>
       </section>
 
-      {/* ── 2. 사업 단계 위험도 ── */}
+      {/* ── 2. 예상 분담금 범위 ── */}
+      <section className={styles.dataSection}>
+        <h2 className={styles.sectionTitle}>예상 추가 분담금 범위</h2>
+        <p className={styles.sectionDesc}>공사비 및 자산 구조 기준 시뮬레이션 범위입니다.</p>
+        <div className={styles.rangeBox}>
+          <div className={styles.rangeBig}>
+            <div className={styles.rangeBigItem}>
+              <span className={styles.rangeBigLabel}>최소 예상</span>
+              <span className={styles.rangeBigVal}>{rangeMin}억</span>
+            </div>
+            <span className={styles.rangeTilde}>~</span>
+            <div className={styles.rangeBigItem}>
+              <span className={styles.rangeBigLabel}>최대 예상</span>
+              <span className={`${styles.rangeBigVal} ${styles.danger}`}>{rangeMax}억</span>
+            </div>
+          </div>
+          <div className={styles.rangeTrackWrap}>
+            <div className={styles.rangeTrackFill} />
+          </div>
+          <p className={styles.rangeNote}>
+            * 평균 자산가 3억 기준 시뮬레이션 — 실제 값은 자산 규모·비례율에 따라 달라집니다.
+          </p>
+        </div>
+      </section>
+
+      {/* ── 3. 사업 단계 위험도 ── */}
       <section className={styles.dataSection}>
         <h2 className={styles.sectionTitle}>사업 단계별 위험도</h2>
         <p className={styles.sectionDesc}>단계가 진행될수록 분담금 협상 여지가 줄어듭니다.</p>
@@ -118,31 +163,6 @@ export default function ComplexPage({ params }) {
               <span className={styles.stageRiskDesc}>{s.desc}</span>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* ── 3. 예상 분담금 범위 ── */}
-      <section className={styles.dataSection}>
-        <h2 className={styles.sectionTitle}>예상 추가 분담금 범위</h2>
-        <p className={styles.sectionDesc}>공사비 및 자산 구조 기준 시뮬레이션 범위입니다.</p>
-        <div className={styles.rangeBox}>
-          <div className={styles.rangeValues}>
-            <div className={styles.rangeEnd}>
-              <span className={styles.rangeEndLabel}>최소 예상</span>
-              <span className={styles.rangeEndVal}>{rangeMin}억</span>
-            </div>
-            <div className={styles.rangeTrack}>
-              <div className={styles.rangeTrackFill} />
-              <span className={styles.rangeTrackLabel}>변동 가능 구간</span>
-            </div>
-            <div className={styles.rangeEnd}>
-              <span className={styles.rangeEndLabel}>최대 예상</span>
-              <span className={`${styles.rangeEndVal} ${styles.danger}`}>{rangeMax}억</span>
-            </div>
-          </div>
-          <p className={styles.rangeNote}>
-            * 평균 자산가 3억 기준 시뮬레이션 — 실제 값은 자산 규모·비례율에 따라 달라집니다.
-          </p>
         </div>
       </section>
 
@@ -210,7 +230,7 @@ export default function ComplexPage({ params }) {
           href={`/member?complex_name=${encodeURIComponent(complexName)}`}
           className={styles.ctaBtn}
         >
-          무료 분담금 계산하기
+          우리 단지 기준으로 분담금 계산하기
         </Link>
       </section>
 

@@ -57,7 +57,62 @@
   margin-bottom: 48px;
 }
 
-/* ── 1. 공사비 비교 ───────────────────────────────────────── */
+/* ── 1. 공사비 분석 ───────────────────────────────────────── */
+.costCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.costCard {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.costCardDanger {
+  background: #fff1f2;
+  border-color: #fecaca;
+}
+
+.costCardSafe {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.costCardEyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+  margin-bottom: 4px;
+}
+
+.costCardValue {
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1;
+}
+
+.costCardUnit {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.costCardSub {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
 .costCompare {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
@@ -153,49 +208,55 @@
   line-height: 1.5;
 }
 
-/* ── 3. 예상 분담금 범위 ──────────────────────────────────── */
+/* ── 2. 예상 분담금 범위 ──────────────────────────────────── */
 .rangeBox {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-  padding: 24px 20px 18px;
+  padding: 28px 24px 20px;
 }
 
-.rangeValues {
+.rangeBig {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 16px;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
-.rangeEnd {
+.rangeBigItem {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
 }
 
-.rangeEndLabel {
+.rangeBigLabel {
   font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.08em;
   color: #94a3b8;
 }
 
-.rangeEndVal {
-  font-size: 1.6rem;
+.rangeBigVal {
+  font-size: 2.4rem;
   font-weight: 900;
   color: #0f172a;
   line-height: 1;
 }
 
-.rangeTrack {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
+.rangeTilde {
+  font-size: 2rem;
+  font-weight: 300;
+  color: #cbd5e1;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 16px;
+}
+
+.rangeTrackWrap {
+  margin-bottom: 18px;
 }
 
 .rangeTrackFill {
@@ -203,13 +264,6 @@
   height: 8px;
   background: linear-gradient(90deg, #16a34a 0%, #d97706 50%, #e63946 100%);
   border-radius: 4px;
-}
-
-.rangeTrackLabel {
-  font-size: 0.68rem;
-  color: #94a3b8;
-  font-weight: 600;
-  white-space: nowrap;
 }
 
 .rangeNote {
@@ -415,8 +469,17 @@
     font-size: 1.5rem;
   }
 
+  .costCards {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .costCardValue {
+    font-size: 1.5rem;
+  }
+
   .costRow {
-    grid-template-columns: 60px 1fr 100px;
+    grid-template-columns: 60px 1fr 90px;
     gap: 8px;
   }
 
@@ -433,8 +496,12 @@
     font-size: 0.82rem;
   }
 
-  .rangeEndVal {
-    font-size: 1.3rem;
+  .rangeBigVal {
+    font-size: 1.9rem;
+  }
+
+  .rangeTilde {
+    font-size: 1.5rem;
   }
 
   .ctaSection {

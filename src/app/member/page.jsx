@@ -500,8 +500,23 @@ export default function ShockCalculatorPage() {
           >
             <p className={styles.modalTitle}>리포트를 받을 이메일</p>
             <p className={styles.modalDesc}>
-              베타 참여자로 등록되며 리포트가 즉시 생성됩니다.
+              이메일을 등록하면 리포트가 즉시 생성됩니다.
             </p>
+
+            <ul className={styles.modalBenefits}>
+              <li className={styles.modalBenefit}>
+                <span className={styles.modalBenefitIcon}>✓</span>
+                <span>공사비 상승 시 <strong>리포트 업데이트 알림</strong> 수신</span>
+              </li>
+              <li className={styles.modalBenefit}>
+                <span className={styles.modalBenefitIcon}>✓</span>
+                <span>총회 일정 변경 등 <strong>핵심 정보 자동 알림</strong></span>
+              </li>
+              <li className={styles.modalBenefit}>
+                <span className={styles.modalBenefitIcon}>✓</span>
+                <span>베타 기간 무료 — <strong>이후 유료 전환 없음</strong></span>
+              </li>
+            </ul>
 
             <form onSubmit={handleModalSubmit} noValidate>
               <div className={styles.modalField}>
