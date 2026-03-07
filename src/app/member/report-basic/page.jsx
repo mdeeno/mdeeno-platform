@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { sendGAEvent } from '@next/third-parties/google';
 import { downloadPdf } from '@/lib/download-pdf';
 import { isBetaMode } from '@/lib/feature-flags';
+import AssetShockCard from '@/components/report/AssetShockCard';
 import styles from './page.module.css';
 
 const RISK_COLOR = { R1: '#16a34a', R2: '#d97706', R3: '#e63946', R4: '#b91c1c' };
@@ -22,11 +23,15 @@ const REPORT_CONTENTS = [
 export default function ReportBasicPage() {
   const router = useRouter();
   const [context, setContext] = useState(null);
-  const [loading, setLoading]  = useState(false);
-  const [email, setEmail] = useState('');
+  const [loading, setLoading]   = useState(false);
+  const [email, setEmail]       = useState('');
   const [emailError, setEmailError] = useState('');
+  const [phone, setPhone]       = useState('');
+  const [phoneError, setPhoneError] = useState('');
   const [isPrivacyAgreed, setIsPrivacyAgreed] = useState(false);
-  const [isRefundAgreed, setIsRefundAgreed] = useState(false);
+  const [isRefundAgreed, setIsRefundAgreed]   = useState(false);
+  const [leadCount, setLeadCount]             = useState(null);
+  const [trafficSource, setTrafficSource]     = useState({});
 
   useEffect(() => {
     try {
@@ -38,19 +43,44 @@ export default function ReportBasicPage() {
         router.push('/member');
       }
     } catch {}
+
+    // 소셜 프루프 카운트
+    fetch('/api/lead-count')
+      .then((r) => r.json())
+      .then((d) => setLeadCount(d.count))
+      .catch(() => {});
+
+    // 트래픽 소스 캡처
+    const params = new URLSearchParams(window.location.search);
+    setTrafficSource({
+      utm_source:   params.get('utm_source')   ?? null,
+      utm_campaign: params.get('utm_campaign') ?? null,
+      referrer:     document.referrer || null,
+    });
   }, []);
+
+  const PHONE_RE = /^010\d{7,8}$/;
 
   const handlePurchase = async () => {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       setEmailError('올바른 이메일 주소를 입력해 주세요.');
       return;
     }
+    const cleanPhone = phone.replace(/\D/g, '');
+    if (phone.trim() && !PHONE_RE.test(cleanPhone)) {
+      setPhoneError('올바른 휴대폰 번호를 입력해주세요. (예: 01012345678)');
+      return;
+    }
     setLoading(true);
 
-    const payload = {
+    const trafficStr = JSON.stringify(trafficSource);
+    const leadBody = {
       email:          email.trim(),
-      asset_value:    context ? Number(context.assetValue)    : 0,
-      expected_extra: context ? Number(context.expectedExtra) : 0,
+      phone:          cleanPhone || null,
+      asset_value:    context ? Number(context.assetValue)    : null,
+      expected_extra: context ? Number(context.expectedExtra) : null,
+      risk_grade:     context?.riskGrade    ?? null,
+      traffic_source: trafficStr,
     };
 
     sendGAEvent({ event: 'basic_lead_submit' });
@@ -60,13 +90,7 @@ export default function ReportBasicPage() {
         await fetch('/api/lead-submit', {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email:          email.trim(),
-            product_type:   'basic_beta',
-            asset_value:    context?.assetValue    ?? null,
-            expected_extra: context?.expectedExtra ?? null,
-            beta:           true,
-          }),
+          body: JSON.stringify({ ...leadBody, product_type: 'basic_beta', beta: true }),
         });
         alert('베타 테스터 신청이 완료되었습니다.\n\n6월 15일 정식 출시 시 베타 가격으로 결제 링크를 보내드립니다.');
       } catch {
@@ -77,21 +101,15 @@ export default function ReportBasicPage() {
       return;
     }
 
-    // 정식 출시 이후 — 즉시 PDF 다운로드
+    // 정식 출시 이후 — 결제 플로우 (구현 예정)
     fetch('/api/lead-submit', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...payload, product_type: 'basic', risk_grade: context?.riskGrade ?? null }),
+      body: JSON.stringify({ ...leadBody, product_type: 'basic' }),
     }).catch(() => {});
 
-    try {
-      await downloadPdf('/api/member-basic-report', payload, 'M-DEENO_기본리포트.pdf');
-      alert('리포트 다운로드가 완료되었습니다.');
-    } catch (err) {
-      alert(err.message || '리포트 생성에 실패했습니다.');
-    } finally {
-      setLoading(false);
-    }
+    setLoading(false);
+    alert('정식 출시 준비 중입니다. 6월 15일부터 결제가 가능합니다.');
   };
 
   return (
@@ -146,6 +164,15 @@ export default function ReportBasicPage() {
         </ul>
       </div>
 
+      {/* ── Asset Shock Card ── */}
+      {context && (
+        <AssetShockCard
+          assetValue={Number(context.assetValue)}
+          expectedExtra={Number(context.expectedExtra)}
+          riskGrade={context.riskGrade}
+        />
+      )}
+
       {/* ── Pricing + CTA ── */}
       <div className={styles.ctaBox}>
         {isBetaMode() && (
@@ -167,6 +194,16 @@ export default function ReportBasicPage() {
         />
         {emailError && <p className={styles.emailError}>{emailError}</p>}
 
+        <input
+          className={`${styles.emailInput}${phoneError ? ` ${styles.emailInputError}` : ''}`}
+          type="tel"
+          placeholder="휴대폰 번호 (선택 · 예: 01012345678)"
+          value={phone}
+          onChange={(e) => { setPhone(e.target.value); setPhoneError(''); }}
+          autoComplete="tel"
+        />
+        {phoneError && <p className={styles.emailError}>{phoneError}</p>}
+
         <div className={styles.consentBox}>
           <label className={styles.consentLabel}>
             <input
@@ -185,6 +222,12 @@ export default function ReportBasicPage() {
             <span>[필수] 디지털 상품(PDF) 특성상 생성/다운로드 이후 환불이 불가함에 동의합니다.</span>
           </label>
         </div>
+
+        {leadCount !== null && leadCount > 0 && (
+          <p className={styles.socialProof}>
+            현재 {leadCount.toLocaleString()}명의 조합원이 베타 분석을 신청했습니다.
+          </p>
+        )}
 
         <button
           onClick={handlePurchase}

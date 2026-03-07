@@ -25,7 +25,7 @@ export async function POST(req) {
       const errorText = await response.text();
       console.error('🚨 파이썬 백엔드 에러:', response.status, errorText);
       return NextResponse.json(
-        { error: '리포트 생성 실패', details: errorText },
+        { error: '리포트 생성 실패' },
         { status: response.status },
       );
     }

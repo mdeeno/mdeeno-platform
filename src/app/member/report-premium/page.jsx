@@ -2,18 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { downloadPdf } from '@/lib/download-pdf';
 import { isBetaMode } from '@/lib/feature-flags';
+import AssetShockCard from '@/components/report/AssetShockCard';
 import styles from './page.module.css';
-
-// ── 구매 핸들러 (베타: 이메일 수집) ──────────────────────────────────────────
-async function submitPremiumLead(email) {
-  await fetch('/api/lead-submit', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, product_type: 'premium' }),
-  });
-}
 
 // R3 기본 협상 절감률 (shock_engine 기준)
 const NEGOTIATION_REDUCTION = 0.22;
@@ -29,13 +20,17 @@ export default function PremiumReportPaywall() {
   const router = useRouter();
   const [email, setEmail]                   = useState('');
   const [emailError, setEmailError]         = useState('');
+  const [phone, setPhone]                   = useState('');
+  const [phoneError, setPhoneError]         = useState('');
   const [submitted, setSubmitted]           = useState(false);
   const [loading, setLoading]               = useState(false);
   const [isPrivacyAgreed, setIsPrivacyAgreed] = useState(false);
   const [isRefundAgreed, setIsRefundAgreed]   = useState(false);
-  const [savings, setSavings]         = useState(null); // 만원 단위
-  const [shareCopied, setShareCopied] = useState(false);
-  const [context, setContext]         = useState(null); // basicReportContext (asset_value + expected_extra)
+  const [savings, setSavings]               = useState(null); // 만원 단위
+  const [shareCopied, setShareCopied]       = useState(false);
+  const [context, setContext]               = useState(null);
+  const [leadCount, setLeadCount]           = useState(null);
+  const [trafficSource, setTrafficSource]   = useState({});
 
   // ── 공유 링크 생성 ───────────────────────────────────────────
   // 프리미엄 페이지는 개인화 데이터 없음 — 리포트 유형 정보만 공유
@@ -71,7 +66,21 @@ export default function PremiumReportPaywall() {
         router.push('/member');
       }
     } catch {}
+
+    fetch('/api/lead-count')
+      .then((r) => r.json())
+      .then((d) => setLeadCount(d.count))
+      .catch(() => {});
+
+    const params = new URLSearchParams(window.location.search);
+    setTrafficSource({
+      utm_source:   params.get('utm_source')   ?? null,
+      utm_campaign: params.get('utm_campaign') ?? null,
+      referrer:     document.referrer || null,
+    });
   }, []);
+
+  const PHONE_RE = /^010\d{7,8}$/;
 
   async function handlePurchase(e) {
     e.preventDefault();
@@ -79,12 +88,21 @@ export default function PremiumReportPaywall() {
       setEmailError('올바른 이메일 주소를 입력해 주세요.');
       return;
     }
+    const cleanPhone = phone.replace(/\D/g, '');
+    if (phone.trim() && !PHONE_RE.test(cleanPhone)) {
+      setPhoneError('올바른 휴대폰 번호를 입력해주세요. (예: 01012345678)');
+      return;
+    }
     setLoading(true);
 
-    const payload = {
+    const trafficStr = JSON.stringify(trafficSource);
+    const leadBody = {
       email:          email.trim(),
-      asset_value:    context ? Number(context.assetValue)    : 0,
-      expected_extra: context ? Number(context.expectedExtra) : 0,
+      phone:          cleanPhone || null,
+      asset_value:    context ? Number(context.assetValue)    : null,
+      expected_extra: context ? Number(context.expectedExtra) : null,
+      risk_grade:     context?.riskGrade ?? null,
+      traffic_source: trafficStr,
     };
 
     if (isBetaMode()) {
@@ -92,13 +110,7 @@ export default function PremiumReportPaywall() {
         await fetch('/api/lead-submit', {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email:          email.trim(),
-            product_type:   'premium_beta',
-            asset_value:    context?.assetValue    ?? null,
-            expected_extra: context?.expectedExtra ?? null,
-            beta:           true,
-          }),
+          body: JSON.stringify({ ...leadBody, product_type: 'premium_beta', beta: true }),
         });
         alert('베타 테스터 신청이 완료되었습니다.\n\n6월 15일 정식 출시 시 베타 가격으로 결제 링크를 보내드립니다.');
       } catch {
@@ -109,18 +121,15 @@ export default function PremiumReportPaywall() {
       return;
     }
 
-    // 정식 출시 이후 — 즉시 PDF 다운로드
-    submitPremiumLead(email.trim()).catch(() => {});
+    // 정식 출시 이후 — 결제 플로우 (구현 예정)
+    fetch('/api/lead-submit', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...leadBody, product_type: 'premium' }),
+    }).catch(() => {});
 
-    try {
-      await downloadPdf('/api/member-premium-report', payload, 'M-DEENO_프리미엄전략리포트.pdf');
-      setSubmitted(true);
-      alert('리포트 다운로드가 완료되었습니다.');
-    } catch (err) {
-      alert(err.message || '리포트 생성에 실패했습니다.');
-    } finally {
-      setLoading(false);
-    }
+    setLoading(false);
+    alert('정식 출시 준비 중입니다. 6월 15일부터 결제가 가능합니다.');
   }
 
   return (
@@ -265,6 +274,15 @@ export default function PremiumReportPaywall() {
         </button>
       </section>
 
+      {/* ── Asset Shock Card ─────────────────────────────────────────────── */}
+      {context && (
+        <AssetShockCard
+          assetValue={Number(context.assetValue)}
+          expectedExtra={Number(context.expectedExtra)}
+          riskGrade={context.riskGrade}
+        />
+      )}
+
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
       <section className={styles.ctaSection}>
         {submitted ? (
@@ -277,6 +295,11 @@ export default function PremiumReportPaywall() {
               <div className={styles.betaBadge}>
                 🚧 BETA 테스트 진행 중 · 6월 15일 정식 출시 예정
               </div>
+            )}
+            {leadCount !== null && leadCount > 0 && (
+              <p className={styles.socialProof}>
+                현재 {leadCount.toLocaleString()}명의 조합원이 베타 분석을 신청했습니다.
+              </p>
             )}
             <h2 className={styles.ctaTitle}>
               {isBetaMode() ? '프리미엄 베타 신청' : 'Premium 전략 리포트 다운로드'}
@@ -296,18 +319,28 @@ export default function PremiumReportPaywall() {
                 onChange={(e) => { setEmail(e.target.value); setEmailError(''); }}
                 autoComplete="email"
               />
+              {emailError && (
+                <p className={styles.ctaError}>{emailError}</p>
+              )}
+              <input
+                className={`${styles.ctaInput}${phoneError ? ` ${styles.ctaInputError}` : ''}`}
+                type="tel"
+                placeholder="휴대폰 번호 (선택 · 예: 01012345678)"
+                value={phone}
+                onChange={(e) => { setPhone(e.target.value); setPhoneError(''); }}
+                autoComplete="tel"
+              />
+              {phoneError && (
+                <p className={styles.ctaError}>{phoneError}</p>
+              )}
               <button
                 className={styles.ctaBtn}
                 type="submit"
-                disabled={loading || !isPrivacyAgreed || !isRefundAgreed}
+                disabled={loading || !isPrivacyAgreed || !isRefundAgreed || !email.trim()}
               >
                 {loading ? '처리 중...' : isBetaMode() ? '프리미엄 베타 신청하기' : 'Premium 전략 리포트 다운로드 →'}
               </button>
             </div>
-
-            {emailError && (
-              <p className={styles.ctaError}>{emailError}</p>
-            )}
 
             <div className={styles.consentBox}>
               <label className={styles.consentLabel}>

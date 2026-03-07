@@ -24,7 +24,7 @@ export async function POST(req) {
       const errorText = await response.text();
       console.error('🚨 Render 백엔드 에러:', response.status, errorText);
       return NextResponse.json(
-        { error: '백엔드 에러', details: errorText },
+        { error: '백엔드 에러' },
         { status: response.status },
       );
     }

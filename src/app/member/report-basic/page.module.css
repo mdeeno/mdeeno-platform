@@ -238,6 +238,13 @@
   height: 15px;
 }
 
+.socialProof {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 14px;
+  text-align: center;
+}
+
 .purchaseBtn {
   display: block;
   width: 100%;

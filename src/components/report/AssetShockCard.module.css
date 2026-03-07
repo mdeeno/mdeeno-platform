@@ -1,0 +1,73 @@
+.card {
+  background: #fff7ed;
+  border: 1.5px solid #fed7aa;
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin-bottom: 16px;
+}
+
+.label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #c2410c;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #fed7aa;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.itemLabel {
+  font-size: 0.68rem;
+  color: #92400e;
+  font-weight: 600;
+}
+
+.itemValue {
+  font-size: 1rem;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.lossRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #fed7aa;
+  padding-top: 12px;
+  gap: 8px;
+}
+
+.lossLabel {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #92400e;
+}
+
+.lossValue {
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .item:last-child {
+    grid-column: span 2;
+  }
+}

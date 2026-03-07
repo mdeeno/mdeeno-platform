@@ -21,7 +21,12 @@ export async function POST(req) {
     });
 
     if (!response.ok) {
-      return NextResponse.json({ error: 'PDF 생성 실패' }, { status: 500 });
+      let detail = 'PDF 생성 실패';
+      try {
+        const errBody = await response.json();
+        if (typeof errBody.detail === 'string') detail = errBody.detail;
+      } catch {}
+      return NextResponse.json({ error: detail }, { status: response.status });
     }
 
     const pdfBuffer = await response.arrayBuffer();

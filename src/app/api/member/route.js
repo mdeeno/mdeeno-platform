@@ -20,6 +20,15 @@ export async function POST(req) {
       cache: 'no-store',
     });
 
+    if (!response.ok) {
+      let detail = '계산 실패';
+      try {
+        const errBody = await response.json();
+        if (typeof errBody.detail === 'string') detail = errBody.detail;
+      } catch {}
+      return NextResponse.json({ error: detail }, { status: response.status });
+    }
+
     const data = await response.json();
 
     return NextResponse.json(data);

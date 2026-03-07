@@ -1,0 +1,86 @@
+.container {
+  min-height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: #f8fafc;
+}
+
+.card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 48px 40px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #dc2626;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+
+.desc {
+  font-size: 0.9rem;
+  color: #64748b;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.ctaBtn {
+  display: block;
+  width: 100%;
+  padding: 14px 24px;
+  background: #e63946;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.15s;
+  margin-bottom: 14px;
+}
+
+.ctaBtn:hover {
+  background: #c1121f;
+}
+
+.backLink {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.backLink:hover {
+  color: #0f172a;
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 36px 24px;
+  }
+
+  .title {
+    font-size: 1.35rem;
+  }
+}
