@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styles from './page.module.css';
 import ReportSamplesSection from './ReportSamplesSection';
+import LandingLeadForm from './LandingLeadForm';
 
 export default function Home() {
   return (
@@ -155,6 +156,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <LandingLeadForm />
 
       <ReportSamplesSection />
     </div>

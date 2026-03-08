@@ -788,6 +788,86 @@
   transform: translateY(-1px);
 }
 
+/* ── Landing Lead Capture ── */
+.landingLead {
+  padding: 72px 20px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+.landingLeadTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+.landingLeadDesc {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-bottom: 28px;
+}
+
+.landingLeadForm {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.landingLeadInput {
+  width: 300px;
+  padding: 14px 16px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.landingLeadInput:focus {
+  border-color: #e63946;
+}
+
+.landingLeadInputError {
+  border-color: #e63946;
+}
+
+.landingLeadBtn {
+  padding: 14px 24px;
+  background: #e63946;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.landingLeadBtn:hover:not(:disabled) {
+  background: #c1121f;
+}
+
+.landingLeadBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.landingLeadError {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: #e63946;
+}
+
+.landingLeadSuccess {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #16a34a;
+}
+
 /* 반응형 */
 @media (max-width: 768px) {
   .title {
@@ -859,5 +939,18 @@
 
   .sampleMetric {
     min-width: calc(50% - 5px);
+  }
+
+  .landingLeadInput {
+    width: 100%;
+  }
+
+  .landingLeadForm {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .landingLeadBtn {
+    width: 100%;
   }
 }
