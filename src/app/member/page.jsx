@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { downloadPdf } from '@/lib/download-pdf';
+import { isBetaMode } from '@/lib/feature-flags';
 import styles from './page.module.css';
 
 const STAGE_OPTIONS = [
@@ -45,6 +46,8 @@ export default function ShockCalculatorPage() {
   const [emailModalOpen, setEmailModalOpen] = useState(false);
   const [email, setEmail]                   = useState('');
   const [emailError, setEmailError]         = useState('');
+  const [betaDone, setBetaDone]             = useState(false);
+  const [betaLoading, setBetaLoading]       = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -132,6 +135,28 @@ export default function ShockCalculatorPage() {
     }
   }
 
+  async function handleBetaSubmit(emailAddress) {
+    setBetaLoading(true);
+    try {
+      const res = await fetch('/api/member-beta-request', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email:          emailAddress,
+          asset_value:    Number(form.asset_value)    || null,
+          expected_extra: Number(form.expected_extra) || null,
+          risk_grade:     result?.risk_level          || null,
+        }),
+      });
+      if (!res.ok) throw new Error('신청에 실패했습니다.');
+      setBetaDone(true);
+    } catch (err) {
+      setPdfError(err.message ?? '신청에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+    } finally {
+      setBetaLoading(false);
+    }
+  }
+
   function handleModalSubmit(e) {
     e.preventDefault();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
@@ -139,7 +164,11 @@ export default function ShockCalculatorPage() {
       return;
     }
     setEmailModalOpen(false);
-    handleDownloadReport(email.trim());
+    if (isBetaMode()) {
+      handleBetaSubmit(email.trim());
+    } else {
+      handleDownloadReport(email.trim());
+    }
   }
 
   return (
@@ -496,36 +525,65 @@ export default function ShockCalculatorPage() {
                 <li className={styles.upsellItem}>총회 발언 스크립트</li>
                 <li className={styles.upsellItem}>시공사 대응 전략</li>
               </ul>
-              <p className={styles.ctaPrice}>
-                <span className={styles.ctaPriceBeta}>베타 99,000원 · 정가 149,000원</span>
-              </p>
+              {!isBetaMode() && (
+                <p className={styles.ctaPrice}>
+                  <span className={styles.ctaPriceBeta}>베타 99,000원 · 정가 149,000원</span>
+                </p>
+              )}
 
               {pdfError && (
                 <p className={styles.ctaError}>{pdfError}</p>
               )}
 
-              <button
-                className={styles.ctaBtn}
-                onClick={() => setEmailModalOpen(true)}
-                disabled={pdfLoading}
-              >
-                {pdfLoading ? (
-                  <span className={styles.ctaBtnInner}>
-                    <span className={styles.ctaSpinner} />
-                    조합원님의 전략 리포트를 생성 중입니다...
-                  </span>
-                ) : pdfDone ? (
-                  'PDF 다운로드 완료'
-                ) : (
-                  '전략 리포트 지금 받기 →'
-                )}
-              </button>
-
-              <p className={styles.ctaNote}>
-                {pdfDone
-                  ? '다운로드 폴더를 확인해 주세요.'
-                  : 'PDF 즉시 다운로드 · 생성까지 약 30초'}
-              </p>
+              {isBetaMode() ? (
+                <>
+                  <button
+                    className={styles.ctaBtn}
+                    onClick={() => !betaDone && setEmailModalOpen(true)}
+                    disabled={betaLoading || betaDone}
+                  >
+                    {betaLoading ? (
+                      <span className={styles.ctaBtnInner}>
+                        <span className={styles.ctaSpinner} />
+                        신청 처리 중...
+                      </span>
+                    ) : betaDone ? (
+                      '베타 신청 완료 ✓'
+                    ) : (
+                      '베타 신청하기 (무료) →'
+                    )}
+                  </button>
+                  <p className={styles.ctaNote}>
+                    {betaDone
+                      ? '신청해 주셔서 감사합니다. 리포트 준비 완료 시 이메일로 안내드립니다.'
+                      : '결제 없음 · 이메일 등록만으로 신청 완료'}
+                  </p>
+                </>
+              ) : (
+                <>
+                  <button
+                    className={styles.ctaBtn}
+                    onClick={() => setEmailModalOpen(true)}
+                    disabled={pdfLoading}
+                  >
+                    {pdfLoading ? (
+                      <span className={styles.ctaBtnInner}>
+                        <span className={styles.ctaSpinner} />
+                        조합원님의 전략 리포트를 생성 중입니다...
+                      </span>
+                    ) : pdfDone ? (
+                      'PDF 다운로드 완료'
+                    ) : (
+                      '전략 리포트 지금 받기 →'
+                    )}
+                  </button>
+                  <p className={styles.ctaNote}>
+                    {pdfDone
+                      ? '다운로드 폴더를 확인해 주세요.'
+                      : 'PDF 즉시 다운로드 · 생성까지 약 30초'}
+                  </p>
+                </>
+              )}
 
               {pdfDone && reportId && (
                 <div className={styles.shareUrlBox}>
@@ -578,24 +636,47 @@ export default function ShockCalculatorPage() {
             className={styles.modal}
             onClick={(e) => e.stopPropagation()}
           >
-            <p className={styles.modalTitle}>리포트를 받을 이메일</p>
+            <p className={styles.modalTitle}>
+              {isBetaMode() ? '베타 신청 — 이메일 등록' : '리포트를 받을 이메일'}
+            </p>
             <p className={styles.modalDesc}>
-              이메일을 등록하면 리포트가 즉시 생성됩니다.
+              {isBetaMode()
+                ? '이메일을 등록하시면 리포트 검토 후 발송됩니다.'
+                : '이메일을 등록하면 리포트가 즉시 생성됩니다.'}
             </p>
 
             <ul className={styles.modalBenefits}>
-              <li className={styles.modalBenefit}>
-                <span className={styles.modalBenefitIcon}>✓</span>
-                <span>공사비 상승 시 <strong>리포트 업데이트 알림</strong> 수신</span>
-              </li>
-              <li className={styles.modalBenefit}>
-                <span className={styles.modalBenefitIcon}>✓</span>
-                <span>총회 일정 변경 등 <strong>핵심 정보 자동 알림</strong></span>
-              </li>
-              <li className={styles.modalBenefit}>
-                <span className={styles.modalBenefitIcon}>✓</span>
-                <span>베타 기간 무료 — <strong>이후 유료 전환 없음</strong></span>
-              </li>
+              {isBetaMode() ? (
+                <>
+                  <li className={styles.modalBenefit}>
+                    <span className={styles.modalBenefitIcon}>✓</span>
+                    <span>결제 없음 — <strong>완전 무료 베타 신청</strong></span>
+                  </li>
+                  <li className={styles.modalBenefit}>
+                    <span className={styles.modalBenefitIcon}>✓</span>
+                    <span>리포트 준비 완료 시 <strong>이메일로 즉시 안내</strong></span>
+                  </li>
+                  <li className={styles.modalBenefit}>
+                    <span className={styles.modalBenefitIcon}>✓</span>
+                    <span>공사비 상승 시 <strong>업데이트 알림</strong> 수신</span>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className={styles.modalBenefit}>
+                    <span className={styles.modalBenefitIcon}>✓</span>
+                    <span>공사비 상승 시 <strong>리포트 업데이트 알림</strong> 수신</span>
+                  </li>
+                  <li className={styles.modalBenefit}>
+                    <span className={styles.modalBenefitIcon}>✓</span>
+                    <span>총회 일정 변경 등 <strong>핵심 정보 자동 알림</strong></span>
+                  </li>
+                  <li className={styles.modalBenefit}>
+                    <span className={styles.modalBenefitIcon}>✓</span>
+                    <span>베타 기간 무료 — <strong>이후 유료 전환 없음</strong></span>
+                  </li>
+                </>
+              )}
             </ul>
 
             <form onSubmit={handleModalSubmit} noValidate>
@@ -619,7 +700,7 @@ export default function ShockCalculatorPage() {
               </div>
 
               <button className={styles.modalSubmitBtn} type="submit">
-                리포트 생성하기
+                {isBetaMode() ? '베타 신청하기' : '리포트 생성하기'}
               </button>
               <button
                 className={styles.modalCancelBtn}
