@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import { resend, FROM } from '@/lib/resend';
+import { buildEmail1 } from '@/lib/emails/email1-welcome';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_RE = /^010\d{7,8}$/;
@@ -56,6 +58,19 @@ export async function POST(req) {
   if (error) {
     console.error('lead-submit DB error:', error.message);
     return NextResponse.json({ error: 'DB 저장 실패' }, { status: 500 });
+  }
+
+  // 이메일 1 즉시 발송 (실패해도 응답에 영향 없음)
+  try {
+    const { subject, html } = buildEmail1({
+      email:         record.email,
+      riskGrade:     record.risk_grade,
+      assetValue:    record.asset_value,
+      expectedExtra: record.expected_extra,
+    });
+    await resend.emails.send({ from: FROM, to: record.email, subject, html });
+  } catch (emailErr) {
+    console.error('email1 send error:', emailErr.message);
   }
 
   return NextResponse.json({ success: true });

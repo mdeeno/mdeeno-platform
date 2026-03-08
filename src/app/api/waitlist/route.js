@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import { resend, FROM } from '@/lib/resend';
+import { buildEmail1 } from '@/lib/emails/email1-welcome';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -32,6 +34,13 @@ export async function POST(req) {
   if (error) {
     console.error('waitlist DB error:', error.message);
     return NextResponse.json({ error: 'DB 저장 실패' }, { status: 500 });
+  }
+
+  try {
+    const { subject, html } = buildEmail1({ email: email.trim().toLowerCase() });
+    await resend.emails.send({ from: FROM, to: email.trim(), subject, html });
+  } catch (emailErr) {
+    console.error('email1 waitlist send error:', emailErr.message);
   }
 
   return NextResponse.json({ success: true });
