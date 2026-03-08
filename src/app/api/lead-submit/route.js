@@ -5,6 +5,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_RE = /^010\d{7,8}$/;
 const ALLOWED_PRODUCT_TYPES = new Set([
   'basic', 'basic_beta', 'premium', 'premium_beta',
+  'landing_beta', 'blog_waitlist',
 ]);
 const ALLOWED_STAGES = new Set([
   'planning', 'approval', 'management', 'construction',

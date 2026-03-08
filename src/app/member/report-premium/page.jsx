@@ -112,7 +112,7 @@ export default function PremiumReportPaywall() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ ...leadBody, product_type: 'premium_beta', beta: true }),
         });
-        alert('베타 테스터 신청이 완료되었습니다.\n\n6월 15일 정식 출시 시 베타 가격으로 결제 링크를 보내드립니다.');
+        setSubmitted(true);
       } catch {
         alert('신청 중 오류가 발생했습니다. 다시 시도해 주세요.');
       } finally {
