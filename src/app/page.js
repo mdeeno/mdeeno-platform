@@ -14,6 +14,9 @@ export default function Home() {
             <span className={styles.highlight}>실제로 얼마나 늘어날까요?</span>
           </h1>
 
+          <p className={styles.subtitleEyebrow}>
+            재건축·재개발 정비사업 조합원을 위한 분담금 리스크 분석
+          </p>
           <p className={styles.subtitle}>
             M-DEENO는 조합원의 자산 기준으로<br />
             공사비 상승 시 분담금 변화를 분석합니다.
