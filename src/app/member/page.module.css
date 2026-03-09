@@ -16,7 +16,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #dc2626;
+  color: #1e40af;
   margin-bottom: 10px;
 }
 
@@ -47,7 +47,7 @@
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #e63946;
+  color: rgba(255, 255, 255, 0.45);
   margin-bottom: 12px;
 }
 
@@ -130,8 +130,8 @@
 }
 
 .trustCard {
-  background: #fff1f2;
-  border: 1px solid #fecaca;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 10px;
   padding: 18px 12px;
   text-align: center;
@@ -140,7 +140,7 @@
 .trustCause {
   font-size: 0.72rem;
   font-weight: 700;
-  color: #b91c1c;
+  color: #64748b;
   margin-bottom: 8px;
   letter-spacing: 0.02em;
 }
@@ -266,7 +266,7 @@
 .submitBtn {
   width: 100%;
   padding: 16px 28px;
-  background: #e63946;
+  background: #1e40af;
   color: #ffffff;
   font-size: 1.05rem;
   font-weight: 800;
@@ -277,7 +277,7 @@
 }
 
 .submitBtn:hover:not(:disabled) {
-  background: #c1121f;
+  background: #1e3a8a;
   transform: translateY(-1px);
 }
 
@@ -613,7 +613,7 @@
 
 .ctaBtn {
   display: inline-block;
-  background: #e63946;
+  background: #1e40af;
   color: #ffffff;
   font-size: 1rem;
   font-weight: 800;
@@ -627,7 +627,7 @@
 }
 
 .ctaBtn:hover:not(:disabled) {
-  background: #c1121f;
+  background: #1e3a8a;
   transform: translateY(-1px);
 }
 
