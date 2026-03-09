@@ -53,18 +53,18 @@
 }
 
 .primaryBtn {
-  background-color: #e63946;
+  background-color: #1e40af;
   color: #ffffff;
   padding: 16px 28px;
   border-radius: 10px;
   font-size: 1rem;
   font-weight: 800;
-  box-shadow: 0 4px 16px rgba(230, 57, 70, 0.3);
+  box-shadow: 0 4px 16px rgba(30, 64, 175, 0.3);
   transition: background 0.15s, transform 0.1s;
 }
 
 .primaryBtn:hover {
-  background-color: #c1121f;
+  background-color: #1e3a8a;
   transform: translateY(-2px);
 }
 
@@ -774,7 +774,7 @@
 .urgencyBtn {
   display: inline-block;
   padding: 16px 28px;
-  background: #e63946;
+  background: #2563eb;
   color: #ffffff;
   font-size: 1rem;
   font-weight: 800;
@@ -784,7 +784,7 @@
 }
 
 .urgencyBtn:hover {
-  background: #c1121f;
+  background: #1d4ed8;
   transform: translateY(-1px);
 }
 
@@ -827,7 +827,7 @@
 }
 
 .landingLeadInput:focus {
-  border-color: #e63946;
+  border-color: #1e40af;
 }
 
 .landingLeadInputError {
@@ -836,7 +836,7 @@
 
 .landingLeadBtn {
   padding: 14px 24px;
-  background: #e63946;
+  background: #1e40af;
   color: #ffffff;
   font-size: 0.95rem;
   font-weight: 800;
@@ -848,7 +848,7 @@
 }
 
 .landingLeadBtn:hover:not(:disabled) {
-  background: #c1121f;
+  background: #1e3a8a;
 }
 
 .landingLeadBtn:disabled {
