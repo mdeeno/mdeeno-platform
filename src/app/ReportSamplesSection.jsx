@@ -222,7 +222,7 @@ export default function ReportSamplesSection() {
                   30페이지 심층 분석 · 협상 전략 · 총회 발언 스크립트 · 행동 타임라인
                 </p>
                 <button
-                  className={`${styles.previewBtn} ${styles.previewBtnRed}`}
+                  className={styles.previewBtn}
                   onClick={() => setModalReport('premium')}
                 >
                   미리보기
