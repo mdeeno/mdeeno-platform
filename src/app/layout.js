@@ -10,6 +10,7 @@ export const metadata = {
   description:
     '공사비 변화에 따른 정비사업 사업안전도를 구조적으로 분석합니다. Prop-Logic™ 엔진 기반 실시간 시뮬레이션 및 조합 제출용 분석 리포트 제공.',
   verification: {
+    google: 'egpUo4dD8e73c7-Sgf7SNHoeFg6kOsPtJf6JoYGE6pw',
     other: {
       'naver-site-verification': ['905d72e9887519789a9582161fb78f72480e8152'],
     },
