@@ -113,15 +113,41 @@ export default function ReportBasicPage() {
       return;
     }
 
-    // 정식 출시 이후 — 결제 플로우 (구현 예정)
-    fetch('/api/lead-submit', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...leadBody, product_type: 'basic' }),
-    }).catch(() => {});
+    // 정식 출시 이후 — Toss Payments 결제
+    try {
+      const res = await fetch('/api/payments/prepare', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email:          email.trim(),
+          phone:          cleanPhone || null,
+          product_type:   'basic',
+          asset_value:    context ? Number(context.assetValue)    : null,
+          expected_extra: context ? Number(context.expectedExtra) : null,
+          risk_grade:     context?.riskGrade ?? null,
+          traffic_source: trafficStr,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? '결제 준비에 실패했습니다.');
 
-    setLoading(false);
-    alert('정식 출시 준비 중입니다. 6월 15일부터 결제가 가능합니다.');
+      const { loadTossPayments } = await import('@tosspayments/tosspayments-sdk');
+      const toss = await loadTossPayments(process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY);
+      await toss.requestPayment({
+        method:        '카드',
+        amount:        { currency: 'KRW', value: data.amount },
+        orderId:       data.orderId,
+        orderName:     data.orderName,
+        customerEmail: data.customerEmail,
+        customerName:  data.customerName,
+        successUrl:    data.successUrl,
+        failUrl:       data.failUrl,
+      });
+    } catch (err) {
+      alert(err.message ?? '결제 처리 중 오류가 발생했습니다.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
