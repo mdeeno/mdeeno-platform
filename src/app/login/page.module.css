@@ -26,7 +26,7 @@
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #dc2626;
+  color: #1e40af;
   margin-bottom: 16px;
 }
 
@@ -49,7 +49,7 @@
   display: block;
   width: 100%;
   padding: 14px 24px;
-  background: #e63946;
+  background: #1e40af;
   color: #ffffff;
   font-size: 0.95rem;
   font-weight: 800;
@@ -60,7 +60,7 @@
 }
 
 .ctaBtn:hover {
-  background: #c1121f;
+  background: #1e3a8a;
 }
 
 .backLink {

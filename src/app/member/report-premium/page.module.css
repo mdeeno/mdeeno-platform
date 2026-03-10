@@ -15,7 +15,7 @@
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #dc2626;
+  color: #1e40af;
   margin-bottom: 10px;
 }
 
@@ -327,7 +327,7 @@
 .ctaBtn {
   width: 100%;
   padding: 14px 24px;
-  background: #e63946;
+  background: #1e40af;
   color: #ffffff;
   font-size: 1rem;
   font-weight: 800;
@@ -338,7 +338,7 @@
 }
 
 .ctaBtn:hover:not(:disabled) {
-  background: #c1121f;
+  background: #1e3a8a;
 }
 
 .ctaBtn:disabled {
@@ -388,7 +388,7 @@
 .consentLabel input[type='checkbox'] {
   margin-top: 2px;
   flex-shrink: 0;
-  accent-color: #e63946;
+  accent-color: #1e40af;
   width: 15px;
   height: 15px;
 }

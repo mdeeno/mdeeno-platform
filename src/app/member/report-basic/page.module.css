@@ -15,7 +15,7 @@
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #dc2626;
+  color: #1e40af;
   margin-bottom: 10px;
 }
 
@@ -233,7 +233,7 @@
 .consentLabel input[type='checkbox'] {
   margin-top: 2px;
   flex-shrink: 0;
-  accent-color: #e63946;
+  accent-color: #1e40af;
   width: 15px;
   height: 15px;
 }
@@ -249,7 +249,7 @@
   display: block;
   width: 100%;
   padding: 16px 24px;
-  background: #e63946;
+  background: #1e40af;
   color: #ffffff;
   font-size: 1rem;
   font-weight: 800;
@@ -261,7 +261,7 @@
 }
 
 .purchaseBtn:hover:not(:disabled) {
-  background: #c1121f;
+  background: #1e3a8a;
   transform: translateY(-1px);
 }
 
