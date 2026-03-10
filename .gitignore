@@ -43,3 +43,7 @@ yarn-error.log*
 next-env.d.ts
 
 .del
+
+# [Claude] 로컬 전용 파일
+CLAUDE.md
+CHANGELOG.md
