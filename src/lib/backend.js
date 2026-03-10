@@ -123,31 +123,55 @@ export async function fetchJsonFromBackend(endpoint, payload, origin) {
 }
 
 export async function fetchPdfFromBackend(endpoint, payload, origin) {
+  // ── 1. PDF 생성 요청 → job_id 수신 ────────────────────────────────────────
   let response;
-
   try {
     response = await fetch(`${BACKEND_URL}${endpoint}`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Origin: origin,
-      },
+      headers: { 'Content-Type': 'application/json', Origin: origin },
       body: JSON.stringify(payload),
       cache: 'no-store',
     });
   } catch {
-    throw {
-      code: 'NETWORK_ERROR',
-      message: '백엔드 서버에 연결할 수 없습니다',
-      status: 503,
-    };
+    throw { code: 'NETWORK_ERROR', message: '백엔드 서버에 연결할 수 없습니다', status: 503 };
   }
 
   if (!response.ok) {
     throw await parseBackendError(response);
   }
 
-  const reportId = response.headers.get('X-Report-Id') ?? null;
-  const buffer   = await response.arrayBuffer();
-  return { buffer, reportId };
+  const { job_id } = await response.json();
+
+  // ── 2. 완료될 때까지 폴링 (최대 120초, 2초 간격) ────────────────────────
+  const MAX_ATTEMPTS = 60;
+  const INTERVAL_MS  = 2_000;
+
+  for (let i = 0; i < MAX_ATTEMPTS; i++) {
+    await new Promise((r) => setTimeout(r, INTERVAL_MS));
+
+    let pollRes;
+    try {
+      pollRes = await fetch(`${BACKEND_URL}/v1/pdf-status/${job_id}`, {
+        headers: { Origin: origin },
+        cache: 'no-store',
+      });
+    } catch {
+      throw { code: 'NETWORK_ERROR', message: '상태 확인 중 연결이 끊어졌습니다', status: 503 };
+    }
+
+    if (!pollRes.ok) {
+      throw await parseBackendError(pollRes);
+    }
+
+    // pending이면 계속 대기
+    const contentType = pollRes.headers.get('Content-Type') ?? '';
+    if (!contentType.includes('application/pdf')) continue;
+
+    // ready — PDF 반환
+    const reportId = pollRes.headers.get('X-Report-Id') ?? null;
+    const buffer   = await pollRes.arrayBuffer();
+    return { buffer, reportId };
+  }
+
+  throw { code: 'TIMEOUT', message: 'PDF 생성 시간이 초과되었습니다. 다시 시도해주세요.', status: 504 };
 }
