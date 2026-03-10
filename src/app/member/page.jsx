@@ -253,6 +253,13 @@ export default function ShockCalculatorPage() {
               <span>조합이 제시하는 수치를 그대로 수용하면 실제 부담을 알 수 없습니다.</span>
             </div>
           </li>
+          <li className={styles.problemItem}>
+            <span className={styles.problemNum}>04</span>
+            <div className={styles.problemText}>
+              <strong>조합 공개 정보만으로는 개인 리스크 판단 불가</strong>
+              <span>조합은 사업 전체 현황만 공개합니다. 내 자산에 미치는 실질 손실은 개인 단위로 직접 계산해야 합니다.</span>
+            </div>
+          </li>
         </ul>
       </div>
 
