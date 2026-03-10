@@ -830,10 +830,32 @@
   box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.08);
 }
 
+.modalPrivacyRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.modalPrivacyRow input[type="checkbox"] {
+  margin-top: 3px;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  accent-color: #1e40af;
+}
+
+.modalPrivacyText {
+  font-size: 0.78rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
 .modalError {
   font-size: 0.8rem;
   color: #dc2626;
-  margin: 0;
+  margin: 0 0 10px;
 }
 
 .modalSubmitBtn {
@@ -890,6 +912,8 @@
   background: transparent;
   color: #475569;
   font-size: 0.875rem;
+  font-family: inherit;
+  cursor: pointer;
   font-weight: 700;
   border: 1.5px solid #cbd5e1;
   border-radius: 8px;

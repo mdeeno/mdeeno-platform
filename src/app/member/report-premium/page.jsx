@@ -45,25 +45,41 @@ export default function PremiumReportPaywall() {
   }
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem('memberPrefill');
-      if (raw) {
-        const { expectedExtra } = JSON.parse(raw);
-        if (expectedExtra && Number(expectedExtra) > 0) {
-          setSavings(calcSavings(Number(expectedExtra)));
-        }
-      }
-    } catch {
-      // localStorage 없음 또는 파싱 실패 — 무시
-    }
+    const params = new URLSearchParams(window.location.search);
+
+    // URL params take priority over localStorage (Fix 1)
+    const assetParam = params.get('asset');
+    const extraParam = params.get('extra');
+    const gradeParam = params.get('grade');
 
     try {
-      const raw = localStorage.getItem('basicReportContext');
-      if (raw) {
-        setContext(JSON.parse(raw));
+      if (assetParam && extraParam && gradeParam) {
+        const ctx = { assetValue: assetParam, expectedExtra: extraParam, riskGrade: gradeParam };
+        setContext(ctx);
+        if (Number(extraParam) > 0) setSavings(calcSavings(Number(extraParam)));
+        try { localStorage.setItem('basicReportContext', JSON.stringify(ctx)); } catch {}
       } else {
-        alert('먼저 무료 계산을 진행해주세요.');
-        router.push('/member');
+        // Fallback: memberPrefill for savings
+        try {
+          const raw = localStorage.getItem('memberPrefill');
+          if (raw) {
+            const { expectedExtra } = JSON.parse(raw);
+            if (expectedExtra && Number(expectedExtra) > 0) {
+              setSavings(calcSavings(Number(expectedExtra)));
+            }
+          }
+        } catch {}
+
+        // Fallback: basicReportContext for context
+        try {
+          const raw = localStorage.getItem('basicReportContext');
+          if (raw) {
+            setContext(JSON.parse(raw));
+          } else {
+            alert('먼저 무료 계산을 진행해주세요.');
+            router.push('/member');
+          }
+        } catch {}
       }
     } catch {}
 
@@ -72,7 +88,6 @@ export default function PremiumReportPaywall() {
       .then((d) => setLeadCount(d.count))
       .catch(() => {});
 
-    const params = new URLSearchParams(window.location.search);
     setTrafficSource({
       utm_source:   params.get('utm_source')   ?? null,
       utm_campaign: params.get('utm_campaign') ?? null,

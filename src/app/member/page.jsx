@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { downloadPdf } from '@/lib/download-pdf';
 import { isBetaMode } from '@/lib/feature-flags';
 import styles from './page.module.css';
@@ -34,6 +34,7 @@ function formatAmount(eokValue) {
 const RISK_LABELS = { R1: '안정', R2: '중위험', R3: '고위험', R4: '최고위험' };
 
 export default function ShockCalculatorPage() {
+  const router = useRouter();
   const [form, setForm]           = useState(INITIAL_FORM);
   const [loading, setLoading]     = useState(false);
   const [result, setResult]       = useState(null);
@@ -48,12 +49,32 @@ export default function ShockCalculatorPage() {
   const [emailError, setEmailError]         = useState('');
   const [betaDone, setBetaDone]             = useState(false);
   const [betaLoading, setBetaLoading]       = useState(false);
+  const [isModalPrivacyAgreed, setIsModalPrivacyAgreed] = useState(false);
+  const [pendingNav, setPendingNav]         = useState(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const cn = params.get('complex_name');
     if (cn) setForm((prev) => ({ ...prev, complex_name: cn }));
   }, []);
+
+  // Navigate after email collected (betaDone becomes true)
+  useEffect(() => {
+    if (betaDone && pendingNav) {
+      router.push(pendingNav);
+      setPendingNav(null);
+    }
+  }, [betaDone, pendingNav, router]);
+
+  // Gate report navigation behind email collection
+  function handleReportNav(href) {
+    if (betaDone || pdfDone) {
+      router.push(href);
+    } else {
+      setPendingNav(href);
+      setEmailModalOpen(true);
+    }
+  }
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -168,11 +189,20 @@ export default function ShockCalculatorPage() {
       setEmailError('올바른 이메일 주소를 입력해 주세요.');
       return;
     }
+    if (!isModalPrivacyAgreed) {
+      setEmailError('개인정보 수집·이용에 동의해 주세요.');
+      return;
+    }
     setEmailModalOpen(false);
+    // pendingNav: navigate after beta submit via useEffect
     if (isBetaMode()) {
       handleBetaSubmit(email.trim());
     } else {
       handleDownloadReport(email.trim());
+      if (pendingNav) {
+        router.push(pendingNav);
+        setPendingNav(null);
+      }
     }
   }
 
@@ -642,23 +672,26 @@ export default function ShockCalculatorPage() {
           </div>
 
           {/* 6. Secondary Report CTA — 등급에 따라 역방향 추천 */}
-          <div className={styles.basicReportCta}>
-            {['R1', 'R2'].includes(result.risk_level) ? (
-              <>
-                <p className={styles.basicReportCtaLabel}>더 심층적인 전략이 필요하다면?</p>
-                <Link href="/member/report-premium" className={styles.basicReportCtaBtn}>
-                  프리미엄 전략 리포트 보기 →
-                </Link>
-              </>
-            ) : (
-              <>
-                <p className={styles.basicReportCtaLabel}>우선 기본 구조만 확인하고 싶다면?</p>
-                <Link href="/member/report-basic" className={styles.basicReportCtaBtn}>
-                  기본 리포트 보기 (베타 29,000원) →
-                </Link>
-              </>
-            )}
-          </div>
+          {(() => {
+            const reportParams = `?asset=${encodeURIComponent(form.asset_value)}&extra=${encodeURIComponent(form.expected_extra)}&grade=${encodeURIComponent(result.risk_level)}`;
+            const isLowRisk = ['R1', 'R2'].includes(result.risk_level);
+            const href = isLowRisk
+              ? `/member/report-premium${reportParams}`
+              : `/member/report-basic${reportParams}`;
+            return (
+              <div className={styles.basicReportCta}>
+                <p className={styles.basicReportCtaLabel}>
+                  {isLowRisk ? '더 심층적인 전략이 필요하다면?' : '우선 기본 구조만 확인하고 싶다면?'}
+                </p>
+                <button
+                  className={styles.basicReportCtaBtn}
+                  onClick={() => handleReportNav(href)}
+                >
+                  {isLowRisk ? '프리미엄 전략 리포트 보기 →' : '기본 리포트 보기 (베타 29,000원) →'}
+                </button>
+              </div>
+            );
+          })()}
 
         </div>
       )}
@@ -735,10 +768,22 @@ export default function ShockCalculatorPage() {
                   autoComplete="email"
                   autoFocus
                 />
-                {emailError && (
-                  <p className={styles.modalError}>{emailError}</p>
-                )}
               </div>
+
+              <label className={styles.modalPrivacyRow}>
+                <input
+                  type="checkbox"
+                  checked={isModalPrivacyAgreed}
+                  onChange={(e) => { setIsModalPrivacyAgreed(e.target.checked); setEmailError(''); }}
+                />
+                <span className={styles.modalPrivacyText}>
+                  개인정보 수집·이용에 동의합니다 (이메일, 자산 정보 — 리포트 발송 목적)
+                </span>
+              </label>
+
+              {emailError && (
+                <p className={styles.modalError}>{emailError}</p>
+              )}
 
               <button className={styles.modalSubmitBtn} type="submit">
                 {isBetaMode() ? '베타 신청하기' : '리포트 생성하기'}

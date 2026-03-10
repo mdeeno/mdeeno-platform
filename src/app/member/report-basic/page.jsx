@@ -34,13 +34,26 @@ export default function ReportBasicPage() {
   const [trafficSource, setTrafficSource]     = useState({});
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    // URL params take priority over localStorage (Fix 1)
+    const assetParam = params.get('asset');
+    const extraParam = params.get('extra');
+    const gradeParam = params.get('grade');
+
     try {
-      const raw = localStorage.getItem('basicReportContext');
-      if (raw) {
-        setContext(JSON.parse(raw));
+      if (assetParam && extraParam && gradeParam) {
+        const ctx = { assetValue: assetParam, expectedExtra: extraParam, riskGrade: gradeParam };
+        setContext(ctx);
+        try { localStorage.setItem('basicReportContext', JSON.stringify(ctx)); } catch {}
       } else {
-        alert('먼저 무료 계산을 진행해주세요.');
-        router.push('/member');
+        const raw = localStorage.getItem('basicReportContext');
+        if (raw) {
+          setContext(JSON.parse(raw));
+        } else {
+          alert('먼저 무료 계산을 진행해주세요.');
+          router.push('/member');
+        }
       }
     } catch {}
 
@@ -51,7 +64,6 @@ export default function ReportBasicPage() {
       .catch(() => {});
 
     // 트래픽 소스 캡처
-    const params = new URLSearchParams(window.location.search);
     setTrafficSource({
       utm_source:   params.get('utm_source')   ?? null,
       utm_campaign: params.get('utm_campaign') ?? null,
