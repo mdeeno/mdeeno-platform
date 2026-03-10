@@ -33,11 +33,14 @@ export async function POST(req) {
 
   let sent = 0, errors = 0;
   const now = new Date().toISOString();
+  const delay = (ms) => new Promise((r) => setTimeout(r, ms));
 
   for (const lead of all) {
     try {
       const { subject, html } = buildEmail3Launch({ riskGrade: lead.risk_grade });
       await resend.emails.send({ from: FROM, to: lead.email, subject, html });
+      // Resend 무료 플랜: 초당 2건 제한 대응
+      await delay(600);
 
       // 발송 완료 표시
       await supabase.from('leads')

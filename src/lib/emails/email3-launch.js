@@ -2,6 +2,10 @@
 
 export function buildEmail3Launch({ riskGrade }) {
   const grade = riskGrade ?? 'R3';
+  const reportUrl = (grade === 'R1' || grade === 'R2')
+    ? 'https://mdeeno.com/member/report-basic'
+    : 'https://mdeeno.com/member/report-premium';
+  const reportLabel = (grade === 'R1' || grade === 'R2') ? '기본 리포트' : '프리미엄 전략 리포트';
 
   const subject = '[M-DEENO] 오늘부터 결제 가능합니다 — 사전 신청자 베타 특가 안내';
 
@@ -66,8 +70,8 @@ export function buildEmail3Launch({ riskGrade }) {
         <!-- CTA -->
         <tr>
           <td style="padding:0 36px 36px;text-align:center;">
-            <a href="https://mdeeno.com/member/report-premium" style="display:inline-block;padding:16px 36px;background:#e63946;color:#ffffff;font-size:16px;font-weight:800;text-decoration:none;border-radius:10px;box-shadow:0 4px 16px rgba(230,57,70,0.3);">
-              베타 특가로 리포트 받기 →
+            <a href="${reportUrl}" style="display:inline-block;padding:16px 36px;background:#1e40af;color:#ffffff;font-size:16px;font-weight:800;text-decoration:none;border-radius:10px;box-shadow:0 4px 16px rgba(30,64,175,0.3);">
+              베타 특가로 ${reportLabel} 받기 →
             </a>
             <p style="margin:12px 0 0;font-size:12px;color:#94a3b8;">베타 특가는 한정 기간만 적용됩니다</p>
           </td>

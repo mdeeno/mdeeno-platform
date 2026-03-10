@@ -207,6 +207,13 @@
   color: #dc2626;
 }
 
+.fieldHint {
+  font-size: 0.75rem;
+  color: #64748b;
+  line-height: 1.4;
+  margin: 0;
+}
+
 .inputWrap {
   position: relative;
 }

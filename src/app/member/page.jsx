@@ -7,9 +7,9 @@ import { isBetaMode } from '@/lib/feature-flags';
 import styles from './page.module.css';
 
 const STAGE_OPTIONS = [
-  { value: 'planning',     label: '기본계획 수립 단계' },
-  { value: 'approval',     label: '사업시행인가 단계' },
-  { value: 'management',   label: '관리처분인가 단계' },
+  { value: 'planning',     label: '기본계획 수립 단계 (사업 초기)' },
+  { value: 'approval',     label: '사업시행인가 단계 (공사 계획 승인)' },
+  { value: 'management',   label: '관리처분인가 단계 (이주·철거 전후)' },
   { value: 'construction', label: '착공 / 공사 진행 단계' },
 ];
 
@@ -284,6 +284,7 @@ export default function ShockCalculatorPage() {
               <label className={styles.label} htmlFor="asset_value">
                 종전자산 평가액 <span className={styles.req}>*</span>
               </label>
+              <p className={styles.fieldHint}>관리처분계획서에 기재된 내 아파트의 감정평가 금액</p>
               <div className={styles.inputWrap}>
                 <input
                   className={styles.input}
@@ -304,6 +305,7 @@ export default function ShockCalculatorPage() {
               <label className={styles.label} htmlFor="expected_extra">
                 예상 추가 분담금 <span className={styles.req}>*</span>
               </label>
+              <p className={styles.fieldHint}>조합이 통보한 입주 시 추가 납부 예정 금액</p>
               <div className={styles.inputWrap}>
                 <input
                   className={styles.input}
@@ -324,6 +326,7 @@ export default function ShockCalculatorPage() {
               <label className={styles.label} htmlFor="cost_increase_rate">
                 예상 공사비 상승률
               </label>
+              <p className={styles.fieldHint}>시공사 요청 또는 예상되는 공사비 인상률 (모르면 10% 기본값 사용)</p>
               <div className={styles.inputWrap}>
                 <input
                   className={styles.input}
@@ -345,6 +348,7 @@ export default function ShockCalculatorPage() {
               <label className={styles.label} htmlFor="project_stage">
                 현재 사업 단계
               </label>
+              <p className={styles.fieldHint}>단계가 뒤로 갈수록 공사비 확정 시점에 가까워집니다</p>
               <select
                 className={styles.input}
                 id="project_stage"
