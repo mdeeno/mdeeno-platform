@@ -30,7 +30,7 @@ export async function GET(req) {
 
   let sent2 = 0, errors = 0;
 
-  // ── 이메일 2: 3일 전 신청자 ──────────────────────────────────────────
+  // ── 이메일 2: 3일 전 신청자 (leads 테이블) ───────────────────────────
   const { data: leads2 } = await supabase
     .from('leads')
     .select('email, risk_grade')
@@ -44,6 +44,30 @@ export async function GET(req) {
       await resend.emails.send({ from: FROM, to: lead.email, subject, html });
       await supabase
         .from('leads')
+        .update({ email_2_sent_at: new Date().toISOString() })
+        .eq('email', lead.email)
+        .gte('created_at', `${day3}T00:00:00Z`)
+        .lte('created_at', `${day3}T23:59:59Z`);
+      sent2++;
+    } catch {
+      errors++;
+    }
+  }
+
+  // ── 이메일 2: 3일 전 신청자 (member_beta_requests 테이블) ────────────
+  const { data: betas2 } = await supabase
+    .from('member_beta_requests')
+    .select('email, risk_grade')
+    .gte('created_at', `${day3}T00:00:00Z`)
+    .lte('created_at', `${day3}T23:59:59Z`)
+    .is('email_2_sent_at', null);
+
+  for (const lead of betas2 ?? []) {
+    try {
+      const { subject, html } = buildEmail2({ riskGrade: lead.risk_grade });
+      await resend.emails.send({ from: FROM, to: lead.email, subject, html });
+      await supabase
+        .from('member_beta_requests')
         .update({ email_2_sent_at: new Date().toISOString() })
         .eq('email', lead.email)
         .gte('created_at', `${day3}T00:00:00Z`)
