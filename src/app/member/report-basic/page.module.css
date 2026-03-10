@@ -349,64 +349,178 @@
 /* ── Basic vs Premium 비교표 ── */
 .compareBox {
   margin-top: 32px;
+  margin-bottom: 24px;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 14px;
   padding: 28px 24px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
 }
 
-.compareTitle {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+.compareEyebrow {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  color: #1e40af;
+  margin-bottom: 6px;
+}
+
+.compareHeading {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.compareSubtitle {
+  font-size: 0.82rem;
   color: #64748b;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  line-height: 1.5;
 }
 
 .compareTable {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.85rem;
+  margin-bottom: 16px;
 }
 
 .compareTable th,
 .compareTable td {
-  padding: 10px 12px;
+  padding: 11px 10px;
   text-align: center;
   border-bottom: 1px solid #e2e8f0;
+  vertical-align: middle;
 }
 
-.compareTable th:first-child,
 .compareTable td:first-child {
   text-align: left;
-  color: #475569;
+  width: 52%;
 }
 
 .compareTable th {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: #64748b;
+  padding: 14px 10px;
+  vertical-align: top;
 }
 
-.compareTable th span,
-.compareTable td span {
-  font-weight: 400;
-  font-size: 0.72rem;
-}
-
+/* Current product column */
 .colActive {
   background: #eff6ff;
-  color: #1e40af;
-  font-weight: 700;
+  border-bottom: 2px solid #1e40af !important;
 }
 
-.compareTable .upsellLink {
+/* Other product column */
+.colOther {
+  background: #f8fafc;
+}
+
+/* Column header text */
+.colName {
   display: block;
-  margin-top: 16px;
-  text-align: right;
+  font-size: 0.82rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+  color: #0f172a;
+}
+
+.colActive .colName {
+  color: #1e40af;
+}
+
+.colPrice {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.colGrade {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.07);
+  color: #475569;
+}
+
+/* Group header rows */
+.groupRow td {
+  background: #f1f5f9;
+  font-size: 0.67rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+  padding: 7px 10px;
+  border-bottom: none;
+  text-align: left;
+}
+
+/* Feature cells */
+.featureName {
+  display: block;
+  font-weight: 700;
+  color: #1e293b;
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+.featureDesc {
+  display: block;
+  font-size: 0.72rem;
+  color: #94a3b8;
+  margin-top: 2px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* Check / cross */
+.checkYes {
+  color: #16a34a;
+  font-weight: 900;
+  font-size: 1rem;
+}
+
+.checkNo {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+/* Upsell callout */
+.upsellCallout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  padding: 14px 18px;
+}
+
+.upsellCallout p {
+  font-size: 0.82rem;
+  color: #1e3a8a;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.upsellLink {
   font-size: 0.82rem;
   color: #1e40af;
-  font-weight: 600;
+  font-weight: 800;
   text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+
+.upsellLink:hover {
+  color: #1e3a8a;
 }

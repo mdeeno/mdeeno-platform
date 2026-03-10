@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { isBetaMode } from '@/lib/feature-flags';
 import AssetShockCard from '@/components/report/AssetShockCard';
 import styles from './page.module.css';
@@ -307,34 +308,64 @@ export default function PremiumReportPaywall() {
 
       {/* ── Basic vs Premium 비교표 ── */}
       <section className={styles.compareSection}>
-        <p className={styles.compareTitle}>기본 vs 프리미엄 리포트 비교</p>
+        <p className={styles.compareEyebrow}>리포트 선택 가이드</p>
+        <h3 className={styles.compareHeading}>프리미엄이 필요한 이유</h3>
+        <p className={styles.compareSubtitle}>R3·R4 등급은 수천만원이 걸린 총회 전략이 핵심입니다</p>
         <table className={styles.compareTable}>
           <thead>
             <tr>
-              <th>기능</th>
-              <th>기본 리포트<br /><span>29,000원</span></th>
-              <th className={styles.colActive}>프리미엄 리포트<br /><span>99,000원</span></th>
+              <th></th>
+              <th className={styles.colOther}>
+                <span className={styles.colName}>기본 리포트</span>
+                <span className={styles.colPrice}>29,000원</span>
+                <span className={styles.colGrade}>R1 · R2 추천</span>
+              </th>
+              <th className={styles.colActive}>
+                <span className={styles.colName}>프리미엄 전략</span>
+                <span className={styles.colPrice}>99,000원</span>
+                <span className={styles.colGrade}>R3 · R4 추천</span>
+              </th>
             </tr>
           </thead>
           <tbody>
+            <tr className={styles.groupRow}><td colSpan={3}>공통 포함</td></tr>
             {[
-              ['분담금 시나리오 분석', true, true],
-              ['자산 잠식 시점 계산', true, true],
-              ['총회 핵심 질문 5개', true, true],
-              ['조합 대응 체크리스트', true, true],
-              ['협상 절감 전략 시뮬레이션', false, true],
-              ['총회 발언 스크립트', false, true],
-              ['조합원 행동 타임라인 (30일)', false, true],
-              ['30페이지 심층 분석', false, true],
-            ].map(([label, basic, premium]) => (
+              ['분담금 시나리오 분석', '공사비 5·10·20% 상승 시 내 분담금 변화'],
+              ['자산 잠식 구간 예측', '내 자산이 줄어드는 공사비 상승률 계산'],
+              ['총회 핵심 질문 5개', '총회에서 바로 쓸 수 있는 검증 질문'],
+              ['조합 대응 체크리스트', '단계별 확인 사항 정리'],
+            ].map(([label, desc]) => (
               <tr key={label}>
-                <td>{label}</td>
-                <td>{basic ? '✓' : '—'}</td>
-                <td className={styles.colActive}>{premium ? '✓' : '—'}</td>
+                <td>
+                  <span className={styles.featureName}>{label}</span>
+                  <span className={styles.featureDesc}>{desc}</span>
+                </td>
+                <td className={styles.checkYes}>✓</td>
+                <td className={`${styles.colActive} ${styles.checkYes}`}>✓</td>
+              </tr>
+            ))}
+            <tr className={styles.groupRow}><td colSpan={3}>프리미엄 전용 전략</td></tr>
+            {[
+              ['협상 절감액 시뮬레이션', '전략 적용 시 절감 가능 금액 추정'],
+              ['총회 발언 스크립트', '즉시 사용 가능한 협상 발언 전문'],
+              ['30일 행동 타임라인', '총회 전 단계별 대응 일정표'],
+              ['30페이지 심층 분석', '컨설팅 수준의 사업 구조 분석'],
+            ].map(([label, desc]) => (
+              <tr key={label}>
+                <td>
+                  <span className={styles.featureName}>{label}</span>
+                  <span className={styles.featureDesc}>{desc}</span>
+                </td>
+                <td className={styles.checkNo}>✗</td>
+                <td className={`${styles.colActive} ${styles.checkYes}`}>✓</td>
               </tr>
             ))}
           </tbody>
         </table>
+        <div className={styles.downsellNote}>
+          <span>R1·R2 등급이라면 </span>
+          <Link href="/member/report-basic" className={styles.downsellLink}>기본 리포트도 충분합니다 →</Link>
+        </div>
       </section>
 
       {/* ── 공유 ────────────────────────────────────────────────────────── */}
