@@ -100,6 +100,11 @@ export default function ShockCalculatorPage() {
       setTimeout(() => {
         document.getElementById('shock-result')?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
+
+      // 충격 수치 확인 후 이메일 수집 — 동기 부여 최고조 시점에 모달 노출
+      setTimeout(() => {
+        if (!betaDone && !pdfDone) setEmailModalOpen(true);
+      }, 2000);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -400,6 +405,10 @@ export default function ShockCalculatorPage() {
 
         {error && <div className={styles.errorBox}>{error}</div>}
 
+        <p className={styles.privacyNote}>
+          🔒 입력하신 자산 정보는 암호화되어 안전하게 처리됩니다.
+        </p>
+
         <button className={styles.submitBtn} type="submit" disabled={loading || !isValid}>
           {loading ? (
             <span className={styles.loadingInner}>
@@ -458,6 +467,9 @@ export default function ShockCalculatorPage() {
               {formatAmount(result.expected_contribution - result.comparison_contribution)}
             </p>
             <p className={styles.savingsNote}>전략 리포트 적용 시 최대 절감 가능 금액</p>
+            <p className={styles.savingsDisclaimer}>
+              * 공사비 10% 상승 가정, 협상·총회 전략 실행 시 시뮬레이션 결과입니다.
+            </p>
           </div>
 
           {/* 3. Strategy Simulation Preview */}
@@ -504,7 +516,25 @@ export default function ShockCalculatorPage() {
             );
           })()}
 
-          {/* 4. Strategy Blur + CTA */}
+          {/* 4. Risk-based Tier Recommendation */}
+          <div className={
+            ['R1', 'R2'].includes(result.risk_level)
+              ? styles.tierRecommendBasic
+              : styles.tierRecommendPremium
+          }>
+            <p className={styles.tierRecommendTitle}>
+              {['R1', 'R2'].includes(result.risk_level)
+                ? `위험 등급 ${result.risk_level} — 기본 리포트로 충분히 대응 가능합니다`
+                : `위험 등급 ${result.risk_level} — 프리미엄 전략 리포트가 필요합니다`}
+            </p>
+            <p className={styles.tierRecommendDesc}>
+              {['R1', 'R2'].includes(result.risk_level)
+                ? '자산 구조 검증과 총회 질문 5개를 담은 기본 리포트로 핵심 리스크를 확인하세요.'
+                : '협상 전략·총회 발언 스크립트·행동 타임라인이 포함된 프리미엄 리포트로 총회에서 이기세요.'}
+            </p>
+          </div>
+
+          {/* 5. Strategy Blur + CTA */}
           <div className={styles.strategyWrap}>
             <div className={styles.strategyBlur} aria-hidden="true">
               <p className={styles.strategyBlurTitle}>M-DEENO 맞춤 전략 분석</p>
@@ -611,12 +641,23 @@ export default function ShockCalculatorPage() {
             </div>
           </div>
 
-          {/* 5. Basic Report CTA */}
+          {/* 6. Secondary Report CTA — 등급에 따라 역방향 추천 */}
           <div className={styles.basicReportCta}>
-            <p className={styles.basicReportCtaLabel}>더 간단한 리포트가 필요하신가요?</p>
-            <Link href="/member/report-basic" className={styles.basicReportCtaBtn}>
-              기본 리포트 보기 (베타 29,000원) →
-            </Link>
+            {['R1', 'R2'].includes(result.risk_level) ? (
+              <>
+                <p className={styles.basicReportCtaLabel}>더 심층적인 전략이 필요하다면?</p>
+                <Link href="/member/report-premium" className={styles.basicReportCtaBtn}>
+                  프리미엄 전략 리포트 보기 →
+                </Link>
+              </>
+            ) : (
+              <>
+                <p className={styles.basicReportCtaLabel}>우선 기본 구조만 확인하고 싶다면?</p>
+                <Link href="/member/report-basic" className={styles.basicReportCtaBtn}>
+                  기본 리포트 보기 (베타 29,000원) →
+                </Link>
+              </>
+            )}
           </div>
 
         </div>

@@ -902,6 +902,53 @@
   color: #1e293b;
 }
 
+/* ── Privacy Note ── */
+.privacyNote {
+  font-size: 0.75rem;
+  color: #64748b;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+/* ── Savings Disclaimer ── */
+.savingsDisclaimer {
+  font-size: 0.7rem;
+  color: #86efac;
+  margin-top: 8px;
+}
+
+/* ── Tier Recommendation ── */
+.tierRecommendBasic,
+.tierRecommendPremium {
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  border-left: 4px solid;
+}
+
+.tierRecommendBasic {
+  background: #eff6ff;
+  border-color: #2563eb;
+}
+
+.tierRecommendPremium {
+  background: #fff7ed;
+  border-color: #ea580c;
+}
+
+.tierRecommendTitle {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.tierRecommendDesc {
+  font-size: 0.82rem;
+  color: #475569;
+  line-height: 1.6;
+}
+
 /* ── Disclaimer ── */
 .disclaimer {
   font-size: 0.75rem;
