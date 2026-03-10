@@ -311,6 +311,28 @@ export default function PremiumReportPaywall() {
         <p className={styles.compareEyebrow}>리포트 선택 가이드</p>
         <h3 className={styles.compareHeading}>프리미엄이 필요한 이유</h3>
         <p className={styles.compareSubtitle}>R3·R4 등급은 수천만원이 걸린 총회 전략이 핵심입니다</p>
+
+        {/* 등급 기준 가이드 */}
+        <div className={styles.gradeGuide}>
+          <p className={styles.gradeGuideTitle}>위험 등급 기준 — 계산기에서 자동 산출</p>
+          <div className={styles.gradeGrid}>
+            {[
+              { grade: 'R1', label: '안정', color: '#16a34a',  desc: '추가 분담금이 자산의 20% 미만' },
+              { grade: 'R2', label: '중위험', color: '#d97706', desc: '자산의 20~30% 수준 부담' },
+              { grade: 'R3', label: '고위험', color: '#e63946', desc: '자산의 30~40% — 전략 필요' },
+              { grade: 'R4', label: '최고위험', color: '#b91c1c', desc: '자산의 40% 초과 — 자산 잠식 위험' },
+            ].map(({ grade, label, color, desc }) => (
+              <div key={grade} className={styles.gradeItem}>
+                <span className={styles.gradeBadge} style={{ background: color }}>{grade}</span>
+                <div>
+                  <span className={styles.gradeLabel}>{label}</span>
+                  <span className={styles.gradeDesc}>{desc}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <table className={styles.compareTable}>
           <thead>
             <tr>
