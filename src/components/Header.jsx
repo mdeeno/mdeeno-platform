@@ -65,11 +65,11 @@ export default function Header() {
         className={`${styles.mobileMenu} ${isMenuOpen ? styles.menuOpen : ''}`}
       >
         <nav className={styles.mobileNav}>
-          <Link href="/member" className={styles.primaryBtn}>
+          <Link href="/member" className={styles.primaryBtn} onClick={toggleMenu}>
             📊 무료 구조 진단
           </Link>
 
-          <Link href="/member/report-basic" className={styles.secondaryBtn}>
+          <Link href="/member/report-basic" className={styles.secondaryBtn} onClick={toggleMenu}>
             📄 리포트 상품 보기
           </Link>
           <a href={TECH_URL} onClick={toggleMenu}>
