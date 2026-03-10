@@ -175,14 +175,13 @@
 }
 
 .formSectionLabel {
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #94a3b8;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #1e293b;
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 2px solid #334155;
 }
 
 .fieldGrid {

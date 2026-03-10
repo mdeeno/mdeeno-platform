@@ -83,9 +83,13 @@ export default function ShockCalculatorPage() {
   }
 
   const isValid =
-    form.expected_extra !== '' && Number(form.expected_extra) > 0 &&
-    form.asset_value    !== '' && Number(form.asset_value)    > 0 &&
-    form.cost_increase_rate !== '' && Number(form.cost_increase_rate) >= 0;
+    form.expected_extra     !== '' && Number(form.expected_extra)     > 0 &&
+    form.asset_value        !== '' && Number(form.asset_value)        > 0 &&
+    form.cost_increase_rate !== '' && Number(form.cost_increase_rate) >= 0 &&
+    form.member_name.trim()   !== '' &&
+    form.complex_name.trim()  !== '' &&
+    form.location.trim()      !== '' &&
+    form.construction_cost  !== '' && Number(form.construction_cost)  > 0;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -293,9 +297,10 @@ export default function ShockCalculatorPage() {
                   type="number"
                   value={form.asset_value}
                   onChange={handleChange}
-                  placeholder="5"
+                  placeholder="5를 입력해주세요"
                   min="0.1"
                   step="0.1"
+                  required
                 />
                 <span className={styles.unit}>억원</span>
               </div>
@@ -314,9 +319,10 @@ export default function ShockCalculatorPage() {
                   type="number"
                   value={form.expected_extra}
                   onChange={handleChange}
-                  placeholder="1.2"
+                  placeholder="1.2를 입력해주세요"
                   min="0.1"
                   step="0.1"
+                  required
                 />
                 <span className={styles.unit}>억원</span>
               </div>
@@ -324,7 +330,7 @@ export default function ShockCalculatorPage() {
 
             <div className={styles.field}>
               <label className={styles.label} htmlFor="cost_increase_rate">
-                예상 공사비 상승률
+                예상 공사비 상승률 <span className={styles.req}>*</span>
               </label>
               <p className={styles.fieldHint}>시공사 요청 또는 예상되는 공사비 인상률 (모르면 10% 기본값 사용)</p>
               <div className={styles.inputWrap}>
@@ -335,10 +341,11 @@ export default function ShockCalculatorPage() {
                   type="number"
                   value={form.cost_increase_rate}
                   onChange={handleChange}
-                  placeholder="10"
+                  placeholder="10을 입력해주세요"
                   min="0"
                   max="100"
                   step="1"
+                  required
                 />
                 <span className={styles.unit}>%</span>
               </div>
@@ -346,7 +353,7 @@ export default function ShockCalculatorPage() {
 
             <div className={styles.field}>
               <label className={styles.label} htmlFor="project_stage">
-                현재 사업 단계
+                현재 사업 단계 <span className={styles.req}>*</span>
               </label>
               <p className={styles.fieldHint}>단계가 뒤로 갈수록 공사비 확정 시점에 가까워집니다</p>
               <select
@@ -355,6 +362,7 @@ export default function ShockCalculatorPage() {
                 name="project_stage"
                 value={form.project_stage}
                 onChange={handleChange}
+                required
               >
                 {STAGE_OPTIONS.map((o) => (
                   <option key={o.value} value={o.value}>{o.label}</option>
@@ -366,12 +374,12 @@ export default function ShockCalculatorPage() {
 
         {/* ── Personalization Fields ── */}
         <div className={styles.formCard}>
-          <p className={styles.formSectionLabel}>리포트 개인화 (선택)</p>
+          <p className={styles.formSectionLabel}>리포트 개인화</p>
 
           <div className={styles.fieldGrid}>
             <div className={styles.field}>
               <label className={styles.label} htmlFor="member_name">
-                조합원 이름
+                조합원 이름 <span className={styles.req}>*</span>
               </label>
               <input
                 className={styles.input}
@@ -380,14 +388,15 @@ export default function ShockCalculatorPage() {
                 type="text"
                 value={form.member_name}
                 onChange={handleChange}
-                placeholder="홍길동"
+                placeholder="홍길동을 입력해주세요"
                 autoComplete="name"
+                required
               />
             </div>
 
             <div className={styles.field}>
               <label className={styles.label} htmlFor="complex_name">
-                아파트 단지명
+                아파트 단지명 <span className={styles.req}>*</span>
               </label>
               <input
                 className={styles.input}
@@ -396,13 +405,14 @@ export default function ShockCalculatorPage() {
                 type="text"
                 value={form.complex_name}
                 onChange={handleChange}
-                placeholder="○○아파트"
+                placeholder="○○아파트를 입력해주세요"
+                required
               />
             </div>
 
             <div className={styles.field}>
               <label className={styles.label} htmlFor="location">
-                사업장 지역
+                사업장 지역 <span className={styles.req}>*</span>
               </label>
               <input
                 className={styles.input}
@@ -411,13 +421,14 @@ export default function ShockCalculatorPage() {
                 type="text"
                 value={form.location}
                 onChange={handleChange}
-                placeholder="예: 서울 강남구"
+                placeholder="서울 강남구를 입력해주세요"
+                required
               />
             </div>
 
             <div className={styles.field}>
               <label className={styles.label} htmlFor="construction_cost">
-                평당 공사비 (만원)
+                평당 공사비 <span className={styles.req}>*</span>
               </label>
               <div className={styles.inputWrap}>
                 <input
@@ -427,9 +438,10 @@ export default function ShockCalculatorPage() {
                   type="number"
                   value={form.construction_cost}
                   onChange={handleChange}
-                  placeholder="900"
+                  placeholder="900을 입력해주세요"
                   min="1"
                   step="10"
+                  required
                 />
                 <span className={styles.unit}>만원</span>
               </div>
