@@ -215,11 +215,11 @@ export default function ReportBasicPage() {
       <div className={styles.ctaBox}>
         {isBetaMode() && (
           <div className={styles.betaBadge}>
-            🚧 BETA 테스트 진행 중 · 6월 15일 정식 출시 예정
+            🚧 사전 신청 진행 중 · 6월 정식 출시 예정
           </div>
         )}
         <div className={styles.priceBox}>
-          <span className={styles.badge}>베타 29,000원</span>
+          <span className={styles.badge}>{isBetaMode() ? '베타' : '출시 특가'} 29,000원</span>
           <span className={styles.price}>정가 39,000원</span>
         </div>
         <input
@@ -263,7 +263,7 @@ export default function ReportBasicPage() {
 
         {leadCount !== null && leadCount > 0 && (
           <p className={styles.socialProof}>
-            현재 {leadCount.toLocaleString()}명의 조합원이 베타 분석을 신청했습니다.
+            현재 {leadCount.toLocaleString()}명의 조합원이 분석을 완료했습니다.
           </p>
         )}
 
@@ -272,12 +272,12 @@ export default function ReportBasicPage() {
           className={styles.purchaseBtn}
           disabled={loading || !isPrivacyAgreed || !isRefundAgreed || !email.trim()}
         >
-          {loading ? '처리 중...' : isBetaMode() ? '베타 테스터 신청하기' : '기본 리포트 다운로드 →'}
+          {loading ? '처리 중...' : isBetaMode() ? '베타 테스터 신청하기' : '기본 리포트 구매 →'}
         </button>
         <p className={styles.priceNote}>
           {isBetaMode()
-            ? '정가 39,000원 → 베타가 29,000원 · 정식 출시(6/15) 이후 결제 가능'
-            : '베타 가격 적용 중 · 결제 완료 즉시 PDF가 자동 다운로드됩니다.'}
+            ? '정가 39,000원 → 베타가 29,000원 · 6월 정식 출시 이후 결제 가능'
+            : '출시 특가 29,000원 (정가 39,000원) · 결제 완료 즉시 PDF가 자동 다운로드됩니다.'}
         </p>
         <div className={styles.disclaimer}>
           <p>※ 본 리포트는 공개 자료와 사용자가 입력한 정보를 기반으로 생성된 참고용 분석 자료입니다. 투자, 법률, 세무 자문이 아니며 실제 사업 결과는 달라질 수 있습니다.</p>

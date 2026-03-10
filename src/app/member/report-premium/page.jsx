@@ -360,27 +360,27 @@ export default function PremiumReportPaywall() {
       <section className={styles.ctaSection}>
         {submitted ? (
           <div className={styles.successBox}>
-            베타 신청이 접수되었습니다. 베타 가격 적용 중 — 리포트를 곧 발송해드립니다.
+            신청이 접수되었습니다. 출시 특가가 적용됩니다 — 6월 정식 출시 시 리포트를 발송해드립니다.
           </div>
         ) : (
           <form className={styles.ctaForm} onSubmit={handlePurchase} noValidate>
             {isBetaMode() && (
               <div className={styles.betaBadge}>
-                🚧 BETA 테스트 진행 중 · 6월 15일 정식 출시 예정
+                🚧 사전 신청 진행 중 · 6월 정식 출시 예정
               </div>
             )}
             {leadCount !== null && leadCount > 0 && (
               <p className={styles.socialProof}>
-                현재 {leadCount.toLocaleString()}명의 조합원이 베타 분석을 신청했습니다.
+                현재 {leadCount.toLocaleString()}명의 조합원이 분석을 완료했습니다.
               </p>
             )}
             <h2 className={styles.ctaTitle}>
-              {isBetaMode() ? '프리미엄 베타 신청' : 'Premium 전략 리포트 다운로드'}
+              {isBetaMode() ? '프리미엄 사전 신청' : 'Premium 전략 리포트 구매'}
             </h2>
             <p className={styles.ctaDesc}>
               {isBetaMode()
-                ? '정가 149,000원 → 베타가 99,000원 · 정식 출시(6/15) 이후 결제 가능'
-                : '베타 가격 적용 중 — 결제 완료 즉시 PDF가 자동 다운로드됩니다.'}
+                ? '정가 149,000원 → 출시 특가 99,000원 · 6월 정식 출시 이후 결제 가능'
+                : '출시 특가 99,000원 (정가 149,000원) · 결제 완료 즉시 PDF가 자동 다운로드됩니다.'}
             </p>
 
             <div className={styles.ctaInputRow}>
@@ -411,7 +411,7 @@ export default function PremiumReportPaywall() {
                 type="submit"
                 disabled={loading || !isPrivacyAgreed || !isRefundAgreed || !email.trim()}
               >
-                {loading ? '처리 중...' : isBetaMode() ? '프리미엄 베타 신청하기' : 'Premium 전략 리포트 다운로드 →'}
+                {loading ? '처리 중...' : isBetaMode() ? '프리미엄 사전 신청하기' : 'Premium 전략 리포트 구매 →'}
               </button>
             </div>
 
@@ -435,7 +435,7 @@ export default function PremiumReportPaywall() {
             </div>
 
             <p className={styles.ctaNote}>
-              정가 149,000원 · 베타 가격 적용 중 99,000원
+              {isBetaMode() ? '정가 149,000원 · 출시 특가 99,000원' : '출시 특가 99,000원 (정가 149,000원)'}
             </p>
           </form>
         )}
