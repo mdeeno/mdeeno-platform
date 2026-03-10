@@ -163,6 +163,92 @@ export default function ReportBasicPage() {
         </p>
       </div>
 
+      {/* ── Basic vs Premium 비교표 ── */}
+      <div className={styles.compareBox}>
+        <p className={styles.compareEyebrow}>리포트 선택 가이드</p>
+        <h3 className={styles.compareHeading}>어떤 리포트가 나에게 맞을까?</h3>
+        <p className={styles.compareSubtitle}>위험 등급이 높을수록 더 강한 전략 도구가 필요합니다</p>
+
+        {/* 등급 기준 가이드 */}
+        <div className={styles.gradeGuide}>
+          <p className={styles.gradeGuideTitle}>위험 등급 기준 — 계산기에서 자동 산출</p>
+          <div className={styles.gradeGrid}>
+            {[
+              { grade: 'R1', label: '안정', color: '#16a34a',  desc: '추가 분담금이 자산의 20% 미만' },
+              { grade: 'R2', label: '중위험', color: '#d97706', desc: '자산의 20~30% 수준 부담' },
+              { grade: 'R3', label: '고위험', color: '#e63946', desc: '자산의 30~40% — 전략 필요' },
+              { grade: 'R4', label: '최고위험', color: '#b91c1c', desc: '자산의 40% 초과 — 자산 잠식 위험' },
+            ].map(({ grade, label, color, desc }) => (
+              <div key={grade} className={styles.gradeItem}>
+                <span className={styles.gradeBadge} style={{ background: color }}>{grade}</span>
+                <div>
+                  <span className={styles.gradeLabel}>{label}</span>
+                  <span className={styles.gradeDesc}>{desc}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <table className={styles.compareTable}>
+          <thead>
+            <tr>
+              <th></th>
+              <th className={styles.colActive}>
+                <span className={styles.colName}>기본 리포트</span>
+                <span className={styles.colPrice}>29,000원</span>
+                <span className={styles.colGrade}>R1 · R2 추천</span>
+              </th>
+              <th className={styles.colOther}>
+                <span className={styles.colName}>프리미엄 전략</span>
+                <span className={styles.colPrice}>99,000원</span>
+                <span className={styles.colGrade}>R3 · R4 추천</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className={styles.groupRow}><td colSpan={3}>공통 포함</td></tr>
+            {[
+              ['분담금 시나리오 분석', '공사비 5·10·20% 상승 시 내 분담금 변화'],
+              ['자산 잠식 구간 예측', '내 자산이 줄어드는 공사비 상승률 계산'],
+              ['총회 핵심 질문 5개', '총회에서 바로 쓸 수 있는 검증 질문'],
+              ['조합 대응 체크리스트', '단계별 확인 사항 정리'],
+            ].map(([label, desc]) => (
+              <tr key={label}>
+                <td>
+                  <span className={styles.featureName}>{label}</span>
+                  <span className={styles.featureDesc}>{desc}</span>
+                </td>
+                <td className={`${styles.colActive} ${styles.checkYes}`}>✓</td>
+                <td className={styles.checkYes}>✓</td>
+              </tr>
+            ))}
+            <tr className={styles.groupRow}><td colSpan={3}>프리미엄 전용 전략</td></tr>
+            {[
+              ['협상 절감액 시뮬레이션', '전략 적용 시 절감 가능 금액 추정'],
+              ['총회 발언 스크립트', '즉시 사용 가능한 협상 발언 전문'],
+              ['30일 행동 타임라인', '총회 전 단계별 대응 일정표'],
+              ['30페이지 심층 분석', '컨설팅 수준의 사업 구조 분석'],
+            ].map(([label, desc]) => (
+              <tr key={label}>
+                <td>
+                  <span className={styles.featureName}>{label}</span>
+                  <span className={styles.featureDesc}>{desc}</span>
+                </td>
+                <td className={styles.checkNo}>✗</td>
+                <td className={styles.checkYes}>✓</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className={styles.upsellCallout}>
+          <p>R3·R4 등급이라면 발언 스크립트 하나로 수천만원 절감이 가능합니다</p>
+          <Link href="/member/report-premium" className={styles.upsellLink}>
+            프리미엄 전략 보기 →
+          </Link>
+        </div>
+      </div>
+
       {/* ── Context Card (calc result from /member) ── */}
       {context && (
         <div className={styles.contextCard}>
@@ -283,92 +369,6 @@ export default function ReportBasicPage() {
           <p>※ 본 리포트는 공개 자료와 사용자가 입력한 정보를 기반으로 생성된 참고용 분석 자료입니다. 투자, 법률, 세무 자문이 아니며 실제 사업 결과는 달라질 수 있습니다.</p>
           <p>※ 본 서비스는 디지털 콘텐츠로 제공되며 리포트 발송 이후 환불이 제한될 수 있습니다.</p>
           <p>※ 입력하신 이메일은 리포트 발송 및 서비스 안내 목적으로만 사용됩니다.</p>
-        </div>
-      </div>
-
-      {/* ── Basic vs Premium 비교표 ── */}
-      <div className={styles.compareBox}>
-        <p className={styles.compareEyebrow}>리포트 선택 가이드</p>
-        <h3 className={styles.compareHeading}>어떤 리포트가 나에게 맞을까?</h3>
-        <p className={styles.compareSubtitle}>위험 등급이 높을수록 더 강한 전략 도구가 필요합니다</p>
-
-        {/* 등급 기준 가이드 */}
-        <div className={styles.gradeGuide}>
-          <p className={styles.gradeGuideTitle}>위험 등급 기준 — 계산기에서 자동 산출</p>
-          <div className={styles.gradeGrid}>
-            {[
-              { grade: 'R1', label: '안정', color: '#16a34a',  desc: '추가 분담금이 자산의 20% 미만' },
-              { grade: 'R2', label: '중위험', color: '#d97706', desc: '자산의 20~30% 수준 부담' },
-              { grade: 'R3', label: '고위험', color: '#e63946', desc: '자산의 30~40% — 전략 필요' },
-              { grade: 'R4', label: '최고위험', color: '#b91c1c', desc: '자산의 40% 초과 — 자산 잠식 위험' },
-            ].map(({ grade, label, color, desc }) => (
-              <div key={grade} className={styles.gradeItem}>
-                <span className={styles.gradeBadge} style={{ background: color }}>{grade}</span>
-                <div>
-                  <span className={styles.gradeLabel}>{label}</span>
-                  <span className={styles.gradeDesc}>{desc}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <table className={styles.compareTable}>
-          <thead>
-            <tr>
-              <th></th>
-              <th className={styles.colActive}>
-                <span className={styles.colName}>기본 리포트</span>
-                <span className={styles.colPrice}>29,000원</span>
-                <span className={styles.colGrade}>R1 · R2 추천</span>
-              </th>
-              <th className={styles.colOther}>
-                <span className={styles.colName}>프리미엄 전략</span>
-                <span className={styles.colPrice}>99,000원</span>
-                <span className={styles.colGrade}>R3 · R4 추천</span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className={styles.groupRow}><td colSpan={3}>공통 포함</td></tr>
-            {[
-              ['분담금 시나리오 분석', '공사비 5·10·20% 상승 시 내 분담금 변화'],
-              ['자산 잠식 구간 예측', '내 자산이 줄어드는 공사비 상승률 계산'],
-              ['총회 핵심 질문 5개', '총회에서 바로 쓸 수 있는 검증 질문'],
-              ['조합 대응 체크리스트', '단계별 확인 사항 정리'],
-            ].map(([label, desc]) => (
-              <tr key={label}>
-                <td>
-                  <span className={styles.featureName}>{label}</span>
-                  <span className={styles.featureDesc}>{desc}</span>
-                </td>
-                <td className={`${styles.colActive} ${styles.checkYes}`}>✓</td>
-                <td className={styles.checkYes}>✓</td>
-              </tr>
-            ))}
-            <tr className={styles.groupRow}><td colSpan={3}>프리미엄 전용 전략</td></tr>
-            {[
-              ['협상 절감액 시뮬레이션', '전략 적용 시 절감 가능 금액 추정'],
-              ['총회 발언 스크립트', '즉시 사용 가능한 협상 발언 전문'],
-              ['30일 행동 타임라인', '총회 전 단계별 대응 일정표'],
-              ['30페이지 심층 분석', '컨설팅 수준의 사업 구조 분석'],
-            ].map(([label, desc]) => (
-              <tr key={label}>
-                <td>
-                  <span className={styles.featureName}>{label}</span>
-                  <span className={styles.featureDesc}>{desc}</span>
-                </td>
-                <td className={styles.checkNo}>✗</td>
-                <td className={styles.checkYes}>✓</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className={styles.upsellCallout}>
-          <p>R3·R4 등급이라면 발언 스크립트 하나로 수천만원 절감이 가능합니다</p>
-          <Link href="/member/report-premium" className={styles.upsellLink}>
-            프리미엄 전략 보기 →
-          </Link>
         </div>
       </div>
 
