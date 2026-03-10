@@ -248,13 +248,45 @@ export default function ReportBasicPage() {
         </div>
       </div>
 
-      {/* ── Back / Upsell ── */}
+      {/* ── Basic vs Premium 비교표 ── */}
+      <div className={styles.compareBox}>
+        <p className={styles.compareTitle}>기본 vs 프리미엄 리포트 비교</p>
+        <table className={styles.compareTable}>
+          <thead>
+            <tr>
+              <th>기능</th>
+              <th className={styles.colActive}>기본 리포트<br /><span>29,000원</span></th>
+              <th>프리미엄 리포트<br /><span>99,000원</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ['분담금 시나리오 분석', true, true],
+              ['자산 잠식 시점 계산', true, true],
+              ['총회 핵심 질문 5개', true, true],
+              ['조합 대응 체크리스트', true, true],
+              ['협상 절감 전략 시뮬레이션', false, true],
+              ['총회 발언 스크립트', false, true],
+              ['조합원 행동 타임라인 (30일)', false, true],
+              ['30페이지 심층 분석', false, true],
+            ].map(([label, basic, premium]) => (
+              <tr key={label}>
+                <td>{label}</td>
+                <td className={styles.colActive}>{basic ? '✓' : '—'}</td>
+                <td>{premium ? '✓' : '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <Link href="/member/report-premium" className={styles.upsellLink}>
+          프리미엄 리포트 알아보기 →
+        </Link>
+      </div>
+
+      {/* ── Back ── */}
       <div className={styles.footerLinks}>
         <Link href="/member" className={styles.backLink}>
           ← 분담금 다시 계산하기
-        </Link>
-        <Link href="/member/report-premium" className={styles.upsellLink}>
-          전략 리포트(프리미엄) 보기 →
         </Link>
       </div>
 

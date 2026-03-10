@@ -264,6 +264,38 @@ export default function PremiumReportPaywall() {
         </div>
       </section>
 
+      {/* ── Basic vs Premium 비교표 ── */}
+      <section className={styles.compareSection}>
+        <p className={styles.compareTitle}>기본 vs 프리미엄 리포트 비교</p>
+        <table className={styles.compareTable}>
+          <thead>
+            <tr>
+              <th>기능</th>
+              <th>기본 리포트<br /><span>29,000원</span></th>
+              <th className={styles.colActive}>프리미엄 리포트<br /><span>99,000원</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ['분담금 시나리오 분석', true, true],
+              ['자산 잠식 시점 계산', true, true],
+              ['총회 핵심 질문 5개', true, true],
+              ['조합 대응 체크리스트', true, true],
+              ['협상 절감 전략 시뮬레이션', false, true],
+              ['총회 발언 스크립트', false, true],
+              ['조합원 행동 타임라인 (30일)', false, true],
+              ['30페이지 심층 분석', false, true],
+            ].map(([label, basic, premium]) => (
+              <tr key={label}>
+                <td>{label}</td>
+                <td>{basic ? '✓' : '—'}</td>
+                <td className={styles.colActive}>{premium ? '✓' : '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
       {/* ── 공유 ────────────────────────────────────────────────────────── */}
       <section className={styles.shareSection}>
         <p className={styles.shareDesc}>

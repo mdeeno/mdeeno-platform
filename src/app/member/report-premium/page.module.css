@@ -550,3 +550,59 @@
     min-width: calc(50% - 5px);
   }
 }
+
+/* ── Basic vs Premium 비교표 ── */
+.compareSection {
+  margin-bottom: 32px;
+}
+
+.compareTitle {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 16px;
+}
+
+.compareTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.compareTable th,
+.compareTable td {
+  padding: 10px 12px;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.compareTable th:first-child,
+.compareTable td:first-child {
+  text-align: left;
+  color: #475569;
+}
+
+.compareTable th {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #64748b;
+  background: #f1f5f9;
+}
+
+.compareTable th span {
+  font-weight: 400;
+  font-size: 0.72rem;
+  display: block;
+}
+
+.colActive {
+  background: #eff6ff;
+  color: #1e40af;
+  font-weight: 700;
+}
