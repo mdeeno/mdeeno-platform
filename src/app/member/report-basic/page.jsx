@@ -302,7 +302,7 @@ export default function ReportBasicPage() {
 
         <p className={styles.ctaNote}>
           {isBetaMode()
-            ? '정식 출시(6/15) 이후 결제 링크를 이메일로 발송합니다'
+            ? '6월 정식 출시 이후 결제 링크를 이메일로 발송합니다'
             : '결제 완료 즉시 입력하신 이메일로 PDF가 발송됩니다'}
         </p>
 
