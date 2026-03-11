@@ -26,6 +26,7 @@ export async function POST(req) {
     return new NextResponse(buffer, { status: 200, headers: responseHeaders });
   } catch (err) {
     const status = err.status ?? 500;
-    return NextResponse.json({ error: err }, { status });
+    const error = { code: err.code ?? 'SERVER_ERROR', message: err.message ?? 'PDF 생성 중 오류가 발생했습니다' };
+    return NextResponse.json({ error }, { status });
   }
 }
