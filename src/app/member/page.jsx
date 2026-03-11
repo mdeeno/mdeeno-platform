@@ -219,7 +219,7 @@ export default function ShockCalculatorPage() {
 
       {/* ── Header ── */}
       <div className={styles.header}>
-        <p className={styles.eyebrow}>M-DEENO Prop-Logic™</p>
+        <p className={styles.eyebrow}>M-DEENO 분담금 리스크 분석</p>
         <h1 className={styles.title}>
           내 자산이 얼마나<br />위험한지 지금 확인하세요
         </h1>
@@ -517,8 +517,8 @@ export default function ShockCalculatorPage() {
           }>
             <p className={styles.tierRecommendTitle}>
               {['R1', 'R2'].includes(result.risk_level)
-                ? `위험 등급 ${result.risk_level} — 기본 리포트로 충분히 대응 가능합니다`
-                : `위험 등급 ${result.risk_level} — 프리미엄 전략 리포트가 필요합니다`}
+                ? `${RISK_LABELS[result.risk_level]} 등급 — 기본 리포트로 충분히 대응 가능합니다`
+                : `${RISK_LABELS[result.risk_level]} 등급 — 프리미엄 전략 리포트가 필요합니다`}
             </p>
             <p className={styles.tierRecommendDesc}>
               {['R1', 'R2'].includes(result.risk_level)
@@ -578,7 +578,7 @@ export default function ShockCalculatorPage() {
                   </button>
                   <p className={styles.ctaNote}>
                     {betaDone
-                      ? '신청해 주셔서 감사합니다. 리포트 준비 완료 시 이메일로 안내드립니다.'
+                      ? '신청이 완료되었습니다. 6월 정식 출시 시 이메일로 먼저 안내드립니다.'
                       : '6월 정식 출시 시 이메일로 우선 안내드립니다'}
                   </p>
                 </>
@@ -724,7 +724,7 @@ export default function ShockCalculatorPage() {
                   type="email"
                   value={email}
                   onChange={(e) => { setEmail(e.target.value); setEmailError(''); }}
-                  placeholder="your@email.com"
+                  placeholder="이메일 주소를 입력해 주세요"
                   autoComplete="email"
                   autoFocus
                 />
@@ -737,7 +737,7 @@ export default function ShockCalculatorPage() {
                   onChange={(e) => { setIsModalPrivacyAgreed(e.target.checked); setEmailError(''); }}
                 />
                 <span className={styles.modalPrivacyText}>
-                  개인정보 수집·이용에 동의합니다 (이메일, 자산 정보 — 리포트 발송 목적)
+                  개인정보 수집·이용에 동의합니다 (이메일로 출시 안내 수신 목적)
                 </span>
               </label>
 
