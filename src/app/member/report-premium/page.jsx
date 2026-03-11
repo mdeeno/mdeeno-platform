@@ -360,7 +360,7 @@ export default function PremiumReportPaywall() {
             )}
 
             <h2 className={styles.ctaTitle}>
-              {isBetaMode() ? '프리미엄 사전 신청' : 'Premium 전략 리포트 구매'}
+              {isBetaMode() ? '프리미엄 사전 신청' : '프리미엄 전략 리포트 구매'}
             </h2>
 
             {!isBetaMode() && (
@@ -415,7 +415,7 @@ export default function PremiumReportPaywall() {
               type="submit"
               disabled={loading || !isPrivacyAgreed || (!isBetaMode() && !isRefundAgreed) || !email.trim()}
             >
-              {loading ? '처리 중...' : isBetaMode() ? '사전 신청하기' : 'Premium 전략 리포트 구매하기 →'}
+              {loading ? '처리 중...' : isBetaMode() ? '사전 신청하기' : '프리미엄 전략 리포트 구매하기 →'}
             </button>
 
             <p className={styles.ctaNote}>
@@ -492,7 +492,7 @@ export default function PremiumReportPaywall() {
 
       {/* ── 8. 공유 (CTA 이후) ── */}
       <section className={styles.shareSection}>
-        <p className={styles.shareDesc}>이 분석 결과를 다른 조합원과 공유해보세요.</p>
+        <p className={styles.shareDesc}>같은 단지 조합원에게 공유해보세요.</p>
         <button className={styles.shareBtn} onClick={handleShare}>
           {shareCopied ? '링크가 복사되었습니다 ✓' : '분석 결과 공유하기'}
         </button>

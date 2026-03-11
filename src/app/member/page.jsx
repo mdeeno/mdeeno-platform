@@ -671,7 +671,7 @@ export default function ShockCalculatorPage() {
             onClick={(e) => e.stopPropagation()}
           >
             <p className={styles.modalTitle}>
-              {isBetaMode() ? '사전 신청 — 이메일 등록' : '리포트를 받을 이메일'}
+              {isBetaMode() ? '출시 알림 · 사전 신청' : '리포트를 받을 이메일'}
             </p>
             <p className={styles.modalDesc}>
               {isBetaMode()

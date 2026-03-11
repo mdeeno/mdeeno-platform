@@ -186,7 +186,7 @@ export default function ReportBasicPage() {
       {isHighRisk && (
         <div className={styles.premiumNudge}>
           <p className={styles.premiumNudgeTitle}>
-            {context.riskGrade} 등급 — 기본 리포트로는 부족합니다
+            {RISK_LABEL[context.riskGrade]}({context.riskGrade}) 등급 — 기본 리포트로는 부족합니다
           </p>
           <p className={styles.premiumNudgeDesc}>
             자산의 {context.riskGrade === 'R4' ? '40% 초과' : '30~40%'}에 달하는 리스크는
@@ -242,7 +242,7 @@ export default function ReportBasicPage() {
         )}
 
         <p className={styles.ctaHeading}>
-          {isBetaMode() ? '6월 출시 시 기본 리포트를 받아보세요' : '지금 바로 리포트를 받아보세요'}
+          {isBetaMode() ? '6월 정식 출시 시 가장 먼저 받아보세요' : '지금 바로 리포트를 받아보세요'}
         </p>
 
         {!isBetaMode() && (

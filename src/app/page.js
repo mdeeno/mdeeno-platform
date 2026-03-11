@@ -68,7 +68,7 @@ export default function Home() {
         <div className={styles.container}>
           <p className={styles.urgencyText}>
             공사비가 5%만 올라가도<br />
-            조합원 분담금은 크게 변합니다.
+            조합원 분담금은 크게 늘어납니다.
           </p>
           <Link href="/member" className={styles.urgencyBtn}>
             내 분담금 분석 시작하기
