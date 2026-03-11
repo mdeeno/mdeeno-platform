@@ -70,12 +70,14 @@
 }
 
 .primaryBtn {
+  display: block;
   background-color: #1e40af;
   color: #ffffff;
   padding: 16px 28px;
   border-radius: 10px;
   font-size: 1rem;
   font-weight: 800;
+  text-align: center;
   box-shadow: 0 4px 16px rgba(30, 64, 175, 0.3);
   transition: background 0.15s, transform 0.1s;
 }
@@ -86,12 +88,14 @@
 }
 
 .secondaryBtn {
+  display: block;
   background-color: white;
   color: var(--text-main);
   padding: 16px 32px;
   border-radius: 8px;
   font-size: 1.1rem;
   font-weight: 600;
+  text-align: center;
   border: 1px solid var(--border-color);
   transition: all 0.2s ease;
 }
