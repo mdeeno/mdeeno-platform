@@ -25,8 +25,8 @@ export default function Header() {
             📊 무료 구조 진단
           </Link>
 
-          <Link href="/member/report-basic" className={styles.secondaryBtn}>
-            📄 리포트 상품 보기
+          <Link href="/#report-samples" className={styles.secondaryBtn}>
+            📄 리포트 보기
           </Link>
           <a
             href={TECH_URL}
@@ -69,8 +69,8 @@ export default function Header() {
             📊 무료 구조 진단
           </Link>
 
-          <Link href="/member/report-basic" className={styles.secondaryBtn} onClick={toggleMenu}>
-            📄 리포트 상품 보기
+          <Link href="/#report-samples" className={styles.secondaryBtn} onClick={toggleMenu}>
+            📄 리포트 보기
           </Link>
           <a href={TECH_URL} onClick={toggleMenu}>
             전문가 부동산 리포트 ↗

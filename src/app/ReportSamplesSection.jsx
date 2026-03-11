@@ -172,9 +172,9 @@ export default function ReportSamplesSection() {
     <>
       <section id="report-samples" className={styles.reportSamples}>
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>리포트 샘플</h2>
+          <h2 className={styles.sectionTitle}>리포트 소개</h2>
           <p className={styles.sectionSubtitle}>
-            실제 생성되는 리포트의 구성을 미리 확인하세요.
+            실제 생성되는 리포트를 미리 확인하고 바로 신청하세요.
           </p>
 
           <div className={styles.sampleGrid}>
@@ -198,12 +198,17 @@ export default function ReportSamplesSection() {
                 <p className={styles.sampleCardDesc}>
                   공사비 시나리오 분석 · 분담금 위험도 진단 · 총회 대응 질문 리스트
                 </p>
-                <button
-                  className={styles.previewBtn}
-                  onClick={() => setModalReport('basic')}
-                >
-                  미리보기
-                </button>
+                <div className={styles.sampleCardBtns}>
+                  <button
+                    className={styles.previewBtn}
+                    onClick={() => setModalReport('basic')}
+                  >
+                    미리보기
+                  </button>
+                  <Link href="/member/report-basic" className={styles.applyBtn}>
+                    {isBetaMode() ? '사전 신청하기' : '구매하기'}
+                  </Link>
+                </div>
               </div>
             </div>
 
@@ -227,12 +232,17 @@ export default function ReportSamplesSection() {
                 <p className={styles.sampleCardDesc}>
                   30페이지 심층 분석 · 협상 전략 · 총회 발언 스크립트 · 행동 타임라인
                 </p>
-                <button
-                  className={styles.previewBtn}
-                  onClick={() => setModalReport('premium')}
-                >
-                  미리보기
-                </button>
+                <div className={styles.sampleCardBtns}>
+                  <button
+                    className={styles.previewBtn}
+                    onClick={() => setModalReport('premium')}
+                  >
+                    미리보기
+                  </button>
+                  <Link href="/member/report-premium" className={`${styles.applyBtn} ${styles.applyBtnPremium}`}>
+                    {isBetaMode() ? '사전 신청하기' : '구매하기'}
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

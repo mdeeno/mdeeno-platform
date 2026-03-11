@@ -374,29 +374,59 @@
   margin-bottom: 16px;
 }
 
+.sampleCardBtns {
+  display: flex;
+  gap: 8px;
+}
+
 .previewBtn {
-  display: inline-block;
-  padding: 9px 20px;
-  background: #0f2d6b;
-  color: #ffffff;
+  flex: 1;
+  padding: 9px 12px;
+  background: transparent;
+  color: #334155;
   font-size: 0.875rem;
   font-weight: 700;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.previewBtn:hover {
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.applyBtn {
+  flex: 1;
+  padding: 9px 12px;
+  background: #1e40af;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 800;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.15s;
+  text-align: center;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.previewBtn:hover {
+.applyBtn:hover {
+  background: #1e3a8a;
+}
+
+.applyBtnPremium {
+  background: #0f2d6b;
+}
+
+.applyBtnPremium:hover {
   background: #0a1f4e;
-}
-
-.previewBtnRed {
-  background: #e63946;
-}
-
-.previewBtnRed:hover {
-  background: #c1121f;
 }
 
 /* ── Sample Preview Modal ── */
@@ -940,6 +970,10 @@
 
   .sampleGrid {
     grid-template-columns: 1fr;
+  }
+
+  .sampleCardBtns {
+    flex-direction: column;
   }
 
   .sampleMetricRow {
