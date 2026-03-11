@@ -268,10 +268,12 @@ export default function ReportBasicPage() {
             <input type="checkbox" checked={isPrivacyAgreed} onChange={(e) => setIsPrivacyAgreed(e.target.checked)} />
             <span>[필수] 개인정보 수집 및 이용 동의 (이메일: 리포트 발송)</span>
           </label>
-          <label className={styles.consentLabel}>
-            <input type="checkbox" checked={isRefundAgreed} onChange={(e) => setIsRefundAgreed(e.target.checked)} />
-            <span>[필수] 디지털 상품 특성상 다운로드 이후 환불 불가에 동의</span>
-          </label>
+          {!isBetaMode() && (
+            <label className={styles.consentLabel}>
+              <input type="checkbox" checked={isRefundAgreed} onChange={(e) => setIsRefundAgreed(e.target.checked)} />
+              <span>[필수] 디지털 상품 특성상 다운로드 이후 환불 불가에 동의</span>
+            </label>
+          )}
         </div>
 
         {leadCount !== null && leadCount > 0 && (
@@ -283,9 +285,9 @@ export default function ReportBasicPage() {
         <button
           onClick={handlePurchase}
           className={styles.purchaseBtn}
-          disabled={loading || !isPrivacyAgreed || !isRefundAgreed || !email.trim()}
+          disabled={loading || !isPrivacyAgreed || (!isBetaMode() && !isRefundAgreed) || !email.trim()}
         >
-          {loading ? '처리 중...' : isBetaMode() ? '베타 테스터 신청하기' : '기본 리포트 구매하기 →'}
+          {loading ? '처리 중...' : isBetaMode() ? '사전 신청하기' : '기본 리포트 구매하기 →'}
         </button>
 
         <p className={styles.ctaNote}>
@@ -311,12 +313,12 @@ export default function ReportBasicPage() {
               <th></th>
               <th className={styles.colActive}>
                 <span className={styles.colName}>기본</span>
-                <span className={styles.colPrice}>29,000원</span>
+                {!isBetaMode() && <span className={styles.colPrice}>29,000원</span>}
                 <span className={styles.colGrade}>R1 · R2</span>
               </th>
               <th className={styles.colOther}>
                 <span className={styles.colName}>프리미엄</span>
-                <span className={styles.colPrice}>99,000원</span>
+                {!isBetaMode() && <span className={styles.colPrice}>99,000원</span>}
                 <span className={styles.colGrade}>R3 · R4</span>
               </th>
             </tr>

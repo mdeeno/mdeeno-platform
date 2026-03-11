@@ -126,10 +126,10 @@ export default function ShockCalculatorPage() {
         document.getElementById('shock-result')?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
 
-      // 충격 수치 확인 후 이메일 수집 — 동기 부여 최고조 시점에 모달 노출
+      // 충격 수치 확인 후 이메일 수집 — 결과를 충분히 확인한 뒤 모달 노출
       setTimeout(() => {
         if (!betaDone && !pdfDone) setEmailModalOpen(true);
-      }, 2000);
+      }, 5000);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -261,28 +261,6 @@ export default function ShockCalculatorPage() {
             </div>
           </li>
         </ul>
-      </div>
-
-      {/* ── Trust Section ── */}
-      <div className={styles.trustSection}>
-        <p className={styles.trustEyebrow}>이미 분석된 실제 사례</p>
-        <div className={styles.trustGrid}>
-          <div className={styles.trustCard}>
-            <p className={styles.trustCause}>공사비 상승</p>
-            <p className={styles.trustAmount}>+1.2억</p>
-            <p className={styles.trustLabel}>추가 분담금</p>
-          </div>
-          <div className={styles.trustCard}>
-            <p className={styles.trustCause}>사업 지연</p>
-            <p className={styles.trustAmount}>+8,000만</p>
-            <p className={styles.trustLabel}>추가 분담금</p>
-          </div>
-          <div className={styles.trustCard}>
-            <p className={styles.trustCause}>설계 변경</p>
-            <p className={styles.trustAmount}>+1.5억</p>
-            <p className={styles.trustLabel}>추가 분담금</p>
-          </div>
-        </div>
       </div>
 
       {/* ── Input Form ── */}

@@ -287,6 +287,75 @@
 .valueWarn   { color: #d97706; }
 .valueSafe   { color: #16a34a; }
 
+/* ── Preview Table (P3) ───────────────────────────────────── */
+.previewTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+}
+
+.previewTable thead tr {
+  background: #0f2d6b;
+  color: #ffffff;
+}
+
+.previewTable th {
+  padding: 7px 10px;
+  text-align: left;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.previewTable td {
+  padding: 7px 10px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.previewNote {
+  font-size: 0.75rem;
+  color: #64748b;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 10px;
+  margin-top: 4px;
+}
+
+.tdSafe { color: #16a34a; font-weight: 700; }
+.tdWarn { color: #d97706; font-weight: 700; }
+
+/* ── Script Box (P4) ──────────────────────────────────────── */
+.scriptBox {
+  background: #f0f7ff;
+  border-left: 3px solid #1e40af;
+  border-radius: 0 6px 6px 0;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+
+.scriptLabel {
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #1e40af;
+  margin-bottom: 7px;
+}
+
+.scriptText {
+  font-size: 0.82rem;
+  color: #1e293b;
+  line-height: 1.65;
+  font-style: italic;
+}
+
+/* ── Partial Blur (P4) ────────────────────────────────────── */
+.partialBlur {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  min-height: 68px;
+}
+
 /* ── Blur / Locked ────────────────────────────────────────── */
 .reportPageBlur {
   overflow: hidden;

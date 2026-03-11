@@ -222,6 +222,7 @@ export default function PremiumReportPaywall() {
       <section className={styles.previewSection}>
         <p className={styles.previewLabel}>리포트 미리보기</p>
 
+        {/* P1 — Cover */}
         <div className={`${styles.reportPage} ${styles.reportPageDark}`}>
           <div className={styles.accentBar} />
           <p className={styles.pageLogoLight}>M — DEENO · Prop-Logic™</p>
@@ -237,6 +238,7 @@ export default function PremiumReportPaywall() {
           <span className={`${styles.riskBadge} ${styles.badgeR3}`}>R3 — 고위험</span>
         </div>
 
+        {/* P2 — Executive Summary */}
         <div className={styles.reportPage}>
           <p className={styles.pageEyebrow}>EXECUTIVE SUMMARY</p>
           <h3 className={styles.pageSectionTitle}>핵심 위험 지표</h3>
@@ -257,26 +259,74 @@ export default function PremiumReportPaywall() {
             </div>
           </div>
         </div>
-      </section>
 
-      {/* ── 4. 잠긴 미리보기 ── */}
-      <section className={styles.lockedSection}>
-        <div className={`${styles.reportPage} ${styles.reportPageBlur}`}>
-          <div className={styles.blurContent}>
-            <p className={styles.pageEyebrow}>SECTION 02</p>
-            <h3 className={styles.pageSectionTitle}>시나리오별 분담금 구조 분석</h3>
-            <div className={styles.blurLine} />
-            <div className={styles.blurLine} />
-            <div className={styles.blurLineShort} />
+        {/* P3 — 협상 절감 시뮬레이션 */}
+        <div className={styles.reportPage}>
+          <p className={styles.pageEyebrow}>SECTION 02</p>
+          <h3 className={styles.pageSectionTitle}>협상 절감 시뮬레이션</h3>
+          <table className={styles.previewTable}>
+            <thead>
+              <tr>
+                <th>협상 전략</th>
+                <th>절감 예상액</th>
+                <th>난이도</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>원가 검증 요청</td>
+                <td className={styles.tdSafe}>-264만 원</td>
+                <td className={styles.tdSafe}>낮음</td>
+              </tr>
+              <tr>
+                <td>마감재 수준 협의</td>
+                <td className={styles.tdWarn}>-105만 원</td>
+                <td className={styles.tdWarn}>중간</td>
+              </tr>
+              <tr>
+                <td>공기 단축 인센티브</td>
+                <td className={styles.tdWarn}>-52만 원</td>
+                <td className={styles.tdWarn}>중간</td>
+              </tr>
+              <tr>
+                <td style={{ fontWeight: 800 }}>전략 합산</td>
+                <td style={{ fontWeight: 800, color: '#16a34a' }}>-421만 원</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+          <p className={styles.previewNote}>세부 협상 스크립트 및 실행 가이드는 리포트 전문에 수록</p>
+        </div>
+
+        {/* P4 — 발언 스크립트 부분 공개 */}
+        <div className={styles.reportPage}>
+          <p className={styles.pageEyebrow}>SECTION 03</p>
+          <h3 className={styles.pageSectionTitle}>총회 발언 스크립트</h3>
+          <div className={styles.scriptBox}>
+            <p className={styles.scriptLabel}>발언 오프닝 — 공사비 원가 공개 요구</p>
+            <p className={styles.scriptText}>
+              &ldquo;조합장님, 저는 금번 총회 안건에 앞서 한 가지를 공식적으로
+              요청드립니다. 시공사가 제시한 평당 공사비 산출 내역서를 조합원 전원이
+              확인할 수 있도록 공개해 주시기 바랍니다.&rdquo;
+            </p>
           </div>
-          <div className={styles.blurOverlay}>
-            <p className={styles.blurOverlayText}>전체 전략 리포트는 구매 후 확인 가능합니다.</p>
+          <div className={styles.partialBlur}>
+            <div className={styles.blurContent}>
+              <div className={styles.blurLine} />
+              <div className={styles.blurLine} />
+              <div className={styles.blurLineShort} />
+            </div>
+            <div className={styles.blurOverlay}>
+              <p className={styles.blurOverlayText}>전체 스크립트(5종)는 구매 후 확인 가능합니다.</p>
+            </div>
           </div>
         </div>
+
+        {/* P5 — 전체 블러 */}
         <div className={`${styles.reportPage} ${styles.reportPageBlur}`}>
           <div className={styles.blurContent}>
-            <p className={styles.pageEyebrow}>SECTION 03</p>
-            <h3 className={styles.pageSectionTitle}>총회 발언 스크립트 및 행동 타임라인</h3>
+            <p className={styles.pageEyebrow}>SECTION 04</p>
+            <h3 className={styles.pageSectionTitle}>행동 타임라인 및 사후 대응 전략</h3>
             <div className={styles.blurLine} />
             <div className={styles.blurLine} />
             <div className={styles.blurLineShort} />
@@ -353,18 +403,20 @@ export default function PremiumReportPaywall() {
                 <input type="checkbox" checked={isPrivacyAgreed} onChange={(e) => setIsPrivacyAgreed(e.target.checked)} />
                 <span>[필수] 개인정보 수집 및 이용 동의 (이메일: 리포트 발송)</span>
               </label>
-              <label className={styles.consentLabel}>
-                <input type="checkbox" checked={isRefundAgreed} onChange={(e) => setIsRefundAgreed(e.target.checked)} />
-                <span>[필수] 디지털 상품 특성상 다운로드 이후 환불 불가에 동의</span>
-              </label>
+              {!isBetaMode() && (
+                <label className={styles.consentLabel}>
+                  <input type="checkbox" checked={isRefundAgreed} onChange={(e) => setIsRefundAgreed(e.target.checked)} />
+                  <span>[필수] 디지털 상품 특성상 다운로드 이후 환불 불가에 동의</span>
+                </label>
+              )}
             </div>
 
             <button
               className={styles.ctaBtn}
               type="submit"
-              disabled={loading || !isPrivacyAgreed || !isRefundAgreed || !email.trim()}
+              disabled={loading || !isPrivacyAgreed || (!isBetaMode() && !isRefundAgreed) || !email.trim()}
             >
-              {loading ? '처리 중...' : isBetaMode() ? '프리미엄 사전 신청하기' : 'Premium 전략 리포트 구매하기 →'}
+              {loading ? '처리 중...' : isBetaMode() ? '사전 신청하기' : 'Premium 전략 리포트 구매하기 →'}
             </button>
 
             <p className={styles.ctaNote}>
@@ -392,12 +444,12 @@ export default function PremiumReportPaywall() {
               <th></th>
               <th className={styles.colOther}>
                 <span className={styles.colName}>기본</span>
-                <span className={styles.colPrice}>29,000원</span>
+                {!isBetaMode() && <span className={styles.colPrice}>29,000원</span>}
                 <span className={styles.colGrade}>R1 · R2</span>
               </th>
               <th className={styles.colActive}>
                 <span className={styles.colName}>프리미엄</span>
-                <span className={styles.colPrice}>99,000원</span>
+                {!isBetaMode() && <span className={styles.colPrice}>99,000원</span>}
                 <span className={styles.colGrade}>R3 · R4</span>
               </th>
             </tr>
