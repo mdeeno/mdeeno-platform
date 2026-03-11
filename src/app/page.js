@@ -22,9 +22,12 @@ export default function Home() {
           </p>
 
           <div className={styles.btnGroup}>
-            <Link href="/member" className={styles.primaryBtn}>
-              내 분담금 분석 시작하기
-            </Link>
+            <div>
+              <Link href="/member" className={styles.primaryBtn}>
+                내 분담금 분석 시작하기
+              </Link>
+              <p className={styles.heroBtnNote}>무료 · 로그인 없음 · 30초 완료</p>
+            </div>
 
             <Link href="/reports" className={styles.secondaryBtn}>
               📄 리포트 샘플 보기
@@ -36,7 +39,7 @@ export default function Home() {
       {/* ── Social Proof ── */}
       <section className={styles.socialProof}>
         <div className={styles.container}>
-          <p className={styles.socialProofEyebrow}>이미 분석된 사례</p>
+          <p className={styles.socialProofEyebrow}>실제 재건축 피해 사례</p>
           <div className={styles.socialProofGrid}>
             <div className={styles.socialProofCard}>
               <p className={styles.spComplex}>잠실 A단지</p>

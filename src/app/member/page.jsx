@@ -221,46 +221,8 @@ export default function ShockCalculatorPage() {
         </h1>
         <p className={styles.subtitle}>
           추가 분담금 규모와 사업 단계를 입력하면<br />
-          M-DEENO가 귀하의 자산 위험도를 즉시 분석합니다.
+          내 자산 위험도를 즉시 분석합니다.
         </p>
-      </div>
-
-      {/* ── Problem Awareness ── */}
-      <div className={styles.problemSection}>
-        <p className={styles.problemEyebrow}>왜 지금 확인해야 하는가</p>
-        <h2 className={styles.problemTitle}>
-          재건축 조합원이<br />분담금을 잃는 이유
-        </h2>
-        <ul className={styles.problemList}>
-          <li className={styles.problemItem}>
-            <span className={styles.problemNum}>01</span>
-            <div className={styles.problemText}>
-              <strong>공사비 상승 구조 이해 부족</strong>
-              <span>시공사 원가 구조를 모르면 인상 요구를 검증할 방법이 없습니다.</span>
-            </div>
-          </li>
-          <li className={styles.problemItem}>
-            <span className={styles.problemNum}>02</span>
-            <div className={styles.problemText}>
-              <strong>총회 의사결정 정보 부족</strong>
-              <span>충분한 데이터 없이 총회 표결에 참석하면 손해를 확정짓는 결과가 됩니다.</span>
-            </div>
-          </li>
-          <li className={styles.problemItem}>
-            <span className={styles.problemNum}>03</span>
-            <div className={styles.problemText}>
-              <strong>분담금 구조 불투명</strong>
-              <span>조합이 제시하는 수치를 그대로 수용하면 실제 부담을 알 수 없습니다.</span>
-            </div>
-          </li>
-          <li className={styles.problemItem}>
-            <span className={styles.problemNum}>04</span>
-            <div className={styles.problemText}>
-              <strong>조합 공개 정보만으로는 개인 리스크 판단 불가</strong>
-              <span>조합은 사업 전체 현황만 공개합니다. 내 자산에 미치는 실질 손실은 개인 단위로 직접 계산해야 합니다.</span>
-            </div>
-          </li>
-        </ul>
       </div>
 
       {/* ── Input Form ── */}

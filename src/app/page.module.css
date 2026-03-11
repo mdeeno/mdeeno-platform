@@ -58,7 +58,15 @@
 .btnGroup {
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   gap: 16px;
+}
+
+.heroBtnNote {
+  margin-top: 8px;
+  font-size: 0.75rem;
+  color: #64748b;
+  text-align: center;
 }
 
 .primaryBtn {

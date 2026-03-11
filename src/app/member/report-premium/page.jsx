@@ -70,7 +70,6 @@ export default function PremiumReportPaywall() {
           if (raw) {
             setContext(JSON.parse(raw));
           } else {
-            alert('먼저 무료 계산을 진행해주세요.');
             router.push('/member');
           }
         } catch {}

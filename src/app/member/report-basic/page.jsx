@@ -29,6 +29,8 @@ export default function ReportBasicPage() {
   const [phoneError, setPhoneError]         = useState('');
   const [isPrivacyAgreed, setIsPrivacyAgreed] = useState(false);
   const [isRefundAgreed, setIsRefundAgreed]   = useState(false);
+  const [submitted, setSubmitted]             = useState(false);
+  const [submitError, setSubmitError]         = useState('');
   const [leadCount, setLeadCount]             = useState(null);
   const [trafficSource, setTrafficSource]     = useState({});
 
@@ -48,7 +50,6 @@ export default function ReportBasicPage() {
         if (raw) {
           setContext(JSON.parse(raw));
         } else {
-          alert('먼저 무료 계산을 진행해주세요.');
           router.push('/member');
         }
       }
@@ -100,9 +101,9 @@ export default function ReportBasicPage() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ ...leadBody, product_type: 'basic_beta', beta: true }),
         });
-        alert('베타 테스터 신청이 완료되었습니다.\n\n6월 15일 정식 출시 시 베타 가격으로 결제 링크를 보내드립니다.');
+        setSubmitted(true);
       } catch {
-        alert('신청 중 오류가 발생했습니다. 다시 시도해 주세요.');
+        setSubmitError('신청 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
       } finally {
         setLoading(false);
       }
@@ -225,6 +226,15 @@ export default function ReportBasicPage() {
 
       {/* ── 6. CTA ── */}
       <div className={styles.ctaBox}>
+        {submitted ? (
+          <div className={styles.successBox}>
+            <p className={styles.successTitle}>사전 신청이 완료되었습니다 ✓</p>
+            <p className={styles.successDesc}>
+              6월 정식 출시 시 출시 특가 결제 링크를 이메일로 보내드립니다.
+            </p>
+          </div>
+        ) : (
+        <>
         {isBetaMode() && (
           <div className={styles.betaBadge}>
             🚧 사전 신청 진행 중 · 6월 정식 출시 예정
@@ -300,6 +310,9 @@ export default function ReportBasicPage() {
           본 리포트는 참고용 분석 자료이며 투자·법률·세무 자문이 아닙니다.
           이메일은 리포트 발송 목적으로만 사용됩니다.
         </p>
+        {submitError && <p className={styles.fieldError}>{submitError}</p>}
+        </>
+        )}
       </div>
 
       {/* ── 7. 비교표 (참고용) ── */}

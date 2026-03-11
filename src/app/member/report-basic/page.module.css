@@ -210,6 +210,27 @@
   overflow: hidden;
 }
 
+.successBox {
+  padding: 24px;
+  background: #f0fdf4;
+  border: 1.5px solid #86efac;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.successTitle {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #15803d;
+  margin-bottom: 8px;
+}
+
+.successDesc {
+  font-size: 0.875rem;
+  color: #166534;
+  line-height: 1.6;
+}
+
 .betaBadge {
   background: #fef9c3;
   border: 1px solid #fde047;
