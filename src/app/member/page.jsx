@@ -550,7 +550,7 @@ export default function ShockCalculatorPage() {
               </ul>
               {!isBetaMode() && (
                 <p className={styles.ctaPrice}>
-                  <span className={styles.ctaPriceBeta}>베타 99,000원 · 정가 149,000원</span>
+                  <span className={styles.ctaPriceBeta}>출시 특가 99,000원 · 정가 149,000원</span>
                 </p>
               )}
 
