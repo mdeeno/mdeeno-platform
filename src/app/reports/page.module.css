@@ -1,0 +1,71 @@
+.wrapper {
+  width: 100%;
+}
+
+.heroBar {
+  padding: 80px 20px 64px;
+  text-align: center;
+  background: linear-gradient(180deg, #f0f4ff 0%, #f8fafc 100%);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.eyebrow {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #1e40af;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.desc {
+  font-size: 1rem;
+  color: #64748b;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.ctaBtn {
+  display: inline-block;
+  padding: 13px 26px;
+  background: #1e40af;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.ctaBtn:hover {
+  background: #1e3a8a;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .heroBar {
+    padding: 60px 20px 48px;
+  }
+
+  .title {
+    font-size: 1.7rem;
+  }
+
+  .desc {
+    font-size: 0.9rem;
+  }
+
+  .ctaBtn {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+}

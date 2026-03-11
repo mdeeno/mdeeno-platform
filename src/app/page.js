@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import styles from './page.module.css';
-import ReportSamplesSection from './ReportSamplesSection';
 import LandingLeadForm from './LandingLeadForm';
 
 export default function Home() {
@@ -27,7 +26,7 @@ export default function Home() {
               내 분담금 분석 시작하기
             </Link>
 
-            <Link href="#report-samples" className={styles.secondaryBtn}>
+            <Link href="/reports" className={styles.secondaryBtn}>
               📄 리포트 샘플 보기
             </Link>
           </div>
@@ -164,8 +163,6 @@ export default function Home() {
       </section>
 
       <LandingLeadForm />
-
-      <ReportSamplesSection />
     </div>
   );
 }

@@ -25,7 +25,7 @@ export default function Header() {
             📊 무료 구조 진단
           </Link>
 
-          <Link href="/#report-samples" className={styles.secondaryBtn}>
+          <Link href="/reports" className={styles.secondaryBtn}>
             📄 리포트 보기
           </Link>
           <a
@@ -69,7 +69,7 @@ export default function Header() {
             📊 무료 구조 진단
           </Link>
 
-          <Link href="/#report-samples" className={styles.secondaryBtn} onClick={toggleMenu}>
+          <Link href="/reports" className={styles.secondaryBtn} onClick={toggleMenu}>
             📄 리포트 보기
           </Link>
           <a href={TECH_URL} onClick={toggleMenu}>
