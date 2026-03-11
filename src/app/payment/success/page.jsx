@@ -1,11 +1,12 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useEffect, useState } from 'react';
 import { useSearchParams }     from 'next/navigation';
 import Link from 'next/link';
 import styles from './page.module.css';
 
-export default function PaymentSuccessPage() {
+function PaymentSuccessContent() {
   const searchParams = useSearchParams();
   const [status, setStatus] = useState('loading'); // loading | success | error
   const [errorMsg, setErrorMsg] = useState('');
@@ -93,5 +94,13 @@ export default function PaymentSuccessPage() {
         </Link>
       </div>
     </div>
+  );
+}
+
+export default function PaymentSuccessPage() {
+  return (
+    <Suspense fallback={<div className={styles.page}><div className={styles.card} /></div>}>
+      <PaymentSuccessContent />
+    </Suspense>
   );
 }

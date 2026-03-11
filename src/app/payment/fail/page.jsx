@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import styles from './page.module.css';
@@ -12,7 +13,7 @@ const ERROR_MESSAGES = {
   EXCEED_MAX_DAILY_PAYMENT_COUNT: '일일 결제 한도를 초과하였습니다.',
 };
 
-export default function PaymentFailPage() {
+function PaymentFailContent() {
   const searchParams = useSearchParams();
   const code    = searchParams.get('code')    ?? '';
   const message = searchParams.get('message') ?? '결제에 실패했습니다.';
@@ -41,5 +42,13 @@ export default function PaymentFailPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function PaymentFailPage() {
+  return (
+    <Suspense fallback={<div className={styles.page}><div className={styles.card} /></div>}>
+      <PaymentFailContent />
+    </Suspense>
   );
 }
