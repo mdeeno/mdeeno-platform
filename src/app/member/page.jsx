@@ -304,7 +304,7 @@ export default function ShockCalculatorPage() {
                   type="number"
                   value={form.asset_value}
                   onChange={handleChange}
-                  placeholder="금액를 입력해주세요"
+                  placeholder="금액을 입력해주세요"
                   min="0.1"
                   step="0.1"
                   required
@@ -326,7 +326,7 @@ export default function ShockCalculatorPage() {
                   type="number"
                   value={form.expected_extra}
                   onChange={handleChange}
-                  placeholder="금액를 입력해주세요"
+                  placeholder="금액을 입력해주세요"
                   min="0.1"
                   step="0.1"
                   required
@@ -412,7 +412,7 @@ export default function ShockCalculatorPage() {
                 type="text"
                 value={form.complex_name}
                 onChange={handleChange}
-                placeholder="단지명를 입력해주세요"
+                placeholder="단지명을 입력해주세요"
                 required
               />
             </div>
@@ -633,13 +633,13 @@ export default function ShockCalculatorPage() {
                     ) : betaDone ? (
                       '베타 신청 완료 ✓'
                     ) : (
-                      '베타 신청하기 (무료) →'
+                      '사전 신청하기 →'
                     )}
                   </button>
                   <p className={styles.ctaNote}>
                     {betaDone
                       ? '신청해 주셔서 감사합니다. 리포트 준비 완료 시 이메일로 안내드립니다.'
-                      : '결제 없음 · 이메일 등록만으로 신청 완료'}
+                      : '6월 정식 출시 시 이메일로 우선 안내드립니다'}
                   </p>
                 </>
               ) : (
@@ -710,7 +710,7 @@ export default function ShockCalculatorPage() {
                   className={styles.basicReportCtaBtn}
                   onClick={() => handleReportNav(href)}
                 >
-                  {isLowRisk ? '프리미엄 전략 리포트 보기 →' : '기본 리포트 보기 (베타 29,000원) →'}
+                  {isLowRisk ? '프리미엄 전략 리포트 보기 →' : '기본 리포트 보기 →'}
                 </button>
               </div>
             );
@@ -734,11 +734,11 @@ export default function ShockCalculatorPage() {
             onClick={(e) => e.stopPropagation()}
           >
             <p className={styles.modalTitle}>
-              {isBetaMode() ? '베타 신청 — 이메일 등록' : '리포트를 받을 이메일'}
+              {isBetaMode() ? '사전 신청 — 이메일 등록' : '리포트를 받을 이메일'}
             </p>
             <p className={styles.modalDesc}>
               {isBetaMode()
-                ? '이메일을 등록하시면 리포트 검토 후 발송됩니다.'
+                ? '이메일을 등록하시면 6월 정식 출시 시 결제 링크와 함께 우선 안내드립니다.'
                 : '이메일을 등록하면 리포트가 즉시 생성됩니다.'}
             </p>
 
@@ -747,11 +747,11 @@ export default function ShockCalculatorPage() {
                 <>
                   <li className={styles.modalBenefit}>
                     <span className={styles.modalBenefitIcon}>✓</span>
-                    <span>결제 없음 — <strong>완전 무료 베타 신청</strong></span>
+                    <span>6월 출시 시 <strong>결제 링크 우선 발송</strong></span>
                   </li>
                   <li className={styles.modalBenefit}>
                     <span className={styles.modalBenefitIcon}>✓</span>
-                    <span>리포트 준비 완료 시 <strong>이메일로 즉시 안내</strong></span>
+                    <span>사전 신청자 한정 <strong>출시 특가 적용</strong></span>
                   </li>
                   <li className={styles.modalBenefit}>
                     <span className={styles.modalBenefitIcon}>✓</span>
@@ -762,15 +762,15 @@ export default function ShockCalculatorPage() {
                 <>
                   <li className={styles.modalBenefit}>
                     <span className={styles.modalBenefitIcon}>✓</span>
+                    <span>PDF 즉시 생성 · <strong>30초 이내 다운로드</strong></span>
+                  </li>
+                  <li className={styles.modalBenefit}>
+                    <span className={styles.modalBenefitIcon}>✓</span>
                     <span>공사비 상승 시 <strong>리포트 업데이트 알림</strong> 수신</span>
                   </li>
                   <li className={styles.modalBenefit}>
                     <span className={styles.modalBenefitIcon}>✓</span>
                     <span>총회 일정 변경 등 <strong>핵심 정보 자동 알림</strong></span>
-                  </li>
-                  <li className={styles.modalBenefit}>
-                    <span className={styles.modalBenefitIcon}>✓</span>
-                    <span>베타 기간 무료 — <strong>이후 유료 전환 없음</strong></span>
                   </li>
                 </>
               )}

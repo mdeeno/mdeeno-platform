@@ -627,8 +627,14 @@
   color: #111827;
 }
 
+/* ── Tablet ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .wrapper { max-width: 100%; }
+  .title { font-size: 1.7rem; }
+}
+
 /* ── Mobile ───────────────────────────────────────────────── */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .wrapper {
     padding: 40px 16px 60px;
   }
@@ -638,7 +644,15 @@
   }
 
   .ctaSection {
-    padding: 28px 20px;
+    padding: 28px 16px;
+  }
+
+  .contextGrade {
+    font-size: 2rem;
+  }
+
+  .contextRow {
+    gap: 16px;
   }
 
   .metricRow {
@@ -647,6 +661,34 @@
 
   .metric {
     min-width: calc(50% - 5px);
+  }
+
+  .compareSection {
+    padding: 20px 16px;
+  }
+}
+
+/* ── Compare table 가로 스크롤 ──────────────────────────────── */
+.compareTableWrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 -24px;
+  padding: 0 24px;
+}
+
+@media (max-width: 600px) {
+  .compareTableWrap {
+    margin: 0 -16px;
+    padding: 0 16px;
+  }
+
+  .compareTable {
+    font-size: 0.8rem;
+  }
+
+  .compareTable th,
+  .compareTable td {
+    padding: 8px 6px;
   }
 }
 

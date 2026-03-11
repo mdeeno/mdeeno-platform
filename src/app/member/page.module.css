@@ -1108,19 +1108,24 @@
   color: #64748b;
 }
 
-/* ── Mobile ── */
-@media (max-width: 480px) {
+/* ── Tablet ── */
+@media (max-width: 768px) {
+  .page { max-width: 100%; }
+}
+
+/* ── Large Mobile / Small Tablet (481-600px) ── */
+@media (max-width: 600px) {
   .page {
     padding: 40px 16px 80px;
   }
 
   .problemSection {
-    padding: 24px 20px;
+    padding: 24px 16px;
     margin-bottom: 24px;
   }
 
   .problemItem {
-    padding: 14px 14px;
+    padding: 12px 14px;
     gap: 12px;
   }
 
@@ -1133,47 +1138,23 @@
   }
 
   .trustAmount {
-    font-size: 1.15rem;
-  }
-
-  .premiumHeadline {
     font-size: 1.1rem;
-  }
-
-  .fieldGrid {
-    grid-template-columns: 1fr;
   }
 
   .formCard {
     padding: 20px 16px;
   }
 
-  .comparisonGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .comparisonDivider {
-    text-align: left;
-    padding-left: 4px;
-  }
-
   .shockBox {
     padding: 24px 16px;
-  }
-
-  .urgencyBanner {
-    flex-wrap: wrap;
-    gap: 8px;
   }
 
   .strategyOverlay {
     padding: 24px 16px;
   }
 
-  .ctaBtn {
-    min-width: unset;
-    width: 100%;
-    box-sizing: border-box;
+  .premiumHeadline {
+    font-size: 1.1rem;
   }
 
   .modal {
@@ -1188,5 +1169,32 @@
 
   .simCardTitle {
     min-width: unset;
+  }
+}
+
+/* ── Mobile (≤ 480px) ── */
+@media (max-width: 480px) {
+  .fieldGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .comparisonGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .comparisonDivider {
+    text-align: left;
+    padding-left: 4px;
+  }
+
+  .urgencyBanner {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .ctaBtn {
+    min-width: unset;
+    width: 100%;
+    box-sizing: border-box;
   }
 }

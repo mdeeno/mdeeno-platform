@@ -314,11 +314,13 @@ export default function PremiumReportPaywall() {
               {isBetaMode() ? '프리미엄 사전 신청' : 'Premium 전략 리포트 구매'}
             </h2>
 
-            <div className={styles.ctaPriceRow}>
-              <span className={styles.ctaPriceFinal}>99,000원</span>
-              <span className={styles.ctaPriceOriginal}>정가 149,000원</span>
-              <span className={styles.ctaPriceBadge}>{isBetaMode() ? '베타가' : '출시 특가'}</span>
-            </div>
+            {!isBetaMode() && (
+              <div className={styles.ctaPriceRow}>
+                <span className={styles.ctaPriceFinal}>99,000원</span>
+                <span className={styles.ctaPriceOriginal}>정가 149,000원</span>
+                <span className={styles.ctaPriceBadge}>출시 특가</span>
+              </div>
+            )}
 
             {leadCount !== null && leadCount > 0 && (
               <p className={styles.socialProof}>
@@ -383,6 +385,7 @@ export default function PremiumReportPaywall() {
       <section className={styles.compareSection}>
         <p className={styles.compareEyebrow}>리포트 비교</p>
         <h3 className={styles.compareHeading}>기본 vs 프리미엄</h3>
+        <div className={styles.compareTableWrap}>
         <table className={styles.compareTable}>
           <thead>
             <tr>
@@ -428,6 +431,7 @@ export default function PremiumReportPaywall() {
             ))}
           </tbody>
         </table>
+        </div>
         <div className={styles.downsellNote}>
           <Link href="/member/report-basic" className={styles.downsellLink}>
             R1·R2 등급이라면 기본 리포트로도 충분합니다 →

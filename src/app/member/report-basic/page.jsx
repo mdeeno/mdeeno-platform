@@ -232,14 +232,16 @@ export default function ReportBasicPage() {
         )}
 
         <p className={styles.ctaHeading}>
-          {isBetaMode() ? '지금 사전 신청하고 베타 가격으로 받아보세요' : '지금 바로 리포트를 받아보세요'}
+          {isBetaMode() ? '6월 출시 시 기본 리포트를 받아보세요' : '지금 바로 리포트를 받아보세요'}
         </p>
 
-        <div className={styles.priceRow}>
-          <span className={styles.priceFinal}>29,000원</span>
-          <span className={styles.priceOriginal}>정가 39,000원</span>
-          <span className={styles.priceBadge}>{isBetaMode() ? '베타가' : '출시 특가'}</span>
-        </div>
+        {!isBetaMode() && (
+          <div className={styles.priceRow}>
+            <span className={styles.priceFinal}>29,000원</span>
+            <span className={styles.priceOriginal}>정가 39,000원</span>
+            <span className={styles.priceBadge}>출시 특가</span>
+          </div>
+        )}
 
         <input
           className={`${styles.input}${emailError ? ` ${styles.inputError}` : ''}`}
@@ -302,6 +304,7 @@ export default function ReportBasicPage() {
       <div className={styles.compareBox}>
         <p className={styles.compareEyebrow}>리포트 비교</p>
         <h3 className={styles.compareHeading}>기본 vs 프리미엄</h3>
+        <div className={styles.compareTableWrap}>
         <table className={styles.compareTable}>
           <thead>
             <tr>
@@ -347,6 +350,7 @@ export default function ReportBasicPage() {
             ))}
           </tbody>
         </table>
+        </div>
         <div className={styles.upsellCallout}>
           <Link href="/member/report-premium" className={styles.upsellLink}>
             프리미엄 전략 리포트 보기 →
