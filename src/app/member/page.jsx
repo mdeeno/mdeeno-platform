@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { downloadPdf } from '@/lib/download-pdf';
 import { isBetaMode } from '@/lib/feature-flags';
 import styles from './page.module.css';
@@ -438,10 +439,6 @@ export default function ShockCalculatorPage() {
             <p className={styles.shockMessage}>{result.shock_message}</p>
           </div>
 
-          <p className={styles.urgencyNote}>
-            공사비가 5%만 올라가도 분담금은 크게 변합니다.
-          </p>
-
           {/* 2. Comparison */}
           <div className={styles.comparisonGrid}>
             <div className={styles.comparisonCard}>
@@ -494,7 +491,7 @@ export default function ShockCalculatorPage() {
               <div className={styles.simSection}>
                 <p className={styles.simLabel}>전략별 예상 절감 효과</p>
                 <p className={styles.simNote}>
-                  M-DEENO 전략 엔진이 귀하의 위험 등급({result.risk_level})을 기반으로 시뮬레이션한 결과입니다.
+                  위험 등급 {result.risk_level} 기준으로 M-DEENO 전략 엔진이 시뮬레이션한 결과입니다.
                 </p>
                 <div className={styles.simGrid}>
                   {strategies.map((s) => (
@@ -649,12 +646,9 @@ export default function ShockCalculatorPage() {
                 <p className={styles.basicReportCtaLabel}>
                   {isLowRisk ? '더 심층적인 전략이 필요하다면?' : '우선 기본 구조만 확인하고 싶다면?'}
                 </p>
-                <button
-                  className={styles.basicReportCtaBtn}
-                  onClick={() => handleReportNav(href)}
-                >
+                <Link href={href} className={styles.basicReportCtaBtn}>
                   {isLowRisk ? '프리미엄 전략 리포트 보기 →' : '기본 리포트 보기 →'}
-                </button>
+                </Link>
               </div>
             );
           })()}

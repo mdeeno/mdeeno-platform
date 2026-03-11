@@ -343,8 +343,11 @@ export default function ReportSamplesSection() {
                   >
                     미리보기
                   </button>
-                  <Link href="/member/report-basic" className={styles.applyBtn}>
-                    {isBetaMode() ? '사전 신청하기' : '구매하기'}
+                  <Link
+                    href={isBetaMode() ? '/member' : '/member/report-basic'}
+                    className={styles.applyBtn}
+                  >
+                    {isBetaMode() ? '무료 분석 후 신청 →' : '구매하기'}
                   </Link>
                 </div>
               </div>
@@ -377,8 +380,11 @@ export default function ReportSamplesSection() {
                   >
                     미리보기
                   </button>
-                  <Link href="/member/report-premium" className={`${styles.applyBtn} ${styles.applyBtnPremium}`}>
-                    {isBetaMode() ? '사전 신청하기' : '구매하기'}
+                  <Link
+                    href={isBetaMode() ? '/member' : '/member/report-premium'}
+                    className={`${styles.applyBtn} ${styles.applyBtnPremium}`}
+                  >
+                    {isBetaMode() ? '무료 분석 후 신청 →' : '구매하기'}
                   </Link>
                 </div>
               </div>

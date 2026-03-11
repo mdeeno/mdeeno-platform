@@ -84,23 +84,23 @@ export default function Home() {
           <div className={styles.grid}>
             <div className={styles.card}>
               <div className={styles.iconWrapper}>📉</div>
-              <h3 className={styles.cardTitle}>자산 잠식 구간 예측</h3>
+              <h3 className={styles.cardTitle}>내 손실이 시작되는 시점 예측</h3>
               <p>
-                공사비 5%, 10%, 20% 상승 시 내 순자산이 언제 줄어드는지 자동
-                계산
+                공사비가 몇 % 오를 때 내 순자산이 줄어들기 시작하는지
+                자동으로 계산합니다
               </p>
             </div>
 
             <div className={styles.card}>
               <div className={styles.iconWrapper}>📑</div>
-              <h3 className={styles.cardTitle}>총회 대응 전략 자동 설계</h3>
-              <p>질문 리스트, 원가 검증 요청 문구, 협상 프레임까지 구조화</p>
+              <h3 className={styles.cardTitle}>총회 당일 쓸 수 있는 질문 제공</h3>
+              <p>시공사에 요구할 질문 리스트와 발언 스크립트를 리포트에 담아드립니다</p>
             </div>
 
             <div className={styles.card}>
               <div className={styles.iconWrapper}>🏗</div>
-              <h3 className={styles.cardTitle}>단지 전체 구조 분석</h3>
-              <p>조합원 입장에서 단지 사업 구조와 공사비 적정성을 직접 확인할 수 있습니다</p>
+              <h3 className={styles.cardTitle}>공사비가 적정한지 직접 확인</h3>
+              <p>조합이 제시한 공사비가 시장 기준 대비 얼마나 높은지 분석합니다</p>
             </div>
           </div>
         </div>
