@@ -4,6 +4,7 @@ import styles from './page.module.css';
 export const metadata = {
   title: '리포트 샘플 | M-DEENO',
   description: '재건축 분담금 리스크 분석 리포트 샘플을 확인하세요.',
+  robots: { index: false, follow: false },
 };
 
 export default function SampleReport() {

@@ -247,14 +247,6 @@ export default function ReportSamplesSection() {
             </div>
           </div>
 
-          <p style={{ textAlign: 'center', marginTop: '28px' }}>
-            <Link
-              href="/sample-report"
-              style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 600, textDecoration: 'underline' }}
-            >
-              전체 샘플 리포트 보기 →
-            </Link>
-          </p>
         </div>
       </section>
 
