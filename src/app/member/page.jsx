@@ -283,7 +283,7 @@ export default function ShockCalculatorPage() {
               <label className={styles.label} htmlFor="cost_increase_rate">
                 예상 공사비 상승률 <span className={styles.req}>*</span>
               </label>
-              <p className={styles.fieldHint}>시공사 요청 또는 예상되는 공사비 인상률 (모르면 10% 기본값 사용)</p>
+              <p className={styles.fieldHint}>시공사 요청 또는 예상되는 공사비 인상률 — 정확한 수치를 모르면 10을 입력하세요</p>
               <div className={styles.inputWrap}>
                 <input
                   className={styles.input}

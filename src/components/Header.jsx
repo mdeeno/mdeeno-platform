@@ -72,7 +72,7 @@ export default function Header() {
           <Link href="/reports" className={styles.secondaryBtn} onClick={toggleMenu}>
             📄 리포트 보기
           </Link>
-          <a href={TECH_URL} onClick={toggleMenu}>
+          <a href={TECH_URL} target="_blank" rel="noopener noreferrer" onClick={toggleMenu}>
             전문가 부동산 리포트 ↗
           </a>
           <hr className={styles.divider} />
