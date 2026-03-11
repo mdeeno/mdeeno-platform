@@ -346,6 +346,55 @@
   }
 }
 
+/* ── R3/R4 프리미엄 유도 배너 ── */
+.premiumNudge {
+  background: #fff1f2;
+  border: 2px solid #e63946;
+  border-radius: 14px;
+  padding: 24px 24px 20px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.premiumNudgeTitle {
+  font-size: 1rem;
+  font-weight: 900;
+  color: #9f1239;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.premiumNudgeDesc {
+  font-size: 0.875rem;
+  color: #be123c;
+  line-height: 1.65;
+  margin-bottom: 18px;
+}
+
+.premiumNudgeBtn {
+  display: inline-block;
+  padding: 13px 28px;
+  background: #e63946;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.1s;
+  margin-bottom: 12px;
+}
+
+.premiumNudgeBtn:hover {
+  background: #be123c;
+  transform: translateY(-1px);
+}
+
+.premiumNudgeSkip {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
 /* ── Basic vs Premium 비교표 ── */
 .compareBox {
   margin-top: 32px;
