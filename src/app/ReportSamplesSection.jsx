@@ -66,10 +66,82 @@ function BasicSamplePages() {
         </p>
       </div>
 
-      {/* P3 — Blurred */}
+      {/* P3 — Asset Erosion Threshold */}
+      <div className={styles.samplePage}>
+        <p className={styles.samplePageSectionEyebrow}>SECTION 02</p>
+        <h4 className={styles.samplePageSectionTitle}>자산 잠식 임계점 분석</h4>
+        <div className={styles.sampleThresholdBox}>
+          <div className={styles.sampleThresholdNum}>+14.8%</div>
+          <div className={styles.sampleThresholdDesc}>
+            공사비가 이 수준을 초과하는 순간<br />
+            순자산이 감소하기 시작합니다
+          </div>
+        </div>
+        <table className={styles.sampleTable}>
+          <thead>
+            <tr>
+              <th>공사비 변동</th>
+              <th>순자산 변화</th>
+              <th>자산 잠식 여부</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>+10%</td>
+              <td>+240만 원</td>
+              <td className={styles.tdSafe}>안전 구간</td>
+            </tr>
+            <tr className={styles.tableRowHighlight}>
+              <td>+14.8%</td>
+              <td>0원 (임계점)</td>
+              <td className={styles.tdWarn}>경계 구간</td>
+            </tr>
+            <tr className={styles.tableRowHighlight}>
+              <td>+20%</td>
+              <td>-1,440만 원</td>
+              <td className={styles.tdDanger}>잠식 시작</td>
+            </tr>
+          </tbody>
+        </table>
+        <p className={styles.samplePageNote}>
+          현재 조합 제시안 기준 — 임계점 초과 시 추가 대응 전략 필수
+        </p>
+      </div>
+
+      {/* P4 — Assembly Questions (partial reveal) */}
+      <div className={styles.samplePage}>
+        <p className={styles.samplePageSectionEyebrow}>SECTION 03</p>
+        <h4 className={styles.samplePageSectionTitle}>총회 핵심 질문 리스트</h4>
+        <ol className={styles.sampleQuestionList}>
+          <li className={styles.sampleQuestionItem}>
+            <span className={styles.sampleQuestionNum}>Q1</span>
+            시공사가 제시한 평당 공사비 산출 근거와 원가 항목별 세부 내역서를
+            총회 전 공개해 주실 수 있습니까?
+          </li>
+          <li className={styles.sampleQuestionItem}>
+            <span className={styles.sampleQuestionNum}>Q2</span>
+            공사비 상승분에 대한 일반분양가 조정 계획과, 미분양 발생 시
+            조합원 분담금 추가 부담 조항이 계약서에 포함되어 있습니까?
+          </li>
+        </ol>
+        <div className={styles.samplePartialBlurArea}>
+          <div className={styles.blurContent}>
+            <div className={styles.blurPlaceholder} />
+            <div className={styles.blurPlaceholder} />
+            <div className={styles.blurPlaceholderShort} />
+          </div>
+          <div className={styles.blurOverlay}>
+            <p className={styles.blurOverlayText}>
+              Q3–Q7은 리포트 구매 후 확인 가능합니다.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* P5 — Full Blur */}
       <div className={`${styles.samplePage} ${styles.samplePageBlur}`}>
         <div className={styles.blurContent}>
-          <p className={styles.samplePageSectionEyebrow}>SECTION 02</p>
+          <p className={styles.samplePageSectionEyebrow}>SECTION 04</p>
           <h4 className={styles.samplePageSectionTitle}>
             손실 체감 분석 및 총회 대응 전략
           </h4>
@@ -141,12 +213,78 @@ function PremiumSamplePages() {
         </div>
       </div>
 
-      {/* P3+ — Blurred */}
+      {/* P3 — Negotiation Simulation */}
+      <div className={styles.samplePage}>
+        <p className={styles.samplePageSectionEyebrow}>SECTION 02</p>
+        <h4 className={styles.samplePageSectionTitle}>협상 절감 시뮬레이션</h4>
+        <table className={styles.sampleTable}>
+          <thead>
+            <tr>
+              <th>협상 전략</th>
+              <th>절감 예상액</th>
+              <th>난이도</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>원가 검증 요청</td>
+              <td className={styles.tdSafe}>-264만 원</td>
+              <td className={styles.tdSafe}>낮음</td>
+            </tr>
+            <tr>
+              <td>마감재 수준 협의</td>
+              <td className={styles.tdWarn}>-105만 원</td>
+              <td className={styles.tdWarn}>중간</td>
+            </tr>
+            <tr>
+              <td>공기 단축 인센티브</td>
+              <td className={styles.tdWarn}>-52만 원</td>
+              <td className={styles.tdWarn}>중간</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: 800 }}>전략 합산</td>
+              <td style={{ fontWeight: 800, color: '#16a34a' }}>-421만 원</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+        <p className={styles.samplePageNote}>
+          세부 협상 스크립트 및 단계별 실행 가이드는 리포트 전문에 수록
+        </p>
+      </div>
+
+      {/* P4 — Speech Script (partial reveal) */}
+      <div className={styles.samplePage}>
+        <p className={styles.samplePageSectionEyebrow}>SECTION 03</p>
+        <h4 className={styles.samplePageSectionTitle}>총회 발언 스크립트</h4>
+        <div className={styles.sampleScriptBox}>
+          <p className={styles.sampleScriptLabel}>발언 오프닝 — 공사비 원가 공개 요구</p>
+          <p className={styles.sampleScriptText}>
+            &ldquo;조합장님, 저는 금번 총회 안건에 앞서 한 가지를 공식적으로
+            요청드립니다. 시공사가 제시한 평당 공사비 산출 내역서를 조합원 전원이
+            확인할 수 있도록 공개해 주시기 바랍니다.&rdquo;
+          </p>
+        </div>
+        <div className={styles.samplePartialBlurArea}>
+          <div className={styles.blurContent}>
+            <div className={styles.blurPlaceholder} />
+            <div className={styles.blurPlaceholder} />
+            <div className={styles.blurPlaceholderShort} />
+          </div>
+          <div className={styles.blurOverlay}>
+            <p className={styles.blurOverlayText}>
+              전체 스크립트(5종)는 리포트 구매 후 확인 가능합니다.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* P5 — Full Blur */}
       <div className={`${styles.samplePage} ${styles.samplePageBlur}`}>
         <div className={styles.blurContent}>
-          <p className={styles.samplePageSectionEyebrow}>SECTION 03</p>
+          <p className={styles.samplePageSectionEyebrow}>SECTION 04</p>
           <h4 className={styles.samplePageSectionTitle}>
-            협상 전략 및 총회 발언 스크립트
+            행동 타임라인 및 사후 대응 전략
           </h4>
           <div className={styles.blurPlaceholder} />
           <div className={styles.blurPlaceholder} />
