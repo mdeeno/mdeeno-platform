@@ -1,34 +1,34 @@
 .container {
   max-width: 640px;
   margin: 0 auto;
-  padding: 60px 20px 80px;
+  padding: 56px 20px 80px;
 }
 
-/* ── Header ── */
+/* ── Hero ── */
 .hero {
   text-align: center;
-  margin-bottom: 36px;
+  margin-bottom: 32px;
 }
 
 .eyebrow {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #1e40af;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .hero h1 {
-  font-size: 2rem;
+  font-size: 1.9rem;
   font-weight: 900;
   color: #0f172a;
-  line-height: 1.2;
+  line-height: 1.25;
   margin-bottom: 14px;
 }
 
 .subtitle {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   color: #64748b;
   line-height: 1.7;
 }
@@ -37,31 +37,53 @@
 .contextCard {
   background: #f0f9ff;
   border: 1.5px solid #bae6fd;
-  border-radius: 12px;
-  padding: 22px 24px;
-  margin-bottom: 24px;
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .contextLabel {
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #0284c7;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+}
+
+.contextGrade {
+  font-size: 2.4rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 10px;
+}
+
+.contextGradeLabel {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 .contextRow {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-bottom: 14px;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #bae6fd;
 }
 
 .contextItem {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  align-items: center;
+  gap: 4px;
 }
 
 .contextItem span {
@@ -71,288 +93,18 @@
 }
 
 .contextItem strong {
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 900;
   color: #0f172a;
 }
 
-.contextNote {
-  font-size: 0.78rem;
-  color: #0369a1;
-  line-height: 1.55;
-  border-top: 1px solid #bae6fd;
-  padding-top: 12px;
-  margin: 0;
-}
-
-/* ── Report Contents ── */
-.contentsCard {
-  background: #ffffff;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 24px;
-  margin-bottom: 24px;
-}
-
-.sectionLabel {
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #94a3b8;
-  margin-bottom: 18px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.contentsList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.contentsItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  font-size: 0.9rem;
-  color: #334155;
-  line-height: 1.55;
-}
-
-.checkIcon {
-  font-size: 0.75rem;
-  font-weight: 900;
-  color: #16a34a;
-  flex-shrink: 0;
-  margin-top: 3px;
-}
-
-/* ── Pricing + CTA ── */
-.ctaBox {
-  background: #0f172a;
-  border-radius: 14px;
-  padding: 32px 28px;
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.priceBox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.badge {
-  display: inline-block;
-  font-size: 1rem;
-  font-weight: 900;
-  background: #e63946;
-  color: #ffffff;
-  padding: 6px 14px;
-  border-radius: 8px;
-}
-
-.price {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.4);
-  font-weight: 600;
-  text-decoration: line-through;
-}
-
-.betaBadge {
-  background: #fef9c3;
-  border: 1px solid #fde047;
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #854d0e;
-  text-align: center;
-  margin-bottom: 16px;
-  line-height: 1.5;
-}
-
-.emailInput {
-  display: block;
-  width: 100%;
-  padding: 13px 16px;
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  font-size: 0.95rem;
-  background: rgba(255, 255, 255, 0.08);
-  color: #f1f5f9;
-  outline: none;
-  transition: border-color 0.15s;
-  box-sizing: border-box;
-  margin-bottom: 8px;
-}
-
-.emailInput::placeholder {
-  color: rgba(255, 255, 255, 0.3);
-}
-
-.emailInput:focus {
-  border-color: rgba(255, 255, 255, 0.4);
-}
-
-.emailInputError {
-  border-color: #e63946;
-}
-
-.emailError {
-  font-size: 0.8rem;
-  color: #fca5a5;
-  margin-bottom: 8px;
-  text-align: left;
-}
-
-.consentBox {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 16px;
-  text-align: left;
-}
-
-.consentLabel {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  cursor: pointer;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.55);
-  line-height: 1.5;
-}
-
-.consentLabel input[type='checkbox'] {
-  margin-top: 2px;
-  flex-shrink: 0;
-  accent-color: #1e40af;
-  width: 15px;
-  height: 15px;
-}
-
-.socialProof {
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.45);
-  margin-bottom: 14px;
-  text-align: center;
-}
-
-.purchaseBtn {
-  display: block;
-  width: 100%;
-  padding: 16px 24px;
-  background: #1e40af;
-  color: #ffffff;
-  font-size: 1rem;
-  font-weight: 800;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.15s, transform 0.1s;
-  margin-bottom: 12px;
-}
-
-.purchaseBtn:hover:not(:disabled) {
-  background: #1e3a8a;
-  transform: translateY(-1px);
-}
-
-.purchaseBtn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.priceNote {
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.35);
-  line-height: 1.5;
-  margin: 0;
-}
-
-/* ── Disclaimer ── */
-.disclaimer {
-  font-size: 0.75rem;
-  color: #94a3b8;
-  line-height: 1.6;
-  margin-top: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-/* ── Footer Links ── */
-.footerLinks {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.backLink {
-  font-size: 0.85rem;
-  color: #64748b;
-  font-weight: 600;
-  text-decoration: none;
-  transition: color 0.15s;
-}
-
-.backLink:hover {
-  color: #0f172a;
-}
-
-.upsellLink {
-  font-size: 0.85rem;
-  color: #1e40af;
-  font-weight: 700;
-  text-decoration: none;
-  transition: color 0.15s;
-}
-
-.upsellLink:hover {
-  color: #1e3a8a;
-}
-
-/* ── Mobile ── */
-@media (max-width: 480px) {
-  .container {
-    padding: 40px 16px 60px;
-  }
-
-  .hero h1 {
-    font-size: 1.6rem;
-  }
-
-  .contextRow {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .ctaBox {
-    padding: 24px 20px;
-  }
-
-  .footerLinks {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
-  }
-}
-
-/* ── R3/R4 프리미엄 유도 배너 ── */
+/* ── R3/R4 프리미엄 유도 ── */
 .premiumNudge {
   background: #fff1f2;
   border: 2px solid #e63946;
   border-radius: 14px;
-  padding: 24px 24px 20px;
-  margin-bottom: 24px;
+  padding: 24px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -395,14 +147,238 @@
   margin: 0;
 }
 
-/* ── Basic vs Premium 비교표 ── */
-.compareBox {
-  margin-top: 32px;
-  margin-bottom: 24px;
+/* ── Report Contents ── */
+.contentsCard {
   background: #ffffff;
   border: 1.5px solid #e2e8f0;
   border-radius: 14px;
-  padding: 28px 24px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.contentsHeading {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.contentsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contentsItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.contentsIcon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.contentsTitle {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 2px;
+}
+
+.contentsDesc {
+  display: block;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+/* ── CTA Box ── */
+.ctaBox {
+  background: #0f172a;
+  border-radius: 16px;
+  padding: 32px 28px;
+  margin-bottom: 24px;
+}
+
+.betaBadge {
+  background: #fef9c3;
+  border: 1px solid #fde047;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #854d0e;
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.ctaHeading {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #f1f5f9;
+  text-align: center;
+  margin-bottom: 18px;
+  line-height: 1.45;
+}
+
+.priceRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.priceFinal {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.priceOriginal {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 500;
+  text-decoration: line-through;
+}
+
+.priceBadge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: #1e40af;
+  color: #ffffff;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.07);
+  color: #f1f5f9;
+  outline: none;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.input:focus {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.inputError {
+  border-color: #e63946;
+}
+
+.fieldError {
+  font-size: 0.8rem;
+  color: #fca5a5;
+  margin-top: -6px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.consentBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.consentLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.79rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.5;
+}
+
+.consentLabel input[type='checkbox'] {
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: #1e40af;
+  width: 15px;
+  height: 15px;
+}
+
+.socialProof {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.purchaseBtn {
+  display: block;
+  width: 100%;
+  padding: 16px 24px;
+  background: #1e40af;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  margin-bottom: 14px;
+}
+
+.purchaseBtn:hover:not(:disabled) {
+  background: #1e3a8a;
+  transform: translateY(-1px);
+}
+
+.purchaseBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.ctaNote {
+  font-size: 0.79rem;
+  color: rgba(255, 255, 255, 0.35);
+  text-align: center;
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+
+.disclaimer {
+  font-size: 0.73rem;
+  color: rgba(255, 255, 255, 0.2);
+  line-height: 1.6;
+  text-align: center;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── Compare Table ── */
+.compareBox {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 24px;
 }
 
 .compareEyebrow {
@@ -410,81 +386,17 @@
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #1e40af;
+  color: #94a3b8;
   margin-bottom: 6px;
 }
 
 .compareHeading {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 900;
   color: #0f172a;
-  margin-bottom: 6px;
-  line-height: 1.3;
+  margin-bottom: 16px;
 }
 
-.compareSubtitle {
-  font-size: 0.82rem;
-  color: #64748b;
-  margin-bottom: 20px;
-  line-height: 1.5;
-}
-
-/* ── 위험 등급 가이드 ── */
-.gradeGuide {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 14px 16px;
-  margin-bottom: 18px;
-}
-
-.gradeGuideTitle {
-  font-size: 0.67rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #94a3b8;
-  margin-bottom: 10px;
-}
-
-.gradeGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px 12px;
-}
-
-.gradeItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-}
-
-.gradeBadge {
-  flex-shrink: 0;
-  font-size: 0.68rem;
-  font-weight: 900;
-  color: #ffffff;
-  padding: 2px 6px;
-  border-radius: 4px;
-  margin-top: 1px;
-}
-
-.gradeLabel {
-  display: block;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: #1e293b;
-  line-height: 1.3;
-}
-
-.gradeDesc {
-  display: block;
-  font-size: 0.69rem;
-  color: #64748b;
-  line-height: 1.4;
-}
-
-/* ── */
 .compareTable {
   width: 100%;
   border-collapse: collapse;
@@ -494,7 +406,7 @@
 
 .compareTable th,
 .compareTable td {
-  padding: 11px 10px;
+  padding: 10px 8px;
   text-align: center;
   border-bottom: 1px solid #e2e8f0;
   vertical-align: middle;
@@ -502,41 +414,36 @@
 
 .compareTable td:first-child {
   text-align: left;
-  width: 52%;
+  width: 54%;
 }
 
 .compareTable th {
-  padding: 14px 10px;
+  padding: 12px 8px;
   vertical-align: top;
 }
 
-/* Current product column */
 .colActive {
   background: #eff6ff;
   border-bottom: 2px solid #1e40af !important;
 }
 
-/* Other product column */
 .colOther {
   background: #f8fafc;
 }
 
-/* Column header text */
 .colName {
   display: block;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 800;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
   color: #0f172a;
 }
 
-.colActive .colName {
-  color: #1e40af;
-}
+.colActive .colName { color: #1e40af; }
 
 .colPrice {
   display: block;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 900;
   color: #0f172a;
   margin-bottom: 4px;
@@ -544,46 +451,33 @@
 
 .colGrade {
   display: inline-block;
-  font-size: 0.65rem;
+  font-size: 0.63rem;
   font-weight: 700;
-  padding: 2px 8px;
+  padding: 2px 7px;
   border-radius: 20px;
   background: rgba(0, 0, 0, 0.07);
   color: #475569;
 }
 
-/* Group header rows */
 .groupRow td {
   background: #f1f5f9;
-  font-size: 0.67rem;
+  font-size: 0.65rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #64748b;
-  padding: 7px 10px;
+  color: #94a3b8;
+  padding: 6px 8px;
   border-bottom: none;
   text-align: left;
 }
 
-/* Feature cells */
 .featureName {
   display: block;
-  font-weight: 700;
-  color: #1e293b;
-  font-size: 0.85rem;
-  line-height: 1.35;
+  font-weight: 600;
+  color: #334155;
+  font-size: 0.84rem;
 }
 
-.featureDesc {
-  display: block;
-  font-size: 0.72rem;
-  color: #94a3b8;
-  margin-top: 2px;
-  font-weight: 400;
-  line-height: 1.4;
-}
-
-/* Check / cross */
 .checkYes {
   color: #16a34a;
   font-weight: 900;
@@ -592,40 +486,44 @@
 
 .checkNo {
   color: #cbd5e1;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
-/* Upsell callout */
 .upsellCallout {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
-  border-radius: 10px;
-  padding: 14px 18px;
-}
-
-.upsellCallout p {
-  font-size: 0.82rem;
-  color: #1e3a8a;
-  font-weight: 600;
-  margin: 0;
-  line-height: 1.5;
-  flex: 1;
+  text-align: center;
+  padding-top: 4px;
 }
 
 .upsellLink {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   color: #1e40af;
-  font-weight: 800;
+  font-weight: 700;
   text-decoration: none;
-  white-space: nowrap;
+}
+
+.upsellLink:hover { color: #1e3a8a; }
+
+/* ── Footer ── */
+.footerLinks {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.backLink {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-weight: 600;
+  text-decoration: none;
   transition: color 0.15s;
 }
 
-.upsellLink:hover {
-  color: #1e3a8a;
+.backLink:hover { color: #0f172a; }
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .container { padding: 40px 16px 60px; }
+  .hero h1 { font-size: 1.6rem; }
+  .contextRow { gap: 20px; }
+  .ctaBox { padding: 24px 20px; }
 }

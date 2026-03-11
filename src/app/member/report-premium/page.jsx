@@ -7,15 +7,17 @@ import { isBetaMode } from '@/lib/feature-flags';
 import AssetShockCard from '@/components/report/AssetShockCard';
 import styles from './page.module.css';
 
-// R3 기본 협상 절감률 (shock_engine 기준)
 const NEGOTIATION_REDUCTION = 0.22;
 const COST_INCREASE_RATE    = 0.10;
 
 function calcSavings(expectedExtra) {
-  const expected_contribution    = expectedExtra * (1 + COST_INCREASE_RATE);
-  const comparison_contribution  = expected_contribution * (1 - NEGOTIATION_REDUCTION);
-  return Math.round((expected_contribution - comparison_contribution) * 10000); // 만원
+  const expected_contribution   = expectedExtra * (1 + COST_INCREASE_RATE);
+  const comparison_contribution = expected_contribution * (1 - NEGOTIATION_REDUCTION);
+  return Math.round((expected_contribution - comparison_contribution) * 10000);
 }
+
+const RISK_COLOR = { R1: '#16a34a', R2: '#d97706', R3: '#e63946', R4: '#b91c1c' };
+const RISK_LABEL = { R1: '안정', R2: '중위험', R3: '고위험', R4: '최고위험' };
 
 export default function PremiumReportPaywall() {
   const router = useRouter();
@@ -27,14 +29,12 @@ export default function PremiumReportPaywall() {
   const [loading, setLoading]               = useState(false);
   const [isPrivacyAgreed, setIsPrivacyAgreed] = useState(false);
   const [isRefundAgreed, setIsRefundAgreed]   = useState(false);
-  const [savings, setSavings]               = useState(null); // 만원 단위
+  const [savings, setSavings]               = useState(null);
   const [shareCopied, setShareCopied]       = useState(false);
   const [context, setContext]               = useState(null);
   const [leadCount, setLeadCount]           = useState(null);
   const [trafficSource, setTrafficSource]   = useState({});
 
-  // ── 공유 링크 생성 ───────────────────────────────────────────
-  // 프리미엄 페이지는 개인화 데이터 없음 — 리포트 유형 정보만 공유
   function handleShare() {
     const id = crypto.randomUUID();
     localStorage.setItem(`share_${id}`, JSON.stringify({ type: 'premium' }));
@@ -47,8 +47,6 @@ export default function PremiumReportPaywall() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-
-    // URL params take priority over localStorage (Fix 1)
     const assetParam = params.get('asset');
     const extraParam = params.get('extra');
     const gradeParam = params.get('grade');
@@ -60,18 +58,13 @@ export default function PremiumReportPaywall() {
         if (Number(extraParam) > 0) setSavings(calcSavings(Number(extraParam)));
         try { localStorage.setItem('basicReportContext', JSON.stringify(ctx)); } catch {}
       } else {
-        // Fallback: memberPrefill for savings
         try {
           const raw = localStorage.getItem('memberPrefill');
           if (raw) {
             const { expectedExtra } = JSON.parse(raw);
-            if (expectedExtra && Number(expectedExtra) > 0) {
-              setSavings(calcSavings(Number(expectedExtra)));
-            }
+            if (expectedExtra && Number(expectedExtra) > 0) setSavings(calcSavings(Number(expectedExtra)));
           }
         } catch {}
-
-        // Fallback: basicReportContext for context
         try {
           const raw = localStorage.getItem('basicReportContext');
           if (raw) {
@@ -137,7 +130,6 @@ export default function PremiumReportPaywall() {
       return;
     }
 
-    // 정식 출시 이후 — Toss Payments 결제
     try {
       const res = await fetch('/api/payments/prepare', {
         method:  'POST',
@@ -179,146 +171,57 @@ export default function PremiumReportPaywall() {
   return (
     <div className={styles.wrapper}>
 
-      {/* ── Section 1: 소개 ───────────────────────────────────────────── */}
+      {/* ── 1. 헤더 ── */}
       <section className={styles.intro}>
-        <p className={styles.eyebrow}>M-DEENO Prop-Logic™</p>
-        <h1 className={styles.title}>프리미엄 전략 리포트</h1>
+        <p className={styles.eyebrow}>M-DEENO 프리미엄 전략 리포트</p>
+        <h1 className={styles.title}>총회 전, 수천만원을<br />지킬 수 있습니다</h1>
         <p className={styles.subtitle}>
-          30페이지 심층 분석 · 협상 전략 · 총회 발언 스크립트 · 행동 타임라인
+          30페이지 심층 분석 · 협상 전략 · 총회 발언 스크립트 · 30일 행동 플랜
         </p>
-
         <ul className={styles.featureList}>
           <li>공사비 시나리오별 자산 잠식 구간 정밀 분석</li>
-          <li>위험등급 기반 협상 절감 시뮬레이션</li>
-          <li>총회 발언 스크립트 및 대응 질문 리스트</li>
-          <li>조합원 행동 타임라인 (30일 플랜)</li>
-          <li>전문가 수준의 McKinsey 스타일 보고서 형식</li>
+          <li>협상 전략 적용 시 예상 절감액 시뮬레이션</li>
+          <li>총회 발언 스크립트 및 검증 질문 리스트</li>
+          <li>조합 대응 타임라인 (30일 행동 플랜)</li>
+          <li>사업 구조 분석 및 원가 검증 방법</li>
         </ul>
       </section>
 
-      {/* ── Basic vs Premium 비교표 ── */}
-      <section className={styles.compareSection}>
-        <p className={styles.compareEyebrow}>리포트 선택 가이드</p>
-        <h3 className={styles.compareHeading}>프리미엄이 필요한 이유</h3>
-        <p className={styles.compareSubtitle}>R3·R4 등급은 수천만원이 걸린 총회 전략이 핵심입니다</p>
-
-        {/* 등급 기준 가이드 */}
-        <div className={styles.gradeGuide}>
-          <p className={styles.gradeGuideTitle}>위험 등급 기준 — 계산기에서 자동 산출</p>
-          <div className={styles.gradeGrid}>
-            {[
-              { grade: 'R1', label: '안정', color: '#16a34a',  desc: '추가 분담금이 자산의 20% 미만' },
-              { grade: 'R2', label: '중위험', color: '#d97706', desc: '자산의 20~30% 수준 부담' },
-              { grade: 'R3', label: '고위험', color: '#e63946', desc: '자산의 30~40% — 전략 필요' },
-              { grade: 'R4', label: '최고위험', color: '#b91c1c', desc: '자산의 40% 초과 — 자산 잠식 위험' },
-            ].map(({ grade, label, color, desc }) => (
-              <div key={grade} className={styles.gradeItem}>
-                <span className={styles.gradeBadge} style={{ background: color }}>{grade}</span>
-                <div>
-                  <span className={styles.gradeLabel}>{label}</span>
-                  <span className={styles.gradeDesc}>{desc}</span>
-                </div>
+      {/* ── 2. 내 분석 결과 + 절감 시뮬레이션 ── */}
+      {context && (
+        <section className={styles.contextSection}>
+          <div className={styles.contextCard}>
+            <p className={styles.contextLabel}>내 분석 결과</p>
+            <div className={styles.contextGrade} style={{ color: RISK_COLOR[context.riskGrade] }}>
+              {context.riskGrade}
+              <span className={styles.contextGradeLabel}>{RISK_LABEL[context.riskGrade]}</span>
+            </div>
+            <div className={styles.contextRow}>
+              <div className={styles.contextItem}>
+                <span>종전자산</span>
+                <strong>{context.assetValue}억원</strong>
               </div>
-            ))}
+              <div className={styles.contextItem}>
+                <span>예상 추가 분담금</span>
+                <strong>{context.expectedExtra}억원</strong>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <table className={styles.compareTable}>
-          <thead>
-            <tr>
-              <th></th>
-              <th className={styles.colOther}>
-                <span className={styles.colName}>기본 리포트</span>
-                <span className={styles.colPrice}>29,000원</span>
-                <span className={styles.colGrade}>R1 · R2 추천</span>
-              </th>
-              <th className={styles.colActive}>
-                <span className={styles.colName}>프리미엄 전략</span>
-                <span className={styles.colPrice}>99,000원</span>
-                <span className={styles.colGrade}>R3 · R4 추천</span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className={styles.groupRow}><td colSpan={3}>공통 포함</td></tr>
-            {[
-              ['분담금 시나리오 분석', '공사비 5·10·20% 상승 시 내 분담금 변화'],
-              ['자산 잠식 구간 예측', '내 자산이 줄어드는 공사비 상승률 계산'],
-              ['총회 핵심 질문 5개', '총회에서 바로 쓸 수 있는 검증 질문'],
-              ['조합 대응 체크리스트', '단계별 확인 사항 정리'],
-            ].map(([label, desc]) => (
-              <tr key={label}>
-                <td>
-                  <span className={styles.featureName}>{label}</span>
-                  <span className={styles.featureDesc}>{desc}</span>
-                </td>
-                <td className={styles.checkYes}>✓</td>
-                <td className={`${styles.colActive} ${styles.checkYes}`}>✓</td>
-              </tr>
-            ))}
-            <tr className={styles.groupRow}><td colSpan={3}>프리미엄 전용 전략</td></tr>
-            {[
-              ['협상 절감액 시뮬레이션', '전략 적용 시 절감 가능 금액 추정'],
-              ['총회 발언 스크립트', '즉시 사용 가능한 협상 발언 전문'],
-              ['30일 행동 타임라인', '총회 전 단계별 대응 일정표'],
-              ['30페이지 심층 분석', '컨설팅 수준의 사업 구조 분석'],
-            ].map(([label, desc]) => (
-              <tr key={label}>
-                <td>
-                  <span className={styles.featureName}>{label}</span>
-                  <span className={styles.featureDesc}>{desc}</span>
-                </td>
-                <td className={styles.checkNo}>✗</td>
-                <td className={`${styles.colActive} ${styles.checkYes}`}>✓</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className={styles.downsellNote}>
-          <span>R1·R2 등급이라면 </span>
-          <Link href="/member/report-basic" className={styles.downsellLink}>기본 리포트도 충분합니다 →</Link>
-        </div>
-      </section>
-
-      {/* ── Section 1.5: 콘텐츠 소개 + 절감 하이라이트 ─────────────────── */}
-      <section className={styles.contentSection}>
-        <p className={styles.contentSectionLabel}>Premium 리포트에서 확인할 수 있는 내용</p>
-        <ul className={styles.contentList}>
-          <li>총회 발언 스크립트</li>
-          <li>공사비 협상 전략</li>
-          <li>사업 구조 분석</li>
-          <li>조합 대응 전략</li>
-          <li>행동 로드맵</li>
-        </ul>
-
-        <div className={styles.savingsBlock}>
-          {savings !== null ? (
-            <>
+          {savings !== null && (
+            <div className={styles.savingsBlock}>
               <p className={styles.savingsLabel}>협상 전략 적용 시 예상 절감액</p>
-              <div className={styles.savingsNumber}>
-                -{savings.toLocaleString()}만원
-              </div>
-              <p className={styles.savingsNote}>
-                공사비 10% 상승 시나리오 기준 · 협상 성공 시 22% 절감 적용
-              </p>
-            </>
-          ) : (
-            <>
-              <p className={styles.savingsLabel}>협상 전략 적용 시 예상 절감율</p>
-              <div className={styles.savingsNumber}>최대 22%</div>
-              <p className={styles.savingsNote}>
-                내 분담금을 입력하면 실제 절감액을 계산해 드립니다
-              </p>
-            </>
+              <div className={styles.savingsNumber}>-{savings.toLocaleString()}만원</div>
+              <p className={styles.savingsNote}>공사비 10% 상승 시나리오 · 협상 성공 시 22% 절감 기준</p>
+            </div>
           )}
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* ── Section 2: 공개 미리보기 (2페이지) ──────────────────────────── */}
+      {/* ── 3. 리포트 미리보기 ── */}
       <section className={styles.previewSection}>
         <p className={styles.previewLabel}>리포트 미리보기</p>
 
-        {/* P1 — 표지 (다크) */}
         <div className={`${styles.reportPage} ${styles.reportPageDark}`}>
           <div className={styles.accentBar} />
           <p className={styles.pageLogoLight}>M — DEENO · Prop-Logic™</p>
@@ -331,12 +234,9 @@ export default function PremiumReportPaywall() {
             <span>수신인: 홍길동 조합원</span>
             <span>발행일: 2026.03.05</span>
           </div>
-          <span className={`${styles.riskBadge} ${styles.badgeR3}`}>
-            R3 — 고위험
-          </span>
+          <span className={`${styles.riskBadge} ${styles.badgeR3}`}>R3 — 고위험</span>
         </div>
 
-        {/* P2 — 핵심 위험 지표 */}
         <div className={styles.reportPage}>
           <p className={styles.pageEyebrow}>EXECUTIVE SUMMARY</p>
           <h3 className={styles.pageSectionTitle}>핵심 위험 지표</h3>
@@ -359,7 +259,7 @@ export default function PremiumReportPaywall() {
         </div>
       </section>
 
-      {/* ── Section 3: 잠긴 미리보기 ─────────────────────────────────────── */}
+      {/* ── 4. 잠긴 미리보기 ── */}
       <section className={styles.lockedSection}>
         <div className={`${styles.reportPage} ${styles.reportPageBlur}`}>
           <div className={styles.blurContent}>
@@ -370,12 +270,9 @@ export default function PremiumReportPaywall() {
             <div className={styles.blurLineShort} />
           </div>
           <div className={styles.blurOverlay}>
-            <p className={styles.blurOverlayText}>
-              전체 전략 리포트는 구매 후 확인 가능합니다.
-            </p>
+            <p className={styles.blurOverlayText}>전체 전략 리포트는 구매 후 확인 가능합니다.</p>
           </div>
         </div>
-
         <div className={`${styles.reportPage} ${styles.reportPageBlur}`}>
           <div className={styles.blurContent}>
             <p className={styles.pageEyebrow}>SECTION 03</p>
@@ -385,24 +282,12 @@ export default function PremiumReportPaywall() {
             <div className={styles.blurLineShort} />
           </div>
           <div className={styles.blurOverlay}>
-            <p className={styles.blurOverlayText}>
-              전체 전략 리포트는 구매 후 확인 가능합니다.
-            </p>
+            <p className={styles.blurOverlayText}>전체 전략 리포트는 구매 후 확인 가능합니다.</p>
           </div>
         </div>
       </section>
 
-      {/* ── 공유 ────────────────────────────────────────────────────────── */}
-      <section className={styles.shareSection}>
-        <p className={styles.shareDesc}>
-          이 분석 결과를 다른 조합원과 공유해보세요.
-        </p>
-        <button className={styles.shareBtn} onClick={handleShare}>
-          {shareCopied ? '링크가 복사되었습니다 ✓' : '분석 결과 공유하기'}
-        </button>
-      </section>
-
-      {/* ── Asset Shock Card ─────────────────────────────────────────────── */}
+      {/* ── 5. AssetShockCard ── */}
       {context && (
         <AssetShockCard
           assetValue={Number(context.assetValue)}
@@ -411,7 +296,7 @@ export default function PremiumReportPaywall() {
         />
       )}
 
-      {/* ── CTA ──────────────────────────────────────────────────────────── */}
+      {/* ── 6. CTA ── */}
       <section className={styles.ctaSection}>
         {submitted ? (
           <div className={styles.successBox}>
@@ -424,77 +309,143 @@ export default function PremiumReportPaywall() {
                 🚧 사전 신청 진행 중 · 6월 정식 출시 예정
               </div>
             )}
-            {leadCount !== null && leadCount > 0 && (
-              <p className={styles.socialProof}>
-                현재 {leadCount.toLocaleString()}명의 조합원이 분석을 완료했습니다.
-              </p>
-            )}
+
             <h2 className={styles.ctaTitle}>
               {isBetaMode() ? '프리미엄 사전 신청' : 'Premium 전략 리포트 구매'}
             </h2>
-            <p className={styles.ctaDesc}>
-              {isBetaMode()
-                ? '정가 149,000원 → 출시 특가 99,000원 · 6월 정식 출시 이후 결제 가능'
-                : '출시 특가 99,000원 (정가 149,000원) · 결제 완료 즉시 PDF가 자동 다운로드됩니다.'}
-            </p>
 
-            <div className={styles.ctaInputRow}>
-              <input
-                className={`${styles.ctaInput}${emailError ? ` ${styles.ctaInputError}` : ''}`}
-                type="email"
-                placeholder="이메일 주소"
-                value={email}
-                onChange={(e) => { setEmail(e.target.value); setEmailError(''); }}
-                autoComplete="email"
-              />
-              {emailError && (
-                <p className={styles.ctaError}>{emailError}</p>
-              )}
-              <input
-                className={`${styles.ctaInput}${phoneError ? ` ${styles.ctaInputError}` : ''}`}
-                type="tel"
-                placeholder="휴대폰 번호 (선택 · 예: 01012345678)"
-                value={phone}
-                onChange={(e) => { setPhone(e.target.value); setPhoneError(''); }}
-                autoComplete="tel"
-              />
-              {phoneError && (
-                <p className={styles.ctaError}>{phoneError}</p>
-              )}
-              <button
-                className={styles.ctaBtn}
-                type="submit"
-                disabled={loading || !isPrivacyAgreed || !isRefundAgreed || !email.trim()}
-              >
-                {loading ? '처리 중...' : isBetaMode() ? '프리미엄 사전 신청하기' : 'Premium 전략 리포트 구매 →'}
-              </button>
+            <div className={styles.ctaPriceRow}>
+              <span className={styles.ctaPriceFinal}>99,000원</span>
+              <span className={styles.ctaPriceOriginal}>정가 149,000원</span>
+              <span className={styles.ctaPriceBadge}>{isBetaMode() ? '베타가' : '출시 특가'}</span>
             </div>
+
+            {leadCount !== null && leadCount > 0 && (
+              <p className={styles.socialProof}>
+                현재 {leadCount.toLocaleString()}명의 조합원이 분석을 완료했습니다
+              </p>
+            )}
+
+            <input
+              className={`${styles.ctaInput}${emailError ? ` ${styles.ctaInputError}` : ''}`}
+              type="email"
+              placeholder="이메일 주소"
+              value={email}
+              onChange={(e) => { setEmail(e.target.value); setEmailError(''); }}
+              autoComplete="email"
+            />
+            {emailError && <p className={styles.ctaError}>{emailError}</p>}
+
+            <input
+              className={`${styles.ctaInput}${phoneError ? ` ${styles.ctaInputError}` : ''}`}
+              type="tel"
+              placeholder="휴대폰 번호 (선택 · 예: 01012345678)"
+              value={phone}
+              onChange={(e) => { setPhone(e.target.value); setPhoneError(''); }}
+              autoComplete="tel"
+            />
+            {phoneError && <p className={styles.ctaError}>{phoneError}</p>}
 
             <div className={styles.consentBox}>
               <label className={styles.consentLabel}>
-                <input
-                  type="checkbox"
-                  checked={isPrivacyAgreed}
-                  onChange={(e) => setIsPrivacyAgreed(e.target.checked)}
-                />
-                <span>[필수] 개인정보 수집 및 이용에 동의합니다. (이메일: 리포트 발송 목적)</span>
+                <input type="checkbox" checked={isPrivacyAgreed} onChange={(e) => setIsPrivacyAgreed(e.target.checked)} />
+                <span>[필수] 개인정보 수집 및 이용 동의 (이메일: 리포트 발송)</span>
               </label>
               <label className={styles.consentLabel}>
-                <input
-                  type="checkbox"
-                  checked={isRefundAgreed}
-                  onChange={(e) => setIsRefundAgreed(e.target.checked)}
-                />
-                <span>[필수] 디지털 상품(PDF) 특성상 생성/다운로드 이후 환불이 불가함에 동의합니다.</span>
+                <input type="checkbox" checked={isRefundAgreed} onChange={(e) => setIsRefundAgreed(e.target.checked)} />
+                <span>[필수] 디지털 상품 특성상 다운로드 이후 환불 불가에 동의</span>
               </label>
             </div>
 
+            <button
+              className={styles.ctaBtn}
+              type="submit"
+              disabled={loading || !isPrivacyAgreed || !isRefundAgreed || !email.trim()}
+            >
+              {loading ? '처리 중...' : isBetaMode() ? '프리미엄 사전 신청하기' : 'Premium 전략 리포트 구매하기 →'}
+            </button>
+
             <p className={styles.ctaNote}>
-              {isBetaMode() ? '정가 149,000원 · 출시 특가 99,000원' : '출시 특가 99,000원 (정가 149,000원)'}
+              {isBetaMode()
+                ? '정식 출시(6/15) 이후 결제 링크를 이메일로 발송합니다'
+                : '결제 완료 즉시 입력하신 이메일로 PDF가 발송됩니다'}
+            </p>
+
+            <p className={styles.ctaDisclaimer}>
+              본 리포트는 참고용 분석 자료이며 투자·법률·세무 자문이 아닙니다.
+              이메일은 리포트 발송 목적으로만 사용됩니다.
             </p>
           </form>
         )}
       </section>
+
+      {/* ── 7. 비교표 ── */}
+      <section className={styles.compareSection}>
+        <p className={styles.compareEyebrow}>리포트 비교</p>
+        <h3 className={styles.compareHeading}>기본 vs 프리미엄</h3>
+        <table className={styles.compareTable}>
+          <thead>
+            <tr>
+              <th></th>
+              <th className={styles.colOther}>
+                <span className={styles.colName}>기본</span>
+                <span className={styles.colPrice}>29,000원</span>
+                <span className={styles.colGrade}>R1 · R2</span>
+              </th>
+              <th className={styles.colActive}>
+                <span className={styles.colName}>프리미엄</span>
+                <span className={styles.colPrice}>99,000원</span>
+                <span className={styles.colGrade}>R3 · R4</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className={styles.groupRow}><td colSpan={3}>공통</td></tr>
+            {[
+              '분담금 시나리오 분석',
+              '자산 잠식 구간 예측',
+              '총회 핵심 질문 5개',
+              '조합 대응 체크리스트',
+            ].map((label) => (
+              <tr key={label}>
+                <td><span className={styles.featureName}>{label}</span></td>
+                <td className={styles.checkYes}>✓</td>
+                <td className={`${styles.colActive} ${styles.checkYes}`}>✓</td>
+              </tr>
+            ))}
+            <tr className={styles.groupRow}><td colSpan={3}>프리미엄 전용</td></tr>
+            {[
+              '협상 절감액 시뮬레이션',
+              '총회 발언 스크립트',
+              '30일 행동 타임라인',
+              '30페이지 심층 분석',
+            ].map((label) => (
+              <tr key={label}>
+                <td><span className={styles.featureName}>{label}</span></td>
+                <td className={styles.checkNo}>✗</td>
+                <td className={`${styles.colActive} ${styles.checkYes}`}>✓</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className={styles.downsellNote}>
+          <Link href="/member/report-basic" className={styles.downsellLink}>
+            R1·R2 등급이라면 기본 리포트로도 충분합니다 →
+          </Link>
+        </div>
+      </section>
+
+      {/* ── 8. 공유 (CTA 이후) ── */}
+      <section className={styles.shareSection}>
+        <p className={styles.shareDesc}>이 분석 결과를 다른 조합원과 공유해보세요.</p>
+        <button className={styles.shareBtn} onClick={handleShare}>
+          {shareCopied ? '링크가 복사되었습니다 ✓' : '분석 결과 공유하기'}
+        </button>
+      </section>
+
+      <div className={styles.footerLinks}>
+        <Link href="/member" className={styles.backLink}>← 분담금 다시 계산하기</Link>
+      </div>
 
     </div>
   );

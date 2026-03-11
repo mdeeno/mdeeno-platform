@@ -295,7 +295,7 @@ export default function ShockCalculatorPage() {
               <label className={styles.label} htmlFor="asset_value">
                 종전자산 평가액 <span className={styles.req}>*</span>
               </label>
-              <p className={styles.fieldHint}>관리처분계획서에 기재된 내 아파트의 감정평가 금액</p>
+              <p className={styles.fieldHint}>내 아파트의 감정평가 금액</p>
               <div className={styles.inputWrap}>
                 <input
                   className={styles.input}
@@ -304,7 +304,7 @@ export default function ShockCalculatorPage() {
                   type="number"
                   value={form.asset_value}
                   onChange={handleChange}
-                  placeholder="5를 입력해주세요"
+                  placeholder="금액를 입력해주세요"
                   min="0.1"
                   step="0.1"
                   required
@@ -326,7 +326,7 @@ export default function ShockCalculatorPage() {
                   type="number"
                   value={form.expected_extra}
                   onChange={handleChange}
-                  placeholder="1.2를 입력해주세요"
+                  placeholder="금액를 입력해주세요"
                   min="0.1"
                   step="0.1"
                   required
@@ -395,7 +395,7 @@ export default function ShockCalculatorPage() {
                 type="text"
                 value={form.member_name}
                 onChange={handleChange}
-                placeholder="홍길동을 입력해주세요"
+                placeholder="이름을 입력해주세요"
                 autoComplete="name"
                 required
               />
@@ -412,7 +412,7 @@ export default function ShockCalculatorPage() {
                 type="text"
                 value={form.complex_name}
                 onChange={handleChange}
-                placeholder="○○아파트를 입력해주세요"
+                placeholder="단지명를 입력해주세요"
                 required
               />
             </div>
@@ -428,7 +428,7 @@ export default function ShockCalculatorPage() {
                 type="text"
                 value={form.location}
                 onChange={handleChange}
-                placeholder="서울 강남구를 입력해주세요"
+                placeholder="00시 00구를 입력해주세요"
                 required
               />
             </div>
@@ -445,7 +445,7 @@ export default function ShockCalculatorPage() {
                   type="number"
                   value={form.construction_cost}
                   onChange={handleChange}
-                  placeholder="900을 입력해주세요"
+                  placeholder="공사비를 입력해주세요"
                   min="1"
                   step="10"
                   required

@@ -7,7 +7,7 @@
 /* ── Section 1: 소개 ──────────────────────────────────────── */
 .intro {
   text-align: center;
-  margin-bottom: 56px;
+  margin-bottom: 32px;
 }
 
 .eyebrow {
@@ -59,6 +59,77 @@
   color: #16a34a;
   font-size: 0.75rem;
   top: 1px;
+}
+
+/* ── Context + Savings ────────────────────────────────────── */
+.contextSection {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contextCard {
+  background: #f0f9ff;
+  border: 1.5px solid #bae6fd;
+  border-radius: 14px;
+  padding: 24px;
+  text-align: center;
+}
+
+.contextLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0284c7;
+  margin-bottom: 12px;
+}
+
+.contextGrade {
+  font-size: 2.4rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 10px;
+}
+
+.contextGradeLabel {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.contextRow {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #bae6fd;
+}
+
+.contextItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.contextItem span {
+  font-size: 0.72rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.contextItem strong {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #0f172a;
 }
 
 /* ── Section 2 & 3: 리포트 미리보기 ──────────────────────── */
@@ -272,31 +343,58 @@
 }
 
 .ctaTitle {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 900;
   color: #f1f5f9;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
+  text-align: center;
 }
 
-.ctaDesc {
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.55);
-  margin-bottom: 24px;
+.ctaPriceRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.ctaPriceFinal {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.ctaPriceOriginal {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 500;
+  text-decoration: line-through;
+}
+
+.ctaPriceBadge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: #1e40af;
+  color: #ffffff;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.ctaDisclaimer {
+  font-size: 0.73rem;
+  color: rgba(255, 255, 255, 0.2);
   line-height: 1.6;
+  text-align: center;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .ctaForm {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0;
-}
-
-.ctaInputRow {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
 
 .ctaInput {
@@ -310,6 +408,7 @@
   outline: none;
   transition: border-color 0.15s;
   box-sizing: border-box;
+  margin-bottom: 10px;
 }
 
 .ctaInput::placeholder {
@@ -371,7 +470,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 16px;
+  margin-bottom: 18px;
   text-align: left;
 }
 
@@ -758,5 +857,24 @@
 }
 
 .downsellLink:hover {
+  color: #0f172a;
+}
+
+/* ── Footer ── */
+.footerLinks {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.backLink {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.backLink:hover {
   color: #0f172a;
 }
