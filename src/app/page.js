@@ -73,6 +73,7 @@ export default function Home() {
           <Link href="/member" className={styles.urgencyBtn}>
             내 분담금 분석 시작하기
           </Link>
+          <p className={styles.urgencyNote}>무료 · 로그인 없음 · 30초 완료</p>
         </div>
       </section>
 

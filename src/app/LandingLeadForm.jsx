@@ -44,10 +44,11 @@ export default function LandingLeadForm() {
         ) : (
           <>
             <p className={styles.landingLeadTitle}>
-              6월 정식 출시 알림 받기
+              리포트 출시 알림 · 사전 신청
             </p>
             <p className={styles.landingLeadDesc}>
-              베타 가격(최대 34% 할인)은 사전 신청자에게만 제공됩니다.
+              6월 정식 출시 시 이메일로 안내드립니다.<br />
+              사전 신청자에게는 기본 25% · 프리미엄 34% 할인가를 제공합니다.
             </p>
             <form className={styles.landingLeadForm} onSubmit={handleSubmit} noValidate>
               <input

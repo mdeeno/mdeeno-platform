@@ -82,14 +82,17 @@ export default function ShockCalculatorPage() {
     if (error) setError(null);
   }
 
+  const betaMode = isBetaMode();
   const isValid =
     form.expected_extra     !== '' && Number(form.expected_extra)     > 0 &&
     form.asset_value        !== '' && Number(form.asset_value)        > 0 &&
     form.cost_increase_rate !== '' && Number(form.cost_increase_rate) >= 0 &&
-    form.member_name.trim()   !== '' &&
-    form.complex_name.trim()  !== '' &&
-    form.location.trim()      !== '' &&
-    form.construction_cost  !== '' && Number(form.construction_cost)  > 0;
+    (betaMode || (
+      form.member_name.trim()   !== '' &&
+      form.complex_name.trim()  !== '' &&
+      form.location.trim()      !== '' &&
+      form.construction_cost  !== '' && Number(form.construction_cost)  > 0
+    ));
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -319,8 +322,8 @@ export default function ShockCalculatorPage() {
           </div>
         </div>
 
-        {/* ── Personalization Fields ── */}
-        <div className={styles.formCard}>
+        {/* ── Personalization Fields (비베타 전용 — PDF 생성에 필요) ── */}
+        {!betaMode && <div className={styles.formCard}>
           <p className={styles.formSectionLabel}>리포트 개인화</p>
 
           <div className={styles.fieldGrid}>
@@ -394,7 +397,7 @@ export default function ShockCalculatorPage() {
               </div>
             </div>
           </div>
-        </div>
+        </div>}
 
         {error && <div className={styles.errorBox}>{error}</div>}
 

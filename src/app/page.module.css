@@ -928,6 +928,12 @@
   transform: translateY(-1px);
 }
 
+.urgencyNote {
+  margin-top: 12px;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
 /* ── Landing Lead Capture ── */
 .landingLead {
   padding: 72px 20px;
