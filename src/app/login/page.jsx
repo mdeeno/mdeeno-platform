@@ -14,10 +14,10 @@ export default function LoginComingSoonPage() {
         <h1 className={styles.title}>로그인 기능 준비 중</h1>
         <p className={styles.desc}>
           회원 기능은 현재 개발 중입니다.<br />
-          지금은 로그인 없이도 무료 분석을 이용하실 수 있습니다.
+          지금은 로그인 없이도 분담금 분석을 이용하실 수 있습니다.
         </p>
         <Link href="/member" className={styles.ctaBtn}>
-          무료 분담금 분석 시작하기 →
+          분담금 분석 시작하기 →
         </Link>
         <Link href="/" className={styles.backLink}>
           ← 홈으로 돌아가기

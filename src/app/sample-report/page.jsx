@@ -1,4 +1,10 @@
+import Link from 'next/link';
 import styles from './page.module.css';
+
+export const metadata = {
+  title: '리포트 샘플 | M-DEENO',
+  description: '재건축 분담금 리스크 분석 리포트 샘플을 확인하세요.',
+};
 
 export default function SampleReport() {
   return (
@@ -112,6 +118,25 @@ export default function SampleReport() {
           </strong>
         </div>
         <br />
+
+        {/* 내 분담금 분석 CTA */}
+        <div style={{ textAlign: 'center', margin: '24px 0 8px' }}>
+          <Link
+            href="/member"
+            style={{
+              display: 'inline-block',
+              padding: '12px 28px',
+              background: '#1e40af',
+              color: '#fff',
+              fontWeight: 800,
+              fontSize: '0.95rem',
+              borderRadius: '8px',
+              textDecoration: 'none',
+            }}
+          >
+            내 분담금 직접 분석하기 →
+          </Link>
+        </div>
 
         {/* 푸터 */}
         <div className={styles.footer}>

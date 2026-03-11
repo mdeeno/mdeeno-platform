@@ -87,7 +87,7 @@ function PaymentSuccessContent() {
           <li>⏱️ 최대 5분 이내 발송됩니다</li>
         </ul>
         <p className={styles.supportNote}>
-          30분 이상 미수신 시 support@mdeeno.com으로 문의해 주세요.
+          10분 이상 미수신 시 support@mdeeno.com으로 문의해 주세요.
         </p>
         <Link href="/" className={styles.homeBtn}>
           홈으로 돌아가기
