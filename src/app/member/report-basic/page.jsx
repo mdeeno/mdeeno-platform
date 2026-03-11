@@ -131,8 +131,10 @@ export default function ReportBasicPage() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? '결제 준비에 실패했습니다.');
 
+      const tossKey = process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY;
+      if (!tossKey) throw new Error('결제 설정이 완료되지 않았습니다. 고객센터로 문의해 주세요.');
       const { loadTossPayments } = await import('@tosspayments/tosspayments-sdk');
-      const toss = await loadTossPayments(process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY);
+      const toss = await loadTossPayments(tossKey);
       await toss.requestPayment({
         method:        '카드',
         amount:        { currency: 'KRW', value: data.amount },
