@@ -15,8 +15,8 @@ export default function ReportsPage() {
         <p className={styles.eyebrow}>M-DEENO Prop-Logic™</p>
         <h1 className={styles.title}>리포트 소개</h1>
         <p className={styles.desc}>
-          조합원의 자산 기준으로 공사비 리스크를 분석하고<br />
-          총회 대응 전략까지 제공하는 컨설팅 리포트입니다.
+          내 분담금이 얼마나 위험한지 수치로 확인하고<br />
+          총회 당일 쓸 수 있는 대응 전략까지 담았습니다.
         </p>
         <Link href="/member" className={styles.ctaBtn}>
           무료 계산기로 먼저 분석하기 →
