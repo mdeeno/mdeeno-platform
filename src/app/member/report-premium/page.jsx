@@ -349,7 +349,7 @@ export default function PremiumReportPaywall() {
       <section className={styles.ctaSection}>
         {submitted ? (
           <div className={styles.successBox}>
-            신청이 접수되었습니다. 출시 특가가 적용됩니다 — 6월 정식 출시 시 리포트를 발송해드립니다.
+            신청이 접수되었습니다. 6월 정식 출시 시 출시 특가 결제 링크를 이메일로 보내드립니다.
           </div>
         ) : (
           <form className={styles.ctaForm} onSubmit={handlePurchase} noValidate>

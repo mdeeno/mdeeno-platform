@@ -571,7 +571,7 @@ export default function ShockCalculatorPage() {
                         신청 처리 중...
                       </span>
                     ) : betaDone ? (
-                      '베타 신청 완료 ✓'
+                      '사전 신청 완료 ✓'
                     ) : (
                       '사전 신청하기 →'
                     )}
@@ -746,7 +746,7 @@ export default function ShockCalculatorPage() {
               )}
 
               <button className={styles.modalSubmitBtn} type="submit">
-                {isBetaMode() ? '베타 신청하기' : '리포트 생성하기'}
+                {isBetaMode() ? '사전 신청하기' : '리포트 생성하기'}
               </button>
               <button
                 className={styles.modalCancelBtn}
