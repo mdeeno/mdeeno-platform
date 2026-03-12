@@ -334,7 +334,7 @@ export default function ReportSamplesSection() {
                   </span>
                 </p>
                 <p className={styles.sampleCardDesc}>
-                  공사비 시나리오 분석 · 분담금 위험도 진단 · 총회 대응 질문 리스트
+                  5페이지 핵심 진단 · 공사비 시나리오별 자산 잠식률 · 총회 대응 질문 5가지 자동 생성
                 </p>
                 <div className={styles.sampleCardBtns}>
                   <button

@@ -12,11 +12,10 @@ const RISK_COLOR = { R1: '#16a34a', R2: '#d97706', R3: '#e63946', R4: '#b91c1c' 
 const RISK_LABEL = { R1: '안정', R2: '중위험', R3: '고위험', R4: '최고위험' };
 
 const REPORT_CONTENTS = [
-  { icon: '📊', title: '공사비 시나리오 분석', desc: '5% · 10% · 20% 상승 시 내 분담금 변화' },
-  { icon: '⚠️', title: '자산 잠식 시점 계산', desc: '내 자산이 줄어드는 공사비 상승률 임계점' },
-  { icon: '💬', title: '총회 핵심 질문 5개', desc: '총회장에서 바로 쓸 수 있는 검증 질문' },
-  { icon: '✅', title: '조합 대응 체크리스트', desc: '단계별 확인 사항 정리' },
-  { icon: '📖', title: '분담금 구조 해설', desc: '핵심 용어 정리 및 계산 구조 설명' },
+  { icon: '📊', title: '공사비 상승 영향 분석 (위험 점수)', desc: '0% · 5% · 10% · 20% 상승 시 내 자산에서 빠져나가는 비율(잠식률) 변화' },
+  { icon: '💸', title: '추가 부담금 시나리오', desc: '공사비가 오를수록 내가 얼마나 더 내야 하는지 연봉 기준으로 환산' },
+  { icon: '⚠️', title: '내 자산 위험 시점 계산', desc: '자산의 20% · 30% · 50%가 빠져나가는 공사비 상승률 임계점 역산' },
+  { icon: '💬', title: '총회 핵심 질문 5가지 자동 생성', desc: '내 위험 등급과 손실 규모에 맞춰 자동 생성된 검증 질문 — 총회 당일 그대로 사용 가능' },
 ];
 
 export default function ReportBasicPage() {
@@ -153,11 +152,11 @@ export default function ReportBasicPage() {
 
       {/* ── 1. Header ── */}
       <div className={styles.hero}>
-        <p className={styles.eyebrow}>M-DEENO 기본 리포트</p>
-        <h1>내 분담금 리스크,<br />데이터로 검증하세요</h1>
+        <p className={styles.eyebrow}>M-DEENO Prop-Logic™ — 기본 리포트</p>
+        <h1>공사비가 오르면<br />내가 얼마나 더 내야 하나</h1>
         <p className={styles.subtitle}>
-          공사비 상승 시나리오별 자산 잠식 시점과<br />
-          총회 대응 전략을 담은 분석 리포트
+          공사비 상승 시나리오별 추가 부담금과 내 자산 위험 시점을<br />
+          5페이지로 정리한 핵심 진단 리포트
         </p>
       </div>
 
@@ -210,7 +209,7 @@ export default function ReportBasicPage() {
 
       {/* ── 5. 리포트 포함 내용 ── */}
       <div className={styles.contentsCard}>
-        <p className={styles.contentsHeading}>기본 리포트에 포함된 내용</p>
+        <p className={styles.contentsHeading}>5페이지 기본 리포트에 포함된 내용</p>
         <ul className={styles.contentsList}>
           {REPORT_CONTENTS.map((item) => (
             <li key={item.title} className={styles.contentsItem}>
