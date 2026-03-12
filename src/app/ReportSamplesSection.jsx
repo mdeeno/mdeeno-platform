@@ -322,10 +322,10 @@ export default function ReportSamplesSection() {
                 <p className={styles.sampleCoverEyebrow}>M-DEENO</p>
                 <p className={styles.sampleCoverTitle}>베이직 리포트</p>
                 <p className={styles.sampleCoverSub}>분담금 위험도 분석</p>
-                <span className={`${styles.sampleRiskBadge} ${styles.badgeR2}`}>R2</span>
+                <span className={`${styles.sampleRiskBadge} ${styles.badgeR2}`}>R2 — 중위험</span>
               </div>
               <div className={styles.sampleCardBody}>
-                <p className={styles.sampleCardLabel}>베이직 리포트</p>
+                <p className={styles.sampleCardLabel}>R1–R2 위험 등급 대상 · 분담금 리스크 파악이 목적</p>
                 <p className={styles.sampleCardPrice}>
                   <span className={styles.officialPrice}>39,000원</span>{' '}
                   29,000원{' '}
@@ -333,15 +333,17 @@ export default function ReportSamplesSection() {
                     {isBetaMode() ? '사전 신청가' : '출시 특가'}
                   </span>
                 </p>
-                <p className={styles.sampleCardDesc}>
-                  5페이지 핵심 진단 · 공사비 시나리오별 자산 잠식률 · 총회 대응 질문 5가지 자동 생성
-                </p>
+                <ul className={styles.sampleCardFeatures}>
+                  <li>시나리오별 분담금 자동 계산 (5페이지)</li>
+                  <li>자산 잠식 임계점 분석</li>
+                  <li>총회 대응 핵심 질문 5가지</li>
+                </ul>
                 <div className={styles.sampleCardBtns}>
                   <button
                     className={styles.previewBtn}
                     onClick={() => setModalReport('basic')}
                   >
-                    미리보기
+                    샘플 보기
                   </button>
                   <Link
                     href={isBetaMode() ? '/member' : '/member/report-basic'}
@@ -359,10 +361,10 @@ export default function ReportSamplesSection() {
                 <p className={styles.sampleCoverEyebrowDark}>M-DEENO</p>
                 <p className={styles.sampleCoverTitleDark}>프리미엄 전략 리포트</p>
                 <p className={styles.sampleCoverSubDark}>총회 대응 전략 패키지</p>
-                <span className={`${styles.sampleRiskBadge} ${styles.badgeR3}`}>R3</span>
+                <span className={`${styles.sampleRiskBadge} ${styles.badgeR3}`}>R3 — 고위험</span>
               </div>
               <div className={styles.sampleCardBody}>
-                <p className={styles.sampleCardLabel}>프리미엄 전략 리포트</p>
+                <p className={styles.sampleCardLabel}>R3–R4 위험 등급 대상 · 총회 전 실전 전략 필요</p>
                 <p className={styles.sampleCardPrice}>
                   <span className={styles.officialPrice}>149,000원</span>{' '}
                   99,000원{' '}
@@ -370,15 +372,17 @@ export default function ReportSamplesSection() {
                     {isBetaMode() ? '사전 신청가' : '출시 특가'}
                   </span>
                 </p>
-                <p className={styles.sampleCardDesc}>
-                  20페이지 이상 심층 분석 · 협상 전략 · 총회 발언 스크립트 · 행동 타임라인
-                </p>
+                <ul className={styles.sampleCardFeatures}>
+                  <li>20페이지 이상 심층 분석</li>
+                  <li>협상 절감 시뮬레이션 + 실행 스크립트</li>
+                  <li>총회 발언문 5종 · 행동 타임라인</li>
+                </ul>
                 <div className={styles.sampleCardBtns}>
                   <button
                     className={styles.previewBtn}
                     onClick={() => setModalReport('premium')}
                   >
-                    미리보기
+                    샘플 보기
                   </button>
                   <Link
                     href={isBetaMode() ? '/member' : '/member/report-premium'}
