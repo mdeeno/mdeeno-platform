@@ -32,6 +32,7 @@ export default function PremiumReportPaywall() {
   const [savings, setSavings]               = useState(null);
   const [shareCopied, setShareCopied]       = useState(false);
   const [context, setContext]               = useState(null);
+  const [contextLoading, setContextLoading] = useState(true);
   const [leadCount, setLeadCount]           = useState(null);
   const [trafficSource, setTrafficSource]   = useState({});
 
@@ -71,10 +72,12 @@ export default function PremiumReportPaywall() {
             setContext(JSON.parse(raw));
           } else {
             router.push('/member');
+            return;
           }
         } catch {}
       }
     } catch {}
+    setContextLoading(false);
 
     fetch('/api/lead-count')
       .then((r) => r.json())
@@ -89,6 +92,10 @@ export default function PremiumReportPaywall() {
   }, []);
 
   const PHONE_RE = /^010\d{7,8}$/;
+  const erosionRate = context
+    ? ((Number(context.expectedExtra) / Number(context.assetValue)) * 100).toFixed(1)
+    : null;
+  const isCTADisabled = loading || !isPrivacyAgreed || (!isBetaMode() && !isRefundAgreed) || !email.trim();
 
   async function handlePurchase(e) {
     e.preventDefault();
@@ -165,6 +172,14 @@ export default function PremiumReportPaywall() {
     } finally {
       setLoading(false);
     }
+  }
+
+  if (contextLoading) {
+    return (
+      <div className={styles.wrapper}>
+        <p className={styles.loadingText}>분석 결과를 불러오는 중...</p>
+      </div>
+    );
   }
 
   return (
@@ -371,7 +386,13 @@ export default function PremiumReportPaywall() {
       <section className={styles.ctaSection}>
         {submitted ? (
           <div className={styles.successBox}>
-            신청이 접수되었습니다. 6월 정식 출시 시 출시 특가 결제 링크를 이메일로 보내드립니다.
+            <p className={styles.successTitle}>사전 신청이 완료되었습니다 ✓</p>
+            <p className={styles.successDesc}>
+              6월 정식 출시 시 출시 특가 결제 링크를 이메일로 보내드립니다.
+            </p>
+            <Link href="/member" className={styles.successCalcBtn}>
+              다시 계산해보기 →
+            </Link>
           </div>
         ) : (
           <form className={styles.ctaForm} onSubmit={handlePurchase} noValidate>
@@ -435,10 +456,17 @@ export default function PremiumReportPaywall() {
             <button
               className={styles.ctaBtn}
               type="submit"
-              disabled={loading || !isPrivacyAgreed || (!isBetaMode() && !isRefundAgreed) || !email.trim()}
+              disabled={isCTADisabled}
             >
               {loading ? '처리 중...' : isBetaMode() ? '사전 신청하기' : '프리미엄 전략 리포트 구매하기 →'}
             </button>
+            {isCTADisabled && !loading && (
+              <p className={styles.ctaHint}>
+                {!email.trim()
+                  ? '이메일을 입력하면 신청 버튼이 활성화됩니다'
+                  : '위 동의 항목을 체크하면 신청 버튼이 활성화됩니다'}
+              </p>
+            )}
 
             <p className={styles.ctaNote}>
               {isBetaMode()
