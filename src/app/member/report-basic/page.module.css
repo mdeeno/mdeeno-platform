@@ -4,6 +4,14 @@
   padding: 56px 20px 80px;
 }
 
+/* ── Loading ── */
+.loadingText {
+  text-align: center;
+  padding: 80px 0;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
 /* ── Hero ── */
 .hero {
   text-align: center;
@@ -229,7 +237,22 @@
   font-size: 0.875rem;
   color: #166534;
   line-height: 1.6;
+  margin-bottom: 16px;
 }
+
+.successCalcBtn {
+  display: inline-block;
+  padding: 10px 22px;
+  background: #1e40af;
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.successCalcBtn:hover { background: #1e3a8a; }
 
 .betaBadge {
   background: #fef9c3;
@@ -375,6 +398,14 @@
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+}
+
+.ctaHint {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+  margin-top: -8px;
+  margin-bottom: 12px;
 }
 
 .ctaNote {

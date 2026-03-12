@@ -21,6 +21,7 @@ const REPORT_CONTENTS = [
 export default function ReportBasicPage() {
   const router = useRouter();
   const [context, setContext]               = useState(null);
+  const [contextLoading, setContextLoading] = useState(true);
   const [loading, setLoading]               = useState(false);
   const [email, setEmail]                   = useState('');
   const [emailError, setEmailError]         = useState('');
@@ -50,9 +51,11 @@ export default function ReportBasicPage() {
           setContext(JSON.parse(raw));
         } else {
           router.push('/member');
+          return;
         }
       }
     } catch {}
+    setContextLoading(false);
 
     fetch('/api/lead-count')
       .then((r) => r.json())
@@ -68,6 +71,10 @@ export default function ReportBasicPage() {
 
   const PHONE_RE = /^010\d{7,8}$/;
   const isHighRisk = context?.riskGrade === 'R3' || context?.riskGrade === 'R4';
+  const erosionRate = context
+    ? ((Number(context.expectedExtra) / Number(context.assetValue)) * 100).toFixed(1)
+    : null;
+  const isCTADisabled = loading || !isPrivacyAgreed || (!isBetaMode() && !isRefundAgreed) || !email.trim();
 
   const handlePurchase = async () => {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
@@ -147,6 +154,14 @@ export default function ReportBasicPage() {
     }
   };
 
+  if (contextLoading) {
+    return (
+      <div className={styles.container}>
+        <p className={styles.loadingText}>분석 결과를 불러오는 중...</p>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
 
@@ -188,7 +203,7 @@ export default function ReportBasicPage() {
             {RISK_LABEL[context.riskGrade]}({context.riskGrade}) 등급 — 베이직 리포트로는 부족합니다
           </p>
           <p className={styles.premiumNudgeDesc}>
-            자산의 {context.riskGrade === 'R4' ? '40% 초과' : '30~40%'}에 달하는 리스크는
+            자산 대비 분담금 비율 <strong>{erosionRate}%</strong>에 달하는 리스크는
             협상 전략과 총회 발언 스크립트 없이 대응하기 어렵습니다.
           </p>
           <Link href="/member/report-premium" className={styles.premiumNudgeBtn}>
@@ -231,6 +246,9 @@ export default function ReportBasicPage() {
             <p className={styles.successDesc}>
               6월 정식 출시 시 출시 특가 결제 링크를 이메일로 보내드립니다.
             </p>
+            <Link href="/member" className={styles.successCalcBtn}>
+              다시 계산해보기 →
+            </Link>
           </div>
         ) : (
         <>
@@ -309,6 +327,13 @@ export default function ReportBasicPage() {
           본 리포트는 참고용 분석 자료이며 투자·법률·세무 자문이 아닙니다.
           이메일은 리포트 발송 목적으로만 사용됩니다.
         </p>
+        {isCTADisabled && !loading && (
+          <p className={styles.ctaHint}>
+            {!email.trim()
+              ? '이메일을 입력하면 신청 버튼이 활성화됩니다'
+              : '위 동의 항목을 체크하면 신청 버튼이 활성화됩니다'}
+          </p>
+        )}
         {submitError && <p className={styles.fieldError}>{submitError}</p>}
         </>
         )}
