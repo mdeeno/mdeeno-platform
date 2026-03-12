@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@supabase/supabase-js';
 import { resend, FROM } from '@/lib/resend';
 import { buildEmail1 } from '@/lib/emails/email1-welcome';
 
@@ -21,6 +21,8 @@ export async function POST(req) {
 
   const record = {
     email:             email.trim().toLowerCase().slice(0, 254),
+    product_type:      'basic_beta',
+    beta:              true,
     asset_value:       typeof asset_value       === 'number' ? asset_value       : null,
     expected_extra:    typeof expected_extra    === 'number' ? expected_extra    : null,
     risk_grade:        typeof risk_grade        === 'string' ? risk_grade.slice(0, 10) : null,
@@ -28,17 +30,22 @@ export async function POST(req) {
     location:          typeof location          === 'string' ? location.trim().slice(0, 100) : null,
     pyeong:            typeof pyeong            === 'number' && pyeong > 0 ? pyeong : null,
     construction_cost: typeof construction_cost === 'number' && construction_cost > 0 ? construction_cost : null,
+    created_at:        new Date().toISOString(),
   };
 
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY,
+  );
+
   try {
-    const { error } = await supabase.from('member_beta_requests').insert([record]);
+    const { error } = await supabase.from('leads').insert([record]);
     if (error) throw error;
   } catch (err) {
     console.error('member-beta-request DB error:', err.message ?? err);
     return NextResponse.json({ error: 'DB 저장 실패' }, { status: 500 });
   }
 
-  // 이메일 1 발송 — DB 실패와 무관하게 응답 반환
   try {
     const { subject, html } = buildEmail1({
       email:         record.email,

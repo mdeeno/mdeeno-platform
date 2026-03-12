@@ -111,7 +111,8 @@ export default function ReportSharePage() {
     );
   }
 
-  const savings = (record.expected_contribution - record.comparison_contribution);
+  const hasSavings = record.comparison_contribution != null && record.expected_contribution != null;
+  const savings = hasSavings ? (record.expected_contribution - record.comparison_contribution) : null;
   const riskColor = RISK_COLORS[record.risk_level] ?? '#64748b';
 
   return (
@@ -143,24 +144,30 @@ export default function ReportSharePage() {
             {formatAmount(record.expected_contribution)}
           </span>
         </div>
-        <div className={styles.metricCard}>
-          <span className={styles.metricLabel}>전략 적용 후</span>
-          <span className={`${styles.metricValue} ${styles.metricSafe}`}>
-            {formatAmount(record.comparison_contribution)}
-          </span>
-        </div>
-        <div className={styles.metricCard}>
-          <span className={styles.metricLabel}>예상 절감액</span>
-          <span className={`${styles.metricValue} ${styles.metricSafe}`}>
-            -{formatAmount(savings)}
-          </span>
-        </div>
-        <div className={styles.metricCard}>
-          <span className={styles.metricLabel}>Shock Score</span>
-          <span className={styles.metricValue} style={{ color: riskColor }}>
-            {record.shock_score}<span className={styles.metricUnit}>/100</span>
-          </span>
-        </div>
+        {record.comparison_contribution != null && (
+          <div className={styles.metricCard}>
+            <span className={styles.metricLabel}>전략 적용 후</span>
+            <span className={`${styles.metricValue} ${styles.metricSafe}`}>
+              {formatAmount(record.comparison_contribution)}
+            </span>
+          </div>
+        )}
+        {savings != null && (
+          <div className={styles.metricCard}>
+            <span className={styles.metricLabel}>예상 절감액</span>
+            <span className={`${styles.metricValue} ${styles.metricSafe}`}>
+              -{formatAmount(savings)}
+            </span>
+          </div>
+        )}
+        {record.shock_score != null && (
+          <div className={styles.metricCard}>
+            <span className={styles.metricLabel}>Shock Score</span>
+            <span className={styles.metricValue} style={{ color: riskColor }}>
+              {record.shock_score}<span className={styles.metricUnit}>/100</span>
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Share */}

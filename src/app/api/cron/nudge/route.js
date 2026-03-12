@@ -1,11 +1,12 @@
 // /api/cron/nudge — 매일 오전 9시(KST) 실행
-// 3일 후: 이메일 2 (동등급 절감 사례)
-// 이메일 3 (6/15 결제 오픈 안내)은 /api/admin/launch 에서 일괄 발송
+// D+3: 이메일 2 (동등급 절감 사례)
+// D+7: 이메일 3-urgency (마지막 할인 코드)
 
 import { NextResponse } from 'next/server';
 import { createClient }  from '@supabase/supabase-js';
 import { resend, FROM }  from '@/lib/resend';
 import { buildEmail2 }   from '@/lib/emails/email2-peer';
+import { buildEmail3 }   from '@/lib/emails/email3-urgency';
 
 function daysAgo(n) {
   const d = new Date();
@@ -14,7 +15,6 @@ function daysAgo(n) {
 }
 
 export async function GET(req) {
-  // Vercel Cron 인증 확인
   const authHeader = req.headers.get('authorization');
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -27,10 +27,11 @@ export async function GET(req) {
 
   const day3 = daysAgo(3);
   const day7 = daysAgo(7);
+  const now   = new Date().toISOString();
 
-  let sent2 = 0, errors = 0;
+  let sent2 = 0, sent3u = 0, errors = 0;
 
-  // ── 이메일 2: 3일 전 신청자 (leads 테이블) ───────────────────────────
+  // ── 이메일 2: D+3 신청자 ────────────────────────────────────────────
   const { data: leads2 } = await supabase
     .from('leads')
     .select('email, risk_grade')
@@ -44,7 +45,7 @@ export async function GET(req) {
       await resend.emails.send({ from: FROM, to: lead.email, subject, html });
       await supabase
         .from('leads')
-        .update({ email_2_sent_at: new Date().toISOString() })
+        .update({ email_2_sent_at: now })
         .eq('email', lead.email)
         .gte('created_at', `${day3}T00:00:00Z`)
         .lte('created_at', `${day3}T23:59:59Z`);
@@ -54,30 +55,31 @@ export async function GET(req) {
     }
   }
 
-  // ── 이메일 2: 3일 전 신청자 (member_beta_requests 테이블) ────────────
-  const { data: betas2 } = await supabase
-    .from('member_beta_requests')
+  // ── 이메일 3-urgency: D+7 신청자 (할인 코드 + 마감 안내) ────────────
+  const { data: leads3u } = await supabase
+    .from('leads')
     .select('email, risk_grade')
-    .gte('created_at', `${day3}T00:00:00Z`)
-    .lte('created_at', `${day3}T23:59:59Z`)
-    .is('email_2_sent_at', null);
+    .gte('created_at', `${day7}T00:00:00Z`)
+    .lte('created_at', `${day7}T23:59:59Z`)
+    .not('email_3_sent_at', 'is', null)   // email3-launch 받은 사람만
+    .is('email_3_urgency_sent_at', null);
 
-  for (const lead of betas2 ?? []) {
+  for (const lead of leads3u ?? []) {
     try {
-      const { subject, html } = buildEmail2({ riskGrade: lead.risk_grade });
+      const { subject, html } = buildEmail3({ riskGrade: lead.risk_grade });
       await resend.emails.send({ from: FROM, to: lead.email, subject, html });
       await supabase
-        .from('member_beta_requests')
-        .update({ email_2_sent_at: new Date().toISOString() })
+        .from('leads')
+        .update({ email_3_urgency_sent_at: now })
         .eq('email', lead.email)
-        .gte('created_at', `${day3}T00:00:00Z`)
-        .lte('created_at', `${day3}T23:59:59Z`);
-      sent2++;
+        .gte('created_at', `${day7}T00:00:00Z`)
+        .lte('created_at', `${day7}T23:59:59Z`);
+      sent3u++;
     } catch {
       errors++;
     }
   }
 
-  console.log(`nudge cron: email2=${sent2}, errors=${errors}`);
-  return NextResponse.json({ ok: true, sent2, errors });
+  console.log(`nudge cron: email2=${sent2}, email3u=${sent3u}, errors=${errors}`);
+  return NextResponse.json({ ok: true, sent2, sent3u, errors });
 }

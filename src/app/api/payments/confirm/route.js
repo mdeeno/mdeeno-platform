@@ -4,6 +4,7 @@
  */
 
 import { NextResponse, after } from 'next/server';
+import { createClient }        from '@supabase/supabase-js';
 import { confirmTossPayment }  from '@/lib/toss';
 import { getOrderById, updateOrderStatus, markOrderDelivered } from '@/lib/orders';
 import { fetchPdfFromBackend } from '@/lib/backend';
@@ -108,6 +109,23 @@ export async function POST(req) {
       });
 
       await markOrderDelivered(orderId, { reportId });
+
+      // report_records 저장 — 공유 링크 페이지(/report/[report_id]) 에서 조회
+      if (reportId) {
+        const supabase = createClient(
+          process.env.NEXT_PUBLIC_SUPABASE_URL,
+          process.env.SUPABASE_SERVICE_ROLE_KEY,
+        );
+        await supabase.from('report_records').insert([{
+          report_id:              reportId,
+          risk_level:             order.risk_grade     ?? null,
+          expected_contribution:  order.expected_extra ?? null,
+          comparison_contribution: null, // 백엔드 고도화 시 추가
+          shock_score:            null,  // 백엔드 고도화 시 추가
+          complex_name:           order.complex_name   ?? null,
+          location:               order.location       ?? null,
+        }]);
+      }
     } catch (err) {
       console.error(`PDF/email failed for order ${orderId}:`, err?.message ?? err);
       // pdf_generated, email_sent = false 유지 → 어드민 재발송 가능

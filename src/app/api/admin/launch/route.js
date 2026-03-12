@@ -1,5 +1,5 @@
 // /api/admin/launch — 6/15 결제 오픈 당일 1회 실행
-// leads + member_beta_requests 전체 수신자에게 결제 오픈 이메일 발송
+// leads 전체 수신자에게 결제 오픈 이메일 발송
 
 import { NextResponse } from 'next/server';
 import { createClient }  from '@supabase/supabase-js';
@@ -17,19 +17,11 @@ export async function POST(req) {
     process.env.SUPABASE_SERVICE_ROLE_KEY,
   );
 
-  // leads + member_beta_requests 전체 수집
-  const [{ data: leads }, { data: betaReqs }] = await Promise.all([
-    supabase.from('leads').select('email, risk_grade').is('email_3_sent_at', null),
-    supabase.from('member_beta_requests').select('email, risk_grade').is('email_3_sent_at', null),
-  ]);
-
-  // 이메일 중복 제거
-  const seen  = new Set();
-  const all   = [...(leads ?? []), ...(betaReqs ?? [])].filter(r => {
-    if (seen.has(r.email)) return false;
-    seen.add(r.email);
-    return true;
-  });
+  // leads 단일 테이블에서 수집 (member_beta_requests 통합 완료)
+  const { data: all } = await supabase
+    .from('leads')
+    .select('email, risk_grade')
+    .is('email_3_sent_at', null);
 
   let sent = 0, errors = 0;
   const now = new Date().toISOString();
@@ -42,11 +34,7 @@ export async function POST(req) {
       // Resend 무료 플랜: 초당 2건 제한 대응
       await delay(600);
 
-      // 발송 완료 표시
       await supabase.from('leads')
-        .update({ email_3_sent_at: now })
-        .eq('email', lead.email);
-      await supabase.from('member_beta_requests')
         .update({ email_3_sent_at: now })
         .eq('email', lead.email);
 
