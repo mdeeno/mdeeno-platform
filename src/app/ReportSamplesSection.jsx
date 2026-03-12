@@ -310,9 +310,9 @@ export default function ReportSamplesSection() {
     <>
       <section id="report-samples" className={styles.reportSamples}>
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>샘플 미리보기</h2>
+          <h2 className={styles.sectionTitle}>리포트에는 이런 내용이 담깁니다</h2>
           <p className={styles.sectionSubtitle}>
-            실제 생성되는 리포트를 미리 확인하세요.
+            계산 결과를 바탕으로 생성되는 실제 리포트를 미리 확인하세요.
           </p>
 
           <div className={styles.sampleGrid}>
