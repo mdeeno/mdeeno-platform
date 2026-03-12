@@ -438,6 +438,45 @@
   padding-top: 14px;
 }
 
+/* ── Benchmark Warning ── */
+.benchmarkHigh {
+  background: #fffbeb;
+  border: 1.5px solid #fde68a;
+  border-left: 4px solid #d97706;
+  border-radius: 8px;
+  padding: 14px 18px;
+}
+
+.benchmarkLow {
+  background: #eff6ff;
+  border: 1.5px solid #bfdbfe;
+  border-left: 4px solid #3b82f6;
+  border-radius: 8px;
+  padding: 14px 18px;
+}
+
+.benchmarkText {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #78350f;
+  line-height: 1.6;
+  margin-bottom: 6px;
+}
+
+.benchmarkLow .benchmarkText {
+  color: #1e3a8a;
+}
+
+.benchmarkSource {
+  font-size: 0.7rem;
+  color: #92400e;
+  font-weight: 500;
+}
+
+.benchmarkLow .benchmarkSource {
+  color: #1d4ed8;
+}
+
 /* ── Comparison ── */
 .comparisonGrid {
   display: grid;

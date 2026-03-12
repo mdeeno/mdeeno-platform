@@ -484,7 +484,17 @@ export default function ShockCalculatorPage() {
             <p className={styles.shockMessage}>{result.shock_message}</p>
           </div>
 
-          {/* 2. Comparison */}
+          {/* 2. Benchmark Warning */}
+          {result.benchmark_warning && result.benchmark_status !== 'normal' && result.benchmark_status !== 'unknown' && (
+            <div className={result.benchmark_status === 'high' ? styles.benchmarkHigh : styles.benchmarkLow}>
+              <p className={styles.benchmarkText}>{result.benchmark_warning}</p>
+              <p className={styles.benchmarkSource}>
+                출처: 한국부동산원 정비사업 공사비 동향 · 주택도시보증공사(HUG) (2024년 기준, 참고용)
+              </p>
+            </div>
+          )}
+
+          {/* 3. Comparison */}
           <div className={styles.comparisonGrid}>
             <div className={styles.comparisonCard}>
               <p className={styles.comparisonLabel}>현재 구조</p>
