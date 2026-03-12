@@ -508,6 +508,19 @@
   font-weight: 600;
 }
 
+.riskBadgeReason {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin-top: 8px;
+  margin-bottom: 0;
+  line-height: 1.55;
+}
+
+.riskBadgeReason strong {
+  color: #0f172a;
+  font-weight: 700;
+}
+
 /* ── Shock Box ── */
 .shockBox {
   background: #0f172a;

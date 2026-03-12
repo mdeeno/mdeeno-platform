@@ -509,6 +509,13 @@ export default function ShockCalculatorPage() {
               {RISK_LABELS[result.risk_level]} — 위험 등급
             </span>
           </div>
+          <p className={styles.riskBadgeReason}>
+            자산 대비 분담금 비율{' '}
+            <strong>
+              {(result.expected_contribution / Number(form.asset_value) * 100).toFixed(1)}%
+            </strong>
+            {' '}· 공사비 {form.cost_increase_rate}% 상승 시나리오 기준 판정
+          </p>
 
           <div className={styles.shockBox}>
             <p className={styles.shockLead}>현재 구조라면</p>
