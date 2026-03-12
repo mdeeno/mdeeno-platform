@@ -175,7 +175,7 @@ export default function PremiumReportPaywall() {
         <p className={styles.eyebrow}>M-DEENO 프리미엄 전략 리포트</p>
         <h1 className={styles.title}>총회 전, 수천만원을<br />지킬 수 있습니다</h1>
         <p className={styles.subtitle}>
-          30페이지 심층 분석 · 협상 전략 · 총회 발언 스크립트 · 30일 행동 플랜
+          20페이지 이상 심층 분석 · 협상 전략 · 총회 발언 스크립트 · 행동 플랜
         </p>
         <ul className={styles.featureList}>
           <li>공사비 시나리오별 자산 잠식 구간 정밀 분석</li>
@@ -472,7 +472,7 @@ export default function PremiumReportPaywall() {
               '협상 절감액 시뮬레이션',
               '총회 발언 스크립트',
               '30일 행동 타임라인',
-              '30페이지 심층 분석',
+              '20페이지 이상 심층 분석',
             ].map((label) => (
               <tr key={label}>
                 <td><span className={styles.featureName}>{label}</span></td>

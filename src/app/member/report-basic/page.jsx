@@ -355,7 +355,7 @@ export default function ReportBasicPage() {
               '협상 절감액 시뮬레이션',
               '총회 발언 스크립트',
               '30일 행동 타임라인',
-              '30페이지 심층 분석',
+              '20페이지 이상 심층 분석',
             ].map((label) => (
               <tr key={label}>
                 <td><span className={styles.featureName}>{label}</span></td>

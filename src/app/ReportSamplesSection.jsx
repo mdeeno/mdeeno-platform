@@ -371,7 +371,7 @@ export default function ReportSamplesSection() {
                   </span>
                 </p>
                 <p className={styles.sampleCardDesc}>
-                  30페이지 심층 분석 · 협상 전략 · 총회 발언 스크립트 · 행동 타임라인
+                  20페이지 이상 심층 분석 · 협상 전략 · 총회 발언 스크립트 · 행동 타임라인
                 </p>
                 <div className={styles.sampleCardBtns}>
                   <button
