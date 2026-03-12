@@ -53,6 +53,7 @@ export default function ShockCalculatorPage() {
   const [betaLoading, setBetaLoading]       = useState(false);
   const [isModalPrivacyAgreed, setIsModalPrivacyAgreed] = useState(false);
   const [pendingNav, setPendingNav]         = useState(null);
+  const [step, setStep]                     = useState(1);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -85,10 +86,11 @@ export default function ShockCalculatorPage() {
   }
 
   const betaMode = isBetaMode();
-  const isValid =
+  const isStep1Valid =
     form.expected_extra     !== '' && Number(form.expected_extra)     > 0 &&
     form.asset_value        !== '' && Number(form.asset_value)        > 0 &&
-    form.cost_increase_rate !== '' && Number(form.cost_increase_rate) >= 0 &&
+    form.cost_increase_rate !== '' && Number(form.cost_increase_rate) >= 0;
+  const isStep2Valid =
     form.complex_name.trim()  !== '' &&
     form.location.trim()      !== '' &&
     form.pyeong             !== '' && Number(form.pyeong)             > 0 &&
@@ -239,228 +241,261 @@ export default function ShockCalculatorPage() {
 
       {/* ── Input Form ── */}
       <form className={styles.form} onSubmit={handleSubmit} noValidate>
-        <div className={styles.formCard}>
-          <p className={styles.formSectionLabel}>자산 정보 입력</p>
 
-          <div className={styles.fieldGrid}>
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="asset_value">
-                종전자산 평가액 <span className={styles.req}>*</span>
-              </label>
-              <p className={styles.fieldHint}>내 아파트의 감정평가 금액</p>
-              <div className={styles.inputWrap}>
-                <input
-                  className={styles.input}
-                  id="asset_value"
-                  name="asset_value"
-                  type="number"
-                  value={form.asset_value}
-                  onChange={handleChange}
-                  placeholder="금액을 입력해주세요"
-                  min="0.1"
-                  step="0.1"
-                  required
-                />
-                <span className={styles.unit}>억원</span>
-              </div>
-            </div>
-
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="expected_extra">
-                예상 추가 분담금 <span className={styles.req}>*</span>
-              </label>
-              <p className={styles.fieldHint}>조합이 통보한 입주 시 추가 납부 예정 금액</p>
-              <div className={styles.inputWrap}>
-                <input
-                  className={styles.input}
-                  id="expected_extra"
-                  name="expected_extra"
-                  type="number"
-                  value={form.expected_extra}
-                  onChange={handleChange}
-                  placeholder="금액을 입력해주세요"
-                  min="0.1"
-                  step="0.1"
-                  required
-                />
-                <span className={styles.unit}>억원</span>
-              </div>
-            </div>
-
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="cost_increase_rate">
-                예상 공사비 상승률 <span className={styles.req}>*</span>
-              </label>
-              <p className={styles.fieldHint}>시공사 요청 또는 예상되는 공사비 인상률 — 정확한 수치를 모르면 10을 입력하세요</p>
-              <div className={styles.inputWrap}>
-                <input
-                  className={styles.input}
-                  id="cost_increase_rate"
-                  name="cost_increase_rate"
-                  type="number"
-                  value={form.cost_increase_rate}
-                  onChange={handleChange}
-                  placeholder="10을 입력해주세요"
-                  min="0"
-                  max="100"
-                  step="1"
-                  required
-                />
-                <span className={styles.unit}>%</span>
-              </div>
-            </div>
-
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="project_stage">
-                현재 사업 단계 <span className={styles.req}>*</span>
-              </label>
-              <p className={styles.fieldHint}>단계가 뒤로 갈수록 공사비 확정 시점에 가까워집니다</p>
-              <select
-                className={styles.input}
-                id="project_stage"
-                name="project_stage"
-                value={form.project_stage}
-                onChange={handleChange}
-                required
-              >
-                {STAGE_OPTIONS.map((o) => (
-                  <option key={o.value} value={o.value}>{o.label}</option>
-                ))}
-              </select>
-            </div>
+        {/* ── 진행 표시 ── */}
+        <div className={styles.stepProgress}>
+          <div className={styles.stepItem}>
+            <div className={`${styles.stepDot} ${step >= 1 ? styles.stepDotActive : ''}`}>1</div>
+            <span className={`${styles.stepLabel} ${step === 1 ? styles.stepLabelActive : ''}`}>자산 정보</span>
+          </div>
+          <div className={styles.stepLine} />
+          <div className={styles.stepItem}>
+            <div className={`${styles.stepDot} ${step >= 2 ? styles.stepDotActive : ''}`}>2</div>
+            <span className={`${styles.stepLabel} ${step === 2 ? styles.stepLabelActive : ''}`}>단지 정보</span>
           </div>
         </div>
 
-        {/* ── 단지 정보 (모든 사용자) ── */}
-        <div className={styles.formCard}>
-          <p className={styles.formSectionLabel}>단지 정보</p>
-          <p className={styles.fieldHint} style={{marginBottom: '12px'}}>
-            지역별 공사비 벤치마크 비교와 맞춤 분석에 사용됩니다
-          </p>
-
-          <div className={styles.fieldGrid}>
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="complex_name">
-                아파트 단지명 <span className={styles.req}>*</span>
-              </label>
-              <p className={styles.fieldHint}>예: 은마아파트, 목동 7단지</p>
-              <input
-                className={styles.input}
-                id="complex_name"
-                name="complex_name"
-                type="text"
-                value={form.complex_name}
-                onChange={handleChange}
-                placeholder="단지명을 입력해주세요"
-                required
-              />
-            </div>
-
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="location">
-                사업장 지역 <span className={styles.req}>*</span>
-              </label>
-              <p className={styles.fieldHint}>예: 서울 강남구, 경기 분당구</p>
-              <input
-                className={styles.input}
-                id="location"
-                name="location"
-                type="text"
-                value={form.location}
-                onChange={handleChange}
-                placeholder="00시 00구를 입력해주세요"
-                required
-              />
-            </div>
-
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="pyeong">
-                내 아파트 평형 <span className={styles.req}>*</span>
-              </label>
-              <p className={styles.fieldHint}>등기부등본 또는 분양계약서의 전용면적 기준 평수</p>
-              <div className={styles.inputWrap}>
-                <input
-                  className={styles.input}
-                  id="pyeong"
-                  name="pyeong"
-                  type="number"
-                  value={form.pyeong}
-                  onChange={handleChange}
-                  placeholder="예: 25"
-                  min="1"
-                  step="1"
-                  required
-                />
-                <span className={styles.unit}>평</span>
-              </div>
-            </div>
-
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="construction_cost">
-                평당 공사비 <span className={styles.req}>*</span>
-              </label>
-              <p className={styles.fieldHint}>조합이 제시한 시공사 평당 공사비 — 모르면 900 입력</p>
-              <div className={styles.inputWrap}>
-                <input
-                  className={styles.input}
-                  id="construction_cost"
-                  name="construction_cost"
-                  type="number"
-                  value={form.construction_cost}
-                  onChange={handleChange}
-                  placeholder="예: 900"
-                  min="1"
-                  step="10"
-                  required
-                />
-                <span className={styles.unit}>만원/평</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ── 리포트 개인화 (비베타 전용 — PDF에 이름 표시) ── */}
-        {!betaMode && (
+        {/* ── Step 1: 자산 정보 ── */}
+        {step === 1 && (
           <div className={styles.formCard}>
-            <p className={styles.formSectionLabel}>리포트 개인화</p>
+            <p className={styles.formSectionLabel}>자산 정보 입력</p>
+
             <div className={styles.fieldGrid}>
               <div className={styles.field}>
-                <label className={styles.label} htmlFor="member_name">
-                  조합원 이름 <span className={styles.req}>*</span>
+                <label className={styles.label} htmlFor="asset_value">
+                  종전자산 평가액 <span className={styles.req}>*</span>
                 </label>
-                <p className={styles.fieldHint}>PDF 리포트 표지에 표시됩니다</p>
+                <p className={styles.fieldHint}>내 아파트의 감정평가 금액</p>
+                <div className={styles.inputWrap}>
+                  <input
+                    className={styles.input}
+                    id="asset_value"
+                    name="asset_value"
+                    type="number"
+                    value={form.asset_value}
+                    onChange={handleChange}
+                    placeholder="금액을 입력해주세요"
+                    min="0.1"
+                    step="0.1"
+                    required
+                  />
+                  <span className={styles.unit}>억원</span>
+                </div>
+              </div>
+
+              <div className={styles.field}>
+                <label className={styles.label} htmlFor="expected_extra">
+                  예상 추가 분담금 <span className={styles.req}>*</span>
+                </label>
+                <p className={styles.fieldHint}>조합이 통보한 입주 시 추가 납부 예정 금액</p>
+                <div className={styles.inputWrap}>
+                  <input
+                    className={styles.input}
+                    id="expected_extra"
+                    name="expected_extra"
+                    type="number"
+                    value={form.expected_extra}
+                    onChange={handleChange}
+                    placeholder="금액을 입력해주세요"
+                    min="0.1"
+                    step="0.1"
+                    required
+                  />
+                  <span className={styles.unit}>억원</span>
+                </div>
+              </div>
+
+              <div className={styles.field}>
+                <label className={styles.label} htmlFor="cost_increase_rate">
+                  예상 공사비 상승률 <span className={styles.req}>*</span>
+                </label>
+                <p className={styles.fieldHint}>모르면 10 입력 — 시공사 요청 인상률</p>
+                <div className={styles.inputWrap}>
+                  <input
+                    className={styles.input}
+                    id="cost_increase_rate"
+                    name="cost_increase_rate"
+                    type="number"
+                    value={form.cost_increase_rate}
+                    onChange={handleChange}
+                    placeholder="10"
+                    min="0"
+                    max="100"
+                    step="1"
+                    required
+                  />
+                  <span className={styles.unit}>%</span>
+                </div>
+              </div>
+
+              <div className={styles.field}>
+                <label className={styles.label} htmlFor="project_stage">
+                  현재 사업 단계 <span className={styles.req}>*</span>
+                </label>
+                <p className={styles.fieldHint}>단계가 뒤로 갈수록 공사비 확정에 가까워집니다</p>
+                <select
+                  className={styles.input}
+                  id="project_stage"
+                  name="project_stage"
+                  value={form.project_stage}
+                  onChange={handleChange}
+                  required
+                >
+                  {STAGE_OPTIONS.map((o) => (
+                    <option key={o.value} value={o.value}>{o.label}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <button
+              className={styles.nextBtn}
+              type="button"
+              disabled={!isStep1Valid}
+              onClick={() => setStep(2)}
+            >
+              다음 단계 →
+            </button>
+          </div>
+        )}
+
+        {/* ── Step 2: 단지 정보 ── */}
+        {step === 2 && (
+          <div className={styles.formCard}>
+            <p className={styles.formSectionLabel}>단지 정보</p>
+            <p className={styles.fieldHint} style={{ marginBottom: '12px' }}>
+              지역별 공사비 벤치마크 비교와 맞춤 분석에 사용됩니다
+            </p>
+
+            <div className={styles.fieldGrid}>
+              <div className={styles.field}>
+                <label className={styles.label} htmlFor="complex_name">
+                  아파트 단지명 <span className={styles.req}>*</span>
+                </label>
+                <p className={styles.fieldHint}>예: 은마아파트, 목동 7단지</p>
                 <input
                   className={styles.input}
-                  id="member_name"
-                  name="member_name"
+                  id="complex_name"
+                  name="complex_name"
                   type="text"
-                  value={form.member_name}
+                  value={form.complex_name}
                   onChange={handleChange}
-                  placeholder="이름을 입력해주세요"
-                  autoComplete="name"
+                  placeholder="단지명을 입력해주세요"
                   required
                 />
               </div>
+
+              <div className={styles.field}>
+                <label className={styles.label} htmlFor="location">
+                  사업장 지역 <span className={styles.req}>*</span>
+                </label>
+                <p className={styles.fieldHint}>예: 서울 강남구, 경기 분당구</p>
+                <input
+                  className={styles.input}
+                  id="location"
+                  name="location"
+                  type="text"
+                  value={form.location}
+                  onChange={handleChange}
+                  placeholder="00시 00구를 입력해주세요"
+                  required
+                />
+              </div>
+
+              <div className={styles.field}>
+                <label className={styles.label} htmlFor="pyeong">
+                  내 아파트 평형 <span className={styles.req}>*</span>
+                </label>
+                <p className={styles.fieldHint}>등기부등본 또는 분양계약서의 전용면적 기준 평수</p>
+                <div className={styles.inputWrap}>
+                  <input
+                    className={styles.input}
+                    id="pyeong"
+                    name="pyeong"
+                    type="number"
+                    value={form.pyeong}
+                    onChange={handleChange}
+                    placeholder="예: 25"
+                    min="1"
+                    step="1"
+                    required
+                  />
+                  <span className={styles.unit}>평</span>
+                </div>
+              </div>
+
+              <div className={styles.field}>
+                <label className={styles.label} htmlFor="construction_cost">
+                  평당 공사비 <span className={styles.req}>*</span>
+                </label>
+                <p className={styles.fieldHint}>조합이 제시한 시공사 평당 공사비 — 모르면 900 입력</p>
+                <div className={styles.inputWrap}>
+                  <input
+                    className={styles.input}
+                    id="construction_cost"
+                    name="construction_cost"
+                    type="number"
+                    value={form.construction_cost}
+                    onChange={handleChange}
+                    placeholder="예: 900"
+                    min="1"
+                    step="10"
+                    required
+                  />
+                  <span className={styles.unit}>만원/평</span>
+                </div>
+              </div>
+
+              {/* 리포트 개인화 — 비베타 전용 */}
+              {!betaMode && (
+                <div className={styles.field} style={{ gridColumn: '1 / -1' }}>
+                  <label className={styles.label} htmlFor="member_name">
+                    조합원 이름 <span className={styles.req}>*</span>
+                  </label>
+                  <p className={styles.fieldHint}>PDF 리포트 표지에 표시됩니다</p>
+                  <input
+                    className={styles.input}
+                    id="member_name"
+                    name="member_name"
+                    type="text"
+                    value={form.member_name}
+                    onChange={handleChange}
+                    placeholder="이름을 입력해주세요"
+                    autoComplete="name"
+                    required
+                  />
+                </div>
+              )}
+            </div>
+
+            {error && <div className={styles.errorBox} style={{ marginTop: '16px' }}>{error}</div>}
+
+            <p className={styles.privacyNote} style={{ marginTop: '16px', marginBottom: '12px' }}>
+              🔒 입력하신 자산 정보는 암호화되어 안전하게 처리됩니다.
+            </p>
+
+            <div className={styles.stepNavRow}>
+              <button
+                className={styles.backBtn}
+                type="button"
+                onClick={() => setStep(1)}
+              >
+                ← 이전
+              </button>
+              <button className={styles.submitBtn} type="submit" disabled={loading || !isStep2Valid}>
+                {loading ? (
+                  <span className={styles.loadingInner}>
+                    <span className={styles.spinner} />
+                    분석 중...
+                  </span>
+                ) : (
+                  '내 분담금 분석 시작하기'
+                )}
+              </button>
             </div>
           </div>
         )}
 
-        {error && <div className={styles.errorBox}>{error}</div>}
-
-        <p className={styles.privacyNote}>
-          🔒 입력하신 자산 정보는 암호화되어 안전하게 처리됩니다.
-        </p>
-
-        <button className={styles.submitBtn} type="submit" disabled={loading || !isValid}>
-          {loading ? (
-            <span className={styles.loadingInner}>
-              <span className={styles.spinner} />
-              분석 중...
-            </span>
-          ) : (
-            '내 분담금 분석 시작하기'
-          )}
-        </button>
       </form>
 
       {/* ── Shock Result ── */}
