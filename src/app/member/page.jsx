@@ -136,11 +136,6 @@ export default function ShockCalculatorPage() {
       setTimeout(() => {
         document.getElementById('shock-result')?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
-
-      // 충격 수치 확인 후 이메일 수집 — 결과를 충분히 확인한 뒤 모달 노출
-      setTimeout(() => {
-        if (!betaDone && !pdfDone) setEmailModalOpen(true);
-      }, 5000);
     } catch (err) {
       setError(err.message);
     } finally {
