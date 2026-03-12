@@ -489,7 +489,7 @@ export default function ShockCalculatorPage() {
             <div className={result.benchmark_status === 'high' ? styles.benchmarkHigh : styles.benchmarkLow}>
               <p className={styles.benchmarkText}>{result.benchmark_warning}</p>
               <p className={styles.benchmarkSource}>
-                출처: (사)주거환경연구원 정비사업 공사비 실태조사 (2024년 실측 + 2026년 전망 보정, 참고용)
+                출처: (사)주거환경연구원 실태조사 (2024년 실측) + 언론·업계 전망 보정 (2026년 기준, 참고용)
               </p>
             </div>
           )}
