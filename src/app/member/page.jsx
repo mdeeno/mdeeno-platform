@@ -54,6 +54,7 @@ export default function ShockCalculatorPage() {
   const [isModalPrivacyAgreed, setIsModalPrivacyAgreed] = useState(false);
   const [pendingNav, setPendingNav]         = useState(null);
   const [step, setStep]                     = useState(1);
+  const [toast, setToast]                   = useState(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -194,6 +195,8 @@ export default function ShockCalculatorPage() {
       });
       if (!res.ok) throw new Error('신청에 실패했습니다.');
       setBetaDone(true);
+      setToast('사전 신청이 완료되었습니다. 6월 출시 시 이메일로 먼저 안내드립니다.');
+      setTimeout(() => setToast(null), 4000);
     } catch (err) {
       setPdfError(err.message ?? '신청에 실패했습니다. 잠시 후 다시 시도해 주세요.');
     } finally {
@@ -229,7 +232,7 @@ export default function ShockCalculatorPage() {
 
       {/* ── Header ── */}
       <div className={styles.header}>
-        <p className={styles.eyebrow}>M-DEENO 분담금 리스크 분석</p>
+        <p className={styles.eyebrow}>M-DEENO Prop-Logic™</p>
         <h1 className={styles.title}>
           내 자산이 얼마나<br />위험한지 지금 확인하세요
         </h1>
@@ -749,6 +752,14 @@ export default function ShockCalculatorPage() {
       <p className={styles.disclaimer}>
         * 본 분석 결과는 입력값 기반 시뮬레이션으로, 법적 증거로 사용될 수 없습니다.
       </p>
+
+      {/* ── Toast Notification ── */}
+      {toast && (
+        <div className={styles.toast}>
+          <span className={styles.toastIcon}>✓</span>
+          {toast}
+        </div>
+      )}
 
       {/* ── Email Gate Modal ── */}
       {emailModalOpen && (
