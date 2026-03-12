@@ -19,10 +19,11 @@ const INITIAL_FORM = {
   asset_value:        '',
   cost_increase_rate: '10',
   project_stage:      'approval',
-  member_name:        '',
   complex_name:       '',
   location:           '',
+  pyeong:             '',
   construction_cost:  '900',
+  member_name:        '',
 };
 
 function formatAmount(eokValue) {
@@ -88,12 +89,11 @@ export default function ShockCalculatorPage() {
     form.expected_extra     !== '' && Number(form.expected_extra)     > 0 &&
     form.asset_value        !== '' && Number(form.asset_value)        > 0 &&
     form.cost_increase_rate !== '' && Number(form.cost_increase_rate) >= 0 &&
-    (betaMode || (
-      form.member_name.trim()   !== '' &&
-      form.complex_name.trim()  !== '' &&
-      form.location.trim()      !== '' &&
-      form.construction_cost  !== '' && Number(form.construction_cost)  > 0
-    ));
+    form.complex_name.trim()  !== '' &&
+    form.location.trim()      !== '' &&
+    form.pyeong             !== '' && Number(form.pyeong)             > 0 &&
+    form.construction_cost  !== '' && Number(form.construction_cost)  > 0 &&
+    (betaMode || form.member_name.trim() !== '');
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -109,6 +109,10 @@ export default function ShockCalculatorPage() {
           asset_value:        Number(form.asset_value),
           cost_increase_rate: Number(form.cost_increase_rate),
           project_stage:      form.project_stage,
+          complex_name:       form.complex_name.trim(),
+          location:           form.location.trim(),
+          pyeong:             Number(form.pyeong),
+          construction_cost:  Number(form.construction_cost),
         }),
       });
 
@@ -176,10 +180,14 @@ export default function ShockCalculatorPage() {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          email:          emailAddress,
-          asset_value:    Number(form.asset_value)    || null,
-          expected_extra: Number(form.expected_extra) || null,
-          risk_grade:     result?.risk_level          || null,
+          email:             emailAddress,
+          asset_value:       Number(form.asset_value)       || null,
+          expected_extra:    Number(form.expected_extra)    || null,
+          risk_grade:        result?.risk_level             || null,
+          complex_name:      form.complex_name.trim()       || null,
+          location:          form.location.trim()           || null,
+          pyeong:            Number(form.pyeong)            || null,
+          construction_cost: Number(form.construction_cost) || null,
         }),
       });
       if (!res.ok) throw new Error('신청에 실패했습니다.');
@@ -323,32 +331,19 @@ export default function ShockCalculatorPage() {
           </div>
         </div>
 
-        {/* ── Personalization Fields (비베타 전용 — PDF 생성에 필요) ── */}
-        {!betaMode && <div className={styles.formCard}>
-          <p className={styles.formSectionLabel}>리포트 개인화</p>
+        {/* ── 단지 정보 (모든 사용자) ── */}
+        <div className={styles.formCard}>
+          <p className={styles.formSectionLabel}>단지 정보</p>
+          <p className={styles.fieldHint} style={{marginBottom: '12px'}}>
+            지역별 공사비 벤치마크 비교와 맞춤 분석에 사용됩니다
+          </p>
 
           <div className={styles.fieldGrid}>
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="member_name">
-                조합원 이름 <span className={styles.req}>*</span>
-              </label>
-              <input
-                className={styles.input}
-                id="member_name"
-                name="member_name"
-                type="text"
-                value={form.member_name}
-                onChange={handleChange}
-                placeholder="이름을 입력해주세요"
-                autoComplete="name"
-                required
-              />
-            </div>
-
             <div className={styles.field}>
               <label className={styles.label} htmlFor="complex_name">
                 아파트 단지명 <span className={styles.req}>*</span>
               </label>
+              <p className={styles.fieldHint}>예: 은마아파트, 목동 7단지</p>
               <input
                 className={styles.input}
                 id="complex_name"
@@ -365,6 +360,7 @@ export default function ShockCalculatorPage() {
               <label className={styles.label} htmlFor="location">
                 사업장 지역 <span className={styles.req}>*</span>
               </label>
+              <p className={styles.fieldHint}>예: 서울 강남구, 경기 분당구</p>
               <input
                 className={styles.input}
                 id="location"
@@ -378,9 +374,32 @@ export default function ShockCalculatorPage() {
             </div>
 
             <div className={styles.field}>
+              <label className={styles.label} htmlFor="pyeong">
+                내 아파트 평형 <span className={styles.req}>*</span>
+              </label>
+              <p className={styles.fieldHint}>등기부등본 또는 분양계약서의 전용면적 기준 평수</p>
+              <div className={styles.inputWrap}>
+                <input
+                  className={styles.input}
+                  id="pyeong"
+                  name="pyeong"
+                  type="number"
+                  value={form.pyeong}
+                  onChange={handleChange}
+                  placeholder="예: 25"
+                  min="1"
+                  step="1"
+                  required
+                />
+                <span className={styles.unit}>평</span>
+              </div>
+            </div>
+
+            <div className={styles.field}>
               <label className={styles.label} htmlFor="construction_cost">
                 평당 공사비 <span className={styles.req}>*</span>
               </label>
+              <p className={styles.fieldHint}>조합이 제시한 시공사 평당 공사비 — 모르면 900 입력</p>
               <div className={styles.inputWrap}>
                 <input
                   className={styles.input}
@@ -389,16 +408,42 @@ export default function ShockCalculatorPage() {
                   type="number"
                   value={form.construction_cost}
                   onChange={handleChange}
-                  placeholder="공사비를 입력해주세요"
+                  placeholder="예: 900"
                   min="1"
                   step="10"
                   required
                 />
-                <span className={styles.unit}>만원</span>
+                <span className={styles.unit}>만원/평</span>
               </div>
             </div>
           </div>
-        </div>}
+        </div>
+
+        {/* ── 리포트 개인화 (비베타 전용 — PDF에 이름 표시) ── */}
+        {!betaMode && (
+          <div className={styles.formCard}>
+            <p className={styles.formSectionLabel}>리포트 개인화</p>
+            <div className={styles.fieldGrid}>
+              <div className={styles.field}>
+                <label className={styles.label} htmlFor="member_name">
+                  조합원 이름 <span className={styles.req}>*</span>
+                </label>
+                <p className={styles.fieldHint}>PDF 리포트 표지에 표시됩니다</p>
+                <input
+                  className={styles.input}
+                  id="member_name"
+                  name="member_name"
+                  type="text"
+                  value={form.member_name}
+                  onChange={handleChange}
+                  placeholder="이름을 입력해주세요"
+                  autoComplete="name"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+        )}
 
         {error && <div className={styles.errorBox}>{error}</div>}
 

@@ -13,17 +13,21 @@ export async function POST(req) {
     return NextResponse.json({ error: '요청 형식이 올바르지 않습니다' }, { status: 400 });
   }
 
-  const { email, asset_value, expected_extra, risk_grade } = body;
+  const { email, asset_value, expected_extra, risk_grade, complex_name, location, pyeong, construction_cost } = body;
 
   if (!email || typeof email !== 'string' || !EMAIL_RE.test(email.trim())) {
     return NextResponse.json({ error: '유효하지 않은 이메일입니다' }, { status: 400 });
   }
 
   const record = {
-    email:          email.trim().toLowerCase().slice(0, 254),
-    asset_value:    typeof asset_value    === 'number' ? asset_value    : null,
-    expected_extra: typeof expected_extra === 'number' ? expected_extra : null,
-    risk_grade:     typeof risk_grade     === 'string' ? risk_grade.slice(0, 10) : null,
+    email:             email.trim().toLowerCase().slice(0, 254),
+    asset_value:       typeof asset_value       === 'number' ? asset_value       : null,
+    expected_extra:    typeof expected_extra    === 'number' ? expected_extra    : null,
+    risk_grade:        typeof risk_grade        === 'string' ? risk_grade.slice(0, 10) : null,
+    complex_name:      typeof complex_name      === 'string' ? complex_name.trim().slice(0, 100) : null,
+    location:          typeof location          === 'string' ? location.trim().slice(0, 100) : null,
+    pyeong:            typeof pyeong            === 'number' && pyeong > 0 ? pyeong : null,
+    construction_cost: typeof construction_cost === 'number' && construction_cost > 0 ? construction_cost : null,
   };
 
   try {
