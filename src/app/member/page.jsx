@@ -610,12 +610,12 @@ export default function ShockCalculatorPage() {
           }>
             <p className={styles.tierRecommendTitle}>
               {['R1', 'R2'].includes(result.risk_level)
-                ? `${RISK_LABELS[result.risk_level]} 등급 — 기본 리포트로 충분히 대응 가능합니다`
+                ? `${RISK_LABELS[result.risk_level]} 등급 — 베이직 리포트로 충분히 대응 가능합니다`
                 : `${RISK_LABELS[result.risk_level]} 등급 — 프리미엄 전략 리포트가 필요합니다`}
             </p>
             <p className={styles.tierRecommendDesc}>
               {['R1', 'R2'].includes(result.risk_level)
-                ? '자산 구조 검증과 총회 질문 5개를 담은 기본 리포트로 핵심 리스크를 확인하세요.'
+                ? '자산 구조 검증과 총회 질문 5개를 담은 베이직 리포트로 핵심 리스크를 확인하세요.'
                 : '협상 전략·총회 발언 스크립트·행동 타임라인이 포함된 프리미엄 리포트로 총회에서 이기세요.'}
             </p>
           </div>
@@ -740,7 +740,7 @@ export default function ShockCalculatorPage() {
                   {isLowRisk ? '더 심층적인 전략이 필요하다면?' : '우선 기본 구조만 확인하고 싶다면?'}
                 </p>
                 <Link href={href} className={styles.basicReportCtaBtn}>
-                  {isLowRisk ? '프리미엄 전략 리포트 보기 →' : '기본 리포트 보기 →'}
+                  {isLowRisk ? '프리미엄 전략 리포트 보기 →' : '베이직 리포트 보기 →'}
                 </Link>
               </div>
             );

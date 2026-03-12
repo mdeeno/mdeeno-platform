@@ -152,7 +152,7 @@ export default function ReportBasicPage() {
 
       {/* ── 1. Header ── */}
       <div className={styles.hero}>
-        <p className={styles.eyebrow}>M-DEENO Prop-Logic™ — 기본 리포트</p>
+        <p className={styles.eyebrow}>M-DEENO Prop-Logic™ — 베이직 리포트</p>
         <h1>공사비가 오르면<br />내가 얼마나 더 내야 하나</h1>
         <p className={styles.subtitle}>
           공사비 상승 시나리오별 추가 부담금과 내 자산 위험 시점을<br />
@@ -185,7 +185,7 @@ export default function ReportBasicPage() {
       {isHighRisk && (
         <div className={styles.premiumNudge}>
           <p className={styles.premiumNudgeTitle}>
-            {RISK_LABEL[context.riskGrade]}({context.riskGrade}) 등급 — 기본 리포트로는 부족합니다
+            {RISK_LABEL[context.riskGrade]}({context.riskGrade}) 등급 — 베이직 리포트로는 부족합니다
           </p>
           <p className={styles.premiumNudgeDesc}>
             자산의 {context.riskGrade === 'R4' ? '40% 초과' : '30~40%'}에 달하는 리스크는
@@ -194,7 +194,7 @@ export default function ReportBasicPage() {
           <Link href="/member/report-premium" className={styles.premiumNudgeBtn}>
             프리미엄 전략 리포트 보기 →
           </Link>
-          <p className={styles.premiumNudgeSkip}>기본 리포트만 신청하려면 아래로 스크롤하세요</p>
+          <p className={styles.premiumNudgeSkip}>베이직 리포트만 신청하려면 아래로 스크롤하세요</p>
         </div>
       )}
 
@@ -209,7 +209,7 @@ export default function ReportBasicPage() {
 
       {/* ── 5. 리포트 포함 내용 ── */}
       <div className={styles.contentsCard}>
-        <p className={styles.contentsHeading}>5페이지 기본 리포트에 포함된 내용</p>
+        <p className={styles.contentsHeading}>5페이지 베이직 리포트에 포함된 내용</p>
         <ul className={styles.contentsList}>
           {REPORT_CONTENTS.map((item) => (
             <li key={item.title} className={styles.contentsItem}>
@@ -296,7 +296,7 @@ export default function ReportBasicPage() {
           className={styles.purchaseBtn}
           disabled={loading || !isPrivacyAgreed || (!isBetaMode() && !isRefundAgreed) || !email.trim()}
         >
-          {loading ? '처리 중...' : isBetaMode() ? '사전 신청하기' : '기본 리포트 구매하기 →'}
+          {loading ? '처리 중...' : isBetaMode() ? '사전 신청하기' : '베이직 리포트 구매하기 →'}
         </button>
 
         <p className={styles.ctaNote}>
@@ -317,14 +317,14 @@ export default function ReportBasicPage() {
       {/* ── 7. 비교표 (참고용) ── */}
       <div className={styles.compareBox}>
         <p className={styles.compareEyebrow}>리포트 비교</p>
-        <h3 className={styles.compareHeading}>기본 vs 프리미엄</h3>
+        <h3 className={styles.compareHeading}>베이직 vs 프리미엄</h3>
         <div className={styles.compareTableWrap}>
         <table className={styles.compareTable}>
           <thead>
             <tr>
               <th></th>
               <th className={styles.colActive}>
-                <span className={styles.colName}>기본</span>
+                <span className={styles.colName}>베이직</span>
                 {!isBetaMode() && <span className={styles.colPrice}>29,000원</span>}
                 <span className={styles.colGrade}>R1 · R2</span>
               </th>

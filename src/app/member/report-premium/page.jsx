@@ -485,7 +485,7 @@ export default function PremiumReportPaywall() {
         </div>
         <div className={styles.downsellNote}>
           <Link href="/member/report-basic" className={styles.downsellLink}>
-            R1·R2 등급이라면 기본 리포트로도 충분합니다 →
+            R1·R2 등급이라면 베이직 리포트로도 충분합니다 →
           </Link>
         </div>
       </section>

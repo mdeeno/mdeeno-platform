@@ -5,7 +5,7 @@ export function buildEmail3Launch({ riskGrade }) {
   const reportUrl = (grade === 'R1' || grade === 'R2')
     ? 'https://mdeeno.com/member/report-basic'
     : 'https://mdeeno.com/member/report-premium';
-  const reportLabel = (grade === 'R1' || grade === 'R2') ? '기본 리포트' : '프리미엄 전략 리포트';
+  const reportLabel = (grade === 'R1' || grade === 'R2') ? '베이직 리포트' : '프리미엄 전략 리포트';
 
   const subject = '[M-DEENO] 정식 출시 — 사전 신청자 출시 특가로 지금 바로 결제 가능합니다';
 
@@ -42,7 +42,7 @@ export function buildEmail3Launch({ riskGrade }) {
             <table width="100%" cellpadding="0" cellspacing="0" style="border:1.5px solid #e2e8f0;border-radius:10px;overflow:hidden;">
               <tr style="background:#f8fafc;">
                 <td style="padding:18px 24px;border-right:1px solid #e2e8f0;">
-                  <p style="margin:0;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;">기본 리포트</p>
+                  <p style="margin:0;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;">베이직 리포트</p>
                   <p style="margin:8px 0 2px;font-size:22px;font-weight:900;color:#0f172a;">29,000원</p>
                   <p style="margin:0;font-size:12px;color:#94a3b8;text-decoration:line-through;">정가 39,000원</p>
                 </td>

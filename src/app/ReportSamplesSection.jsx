@@ -320,12 +320,12 @@ export default function ReportSamplesSection() {
             <div className={styles.sampleCard}>
               <div className={styles.sampleCoverThumb}>
                 <p className={styles.sampleCoverEyebrow}>M-DEENO</p>
-                <p className={styles.sampleCoverTitle}>기본 리포트</p>
+                <p className={styles.sampleCoverTitle}>베이직 리포트</p>
                 <p className={styles.sampleCoverSub}>분담금 위험도 분석</p>
                 <span className={`${styles.sampleRiskBadge} ${styles.badgeR2}`}>R2</span>
               </div>
               <div className={styles.sampleCardBody}>
-                <p className={styles.sampleCardLabel}>기본 리포트</p>
+                <p className={styles.sampleCardLabel}>베이직 리포트</p>
                 <p className={styles.sampleCardPrice}>
                   <span className={styles.officialPrice}>39,000원</span>{' '}
                   29,000원{' '}
@@ -407,7 +407,7 @@ export default function ReportSamplesSection() {
             <div className={styles.sampleModalHeader}>
               <p className={styles.sampleModalTitle}>
                 {modalReport === 'basic'
-                  ? '기본 리포트'
+                  ? '베이직 리포트'
                   : '프리미엄 전략 리포트'}{' '}
                 미리보기
               </p>
