@@ -104,7 +104,7 @@
 
 .problemText span {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.45);
   line-height: 1.6;
 }
 
@@ -817,8 +817,8 @@
 }
 
 .ctaNote {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
   margin: 0;
 }
 
@@ -1051,8 +1051,8 @@
 }
 
 .basicReportCtaLabel {
-  font-size: 0.83rem;
-  color: #64748b;
+  font-size: 0.78rem;
+  color: #94a3b8;
   margin-bottom: 10px;
   font-weight: 500;
 }
@@ -1087,7 +1087,7 @@
 
 /* ── Savings Disclaimer ── */
 .savingsDisclaimer {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: #86efac;
   margin-top: 8px;
 }

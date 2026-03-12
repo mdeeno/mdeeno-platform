@@ -196,8 +196,8 @@
 
 .contentsDesc {
   display: block;
-  font-size: 0.78rem;
-  color: #94a3b8;
+  font-size: 0.8rem;
+  color: #64748b;
   line-height: 1.5;
 }
 
@@ -270,7 +270,7 @@
 
 .priceOriginal {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.55);
   font-weight: 500;
   text-decoration: line-through;
 }
@@ -331,8 +331,8 @@
   align-items: flex-start;
   gap: 10px;
   cursor: pointer;
-  font-size: 0.79rem;
-  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.75);
   line-height: 1.5;
 }
 
@@ -345,8 +345,8 @@
 }
 
 .socialProof {
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.65);
   text-align: center;
   margin-bottom: 14px;
 }
@@ -378,20 +378,20 @@
 }
 
 .ctaNote {
-  font-size: 0.79rem;
-  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.65);
   text-align: center;
   line-height: 1.55;
   margin-bottom: 16px;
 }
 
 .disclaimer {
-  font-size: 0.73rem;
-  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
   line-height: 1.6;
   text-align: center;
   padding-top: 14px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 /* ── Compare Table ── */
@@ -412,11 +412,9 @@
 }
 
 .compareEyebrow {
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748b;
   margin-bottom: 6px;
 }
 
@@ -481,7 +479,7 @@
 
 .colGrade {
   display: inline-block;
-  font-size: 0.63rem;
+  font-size: 0.72rem;
   font-weight: 700;
   padding: 2px 7px;
   border-radius: 20px;
@@ -491,12 +489,10 @@
 
 .groupRow td {
   background: #f1f5f9;
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #94a3b8;
-  padding: 6px 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748b;
+  padding: 7px 8px;
   border-bottom: none;
   text-align: left;
 }

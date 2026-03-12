@@ -193,11 +193,11 @@
 }
 
 .pageEyebrowLight {
-  font-size: 0.58rem;
+  font-size: 0.68rem;
   font-weight: 800;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.65);
   margin-bottom: 6px;
 }
 
@@ -451,8 +451,8 @@
 }
 
 .ctaDisclaimer {
-  font-size: 0.73rem;
-  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.5);
   line-height: 1.6;
   text-align: center;
   margin-top: 14px;
@@ -481,7 +481,7 @@
 }
 
 .ctaInput::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .ctaInput:focus {
@@ -641,9 +641,9 @@
 }
 
 .savingsLabel {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.72);
   letter-spacing: 0.04em;
   margin-bottom: 8px;
 }
@@ -658,8 +658,8 @@
 }
 
 .savingsNote {
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.6);
   line-height: 1.55;
 }
 
@@ -771,10 +771,8 @@
 }
 
 .compareEyebrow {
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
   color: #1e40af;
   margin-bottom: 6px;
 }
@@ -804,11 +802,9 @@
 }
 
 .gradeGuideTitle {
-  font-size: 0.67rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748b;
   margin-bottom: 10px;
 }
 
@@ -844,7 +840,7 @@
 
 .gradeDesc {
   display: block;
-  font-size: 0.69rem;
+  font-size: 0.75rem;
   color: #64748b;
   line-height: 1.4;
 }
@@ -906,7 +902,7 @@
 
 .colGrade {
   display: inline-block;
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   font-weight: 700;
   padding: 2px 8px;
   border-radius: 20px;
@@ -916,10 +912,8 @@
 
 .groupRow td {
   background: #f1f5f9;
-  font-size: 0.67rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
   color: #64748b;
   padding: 7px 10px;
   border-bottom: none;
@@ -936,8 +930,8 @@
 
 .featureDesc {
   display: block;
-  font-size: 0.72rem;
-  color: #94a3b8;
+  font-size: 0.78rem;
+  color: #64748b;
   margin-top: 2px;
   font-weight: 400;
   line-height: 1.4;

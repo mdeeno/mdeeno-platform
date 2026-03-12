@@ -202,11 +202,9 @@
 
 .caseStatLabel {
   display: block;
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: #64748b;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
   margin-bottom: 6px;
 }
 
@@ -574,11 +572,11 @@
 }
 
 .samplePageEyebrowLight {
-  font-size: 0.6rem;
+  font-size: 0.68rem;
   font-weight: 800;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.65);
   margin-bottom: 6px;
 }
 
@@ -773,7 +771,7 @@
 
 .sampleQuestionNum {
   flex-shrink: 0;
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   font-weight: 900;
   color: #1e40af;
   background: #dbeafe;
@@ -801,10 +799,8 @@
 }
 
 .sampleScriptLabel {
-  font-size: 0.62rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  font-weight: 700;
   color: #1e40af;
   margin-bottom: 7px;
 }
@@ -871,10 +867,8 @@
 
 .socialProofEyebrow {
   text-align: center;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 700;
   color: #64748b;
   margin-bottom: 28px;
 }
@@ -904,11 +898,9 @@
 }
 
 .spCause {
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  color: #94a3b8;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  color: #64748b;
   margin-bottom: 14px;
 }
 
@@ -922,8 +914,8 @@
 }
 
 .spLabel {
-  font-size: 0.65rem;
-  color: #94a3b8;
+  font-size: 0.72rem;
+  color: #64748b;
   font-weight: 600;
 }
 
