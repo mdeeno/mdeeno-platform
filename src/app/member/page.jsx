@@ -613,6 +613,12 @@ export default function ShockCalculatorPage() {
                 ? '자산 구조 검증과 총회 질문 5개를 담은 베이직 리포트로 핵심 리스크를 확인하세요.'
                 : '협상 전략·총회 발언 스크립트·행동 타임라인이 포함된 프리미엄 리포트로 총회에서 이기세요.'}
             </p>
+            <Link
+              href={['R1', 'R2'].includes(result.risk_level) ? '/reports#report-samples' : '/reports#report-samples'}
+              className={styles.tierSampleLink}
+            >
+              리포트 샘플 먼저 확인하기 →
+            </Link>
           </div>
 
           {/* 5. Strategy Blur + CTA */}

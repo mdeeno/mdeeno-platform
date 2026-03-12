@@ -1122,6 +1122,23 @@
   font-size: 0.875rem;
   color: #334155;
   line-height: 1.65;
+  margin-bottom: 12px;
+}
+
+.tierSampleLink {
+  display: inline-block;
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: #1e40af;
+  text-decoration: none;
+  border-bottom: 1.5px solid #93c5fd;
+  padding-bottom: 1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tierSampleLink:hover {
+  color: #1e3a8a;
+  border-color: #1e40af;
 }
 
 /* ── Disclaimer ── */
