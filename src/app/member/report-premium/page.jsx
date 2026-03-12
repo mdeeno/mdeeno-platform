@@ -300,7 +300,29 @@ export default function PremiumReportPaywall() {
         {/* P4 — 발언 스크립트 부분 공개 */}
         <div className={styles.reportPage}>
           <p className={styles.pageEyebrow}>SECTION 03</p>
-          <h3 className={styles.pageSectionTitle}>총회 발언 스크립트</h3>
+          <h3 className={styles.pageSectionTitle}>총회 발언 스크립트 5종</h3>
+
+          {/* 스크립트 목차 */}
+          <ol className={styles.scriptIndex}>
+            <li className={styles.scriptIndexItem}>
+              <span className={styles.scriptIndexNum}>01</span>
+              <span className={styles.scriptIndexTitle}>오프닝 — 공사비 원가 공개 요구</span>
+              <span className={styles.scriptIndexTag}>미리보기</span>
+            </li>
+            {[
+              '공사비 인상 근거 질의 — 시나리오별 분담금 변화',
+              '감정평가 재검토 요구 — 종전자산 적정성 문제 제기',
+              '집단 의견 표명 — 충분한 설명·자료 제공 요구',
+              '표결 전 발언 — 독립 원가 검증 선행 요청',
+            ].map((title, i) => (
+              <li key={title} className={`${styles.scriptIndexItem} ${styles.scriptIndexItemLocked}`}>
+                <span className={styles.scriptIndexNum}>0{i + 2}</span>
+                <span className={styles.scriptIndexTitle}>{title}</span>
+                <span className={styles.scriptIndexLock}>🔒</span>
+              </li>
+            ))}
+          </ol>
+
           <div className={styles.scriptBox}>
             <p className={styles.scriptLabel}>발언 오프닝 — 공사비 원가 공개 요구</p>
             <p className={styles.scriptText}>
@@ -316,7 +338,7 @@ export default function PremiumReportPaywall() {
               <div className={styles.blurLineShort} />
             </div>
             <div className={styles.blurOverlay}>
-              <p className={styles.blurOverlayText}>전체 스크립트(5종)는 구매 후 확인 가능합니다.</p>
+              <p className={styles.blurOverlayText}>나머지 4종 스크립트 전문은 구매 후 확인 가능합니다.</p>
             </div>
           </div>
         </div>

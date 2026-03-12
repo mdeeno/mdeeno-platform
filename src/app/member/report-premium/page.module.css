@@ -323,6 +323,61 @@
 .tdSafe { color: #16a34a; font-weight: 700; }
 .tdWarn { color: #d97706; font-weight: 700; }
 
+/* ── Script Index (P4) ───────────────────────────────────── */
+.scriptIndex {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.scriptIndexItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+}
+
+.scriptIndexItemLocked {
+  opacity: 0.55;
+}
+
+.scriptIndexNum {
+  font-size: 0.68rem;
+  font-weight: 900;
+  color: #1e40af;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+
+.scriptIndexTitle {
+  flex: 1;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.4;
+}
+
+.scriptIndexTag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: #1e40af;
+  padding: 2px 7px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+
+.scriptIndexLock {
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
 /* ── Script Box (P4) ──────────────────────────────────────── */
 .scriptBox {
   background: #f0f7ff;
