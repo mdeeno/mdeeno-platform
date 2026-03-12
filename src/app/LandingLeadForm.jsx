@@ -1,13 +1,20 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import styles from './page.module.css';
 
+const BENEFITS = [
+  '6월 정식 출시 시 결제 링크 우선 발송',
+  '사전 신청자 한정 — 기본 25% · 프리미엄 34% 할인',
+  '공사비 상승 시 분석 업데이트 알림 수신',
+];
+
 export default function LandingLeadForm() {
-  const [email, setEmail]       = useState('');
-  const [error, setError]       = useState('');
+  const [email, setEmail]         = useState('');
+  const [error, setError]         = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading]   = useState(false);
+  const [loading, setLoading]     = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -38,18 +45,34 @@ export default function LandingLeadForm() {
     <section className={styles.landingLead}>
       <div className={styles.container}>
         {submitted ? (
-          <p className={styles.landingLeadSuccess}>
-            신청 완료. 정식 출시 시 이메일로 안내드립니다.
-          </p>
+          <div className={styles.landingLeadSuccessBox}>
+            <p className={styles.landingLeadSuccessTitle}>신청이 완료되었습니다 ✓</p>
+            <p className={styles.landingLeadSuccessDesc}>
+              6월 정식 출시 시 할인 결제 링크를 이메일로 보내드립니다.
+            </p>
+            <Link href="/member" className={styles.landingLeadSuccessBtn}>
+              지금 바로 무료 분담금 계산하기 →
+            </Link>
+          </div>
         ) : (
           <>
+            <p className={styles.landingLeadEyebrow}>6월 출시 예정</p>
             <p className={styles.landingLeadTitle}>
-              리포트 출시 알림 · 사전 신청
+              출시 전, 이메일만 남겨두세요
             </p>
             <p className={styles.landingLeadDesc}>
-              6월 정식 출시 시 이메일로 안내드립니다.<br />
-              사전 신청자에게는 기본 25% · 프리미엄 34% 할인가를 제공합니다.
+              정식 출시 시 할인 결제 링크를 가장 먼저 받아보실 수 있습니다.
             </p>
+
+            <ul className={styles.landingLeadBenefits}>
+              {BENEFITS.map((b) => (
+                <li key={b} className={styles.landingLeadBenefit}>
+                  <span className={styles.landingLeadBenefitIcon}>✓</span>
+                  {b}
+                </li>
+              ))}
+            </ul>
+
             <form className={styles.landingLeadForm} onSubmit={handleSubmit} noValidate>
               <input
                 className={`${styles.landingLeadInput}${error ? ` ${styles.landingLeadInputError}` : ''}`}
@@ -64,10 +87,17 @@ export default function LandingLeadForm() {
                 type="submit"
                 disabled={loading}
               >
-                {loading ? '처리 중...' : '사전 신청하기'}
+                {loading ? '처리 중...' : '출시 알림 신청하기'}
               </button>
             </form>
             {error && <p className={styles.landingLeadError}>{error}</p>}
+
+            <p className={styles.landingLeadAlt}>
+              지금 바로 사용하고 싶다면?{' '}
+              <Link href="/member" className={styles.landingLeadAltLink}>
+                무료 분담금 계산 시작 →
+              </Link>
+            </p>
           </>
         )}
       </div>
