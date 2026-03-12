@@ -245,6 +245,14 @@
   cursor: not-allowed;
 }
 
+.stepHint {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
 .backBtn {
   padding: 16px 20px;
   background: transparent;

@@ -238,6 +238,7 @@ export default function ShockCalculatorPage() {
       </div>
 
       {/* ── Input Form ── */}
+      <div id="calc-form-top" />
       <form className={styles.form} onSubmit={handleSubmit} noValidate>
 
         {/* ── 진행 표시 ── */}
@@ -260,19 +261,19 @@ export default function ShockCalculatorPage() {
 
             <div className={styles.fieldGrid}>
               <div className={styles.field}>
-                <label className={styles.label} htmlFor="asset_value">
-                  종전자산 평가액 <span className={styles.req}>*</span>
+                <label className={styles.label} htmlFor="expected_extra">
+                  예상 추가 분담금 <span className={styles.req}>*</span>
                 </label>
-                <p className={styles.fieldHint}>내 아파트의 감정평가 금액</p>
+                <p className={styles.fieldHint}>조합이 통보한 추가 분담금 예정액 — 조합 안내문·총회 자료에서 확인</p>
                 <div className={styles.inputWrap}>
                   <input
                     className={styles.input}
-                    id="asset_value"
-                    name="asset_value"
+                    id="expected_extra"
+                    name="expected_extra"
                     type="number"
-                    value={form.asset_value}
+                    value={form.expected_extra}
                     onChange={handleChange}
-                    placeholder="금액을 입력해주세요"
+                    placeholder="예: 1.5 (1억 5천만원)"
                     min="0.1"
                     step="0.1"
                     required
@@ -282,19 +283,19 @@ export default function ShockCalculatorPage() {
               </div>
 
               <div className={styles.field}>
-                <label className={styles.label} htmlFor="expected_extra">
-                  예상 추가 분담금 <span className={styles.req}>*</span>
+                <label className={styles.label} htmlFor="asset_value">
+                  종전자산 평가액 <span className={styles.req}>*</span>
                 </label>
-                <p className={styles.fieldHint}>조합이 통보한 입주 시 추가 납부 예정 금액</p>
+                <p className={styles.fieldHint}>관리처분계획서 또는 감정평가서의 종전자산평가액</p>
                 <div className={styles.inputWrap}>
                   <input
                     className={styles.input}
-                    id="expected_extra"
-                    name="expected_extra"
+                    id="asset_value"
+                    name="asset_value"
                     type="number"
-                    value={form.expected_extra}
+                    value={form.asset_value}
                     onChange={handleChange}
-                    placeholder="금액을 입력해주세요"
+                    placeholder="예: 5.0 (5억원)"
                     min="0.1"
                     step="0.1"
                     required
@@ -307,7 +308,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="cost_increase_rate">
                   예상 공사비 상승률 <span className={styles.req}>*</span>
                 </label>
-                <p className={styles.fieldHint}>모르면 10 입력 — 시공사 요청 인상률</p>
+                <p className={styles.fieldHint}>시공사 요청 인상률 — 2025~2026 시장 평균 8~15%, 모르면 10 입력</p>
                 <div className={styles.inputWrap}>
                   <input
                     className={styles.input}
@@ -330,7 +331,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="project_stage">
                   현재 사업 단계 <span className={styles.req}>*</span>
                 </label>
-                <p className={styles.fieldHint}>단계가 뒤로 갈수록 공사비 확정에 가까워집니다</p>
+                <p className={styles.fieldHint}>단계가 뒤로 갈수록 공사비가 확정에 가까워져 위험도가 높아집니다</p>
                 <select
                   className={styles.input}
                   id="project_stage"
@@ -350,10 +351,18 @@ export default function ShockCalculatorPage() {
               className={styles.nextBtn}
               type="button"
               disabled={!isStep1Valid}
-              onClick={() => setStep(2)}
+              onClick={() => {
+                setStep(2);
+                setTimeout(() => {
+                  document.getElementById('calc-form-top')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 50);
+              }}
             >
               다음 단계 →
             </button>
+            {!isStep1Valid && (
+              <p className={styles.stepHint}>위 항목을 모두 입력하면 다음 단계로 진행됩니다</p>
+            )}
           </div>
         )}
 
@@ -404,7 +413,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="pyeong">
                   내 아파트 평형 <span className={styles.req}>*</span>
                 </label>
-                <p className={styles.fieldHint}>등기부등본 또는 분양계약서의 전용면적 기준 평수</p>
+                <p className={styles.fieldHint}>등기부등본·분양계약서의 전용면적을 평으로 환산 (㎡ ÷ 3.305)</p>
                 <div className={styles.inputWrap}>
                   <input
                     className={styles.input}
@@ -426,7 +435,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="construction_cost">
                   평당 공사비 <span className={styles.req}>*</span>
                 </label>
-                <p className={styles.fieldHint}>조합이 제시한 시공사 평당 공사비 — 모르면 900 입력</p>
+                <p className={styles.fieldHint}>조합·시공사가 제시한 평당 공사비 — 2025~2026 시장 기준 800~1,100만원, 모르면 900 입력</p>
                 <div className={styles.inputWrap}>
                   <input
                     className={styles.input}
@@ -491,6 +500,9 @@ export default function ShockCalculatorPage() {
                 )}
               </button>
             </div>
+            {!isStep2Valid && !loading && (
+              <p className={styles.stepHint}>위 항목을 모두 입력하면 분석을 시작할 수 있습니다</p>
+            )}
           </div>
         )}
 
