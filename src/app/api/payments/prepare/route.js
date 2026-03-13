@@ -7,6 +7,8 @@ import { NextResponse } from 'next/server';
 import { isBetaMode }   from '@/lib/feature-flags';
 import { PRICES, ORDER_NAMES } from '@/lib/toss';
 import { createOrder }  from '@/lib/orders';
+import { writeAuditLog, AUDIT_EVENT } from '@/lib/auditLog';
+import { getClientIp }  from '@/lib/security';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_RE = /^010\d{7,8}$/;
@@ -43,6 +45,8 @@ export async function POST(req) {
   const amount     = beta ? PRICES[product_type].beta : PRICES[product_type].full;
   const orderId    = makeOrderId();
 
+  const clientIp = getClientIp(req);
+
   // orders INSERT
   try {
     await createOrder({
@@ -65,6 +69,14 @@ export async function POST(req) {
     console.error('payments/prepare DB error:', err.message ?? err);
     return NextResponse.json({ error: '주문 생성에 실패했습니다' }, { status: 500 });
   }
+
+  await writeAuditLog({
+    eventType : AUDIT_EVENT.ORDER_CREATED,
+    orderId   : orderId,
+    email     : email.trim().toLowerCase(),
+    ipAddress : clientIp,
+    metadata  : { productType: product_type, amount, isBeta: beta },
+  });
 
   // Toss 결제창 파라미터 반환
   return NextResponse.json({

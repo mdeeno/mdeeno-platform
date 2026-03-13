@@ -10,9 +10,12 @@ import { getOrderById, updateOrderStatus, markOrderDelivered } from '@/lib/order
 import { fetchPdfFromBackend } from '@/lib/backend';
 import { resend, FROM }        from '@/lib/resend';
 import { buildEmail1 }         from '@/lib/emails/email1-welcome';
-import { isValidOrderId }      from '@/lib/security';
+import { isValidOrderId, getClientIp } from '@/lib/security';
+import { writeAuditLog, AUDIT_EVENT }  from '@/lib/auditLog';
 
 export async function POST(req) {
+  const clientIp = getClientIp(req);
+
   let body;
   try { body = await req.json(); }
   catch { return NextResponse.json({ error: '요청 형식이 올바르지 않습니다' }, { status: 400 }); }
@@ -54,6 +57,13 @@ export async function POST(req) {
   } catch (err) {
     console.error('Toss confirm error:', err);
     await updateOrderStatus(orderId, 'failed').catch(() => {});
+    await writeAuditLog({
+      eventType : AUDIT_EVENT.PAYMENT_FAILED,
+      orderId,
+      email     : order.email,
+      ipAddress : clientIp,
+      metadata  : { reason: err.message ?? '결제 승인 실패', tossStatus: err.status },
+    });
     return NextResponse.json(
       { error: err.message ?? '결제 승인에 실패했습니다' },
       { status: err.status ?? 500 },
@@ -71,6 +81,14 @@ export async function POST(req) {
     console.error('orders update error:', err.message);
     // 결제는 됐으므로 에러 반환하지 않음
   }
+
+  await writeAuditLog({
+    eventType : AUDIT_EVENT.PAYMENT_CONFIRMED,
+    orderId,
+    email     : order.email,
+    ipAddress : clientIp,
+    metadata  : { productType: order.product_type, amount: order.amount },
+  });
 
   // ── 5. PDF 생성 + 이메일 (after — 응답 후 백그라운드 처리) ────────────────
   after(async () => {
@@ -115,6 +133,12 @@ export async function POST(req) {
       });
 
       await markOrderDelivered(orderId, { reportId });
+      await writeAuditLog({
+        eventType : AUDIT_EVENT.PDF_GENERATED,
+        orderId,
+        email     : order.email,
+        metadata  : { reportId, productType: order.product_type },
+      });
 
       // report_records 저장 — 공유 링크 페이지(/report/[report_id]) 에서 조회
       if (reportId) {
@@ -134,6 +158,12 @@ export async function POST(req) {
       }
     } catch (err) {
       console.error(`PDF/email failed for order ${orderId}:`, err?.message ?? err);
+      await writeAuditLog({
+        eventType : AUDIT_EVENT.PDF_FAILED,
+        orderId,
+        email     : order.email,
+        metadata  : { reason: err?.message ?? 'PDF 생성 실패' },
+      });
       // pdf_generated, email_sent = false 유지 → 어드민 재발송 가능
     }
   });
