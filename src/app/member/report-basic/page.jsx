@@ -42,7 +42,19 @@ export default function ReportBasicPage() {
 
     try {
       if (assetParam && extraParam && gradeParam) {
-        const ctx = { assetValue: assetParam, expectedExtra: extraParam, riskGrade: gradeParam };
+        // localStorage에 저장된 context(단지명·지역·공사비·이름)를 먼저 읽어서 병합
+        // URL params로 덮어쓰면 계산기에서 입력한 데이터가 사라지는 버그 방지
+        let storedContext = {};
+        try {
+          const raw = localStorage.getItem('basicReportContext');
+          if (raw) storedContext = JSON.parse(raw);
+        } catch {}
+        const ctx = {
+          ...storedContext,
+          assetValue:    assetParam,
+          expectedExtra: extraParam,
+          riskGrade:     gradeParam,
+        };
         setContext(ctx);
         try { localStorage.setItem('basicReportContext', JSON.stringify(ctx)); } catch {}
       } else {
@@ -102,14 +114,15 @@ export default function ReportBasicPage() {
 
     if (isBetaMode()) {
       try {
-        await fetch('/api/lead-submit', {
+        const res = await fetch('/api/lead-submit', {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ ...leadBody, product_type: 'basic_beta', beta: true }),
         });
+        if (!res.ok) throw new Error('신청 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
         setSubmitted(true);
-      } catch {
-        setSubmitError('신청 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+      } catch (err) {
+        setSubmitError(err.message ?? '신청 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
       } finally {
         setLoading(false);
       }

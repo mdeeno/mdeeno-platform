@@ -54,27 +54,34 @@ export default function PremiumReportPaywall() {
 
     try {
       if (assetParam && extraParam && gradeParam) {
-        const ctx = { assetValue: assetParam, expectedExtra: extraParam, riskGrade: gradeParam };
+        // localStorage에 저장된 context(단지명·지역·공사비·이름)를 먼저 읽어서 병합
+        // URL params로 덮어쓰면 계산기에서 입력한 데이터가 사라지는 버그 방지
+        let storedContext = {};
+        try {
+          const raw = localStorage.getItem('basicReportContext');
+          if (raw) storedContext = JSON.parse(raw);
+        } catch {}
+        const ctx = {
+          ...storedContext,
+          assetValue:    assetParam,
+          expectedExtra: extraParam,
+          riskGrade:     gradeParam,
+        };
         setContext(ctx);
         if (Number(extraParam) > 0) setSavings(calcSavings(Number(extraParam)));
         try { localStorage.setItem('basicReportContext', JSON.stringify(ctx)); } catch {}
       } else {
-        try {
-          const raw = localStorage.getItem('memberPrefill');
-          if (raw) {
-            const { expectedExtra } = JSON.parse(raw);
-            if (expectedExtra && Number(expectedExtra) > 0) setSavings(calcSavings(Number(expectedExtra)));
+        const raw = localStorage.getItem('basicReportContext');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          setContext(parsed);
+          if (parsed.expectedExtra && Number(parsed.expectedExtra) > 0) {
+            setSavings(calcSavings(Number(parsed.expectedExtra)));
           }
-        } catch {}
-        try {
-          const raw = localStorage.getItem('basicReportContext');
-          if (raw) {
-            setContext(JSON.parse(raw));
-          } else {
-            router.push('/member');
-            return;
-          }
-        } catch {}
+        } else {
+          router.push('/member');
+          return;
+        }
       }
     } catch {}
     setContextLoading(false);
@@ -122,14 +129,15 @@ export default function PremiumReportPaywall() {
 
     if (isBetaMode()) {
       try {
-        await fetch('/api/lead-submit', {
+        const res = await fetch('/api/lead-submit', {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ ...leadBody, product_type: 'premium_beta', beta: true }),
         });
+        if (!res.ok) throw new Error('신청 중 오류가 발생했습니다. 다시 시도해 주세요.');
         setSubmitted(true);
-      } catch {
-        alert('신청 중 오류가 발생했습니다. 다시 시도해 주세요.');
+      } catch (err) {
+        alert(err.message ?? '신청 중 오류가 발생했습니다. 다시 시도해 주세요.');
       } finally {
         setLoading(false);
       }
