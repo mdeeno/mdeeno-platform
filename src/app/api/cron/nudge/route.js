@@ -2,23 +2,22 @@
 // D+3: 이메일 2 (동등급 절감 사례)
 // D+7: 이메일 3-urgency (마지막 할인 코드)
 
-import { NextResponse } from 'next/server';
-import { createClient }  from '@supabase/supabase-js';
-import { resend, FROM }  from '@/lib/resend';
-import { buildEmail2 }   from '@/lib/emails/email2-peer';
-import { buildEmail3 }   from '@/lib/emails/email3-urgency';
+import { NextResponse }          from 'next/server';
+import { createClient }          from '@supabase/supabase-js';
+import { resend, FROM }          from '@/lib/resend';
+import { buildEmail2 }           from '@/lib/emails/email2-peer';
+import { buildEmail3 }           from '@/lib/emails/email3-urgency';
+import { blockUnauthorizedAdmin } from '@/lib/security';
 
-function daysAgo(n) {
-  const d = new Date();
-  d.setDate(d.getDate() - n);
-  return d.toISOString().slice(0, 10); // 'YYYY-MM-DD'
+function daysAgo(numberOfDays) {
+  const date = new Date();
+  date.setDate(date.getDate() - numberOfDays);
+  return date.toISOString().slice(0, 10); // 'YYYY-MM-DD'
 }
 
 export async function GET(req) {
-  const authHeader = req.headers.get('authorization');
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
+  const authError = blockUnauthorizedAdmin(req);
+  if (authError) return authError;
 
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,

@@ -10,6 +10,7 @@ import { getOrderById, updateOrderStatus, markOrderDelivered } from '@/lib/order
 import { fetchPdfFromBackend } from '@/lib/backend';
 import { resend, FROM }        from '@/lib/resend';
 import { buildEmail1 }         from '@/lib/emails/email1-welcome';
+import { isValidOrderId }      from '@/lib/security';
 
 export async function POST(req) {
   let body;
@@ -20,6 +21,11 @@ export async function POST(req) {
 
   if (!paymentKey || !orderId || typeof amount !== 'number') {
     return NextResponse.json({ error: '필수 파라미터가 누락되었습니다' }, { status: 400 });
+  }
+
+  // orderId 형식 검증 (mdeeno_YYYYMMDD_XXXXXXXXXX)
+  if (!isValidOrderId(orderId)) {
+    return NextResponse.json({ error: '유효하지 않은 주문 ID입니다' }, { status: 400 });
   }
 
   // ── 1. DB에서 주문 조회 ───────────────────────────────────────────────────
