@@ -1,20 +1,22 @@
 /**
- * src/middleware.js
- * Next.js Edge Middleware — 모든 요청에 적용
+ * src/proxy.js
+ * Next.js Edge Proxy (구 middleware) — 모든 요청에 적용
  *
  * 역할:
  *  1. 보안 응답 헤더 추가 (클릭재킹, MIME 스니핑 방지 등)
  *  2. 민감 API 엔드포인트에 CSRF 방어 (Origin 헤더 검증)
+ *  3. Rate Limit (Upstash Redis — IP + 경로 기준)
  */
 
 import { NextResponse } from 'next/server';
+import { checkRateLimit } from '@/lib/rateLimiter';
 
 // ── 보안 헤더 (모든 응답에 적용) ────────────────────────────────────────────
 const SECURITY_RESPONSE_HEADERS = {
-  'X-Frame-Options'         : 'DENY',               // 클릭재킹 방지
-  'X-Content-Type-Options'  : 'nosniff',            // MIME 스니핑 방지
-  'Referrer-Policy'         : 'strict-origin-when-cross-origin',
-  'Permissions-Policy'      : 'camera=(), microphone=(), geolocation=()',
+  'X-Frame-Options'        : 'DENY',               // 클릭재킹 방지
+  'X-Content-Type-Options' : 'nosniff',            // MIME 스니핑 방지
+  'Referrer-Policy'        : 'strict-origin-when-cross-origin',
+  'Permissions-Policy'     : 'camera=(), microphone=(), geolocation=()',
 };
 
 // ── CSRF 방어 대상 API 경로 (POST 요청만 검사) ───────────────────────────────
@@ -41,10 +43,17 @@ function getAllowedOrigins() {
   return new Set(['https://mdeeno.com', 'https://www.mdeeno.com']);
 }
 
-export function middleware(request) {
-  const { pathname, method } = request.nextUrl
-    ? { pathname: request.nextUrl.pathname, method: request.method }
-    : { pathname: '', method: request.method };
+/**
+ * 클라이언트 IP 추출 (Vercel은 x-forwarded-for로 전달)
+ */
+function getClientIp(request) {
+  const forwardedFor = request.headers.get('x-forwarded-for');
+  if (forwardedFor) return forwardedFor.split(',')[0].trim();
+  return request.headers.get('x-real-ip') ?? 'unknown';
+}
+
+export async function proxy(request) {
+  const pathname = request.nextUrl.pathname;
 
   // ── CSRF 방어 ─────────────────────────────────────────────────────────────
   const isCsrfProtectedPath = CSRF_PROTECTED_API_PATHS.some((path) =>
@@ -63,6 +72,25 @@ export function middleware(request) {
         );
       }
     }
+  }
+
+  // ── Rate Limit ────────────────────────────────────────────────────────────
+  try {
+    const clientIp = getClientIp(request);
+    const { limited, retryAfterSeconds } = await checkRateLimit(pathname, clientIp);
+
+    if (limited) {
+      return NextResponse.json(
+        { error: '요청 한도를 초과했습니다. 잠시 후 다시 시도해주세요.' },
+        {
+          status: 429,
+          headers: { 'Retry-After': String(retryAfterSeconds ?? 60) },
+        },
+      );
+    }
+  } catch (rateLimitError) {
+    // Redis 장애 시 rate limit을 우회하고 계속 진행 (가용성 우선)
+    console.error('Rate limit 확인 실패 (통과 허용):', rateLimitError?.message);
   }
 
   // ── 보안 헤더 적용 ────────────────────────────────────────────────────────
