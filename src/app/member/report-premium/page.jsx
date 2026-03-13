@@ -35,6 +35,7 @@ export default function PremiumReportPaywall() {
   const [contextLoading, setContextLoading] = useState(true);
   const [leadCount, setLeadCount]           = useState(null);
   const [trafficSource, setTrafficSource]   = useState({});
+  const [submitError, setSubmitError]       = useState('');
 
   function handleShare() {
     const id = crypto.randomUUID();
@@ -127,6 +128,8 @@ export default function PremiumReportPaywall() {
       traffic_source: trafficStr,
     };
 
+    setSubmitError('');
+
     if (isBetaMode()) {
       try {
         const res = await fetch('/api/lead-submit', {
@@ -137,7 +140,7 @@ export default function PremiumReportPaywall() {
         if (!res.ok) throw new Error('신청 중 오류가 발생했습니다. 다시 시도해 주세요.');
         setSubmitted(true);
       } catch (err) {
-        alert(err.message ?? '신청 중 오류가 발생했습니다. 다시 시도해 주세요.');
+        setSubmitError(err.message ?? '신청 중 오류가 발생했습니다. 다시 시도해 주세요.');
       } finally {
         setLoading(false);
       }
@@ -180,7 +183,7 @@ export default function PremiumReportPaywall() {
         failUrl:       data.failUrl,
       });
     } catch (err) {
-      alert(err.message ?? '결제 처리 중 오류가 발생했습니다.');
+      setSubmitError(err.message ?? '결제 처리 중 오류가 발생했습니다.');
     } finally {
       setLoading(false);
     }
@@ -464,6 +467,10 @@ export default function PremiumReportPaywall() {
                 </label>
               )}
             </div>
+
+            {submitError && (
+              <p className={styles.ctaError} role="alert">{submitError}</p>
+            )}
 
             <button
               className={styles.ctaBtn}

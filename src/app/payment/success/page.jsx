@@ -22,10 +22,13 @@ function PaymentSuccessContent() {
       return;
     }
 
+    const controller = new AbortController();
+
     fetch('/api/payments/confirm', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify({ paymentKey, orderId, amount }),
+      signal:  controller.signal,
     })
       .then((res) => res.json())
       .then((data) => {
@@ -36,10 +39,13 @@ function PaymentSuccessContent() {
           setStatus('error');
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        if (err.name === 'AbortError') return;
         setErrorMsg('네트워크 오류가 발생했습니다. 고객센터로 문의해 주세요.');
         setStatus('error');
       });
+
+    return () => controller.abort();
   }, [searchParams]);
 
   if (status === 'loading') {
