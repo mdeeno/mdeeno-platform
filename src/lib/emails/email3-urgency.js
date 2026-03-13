@@ -85,7 +85,7 @@ export function buildEmail3({ riskGrade }) {
         <!-- CTA -->
         <tr>
           <td style="padding:0 36px 36px;text-align:center;">
-            <a href="https://mdeeno.com/member/report-premium" style="display:inline-block;padding:16px 36px;background:#e63946;color:#ffffff;font-size:16px;font-weight:800;text-decoration:none;border-radius:10px;box-shadow:0 4px 16px rgba(230,57,70,0.3);">
+            <a href="https://mdeeno.com/member/report-premium" style="display:inline-block;padding:16px 36px;background:#1e40af;color:#ffffff;font-size:16px;font-weight:800;text-decoration:none;border-radius:10px;box-shadow:0 4px 16px rgba(30,64,175,0.3);">
               할인 코드 적용하고 리포트 받기 →
             </a>
             <p style="margin:12px 0 0;font-size:13px;color:#64748b;">

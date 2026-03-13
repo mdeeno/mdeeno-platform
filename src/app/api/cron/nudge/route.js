@@ -55,12 +55,12 @@ export async function GET(req) {
   }
 
   // ── 이메일 3-urgency: D+7 신청자 (할인 코드 + 마감 안내) ────────────
+  // launch 이메일 수신 여부와 무관하게 D+7 도달 시 발송
   const { data: leads3u } = await supabase
     .from('leads')
     .select('email, risk_grade')
     .gte('created_at', `${day7}T00:00:00Z`)
     .lte('created_at', `${day7}T23:59:59Z`)
-    .not('email_3_sent_at', 'is', null)   // email3-launch 받은 사람만
     .is('email_3_urgency_sent_at', null);
 
   for (const lead of leads3u ?? []) {
