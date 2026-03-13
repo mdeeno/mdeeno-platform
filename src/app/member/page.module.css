@@ -166,33 +166,37 @@
   align-items: center;
   gap: 0;
   margin-bottom: 20px;
-  padding: 0 4px;
+  padding: 16px 20px;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
 }
 
 .stepItem {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .stepDot {
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: #e2e8f0;
   color: #94a3b8;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.25s, color 0.25s;
 }
 
 .stepDotActive {
   background: #1e40af;
   color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.12);
 }
 
 .stepDotDone {
@@ -201,8 +205,8 @@
 }
 
 .stepLabel {
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.875rem;
+  font-weight: 700;
   color: #94a3b8;
   transition: color 0.2s;
 }
@@ -217,9 +221,10 @@
 
 .stepLine {
   flex: 1;
-  height: 2px;
+  height: 3px;
   background: #e2e8f0;
-  margin: 0 10px;
+  margin: 0 14px;
+  border-radius: 2px;
   transition: background 0.3s;
 }
 
@@ -295,19 +300,20 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .formCard {
   background: #ffffff;
   border: 1.5px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 24px;
+  border-radius: 12px;
+  padding: 32px 28px;
 }
 
 .formCardActive {
-  border-top: 3px solid #1e40af;
-  border-color: #1e40af;
+  border-color: #bfdbfe;
+  border-left: 4px solid #1e40af;
+  background: #fafcff;
 }
 
 .stepBadge {
@@ -317,37 +323,38 @@
   font-size: 0.65rem;
   font-weight: 800;
   letter-spacing: 0.08em;
-  padding: 2px 7px;
+  padding: 3px 8px;
   border-radius: 4px;
-  margin-right: 8px;
+  margin-right: 10px;
   vertical-align: middle;
 }
 
 .formSectionLabel {
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: #1e293b;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #334155;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #e2e8f0;
+  display: flex;
+  align-items: center;
 }
 
 .fieldGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 24px;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .label {
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.875rem;
+  font-weight: 700;
   color: #1e293b;
 }
 
@@ -356,9 +363,9 @@
 }
 
 .fieldHint {
-  font-size: 0.75rem;
-  color: #64748b;
-  line-height: 1.4;
+  font-size: 0.72rem;
+  color: #94a3b8;
+  line-height: 1.45;
   margin: 0;
 }
 
@@ -1355,7 +1362,7 @@
   }
 
   .formCard {
-    padding: 20px 16px;
+    padding: 24px 20px;
   }
 
   .shockBox {
