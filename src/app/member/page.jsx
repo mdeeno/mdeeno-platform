@@ -124,12 +124,16 @@ export default function ShockCalculatorPage() {
 
       setResult(data);
 
-      // Save context for /member/report-basic (no re-entry needed there)
+      // Save context for /member/report-basic|premium (결제 시 PDF 생성에 필요한 전체 데이터 보존)
       try {
         localStorage.setItem('basicReportContext', JSON.stringify({
-          assetValue:    form.asset_value,
-          expectedExtra: form.expected_extra,
-          riskGrade:     data.risk_level,
+          assetValue:       form.asset_value,
+          expectedExtra:    form.expected_extra,
+          riskGrade:        data.risk_level,
+          complexName:      form.complex_name.trim()      || null,
+          location:         form.location.trim()          || null,
+          constructionCost: Number(form.construction_cost) || null,
+          memberName:       form.member_name.trim()       || null,
         }));
       } catch {}
 
