@@ -195,6 +195,11 @@
   color: #ffffff;
 }
 
+.stepDotDone {
+  background: #16a34a;
+  color: #ffffff;
+}
+
 .stepLabel {
   font-size: 0.8rem;
   font-weight: 600;
@@ -206,11 +211,20 @@
   color: #1e40af;
 }
 
+.stepLabelDone {
+  color: #16a34a;
+}
+
 .stepLine {
   flex: 1;
   height: 2px;
   background: #e2e8f0;
   margin: 0 10px;
+  transition: background 0.3s;
+}
+
+.stepLineCompleted {
+  background: #1e40af;
 }
 
 /* ── Step Navigation ── */
@@ -289,6 +303,24 @@
   border: 1.5px solid #e2e8f0;
   border-radius: 10px;
   padding: 24px;
+}
+
+.formCardActive {
+  border-top: 3px solid #1e40af;
+  border-color: #1e40af;
+}
+
+.stepBadge {
+  display: inline-block;
+  background: #1e40af;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-right: 8px;
+  vertical-align: middle;
 }
 
 .formSectionLabel {

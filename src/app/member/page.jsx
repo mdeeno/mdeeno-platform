@@ -248,10 +248,12 @@ export default function ShockCalculatorPage() {
         {/* ── 진행 표시 ── */}
         <div className={styles.stepProgress}>
           <div className={styles.stepItem}>
-            <div className={`${styles.stepDot} ${step >= 1 ? styles.stepDotActive : ''}`}>1</div>
-            <span className={`${styles.stepLabel} ${step === 1 ? styles.stepLabelActive : ''}`}>자산 정보</span>
+            <div className={`${styles.stepDot} ${step >= 1 ? styles.stepDotActive : ''} ${step > 1 ? styles.stepDotDone : ''}`}>
+              {step > 1 ? '✓' : '1'}
+            </div>
+            <span className={`${styles.stepLabel} ${step === 1 ? styles.stepLabelActive : ''} ${step > 1 ? styles.stepLabelDone : ''}`}>자산 정보</span>
           </div>
-          <div className={styles.stepLine} />
+          <div className={`${styles.stepLine} ${step >= 2 ? styles.stepLineCompleted : ''}`} />
           <div className={styles.stepItem}>
             <div className={`${styles.stepDot} ${step >= 2 ? styles.stepDotActive : ''}`}>2</div>
             <span className={`${styles.stepLabel} ${step === 2 ? styles.stepLabelActive : ''}`}>단지 정보</span>
@@ -260,8 +262,11 @@ export default function ShockCalculatorPage() {
 
         {/* ── Step 1: 자산 정보 ── */}
         {step === 1 && (
-          <div className={styles.formCard}>
-            <p className={styles.formSectionLabel}>자산 정보 입력</p>
+          <div className={`${styles.formCard} ${styles.formCardActive}`}>
+            <p className={styles.formSectionLabel}>
+              <span className={styles.stepBadge}>STEP 1</span>
+              자산 정보 입력
+            </p>
 
             <div className={styles.fieldGrid}>
               <div className={styles.field}>
@@ -372,8 +377,11 @@ export default function ShockCalculatorPage() {
 
         {/* ── Step 2: 단지 정보 ── */}
         {step === 2 && (
-          <div className={styles.formCard}>
-            <p className={styles.formSectionLabel}>단지 정보</p>
+          <div className={`${styles.formCard} ${styles.formCardActive}`}>
+            <p className={styles.formSectionLabel}>
+              <span className={styles.stepBadge}>STEP 2</span>
+              단지 정보
+            </p>
             <p className={styles.fieldHint} style={{ marginBottom: '12px' }}>
               지역별 공사비 벤치마크 비교와 맞춤 분석에 사용됩니다
             </p>
