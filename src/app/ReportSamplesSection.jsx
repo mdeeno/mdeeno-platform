@@ -317,7 +317,7 @@ export default function ReportSamplesSection() {
 
           <div className={styles.sampleGrid}>
             {/* ── Basic ── */}
-            <div className={styles.sampleCard}>
+            <div id="basic" className={styles.sampleCard}>
               <div className={styles.sampleCoverThumb}>
                 <p className={styles.sampleCoverEyebrow}>M-DEENO</p>
                 <p className={styles.sampleCoverTitle}>베이직 리포트</p>
@@ -356,7 +356,7 @@ export default function ReportSamplesSection() {
             </div>
 
             {/* ── Premium ── */}
-            <div className={`${styles.sampleCard} ${styles.sampleCardFeatured}`}>
+            <div id="premium" className={`${styles.sampleCard} ${styles.sampleCardFeatured}`}>
               <div className={`${styles.sampleCoverThumb} ${styles.sampleCoverThumbDark}`}>
                 <p className={styles.sampleCoverEyebrowDark}>M-DEENO</p>
                 <p className={styles.sampleCoverTitleDark}>프리미엄 전략 리포트</p>

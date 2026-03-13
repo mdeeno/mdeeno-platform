@@ -637,7 +637,7 @@ export default function ShockCalculatorPage() {
                 : '협상 전략·총회 발언 스크립트·행동 타임라인이 포함된 프리미엄 리포트로 총회에서 이기세요.'}
             </p>
             <Link
-              href={['R1', 'R2'].includes(result.risk_level) ? '/reports#report-samples' : '/reports#report-samples'}
+              href={['R1', 'R2'].includes(result.risk_level) ? '/reports#basic' : '/reports#premium'}
               className={styles.tierSampleLink}
             >
               리포트 샘플 먼저 확인하기 →
