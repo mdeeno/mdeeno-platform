@@ -38,6 +38,7 @@ ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
 -- report_records 테이블: 공개 읽기 허용 (공유 링크 페이지용)
 ALTER TABLE report_records ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "report_records_public_read" ON report_records;
 CREATE POLICY "report_records_public_read"
   ON report_records
   FOR SELECT
