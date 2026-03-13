@@ -13,7 +13,7 @@ export async function POST(req) {
     return NextResponse.json({ error: '요청 형식이 올바르지 않습니다' }, { status: 400 });
   }
 
-  const { email, asset_value, expected_extra, risk_grade, complex_name, location, pyeong, construction_cost } = body;
+  const { email, source, asset_value, expected_extra, risk_grade, complex_name, location, pyeong, construction_cost } = body;
 
   if (!email || typeof email !== 'string' || !EMAIL_RE.test(email.trim())) {
     return NextResponse.json({ error: '유효하지 않은 이메일입니다' }, { status: 400 });
@@ -22,6 +22,7 @@ export async function POST(req) {
   const record = {
     email:             email.trim().toLowerCase().slice(0, 254),
     product_type:      'basic_beta',
+    traffic_source:    typeof source === 'string' ? source.slice(0, 100) : 'calc_cta',
     beta:              true,
     asset_value:       typeof asset_value       === 'number' ? asset_value       : null,
     expected_extra:    typeof expected_extra    === 'number' ? expected_extra    : null,

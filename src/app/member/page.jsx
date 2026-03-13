@@ -190,6 +190,7 @@ export default function ShockCalculatorPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email:             emailAddress,
+          source:            modalSource === 'result' ? 'calc_result' : 'calc_cta',
           asset_value:       Number(form.asset_value)       || null,
           expected_extra:    Number(form.expected_extra)    || null,
           risk_grade:        result?.risk_level             || null,
