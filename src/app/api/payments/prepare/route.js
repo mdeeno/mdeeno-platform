@@ -59,11 +59,11 @@ export async function POST(req) {
       assetValue:       typeof asset_value       === 'number' ? asset_value       : null,
       expectedExtra:    typeof expected_extra    === 'number' ? expected_extra    : null,
       riskGrade:        typeof risk_grade        === 'string' ? risk_grade        : null,
-      complexName:      typeof complex_name      === 'string' ? complex_name      : null,
-      memberName:       typeof member_name       === 'string' ? member_name       : null,
-      location:         typeof location          === 'string' ? location          : null,
+      complexName:      typeof complex_name      === 'string' ? complex_name.slice(0, 100)      : null,
+      memberName:       typeof member_name       === 'string' ? member_name.slice(0, 50)        : null,
+      location:         typeof location          === 'string' ? location.slice(0, 100)          : null,
       constructionCost: typeof construction_cost === 'number' ? construction_cost : null,
-      trafficSource:    typeof traffic_source    === 'string' ? traffic_source    : null,
+      trafficSource:    typeof traffic_source    === 'string' ? traffic_source.slice(0, 500)    : null,
     });
   } catch (err) {
     console.error('payments/prepare DB error:', err.message ?? err);
