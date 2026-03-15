@@ -15,7 +15,7 @@ export const ORDER_ID_REGEX = /^mdeeno_\d{8}_[A-Z0-9]{10}$/;
 // ── Rate limit 설정 (Upstash Redis 연동 시 사용) ────────────────────────────
 export const RATE_LIMIT = {
   PAYMENT_MAX_REQUESTS_PER_MINUTE : 5,
-  PDF_MAX_REQUESTS_PER_MINUTE     : 3,
+  PDF_MAX_REQUESTS_PER_MINUTE     : 1,
   LEAD_MAX_REQUESTS_PER_MINUTE    : 10,
 };
 
