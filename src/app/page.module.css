@@ -1068,6 +1068,30 @@
   cursor: not-allowed;
 }
 
+.landingLeadPhoneWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.landingLeadPhoneLabel {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+.landingLeadPhoneOpt {
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 400;
+}
+
+.landingLeadPhoneHint {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0;
+}
+
 .landingLeadError {
   margin-top: 10px;
   font-size: 0.82rem;

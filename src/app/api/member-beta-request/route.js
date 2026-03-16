@@ -4,6 +4,7 @@ import { resend, FROM } from '@/lib/resend';
 import { buildEmail1 } from '@/lib/emails/email1-welcome';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_RE = /^010\d{7,8}$/;
 
 export async function POST(req) {
   let body;
@@ -13,14 +14,17 @@ export async function POST(req) {
     return NextResponse.json({ error: '요청 형식이 올바르지 않습니다' }, { status: 400 });
   }
 
-  const { email, source, asset_value, expected_extra, risk_grade, complex_name, location, pyeong, construction_cost } = body;
+  const { email, phone, source, asset_value, expected_extra, risk_grade, complex_name, location, pyeong, construction_cost } = body;
 
   if (!email || typeof email !== 'string' || !EMAIL_RE.test(email.trim())) {
     return NextResponse.json({ error: '유효하지 않은 이메일입니다' }, { status: 400 });
   }
 
+  const cleanPhone = typeof phone === 'string' ? phone.replace(/\D/g, '') : '';
+
   const record = {
     email:             email.trim().toLowerCase().slice(0, 254),
+    phone:             cleanPhone && PHONE_RE.test(cleanPhone) ? cleanPhone : null,
     product_type:      'basic_beta',
     traffic_source:    typeof source === 'string' ? source.slice(0, 100) : 'calc_cta',
     beta:              true,

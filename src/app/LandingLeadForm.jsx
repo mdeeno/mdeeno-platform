@@ -10,16 +10,35 @@ const BENEFITS = [
   '공사비 상승 시 분석 업데이트 알림 수신',
 ];
 
+const PHONE_DISPLAY_RE = /^01[016789]-\d{3,4}-\d{4}$/;
+
+function formatPhoneInput(raw) {
+  const digits = raw.replace(/\D/g, '').slice(0, 11);
+  if (digits.length < 4)  return digits;
+  if (digits.length < 8)  return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+  return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7)}`;
+}
+
 export default function LandingLeadForm() {
   const [email, setEmail]         = useState('');
+  const [phone, setPhone]         = useState('');
   const [error, setError]         = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading]     = useState(false);
+
+  function handlePhoneChange(e) {
+    setPhone(formatPhoneInput(e.target.value));
+    if (error) setError('');
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       setError('올바른 이메일 주소를 입력해 주세요.');
+      return;
+    }
+    if (phone && !PHONE_DISPLAY_RE.test(phone)) {
+      setError('올바른 휴대폰 번호를 입력해 주세요. (예: 010-1234-5678)');
       return;
     }
     setLoading(true);
@@ -29,6 +48,7 @@ export default function LandingLeadForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email:        email.trim(),
+          phone:        phone || undefined,
           product_type: 'landing_beta',
           beta:         true,
         }),
@@ -82,6 +102,22 @@ export default function LandingLeadForm() {
                 onChange={(e) => { setEmail(e.target.value); setError(''); }}
                 autoComplete="email"
               />
+              <div className={styles.landingLeadPhoneWrap}>
+                <label className={styles.landingLeadPhoneLabel} htmlFor="landing_phone">
+                  휴대폰 번호 <span className={styles.landingLeadPhoneOpt}>(선택)</span>
+                </label>
+                <input
+                  className={`${styles.landingLeadInput}${error && phone ? ` ${styles.landingLeadInputError}` : ''}`}
+                  id="landing_phone"
+                  type="tel"
+                  placeholder="010-0000-0000"
+                  value={phone}
+                  onChange={handlePhoneChange}
+                  autoComplete="tel"
+                  inputMode="numeric"
+                />
+                <p className={styles.landingLeadPhoneHint}>서비스 오픈 시 알림톡으로 먼저 안내해 드립니다</p>
+              </div>
               <button
                 className={styles.landingLeadBtn}
                 type="submit"

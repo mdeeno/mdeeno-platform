@@ -1042,6 +1042,18 @@
   box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.08);
 }
 
+.modalLabelOpt {
+  font-weight: 400;
+  color: #94a3b8;
+  font-size: 0.78rem;
+}
+
+.modalPhoneHint {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
 .modalPrivacyRow {
   display: flex;
   align-items: flex-start;

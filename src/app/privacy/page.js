@@ -22,7 +22,7 @@ export default function PrivacyPage() {
           <ul>
             <li>서비스 제공: 분담금 시뮬레이션 결과 및 리포트 전달</li>
             <li>회원 관리: 사전 신청자 관리 및 베타 서비스 안내</li>
-            <li>마케팅·광고: 서비스 출시 및 업데이트 이메일 발송 (동의 시)</li>
+            <li>마케팅·광고: 서비스 출시 및 업데이트 이메일·알림톡 발송 (동의 시)</li>
             <li>서비스 개선: 이용 통계 분석 및 기능 개선</li>
           </ul>
         </section>
@@ -32,6 +32,7 @@ export default function PrivacyPage() {
           <p>회사는 다음과 같은 개인정보를 처리합니다.</p>
           <ul>
             <li><strong>필수:</strong> 이메일 주소</li>
+            <li><strong>선택:</strong> 휴대폰 번호 (서비스 오픈 알림톡 발송 목적)</li>
             <li><strong>선택 (시뮬레이터 입력):</strong> 단지명, 전용면적, 권리가액, 공사비 등 정비사업 관련 수치 정보</li>
             <li><strong>자동 수집:</strong> IP 주소, 쿠키, 서비스 이용 기록, 접속 로그</li>
           </ul>

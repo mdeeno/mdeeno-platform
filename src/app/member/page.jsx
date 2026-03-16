@@ -51,6 +51,7 @@ export default function ShockCalculatorPage() {
   const [emailError, setEmailError]         = useState('');
   const [betaDone, setBetaDone]             = useState(false);
   const [betaLoading, setBetaLoading]       = useState(false);
+  const [phone, setPhone]                               = useState('');
   const [isModalPrivacyAgreed, setIsModalPrivacyAgreed] = useState(false);
   const [pendingNav, setPendingNav]         = useState(null);
   const [modalSource, setModalSource]       = useState('report'); // 'result' | 'report'
@@ -182,7 +183,7 @@ export default function ShockCalculatorPage() {
     }
   }
 
-  async function handleBetaSubmit(emailAddress) {
+  async function handleBetaSubmit(emailAddress, phoneNumber) {
     setBetaLoading(true);
     try {
       const res = await fetch('/api/member-beta-request', {
@@ -190,6 +191,7 @@ export default function ShockCalculatorPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email:             emailAddress,
+          phone:             phoneNumber || undefined,
           source:            modalSource === 'result' ? 'calc_result' : 'calc_cta',
           asset_value:       Number(form.asset_value)       || null,
           expected_extra:    Number(form.expected_extra)    || null,
@@ -216,10 +218,23 @@ export default function ShockCalculatorPage() {
     }
   }
 
+  const PHONE_DISPLAY_RE = /^01[016789]-\d{3,4}-\d{4}$/;
+
+  function formatPhoneInput(raw) {
+    const digits = raw.replace(/\D/g, '').slice(0, 11);
+    if (digits.length < 4)  return digits;
+    if (digits.length < 8)  return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+    return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7)}`;
+  }
+
   function handleModalSubmit(e) {
     e.preventDefault();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       setEmailError('올바른 이메일 주소를 입력해 주세요.');
+      return;
+    }
+    if (phone && !PHONE_DISPLAY_RE.test(phone)) {
+      setEmailError('올바른 휴대폰 번호를 입력해 주세요. (예: 010-1234-5678)');
       return;
     }
     if (!isModalPrivacyAgreed) {
@@ -229,7 +244,7 @@ export default function ShockCalculatorPage() {
     setEmailModalOpen(false);
     // pendingNav: navigate after beta submit via useEffect
     if (isBetaMode()) {
-      handleBetaSubmit(email.trim());
+      handleBetaSubmit(email.trim(), phone || undefined);
     } else {
       handleDownloadReport(email.trim());
       if (pendingNav) {
@@ -895,6 +910,23 @@ export default function ShockCalculatorPage() {
                   autoComplete="email"
                   autoFocus
                 />
+              </div>
+
+              <div className={styles.modalField}>
+                <label className={styles.modalLabel} htmlFor="modal_phone">
+                  휴대폰 번호 <span className={styles.modalLabelOpt}>(선택)</span>
+                </label>
+                <input
+                  className={styles.modalInput}
+                  id="modal_phone"
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => { setPhone(formatPhoneInput(e.target.value)); setEmailError(''); }}
+                  placeholder="010-0000-0000"
+                  autoComplete="tel"
+                  inputMode="numeric"
+                />
+                <p className={styles.modalPhoneHint}>서비스 오픈 시 알림톡으로 먼저 안내해 드립니다</p>
               </div>
 
               <label className={styles.modalPrivacyRow}>
