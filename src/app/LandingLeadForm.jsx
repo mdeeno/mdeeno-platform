@@ -37,8 +37,8 @@ export default function LandingLeadForm() {
       setError('올바른 이메일 주소를 입력해 주세요.');
       return;
     }
-    if (phone && !PHONE_DISPLAY_RE.test(phone)) {
-      setError('올바른 휴대폰 번호를 입력해 주세요. (예: 010-1234-5678)');
+    if (!phone || !PHONE_DISPLAY_RE.test(phone)) {
+      setError('휴대폰 번호를 입력해 주세요. (예: 010-1234-5678)');
       return;
     }
     setLoading(true);
@@ -48,7 +48,7 @@ export default function LandingLeadForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email:        email.trim(),
-          phone:        phone || undefined,
+          phone:        phone,
           product_type: 'landing_beta',
           beta:         true,
         }),
@@ -78,7 +78,7 @@ export default function LandingLeadForm() {
           <>
             <p className={styles.landingLeadEyebrow}>6월 출시 예정</p>
             <p className={styles.landingLeadTitle}>
-              출시 전, 이메일만 남겨두세요
+              출시 전, 연락처만 남겨두세요
             </p>
             <p className={styles.landingLeadDesc}>
               정식 출시 시 할인 결제 링크를 가장 먼저 받아보실 수 있습니다.
@@ -104,10 +104,10 @@ export default function LandingLeadForm() {
               />
               <div className={styles.landingLeadPhoneWrap}>
                 <label className={styles.landingLeadPhoneLabel} htmlFor="landing_phone">
-                  휴대폰 번호 <span className={styles.landingLeadPhoneOpt}>(선택)</span>
+                  휴대폰 번호
                 </label>
                 <input
-                  className={`${styles.landingLeadInput}${error && phone ? ` ${styles.landingLeadInputError}` : ''}`}
+                  className={`${styles.landingLeadInput}${error ? ` ${styles.landingLeadInputError}` : ''}`}
                   id="landing_phone"
                   type="tel"
                   placeholder="010-0000-0000"
@@ -115,8 +115,9 @@ export default function LandingLeadForm() {
                   onChange={handlePhoneChange}
                   autoComplete="tel"
                   inputMode="numeric"
+                  required
                 />
-                <p className={styles.landingLeadPhoneHint}>서비스 오픈 시 알림톡으로 먼저 안내해 드립니다</p>
+                <p className={styles.landingLeadPhoneHint}>출시 시 알림톡으로 가장 먼저 안내해 드립니다</p>
               </div>
               <button
                 className={styles.landingLeadBtn}

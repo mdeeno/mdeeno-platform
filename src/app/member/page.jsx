@@ -233,8 +233,8 @@ export default function ShockCalculatorPage() {
       setEmailError('올바른 이메일 주소를 입력해 주세요.');
       return;
     }
-    if (phone && !PHONE_DISPLAY_RE.test(phone)) {
-      setEmailError('올바른 휴대폰 번호를 입력해 주세요. (예: 010-1234-5678)');
+    if (!phone || !PHONE_DISPLAY_RE.test(phone)) {
+      setEmailError('휴대폰 번호를 입력해 주세요. (예: 010-1234-5678)');
       return;
     }
     if (!isModalPrivacyAgreed) {
@@ -914,7 +914,7 @@ export default function ShockCalculatorPage() {
 
               <div className={styles.modalField}>
                 <label className={styles.modalLabel} htmlFor="modal_phone">
-                  휴대폰 번호 <span className={styles.modalLabelOpt}>(선택)</span>
+                  휴대폰 번호
                 </label>
                 <input
                   className={styles.modalInput}
@@ -925,6 +925,7 @@ export default function ShockCalculatorPage() {
                   placeholder="010-0000-0000"
                   autoComplete="tel"
                   inputMode="numeric"
+                  required
                 />
                 <p className={styles.modalPhoneHint}>서비스 오픈 시 알림톡으로 먼저 안내해 드립니다</p>
               </div>

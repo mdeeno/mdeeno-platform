@@ -21,10 +21,13 @@ export async function POST(req) {
   }
 
   const cleanPhone = typeof phone === 'string' ? phone.replace(/\D/g, '') : '';
+  if (!cleanPhone || !PHONE_RE.test(cleanPhone)) {
+    return NextResponse.json({ error: '유효하지 않은 휴대폰 번호입니다' }, { status: 400 });
+  }
 
   const record = {
     email:             email.trim().toLowerCase().slice(0, 254),
-    phone:             cleanPhone && PHONE_RE.test(cleanPhone) ? cleanPhone : null,
+    phone:             cleanPhone,
     product_type:      'basic_beta',
     traffic_source:    typeof source === 'string' ? source.slice(0, 100) : 'calc_cta',
     beta:              true,

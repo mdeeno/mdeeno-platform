@@ -31,8 +31,7 @@ export default function PrivacyPage() {
           <h2>제2조 (처리하는 개인정보 항목)</h2>
           <p>회사는 다음과 같은 개인정보를 처리합니다.</p>
           <ul>
-            <li><strong>필수:</strong> 이메일 주소</li>
-            <li><strong>선택:</strong> 휴대폰 번호 (서비스 오픈 알림톡 발송 목적)</li>
+            <li><strong>필수:</strong> 이메일 주소, 휴대폰 번호</li>
             <li><strong>선택 (시뮬레이터 입력):</strong> 단지명, 전용면적, 권리가액, 공사비 등 정비사업 관련 수치 정보</li>
             <li><strong>자동 수집:</strong> IP 주소, 쿠키, 서비스 이용 기록, 접속 로그</li>
           </ul>
