@@ -112,8 +112,8 @@ export default function PremiumReportPaywall() {
       return;
     }
     const cleanPhone = phone.replace(/\D/g, '');
-    if (phone.trim() && !PHONE_RE.test(cleanPhone)) {
-      setPhoneError('올바른 휴대폰 번호를 입력해주세요. (예: 01012345678)');
+    if (!cleanPhone || !PHONE_RE.test(cleanPhone)) {
+      setPhoneError('휴대폰 번호를 입력해주세요. (예: 01012345678)');
       return;
     }
     setLoading(true);
@@ -121,7 +121,7 @@ export default function PremiumReportPaywall() {
     const trafficStr = JSON.stringify(trafficSource);
     const leadBody = {
       email:          email.trim(),
-      phone:          cleanPhone || null,
+      phone:          cleanPhone,
       asset_value:    context ? Number(context.assetValue)    : null,
       expected_extra: context ? Number(context.expectedExtra) : null,
       risk_grade:     context?.riskGrade ?? null,
@@ -153,7 +153,7 @@ export default function PremiumReportPaywall() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email:             email.trim(),
-          phone:             cleanPhone || null,
+          phone:             cleanPhone,
           product_type:      'premium',
           asset_value:       context ? Number(context.assetValue)       : null,
           expected_extra:    context ? Number(context.expectedExtra)    : null,
@@ -448,7 +448,7 @@ export default function PremiumReportPaywall() {
             <input
               className={`${styles.ctaInput}${phoneError ? ` ${styles.ctaInputError}` : ''}`}
               type="tel"
-              placeholder="휴대폰 번호 (선택 · 예: 01012345678)"
+              placeholder="휴대폰 번호 (예: 01012345678)"
               value={phone}
               onChange={(e) => { setPhone(e.target.value); setPhoneError(''); }}
               autoComplete="tel"
@@ -490,7 +490,7 @@ export default function PremiumReportPaywall() {
             <p className={styles.ctaNote}>
               {isBetaMode()
                 ? '6월 정식 출시 이후 결제 링크를 이메일로 발송합니다'
-                : '결제 완료 즉시 PDF가 다운로드됩니다'}
+                : '결제 완료 즉시 입력하신 이메일로 PDF가 발송됩니다'}
             </p>
 
             <p className={styles.ctaDisclaimer}>
