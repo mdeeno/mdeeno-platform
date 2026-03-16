@@ -937,7 +937,7 @@ export default function ShockCalculatorPage() {
                   onChange={(e) => { setIsModalPrivacyAgreed(e.target.checked); setEmailError(''); }}
                 />
                 <span className={styles.modalPrivacyText}>
-                  개인정보 수집·이용에 동의합니다 (이메일로 출시 안내 수신 목적)
+                  개인정보 수집·이용에 동의합니다 (이메일·휴대폰 번호 수집, 출시 안내 목적)
                 </span>
               </label>
 
