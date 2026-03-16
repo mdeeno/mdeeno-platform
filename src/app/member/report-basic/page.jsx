@@ -310,7 +310,7 @@ export default function ReportBasicPage() {
         <div className={styles.consentBox}>
           <label className={styles.consentLabel}>
             <input type="checkbox" checked={isPrivacyAgreed} onChange={(e) => setIsPrivacyAgreed(e.target.checked)} />
-            <span>[필수] 개인정보 수집 및 이용 동의 (이메일: 리포트 발송)</span>
+            <span>[필수] 개인정보 수집 및 이용 동의 (이메일·휴대폰 번호: 출시 안내 및 서비스 알림)</span>
           </label>
           {!isBetaMode() && (
             <label className={styles.consentLabel}>
@@ -337,12 +337,12 @@ export default function ReportBasicPage() {
         <p className={styles.ctaNote}>
           {isBetaMode()
             ? '6월 정식 출시 이후 결제 링크를 이메일로 발송합니다'
-            : '결제 완료 즉시 입력하신 이메일로 PDF가 발송됩니다'}
+            : '결제 완료 즉시 PDF가 다운로드됩니다'}
         </p>
 
         <p className={styles.disclaimer}>
           본 리포트는 참고용 분석 자료이며 투자·법률·세무 자문이 아닙니다.
-          이메일은 리포트 발송 목적으로만 사용됩니다.
+          수집된 연락처는 출시 안내 및 서비스 알림 목적으로만 사용됩니다.
         </p>
         {isCTADisabled && !loading && (
           <p className={styles.ctaHint}>
