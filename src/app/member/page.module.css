@@ -1343,23 +1343,69 @@
 
 /* ── Tablet ── */
 @media (max-width: 768px) {
-  .page { max-width: 100%; }
+  .page {
+    max-width: 100%;
+    padding: 48px 16px 80px;
+  }
+
+  .header {
+    margin-bottom: 32px;
+  }
+
+  .title {
+    font-size: 1.65rem;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-size: 0.92rem;
+  }
+
+  .fieldGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
 
 /* ── Large Mobile / Small Tablet (481-600px) ── */
 @media (max-width: 600px) {
   .page {
-    padding: 40px 16px 80px;
+    padding: 36px 14px 72px;
+  }
+
+  .header {
+    margin-bottom: 24px;
+  }
+
+  .title {
+    font-size: 1.45rem;
   }
 
   .problemSection {
-    padding: 24px 16px;
-    margin-bottom: 24px;
+    padding: 22px 16px;
+    margin-bottom: 20px;
+  }
+
+  .problemTitle {
+    font-size: 1.15rem;
+    margin-bottom: 20px;
   }
 
   .problemItem {
     padding: 12px 14px;
-    gap: 12px;
+    gap: 10px;
+  }
+
+  .problemText strong {
+    font-size: 0.88rem;
+  }
+
+  .problemText span {
+    font-size: 0.75rem;
+  }
+
+  .trustSection {
+    margin-bottom: 24px;
   }
 
   .trustGrid {
@@ -1367,33 +1413,110 @@
   }
 
   .trustCard {
-    padding: 14px 8px;
+    padding: 12px 8px;
+  }
+
+  .trustCause {
+    font-size: 0.65rem;
+    margin-bottom: 6px;
   }
 
   .trustAmount {
     font-size: 1.1rem;
   }
 
+  .trustLabel {
+    font-size: 0.65rem;
+  }
+
+  /* Step Progress */
+  .stepProgress {
+    padding: 12px 14px;
+    margin-bottom: 16px;
+  }
+
+  .stepDot {
+    width: 30px;
+    height: 30px;
+    font-size: 0.75rem;
+  }
+
+  .stepLabel {
+    font-size: 0.75rem;
+  }
+
+  .stepLine {
+    margin: 0 8px;
+  }
+
+  /* Form */
   .formCard {
-    padding: 24px 20px;
+    padding: 22px 16px;
   }
 
+  .formSectionLabel {
+    font-size: 0.92rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+  }
+
+  .label {
+    font-size: 0.92rem;
+  }
+
+  .fieldHint {
+    font-size: 0.8rem;
+  }
+
+  .input {
+    padding: 12px 14px;
+    font-size: 0.92rem;
+  }
+
+  .nextBtn,
+  .submitBtn {
+    padding: 14px 24px;
+    font-size: 0.95rem;
+  }
+
+  .backBtn {
+    padding: 14px 16px;
+    font-size: 0.88rem;
+  }
+
+  /* Shock Box */
   .shockBox {
-    padding: 24px 16px;
+    padding: 22px 16px;
   }
 
+  /* Strategy overlay */
   .strategyOverlay {
-    padding: 24px 16px;
+    padding: 22px 14px;
+    gap: 12px;
+  }
+
+  .ctaTitle {
+    font-size: 1rem;
+  }
+
+  .ctaBtn {
+    padding: 14px 24px;
+    font-size: 0.95rem;
+    min-width: unset;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .premiumHeadline {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
   }
 
+  /* Modal */
   .modal {
-    padding: 28px 20px;
+    padding: 24px 18px;
   }
 
+  /* Simulation cards */
   .simCard {
     flex-direction: column;
     align-items: flex-start;
@@ -1403,16 +1526,22 @@
   .simCardTitle {
     min-width: unset;
   }
-}
 
-/* ── Mobile (≤ 480px) ── */
-@media (max-width: 480px) {
-  .fieldGrid {
-    grid-template-columns: 1fr;
+  /* Urgency banner */
+  .urgencyBanner {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px 16px;
   }
 
+  .urgencyCount {
+    font-size: 1.3rem;
+  }
+
+  /* Comparison grid */
   .comparisonGrid {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .comparisonDivider {
@@ -1420,15 +1549,69 @@
     padding-left: 4px;
   }
 
-  .urgencyBanner {
-    flex-wrap: wrap;
-    gap: 8px;
+  /* Social proof */
+  .socialProof {
+    padding: 12px 14px;
+    font-size: 0.82rem;
+  }
+}
+
+/* ── Mobile (≤ 480px) ── */
+@media (max-width: 480px) {
+  .page {
+    padding: 28px 12px 64px;
   }
 
-  .ctaBtn {
-    min-width: unset;
-    width: 100%;
-    box-sizing: border-box;
+  .header {
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+  }
+
+  .problemSection {
+    padding: 18px 14px;
+    margin-bottom: 16px;
+  }
+
+  .problemTitle {
+    font-size: 1.05rem;
+    margin-bottom: 16px;
+  }
+
+  .trustGrid {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+  }
+
+  .trustCard {
+    padding: 10px 6px;
+  }
+
+  .trustAmount {
+    font-size: 0.95rem;
+  }
+
+  .formCard {
+    padding: 18px 14px;
+  }
+
+  .shockBox {
+    padding: 18px 14px;
+  }
+
+  .strategyOverlay {
+    padding: 18px 12px;
+    gap: 10px;
+  }
+
+  .ctaTitle {
+    font-size: 0.92rem;
   }
 }
 

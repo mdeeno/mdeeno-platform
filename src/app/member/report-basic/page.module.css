@@ -579,22 +579,186 @@
 
 /* ── Tablet ── */
 @media (max-width: 768px) {
-  .container { max-width: 100%; }
-  .hero h1 { font-size: 1.7rem; }
+  .container {
+    max-width: 100%;
+    padding: 40px 16px 60px;
+  }
+
+  .hero {
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-size: 1.55rem;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-size: 0.88rem;
+  }
+
+  .contextCard {
+    padding: 20px;
+  }
+
+  .contextGrade {
+    font-size: 2rem;
+  }
+
+  .contextRow {
+    gap: 20px;
+  }
+
+  .premiumNudge {
+    padding: 20px;
+  }
+
+  .premiumNudgeTitle {
+    font-size: 0.95rem;
+  }
+
+  .contentsCard {
+    padding: 20px;
+  }
+
+  .ctaBox {
+    padding: 24px 18px;
+  }
+
+  .ctaHeading {
+    font-size: 1.05rem;
+  }
+
+  .compareBox {
+    padding: 20px 16px;
+  }
+
+  .compareTableWrap {
+    margin: 0 -16px;
+    padding: 0 16px;
+  }
+
+  .compareTable {
+    font-size: 0.8rem;
+  }
+
+  .compareTable th,
+  .compareTable td {
+    padding: 8px 6px;
+  }
 }
 
 /* ── Mobile ── */
-@media (max-width: 600px) {
-  .container { padding: 40px 16px 60px; }
-  .hero h1 { font-size: 1.55rem; }
-  .contextGrade { font-size: 2rem; }
-  .contextRow { gap: 16px; }
-  .ctaBox { padding: 24px 16px; }
-  .compareBox { padding: 20px 16px; }
-  .compareTableWrap { margin: 0 -16px; padding: 0 16px; }
-  .compareTable { font-size: 0.8rem; }
+@media (max-width: 480px) {
+  .container {
+    padding: 32px 14px 48px;
+  }
+
+  .hero {
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-size: 1.35rem;
+    margin-bottom: 8px;
+  }
+
+  .eyebrow {
+    font-size: 0.65rem;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 0.84rem;
+    line-height: 1.6;
+  }
+
+  .contextCard {
+    padding: 16px;
+    border-radius: 10px;
+  }
+
+  .contextGrade {
+    font-size: 1.75rem;
+  }
+
+  .contextRow {
+    gap: 14px;
+    margin-top: 12px;
+    padding-top: 12px;
+  }
+
+  .contextItem strong {
+    font-size: 0.95rem;
+  }
+
+  .premiumNudge {
+    padding: 16px;
+    border-radius: 10px;
+  }
+
+  .premiumNudgeBtn {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .contentsCard {
+    padding: 16px;
+    border-radius: 10px;
+  }
+
+  .contentsItem {
+    gap: 10px;
+  }
+
+  .ctaBox {
+    padding: 20px 14px;
+    border-radius: 12px;
+  }
+
+  .ctaHeading {
+    font-size: 1rem;
+    margin-bottom: 14px;
+  }
+
+  .priceFinal {
+    font-size: 1.3rem;
+  }
+
+  .input {
+    padding: 12px 14px;
+    font-size: 0.9rem;
+  }
+
+  .purchaseBtn {
+    padding: 14px 20px;
+    font-size: 0.95rem;
+  }
+
+  .successBox {
+    padding: 18px;
+  }
+
+  .compareBox {
+    padding: 16px 12px;
+    border-radius: 10px;
+  }
+
+  .compareTableWrap {
+    margin: 0 -12px;
+    padding: 0 12px;
+  }
+
+  .compareTable {
+    font-size: 0.75rem;
+  }
+
   .compareTable th,
-  .compareTable td { padding: 8px 6px; }
+  .compareTable td {
+    padding: 7px 5px;
+  }
 }
 
 .guarantee {

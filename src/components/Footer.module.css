@@ -53,13 +53,28 @@
 
 /* 반응형 */
 @media (max-width: 768px) {
+  .footer {
+    padding: 36px 16px 20px;
+  }
+
   .container {
     flex-direction: column;
     text-align: center;
-    gap: 32px;
+    gap: 20px;
+    margin-bottom: 24px;
   }
 
   .links {
     justify-content: center;
+    gap: 14px;
+  }
+
+  .links a {
+    font-size: 0.88rem;
+  }
+
+  .copyright {
+    font-size: 0.78rem;
+    padding-top: 18px;
   }
 }

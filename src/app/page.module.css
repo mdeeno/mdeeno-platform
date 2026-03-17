@@ -1156,77 +1156,190 @@
 
 /* 반응형 */
 @media (max-width: 768px) {
+  .hero {
+    padding: 64px 16px 48px;
+  }
+
   .title {
-    padding: 0 8px;
+    padding: 0;
+    font-size: 1.75rem;
+    margin-bottom: 16px;
   }
 
   .subtitle {
-    padding: 0 16px;
-  }
-
-  .hero {
-    padding: 80px 20px 60px;
+    padding: 0;
+    margin-bottom: 28px;
+    font-size: 0.95rem;
   }
 
   .btnGroup {
     flex-direction: column;
-    gap: 12px;
-    padding: 0 24px;
+    gap: 10px;
+    padding: 0;
   }
 
   .primaryBtn,
   .secondaryBtn {
     width: 100%;
-    padding: 16px 28px;
+    padding: 15px 24px;
+    font-size: 1rem;
     text-align: center;
     box-sizing: border-box;
   }
 
-  .socialProof {
-    padding: 48px 20px;
+  .heroBtnNote {
+    font-size: 0.72rem;
   }
 
-  .socialProofGrid {
-    grid-template-columns: 1fr;
-    max-width: 400px;
-    gap: 12px;
+  /* 섹션 공통 */
+  .features {
+    padding: 48px 16px;
   }
 
-  .socialProofCard {
-    padding: 20px 16px;
+  .cases {
+    padding: 48px 16px;
   }
 
-  .spAmount {
-    font-size: 1.6rem;
+  .reportSamples {
+    padding: 48px 16px;
   }
 
-  .urgencySection {
-    padding: 56px 20px;
+  .sectionTitle {
+    font-size: 1.5rem;
+    margin-bottom: 28px;
   }
 
-  .urgencyBtn {
-    width: 100%;
-    text-align: center;
-    box-sizing: border-box;
+  .sectionSubtitle {
+    margin-top: -16px;
+    margin-bottom: 28px;
+    font-size: 0.88rem;
   }
 
   .grid {
     grid-template-columns: 1fr;
-    padding: 0 20px;
-  }
-
-  .sampleGrid {
-    grid-template-columns: 1fr 1fr;
+    padding: 0;
     gap: 16px;
   }
 
+  .card {
+    padding: 24px 20px;
+  }
+
+  .iconWrapper {
+    font-size: 2rem;
+    margin-bottom: 14px;
+  }
+
+  .cardTitle {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  /* 사례 분석 */
+  .caseGrid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .caseCard {
+    padding: 22px 18px;
+  }
+
+  .caseRegion {
+    margin-bottom: 12px;
+  }
+
+  .caseStats {
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .caseStat {
+    padding: 10px 8px;
+  }
+
+  .caseStatValue {
+    font-size: 1.1rem;
+  }
+
+  /* 소셜 프루프 */
+  .socialProof {
+    padding: 40px 16px;
+  }
+
+  .socialProofEyebrow {
+    margin-bottom: 20px;
+    font-size: 0.72rem;
+  }
+
+  .socialProofGrid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    gap: 10px;
+  }
+
+  .socialProofCard {
+    padding: 18px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+  }
+
+  .spAmount {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  /* 긴급 섹션 */
+  .urgencySection {
+    padding: 48px 16px;
+  }
+
+  .urgencyText {
+    font-size: 1.25rem;
+    margin-bottom: 24px;
+  }
+
+  .urgencyBtn {
+    width: 100%;
+    padding: 15px 24px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  /* 리드 캡처 */
+  .landingLead {
+    padding: 48px 16px;
+  }
+
+  .landingLeadTitle {
+    font-size: 1.4rem;
+  }
+
+  .landingLeadDesc {
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
+
+  .landingLeadBenefit {
+    font-size: 0.82rem;
+  }
+
+  /* 샘플 리포트 */
+  .sampleGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
   .sampleCoverThumb {
-    min-height: 130px;
-    padding: 20px 16px;
+    min-height: 120px;
+    padding: 18px 12px;
   }
 
   .sampleCardBody {
-    padding: 16px;
+    padding: 14px 12px;
   }
 
   .sampleCardBtns {
@@ -1240,8 +1353,6 @@
   .sampleMetric {
     min-width: calc(50% - 5px);
   }
-
-  /* landingLeadForm은 이미 column/100% — 별도 override 불필요 */
 }
 
 @media (max-width: 600px) {
@@ -1252,10 +1363,45 @@
 }
 
 @media (max-width: 480px) {
+  .hero {
+    padding: 52px 14px 40px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+
+  .subtitle {
+    font-size: 0.88rem;
+    margin-bottom: 24px;
+  }
+
+  .sectionTitle {
+    font-size: 1.3rem;
+    margin-bottom: 24px;
+  }
+
+  .socialProofCard {
+    padding: 14px 12px;
+    gap: 12px;
+  }
+
+  .spAmount {
+    font-size: 1.3rem;
+  }
+
+  .urgencyText {
+    font-size: 1.1rem;
+  }
+
+  .sampleGrid {
+    grid-template-columns: 1fr;
+  }
 
   .sampleCoverThumb {
-    min-height: 120px;
-    padding: 18px 16px;
+    min-height: 100px;
+    padding: 16px 14px;
   }
 
   .sampleCoverTitle,

@@ -794,22 +794,26 @@
 
 /* ── Tablet ───────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .wrapper { max-width: 100%; }
-  .title { font-size: 1.7rem; }
-}
-
-/* ── Mobile ───────────────────────────────────────────────── */
-@media (max-width: 600px) {
   .wrapper {
+    max-width: 100%;
     padding: 40px 16px 60px;
   }
 
-  .title {
-    font-size: 1.5rem;
+  .intro {
+    margin-bottom: 24px;
   }
 
-  .ctaSection {
-    padding: 28px 16px;
+  .title {
+    font-size: 1.55rem;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-size: 0.86rem;
+  }
+
+  .contextCard {
+    padding: 20px;
   }
 
   .contextGrade {
@@ -817,7 +821,37 @@
   }
 
   .contextRow {
-    gap: 16px;
+    gap: 20px;
+  }
+
+  .reportPage {
+    padding: 20px;
+  }
+
+  .ctaSection {
+    padding: 28px 18px;
+    margin-top: 32px;
+  }
+
+  .ctaTitle {
+    font-size: 1.05rem;
+  }
+
+  .contentSection {
+    padding: 22px 18px;
+    margin-bottom: 36px;
+  }
+
+  .savingsNumber {
+    font-size: 1.9rem;
+  }
+
+  .compareSection {
+    padding: 22px 18px;
+  }
+
+  .compareHeading {
+    font-size: 1rem;
   }
 
   .metricRow {
@@ -828,8 +862,167 @@
     min-width: calc(50% - 5px);
   }
 
-  .compareSection {
+  .gradeGrid {
+    gap: 8px 10px;
+  }
+}
+
+/* ── Mobile ───────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 32px 14px 48px;
+  }
+
+  .intro {
+    margin-bottom: 20px;
+  }
+
+  .eyebrow {
+    font-size: 0.65rem;
+    margin-bottom: 8px;
+  }
+
+  .title {
+    font-size: 1.35rem;
+  }
+
+  .subtitle {
+    font-size: 0.84rem;
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
+
+  .featureList li {
+    font-size: 0.84rem;
+  }
+
+  .contextCard {
+    padding: 16px;
+    border-radius: 10px;
+  }
+
+  .contextGrade {
+    font-size: 1.75rem;
+  }
+
+  .contextRow {
+    gap: 14px;
+    margin-top: 12px;
+    padding-top: 12px;
+  }
+
+  .contextItem strong {
+    font-size: 0.95rem;
+  }
+
+  .previewSection,
+  .lockedSection {
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .reportPage {
+    padding: 16px;
+    border-radius: 8px;
+  }
+
+  .pageTitleLight {
+    font-size: 1.05rem;
+  }
+
+  .shockNumber {
+    font-size: 1.7rem;
+  }
+
+  .metricRow {
+    gap: 8px;
+  }
+
+  .metric {
+    padding: 8px 6px;
+    min-width: calc(50% - 4px);
+  }
+
+  .metricLabel {
+    font-size: 0.55rem;
+  }
+
+  .metricValue {
+    font-size: 0.9rem;
+  }
+
+  .scriptBox {
+    padding: 10px 12px;
+  }
+
+  .blurOverlayText {
+    font-size: 0.8rem;
+    padding: 10px 16px;
+  }
+
+  .ctaSection {
+    padding: 22px 14px;
+    border-radius: 10px;
+    margin-top: 28px;
+  }
+
+  .ctaTitle {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+
+  .ctaPriceFinal {
+    font-size: 1.3rem;
+  }
+
+  .ctaInput {
+    padding: 12px 14px;
+    font-size: 0.9rem;
+  }
+
+  .ctaBtn {
+    padding: 13px 20px;
+    font-size: 0.95rem;
+  }
+
+  .contentSection {
     padding: 20px 16px;
+    margin-bottom: 32px;
+    border-radius: 10px;
+  }
+
+  .savingsBlock {
+    padding: 18px 16px;
+  }
+
+  .savingsNumber {
+    font-size: 1.7rem;
+  }
+
+  .compareSection {
+    padding: 18px 14px;
+    border-radius: 10px;
+  }
+
+  .compareHeading {
+    font-size: 0.95rem;
+  }
+
+  .gradeGuide {
+    padding: 12px 14px;
+  }
+
+  .gradeGrid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .shareSection {
+    padding: 16px;
+  }
+
+  .successBox {
+    padding: 18px;
   }
 }
 
@@ -841,10 +1034,10 @@
   padding: 0 24px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .compareTableWrap {
-    margin: 0 -16px;
-    padding: 0 16px;
+    margin: 0 -18px;
+    padding: 0 18px;
   }
 
   .compareTable {
@@ -854,6 +1047,22 @@
   .compareTable th,
   .compareTable td {
     padding: 8px 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .compareTableWrap {
+    margin: 0 -14px;
+    padding: 0 14px;
+  }
+
+  .compareTable {
+    font-size: 0.75rem;
+  }
+
+  .compareTable th,
+  .compareTable td {
+    padding: 7px 5px;
   }
 }
 

@@ -164,18 +164,22 @@
   }
 }
 
-/* 반응형 */
-@media (max-width: 768px) {
-  .nav {
-    display: none;
-  }
-
+/* 반응형 — 추가 축소 */
+@media (max-width: 480px) {
   .container {
-    padding: 0 16px;
+    padding: 0 12px;
+    height: 56px;
   }
 
-  .startBtn {
-    padding: 6px 12px;
-    font-size: 0.85rem;
+  .logo {
+    font-size: 1.25rem;
+  }
+
+  .mobileMenu {
+    top: 56px;
+  }
+
+  .menuOpen {
+    height: calc(100vh - 56px);
   }
 }
