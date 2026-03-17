@@ -207,6 +207,40 @@
   background: #c1121f;
 }
 
+/* ── Tablet ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 48px 16px 64px;
+  }
+
+  .header {
+    margin-bottom: 36px;
+  }
+
+  .title {
+    font-size: 1.65rem;
+    margin-bottom: 12px;
+  }
+
+  .metricsSection {
+    margin-bottom: 36px;
+  }
+
+  .trendSection {
+    margin-bottom: 36px;
+  }
+
+  .riskSection {
+    margin-bottom: 36px;
+  }
+
+  .ctaBtn {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+}
+
 /* ── Mobile ───────────────────────────────────────────────── */
 @media (max-width: 600px) {
   .title {
@@ -228,5 +262,92 @@
 
   .ctaTitle {
     font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 36px 14px 60px;
+  }
+
+  .header {
+    margin-bottom: 32px;
+  }
+
+  .eyebrow {
+    font-size: 0.65rem;
+    margin-bottom: 8px;
+  }
+
+  .title {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  .desc {
+    font-size: 0.85rem;
+    line-height: 1.65;
+  }
+
+  .sectionTitle {
+    font-size: 1rem;
+    margin-bottom: 14px;
+  }
+
+  .metricsSection {
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .metricCard {
+    padding: 16px 14px;
+    border-radius: 10px;
+  }
+
+  .metricValue {
+    font-size: 1.2rem;
+  }
+
+  .trendSection {
+    padding: 20px 16px;
+    margin-bottom: 32px;
+    border-radius: 10px;
+  }
+
+  .trendChart {
+    gap: 10px;
+    height: 110px;
+  }
+
+  .riskSection {
+    margin-bottom: 32px;
+  }
+
+  .riskItem {
+    font-size: 0.82rem;
+    padding: 12px 14px 12px 38px;
+  }
+
+  .ctaSection {
+    padding: 24px 16px;
+    border-radius: 10px;
+  }
+
+  .ctaTitle {
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+  }
+
+  .ctaDesc {
+    font-size: 0.82rem;
+    margin-bottom: 20px;
+  }
+
+  .ctaBtn {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 13px 24px;
+    font-size: 0.95rem;
   }
 }
