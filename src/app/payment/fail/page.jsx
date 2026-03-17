@@ -23,25 +23,25 @@ function PaymentFailContent() {
   return (
     <div className={styles.page}>
       <div className={styles.card}>
-        <div className={styles.icon}>✕</div>
+        <div className={styles.icon} aria-hidden="true">✕</div>
         <h1 className={styles.title}>결제에 실패했습니다</h1>
         <p className={styles.message}>{displayMessage}</p>
+        {code && (
+          <p className={styles.errorCode}>오류 코드: {code}</p>
+        )}
         <p className={styles.note}>
-          문제가 반복된다면 support@mdeeno.com으로 문의해 주세요.
+          문제가 반복된다면 help@mdeeno.com으로 문의해 주세요.
         </p>
-        <div className={styles.btnGroup}>
-          <button
-            className={styles.retryBtn}
-            onClick={() => window.history.back()}
-          >
-            다시 시도하기
-          </button>
-          <Link href="/member" className={styles.homeBtn}>
-            계산기로 돌아가기
-          </Link>
-          <Link href="/" className={styles.homeBtn}>
-            홈으로 돌아가기
-          </Link>
+        <button
+          className={styles.retryBtn}
+          onClick={() => window.history.back()}
+        >
+          다시 시도하기
+        </button>
+        <div className={styles.subLinks}>
+          <Link href="/member">계산기로 돌아가기</Link>
+          <span className={styles.linkDivider}>·</span>
+          <Link href="/">홈으로</Link>
         </div>
       </div>
     </div>

@@ -5,6 +5,11 @@
   --primary-hover: #1e3a8a;
   --secondary: #eff6ff;
 
+  --danger: #e63946;
+  --danger-bg: #fef2f2;
+  --success: #16a34a;
+  --warning: #d97706;
+
   --text-main: #111827;
   --text-muted: #4b5563;
   --bg-white: #ffffff;

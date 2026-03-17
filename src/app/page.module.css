@@ -28,7 +28,7 @@
 }
 
 .highlight {
-  color: #e63946;
+  color: var(--danger);
 }
 
 .subtitleEyebrow {
@@ -71,7 +71,7 @@
 
 .primaryBtn {
   display: block;
-  background-color: #1e40af;
+  background-color: var(--primary);
   color: #ffffff;
   padding: 16px 28px;
   border-radius: 10px;
@@ -83,7 +83,7 @@
 }
 
 .primaryBtn:hover {
-  background-color: #1e3a8a;
+  background-color: var(--primary-hover);
   transform: translateY(-2px);
 }
 
@@ -316,7 +316,7 @@
 .sampleCoverSub {
   font-size: 0.85rem;
   font-weight: 700;
-  color: #1e40af;
+  color: var(--primary);
   margin-bottom: 8px;
 }
 
@@ -339,8 +339,8 @@
 
 .badgeR1 { background: #dcfce7; color: #15803d; }
 .badgeR2 { background: #fef3c7; color: #b45309; }
-.badgeR3 { background: #fee2e2; color: #b91c1c; }
-.badgeR4 { background: #b91c1c; color: #ffffff; }
+.badgeR3 { background: #fee2e2; color: var(--danger); }
+.badgeR4 { background: var(--danger); color: #ffffff; }
 
 /* Card body */
 .sampleCardBody {
@@ -350,7 +350,7 @@
 .sampleCardLabel {
   font-size: 0.72rem;
   font-weight: 700;
-  color: #1e40af;
+  color: var(--primary);
   margin-bottom: 6px;
   line-height: 1.4;
 }
@@ -438,7 +438,7 @@
 .applyBtn {
   flex: 1;
   padding: 9px 12px;
-  background: #1e40af;
+  background: var(--primary);
   color: #ffffff;
   font-size: 0.875rem;
   font-weight: 800;
@@ -455,7 +455,7 @@
 }
 
 .applyBtn:hover {
-  background: #1e3a8a;
+  background: var(--primary-hover);
 }
 
 .applyBtnPremium {
@@ -549,7 +549,7 @@
   left: 0;
   width: 5px;
   height: 100%;
-  background: #e63946;
+  background: var(--danger);
   border-radius: 8px 0 0 8px;
 }
 
@@ -667,15 +667,15 @@
   background: #fff1f2;
 }
 
-.tdSafe   { color: #16a34a; font-weight: 700; }
-.tdWarn   { color: #d97706; font-weight: 700; }
-.tdDanger { color: #e63946; font-weight: 700; }
+.tdSafe   { color: var(--success); font-weight: 700; }
+.tdWarn   { color: var(--warning); font-weight: 700; }
+.tdDanger { color: var(--danger); font-weight: 700; }
 
 /* Executive metrics */
 .sampleShockNumber {
   font-size: 2rem;
   font-weight: 900;
-  color: #e63946;
+  color: var(--danger);
   letter-spacing: -1px;
   line-height: 1;
   margin-bottom: 4px;
@@ -717,9 +717,9 @@
   font-weight: 900;
 }
 
-.valueDanger { color: #e63946; }
-.valueWarn   { color: #d97706; }
-.valueSafe   { color: #16a34a; }
+.valueDanger { color: var(--danger); }
+.valueWarn   { color: var(--warning); }
+.valueSafe   { color: var(--success); }
 
 /* Threshold box (P3 basic) */
 .sampleThresholdBox {
@@ -734,7 +734,7 @@
 .sampleThresholdNum {
   font-size: 2.2rem;
   font-weight: 900;
-  color: #e63946;
+  color: var(--danger);
   letter-spacing: -1px;
   line-height: 1;
   margin-bottom: 8px;
@@ -773,7 +773,7 @@
   flex-shrink: 0;
   font-size: 0.72rem;
   font-weight: 900;
-  color: #1e40af;
+  color: var(--primary);
   background: #dbeafe;
   border-radius: 4px;
   padding: 2px 6px;
@@ -792,7 +792,7 @@
 /* Script box (P4 premium) */
 .sampleScriptBox {
   background: #f0f7ff;
-  border-left: 3px solid #1e40af;
+  border-left: 3px solid var(--primary);
   border-radius: 0 6px 6px 0;
   padding: 12px 14px;
   margin-bottom: 12px;
@@ -801,7 +801,7 @@
 .sampleScriptLabel {
   font-size: 0.72rem;
   font-weight: 700;
-  color: #1e40af;
+  color: var(--primary);
   margin-bottom: 7px;
 }
 
@@ -884,7 +884,7 @@
 .socialProofCard {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
-  border-top: 3px solid #e63946;
+  border-top: 3px solid var(--danger);
   border-radius: 10px;
   padding: 24px 16px;
   text-align: center;
@@ -907,7 +907,7 @@
 .spAmount {
   font-size: 2rem;
   font-weight: 900;
-  color: #e63946;
+  color: var(--danger);
   letter-spacing: -1px;
   line-height: 1;
   margin-bottom: 6px;
@@ -937,7 +937,7 @@
 .urgencyBtn {
   display: inline-block;
   padding: 16px 28px;
-  background: #1e40af;
+  background: var(--primary);
   color: #ffffff;
   font-size: 1rem;
   font-weight: 800;
@@ -947,7 +947,7 @@
 }
 
 .urgencyBtn:hover {
-  background: #1e3a8a;
+  background: var(--primary-hover);
   transform: translateY(-1px);
 }
 
@@ -1046,13 +1046,13 @@
 }
 
 .landingLeadInputError {
-  border-color: #e63946;
+  border-color: var(--danger);
 }
 
 .landingLeadBtn {
   width: 100%;
   padding: 14px 24px;
-  background: #1e40af;
+  background: var(--primary);
   color: #ffffff;
   font-size: 0.95rem;
   font-weight: 800;
@@ -1064,7 +1064,7 @@
 }
 
 .landingLeadBtn:hover:not(:disabled) {
-  background: #1e3a8a;
+  background: var(--primary-hover);
 }
 
 .landingLeadBtn:disabled {
@@ -1140,7 +1140,7 @@
 .landingLeadSuccessBtn {
   display: inline-block;
   padding: 13px 28px;
-  background: #1e40af;
+  background: var(--primary);
   color: #ffffff;
   font-size: 0.95rem;
   font-weight: 800;
@@ -1151,7 +1151,7 @@
 }
 
 .landingLeadSuccessBtn:hover {
-  background: #1e3a8a;
+  background: var(--primary-hover);
 }
 
 /* 반응형 */
@@ -1244,11 +1244,14 @@
   /* landingLeadForm은 이미 column/100% — 별도 override 불필요 */
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .sampleGrid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
+}
+
+@media (max-width: 480px) {
 
   .sampleCoverThumb {
     min-height: 120px;

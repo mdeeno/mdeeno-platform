@@ -23,7 +23,7 @@
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #1e40af;
+  color: var(--primary);
   margin-bottom: 10px;
 }
 
@@ -64,7 +64,7 @@
   content: '✔';
   position: absolute;
   left: 0;
-  color: #16a34a;
+  color: var(--success);
   font-size: 0.75rem;
   top: 1px;
 }
@@ -178,7 +178,7 @@
   left: 0;
   width: 5px;
   height: 100%;
-  background: #e63946;
+  background: var(--danger);
   border-radius: 10px 0 0 10px;
 }
 
@@ -243,13 +243,13 @@
   border-radius: 3px;
 }
 
-.badgeR3 { background: #fee2e2; color: #b91c1c; }
+.badgeR3 { background: #fee2e2; color: var(--danger); }
 
 /* ── Executive metrics ────────────────────────────────────── */
 .shockNumber {
   font-size: 2rem;
   font-weight: 900;
-  color: #e63946;
+  color: var(--danger);
   letter-spacing: -1px;
   line-height: 1;
   margin-bottom: 4px;
@@ -291,9 +291,9 @@
   font-weight: 900;
 }
 
-.valueDanger { color: #e63946; }
-.valueWarn   { color: #d97706; }
-.valueSafe   { color: #16a34a; }
+.valueDanger { color: var(--danger); }
+.valueWarn   { color: var(--warning); }
+.valueSafe   { color: var(--success); }
 
 /* ── Preview Table (P3) ───────────────────────────────────── */
 .previewTable {
@@ -328,8 +328,8 @@
   margin-top: 4px;
 }
 
-.tdSafe { color: #16a34a; font-weight: 700; }
-.tdWarn { color: #d97706; font-weight: 700; }
+.tdSafe { color: var(--success); font-weight: 700; }
+.tdWarn { color: var(--warning); font-weight: 700; }
 
 /* ── Script Index (P4) ───────────────────────────────────── */
 .scriptIndex {
@@ -358,7 +358,7 @@
 .scriptIndexNum {
   font-size: 0.68rem;
   font-weight: 900;
-  color: #1e40af;
+  color: var(--primary);
   flex-shrink: 0;
   letter-spacing: 0.04em;
 }
@@ -375,7 +375,7 @@
   font-size: 0.65rem;
   font-weight: 700;
   color: #ffffff;
-  background: #1e40af;
+  background: var(--primary);
   padding: 2px 7px;
   border-radius: 20px;
   flex-shrink: 0;
@@ -389,7 +389,7 @@
 /* ── Script Box (P4) ──────────────────────────────────────── */
 .scriptBox {
   background: #f0f7ff;
-  border-left: 3px solid #1e40af;
+  border-left: 3px solid var(--primary);
   border-radius: 0 6px 6px 0;
   padding: 12px 14px;
   margin-bottom: 12px;
@@ -400,7 +400,7 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #1e40af;
+  color: var(--primary);
   margin-bottom: 7px;
 }
 
@@ -507,7 +507,7 @@
 .ctaPriceBadge {
   font-size: 0.72rem;
   font-weight: 800;
-  background: #1e40af;
+  background: var(--primary);
   color: #ffffff;
   padding: 3px 10px;
   border-radius: 20px;
@@ -552,13 +552,13 @@
 }
 
 .ctaInputError {
-  border-color: #e63946;
+  border-color: var(--danger);
 }
 
 .ctaBtn {
   width: 100%;
   padding: 14px 24px;
-  background: #1e40af;
+  background: var(--primary);
   color: #ffffff;
   font-size: 1rem;
   font-weight: 800;
@@ -569,7 +569,7 @@
 }
 
 .ctaBtn:hover:not(:disabled) {
-  background: #1e3a8a;
+  background: var(--primary-hover);
 }
 
 .ctaBtn:disabled {
@@ -627,7 +627,7 @@
 .consentLabel input[type='checkbox'] {
   margin-top: 2px;
   flex-shrink: 0;
-  accent-color: #1e40af;
+  accent-color: var(--primary);
   width: 15px;
   height: 15px;
 }
@@ -671,7 +671,7 @@
 .successCalcBtn {
   display: inline-block;
   padding: 10px 22px;
-  background: #1e40af;
+  background: var(--primary);
   color: #ffffff;
   font-size: 0.88rem;
   font-weight: 700;
@@ -680,7 +680,7 @@
   transition: background 0.15s;
 }
 
-.successCalcBtn:hover { background: #1e3a8a; }
+.successCalcBtn:hover { background: var(--primary-hover); }
 
 /* ── Content Section ──────────────────────────────────────── */
 .contentSection {
@@ -723,7 +723,7 @@
   content: '▶';
   position: absolute;
   left: 0;
-  color: #e63946;
+  color: var(--danger);
   font-size: 0.6rem;
   top: 3px;
 }
@@ -869,7 +869,7 @@
 .compareEyebrow {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #1e40af;
+  color: var(--primary);
   margin-bottom: 6px;
 }
 
@@ -969,7 +969,7 @@
 
 .colActive {
   background: #eff6ff;
-  border-bottom: 2px solid #1e40af !important;
+  border-bottom: 2px solid var(--primary) !important;
 }
 
 .colOther {
@@ -985,7 +985,7 @@
 }
 
 .colActive .colName {
-  color: #1e40af;
+  color: var(--primary);
 }
 
 .colPrice {
@@ -1034,7 +1034,7 @@
 }
 
 .checkYes {
-  color: #16a34a;
+  color: var(--success);
   font-weight: 900;
   font-size: 1rem;
 }
@@ -1078,4 +1078,12 @@
 
 .backLink:hover {
   color: #0f172a;
+}
+
+.ctaGuarantee {
+  font-size: 0.82rem;
+  color: var(--success, #16a34a);
+  text-align: center;
+  margin: 12px 0 0;
+  line-height: 1.5;
 }

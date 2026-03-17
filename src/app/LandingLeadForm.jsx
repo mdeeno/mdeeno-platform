@@ -7,7 +7,7 @@ import styles from './page.module.css';
 const BENEFITS = [
   '6월 정식 출시 시 결제 링크 우선 발송',
   '사전 신청자 한정 — 기본 25% · 프리미엄 34% 할인',
-  '공사비 상승 시 분석 업데이트 알림 수신',
+  '서비스 업데이트 · 신기능 출시 알림 우선 수신',
 ];
 
 const PHONE_DISPLAY_RE = /^01[016789]-\d{3,4}-\d{4}$/;
@@ -103,14 +103,11 @@ export default function LandingLeadForm() {
                 autoComplete="email"
               />
               <div className={styles.landingLeadPhoneWrap}>
-                <label className={styles.landingLeadPhoneLabel} htmlFor="landing_phone">
-                  휴대폰 번호
-                </label>
                 <input
                   className={`${styles.landingLeadInput}${error ? ` ${styles.landingLeadInputError}` : ''}`}
                   id="landing_phone"
                   type="tel"
-                  placeholder="010-0000-0000"
+                  placeholder="휴대폰 번호 (010-0000-0000)"
                   value={phone}
                   onChange={handlePhoneChange}
                   autoComplete="tel"

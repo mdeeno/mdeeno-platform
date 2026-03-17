@@ -16,7 +16,7 @@ function calcSavings(expectedExtra) {
   return Math.round((expected_contribution - comparison_contribution) * 10000);
 }
 
-const RISK_COLOR = { R1: '#16a34a', R2: '#d97706', R3: '#e63946', R4: '#b91c1c' };
+const RISK_COLOR = { R1: 'var(--success)', R2: 'var(--warning)', R3: 'var(--danger)', R4: 'var(--danger)' };
 const RISK_LABEL = { R1: '안정', R2: '중위험', R3: '고위험', R4: '최고위험' };
 
 export default function PremiumReportPaywall() {
@@ -111,7 +111,9 @@ export default function PremiumReportPaywall() {
   const erosionRate = context
     ? ((Number(context.expectedExtra) / Number(context.assetValue)) * 100).toFixed(1)
     : null;
-  const isCTADisabled = loading || !isPrivacyAgreed || (!isBetaMode() && !isRefundAgreed) || !email.trim();
+  const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  const isPhoneValid = PHONE_RE.test(phone.replace(/\D/g, ''));
+  const isCTADisabled = loading || !isPrivacyAgreed || (!isBetaMode() && !isRefundAgreed) || !isEmailValid || !isPhoneValid;
 
   async function handlePurchase(e) {
     e.preventDefault();
@@ -449,6 +451,9 @@ export default function PremiumReportPaywall() {
               placeholder="이메일 주소"
               value={email}
               onChange={(e) => { setEmail(e.target.value); setEmailError(''); }}
+              onBlur={() => {
+                if (email.trim() && !isEmailValid) setEmailError('올바른 이메일 주소를 입력해 주세요.');
+              }}
               autoComplete="email"
             />
             {emailError && <p className={styles.ctaError}>{emailError}</p>}
@@ -459,6 +464,9 @@ export default function PremiumReportPaywall() {
               placeholder="010-0000-0000"
               value={phone}
               onChange={(e) => { setPhone(formatPhoneInput(e.target.value)); setPhoneError(''); }}
+              onBlur={() => {
+                if (phone && !isPhoneValid) setPhoneError('휴대폰 번호를 정확히 입력해 주세요. (예: 010-1234-5678)');
+              }}
               autoComplete="tel"
               inputMode="numeric"
             />
@@ -490,8 +498,10 @@ export default function PremiumReportPaywall() {
             </button>
             {isCTADisabled && !loading && (
               <p className={styles.ctaHint}>
-                {!email.trim()
-                  ? '이메일을 입력하면 신청 버튼이 활성화됩니다'
+                {!isEmailValid
+                  ? '이메일을 입력해 주세요'
+                  : !isPhoneValid
+                  ? '휴대폰 번호를 입력해 주세요'
                   : '위 동의 항목을 체크하면 신청 버튼이 활성화됩니다'}
               </p>
             )}
@@ -500,6 +510,10 @@ export default function PremiumReportPaywall() {
               {isBetaMode()
                 ? '6월 정식 출시 이후 결제 링크를 이메일로 발송합니다'
                 : '결제 완료 즉시 입력하신 이메일로 PDF가 발송됩니다'}
+            </p>
+
+            <p className={styles.ctaGuarantee}>
+              리포트 품질에 만족하지 못하실 경우 help@mdeeno.com으로 사유를 보내주시면 검토 후 안내드립니다.
             </p>
 
             <p className={styles.ctaDisclaimer}>

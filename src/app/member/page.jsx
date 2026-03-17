@@ -27,7 +27,7 @@ const INITIAL_FORM = {
 };
 
 function formatAmount(eokValue) {
-  if (eokValue == null) return '—';
+  if (eokValue == null || Number.isNaN(eokValue)) return '—';
   const manwon = Math.round(eokValue * 10000);
   if (manwon >= 10000) return `${eokValue.toFixed(1)}억 원`;
   return `${manwon.toLocaleString()}만 원`;
@@ -54,7 +54,7 @@ export default function ShockCalculatorPage() {
   const [phone, setPhone]                               = useState('');
   const [isModalPrivacyAgreed, setIsModalPrivacyAgreed] = useState(false);
   const [pendingNav, setPendingNav]         = useState(null);
-  const [modalSource, setModalSource]       = useState('report'); // 'result' | 'report'
+  const [modalSource, setModalSource]       = useState('report');
   const [step, setStep]                     = useState(1);
   const [toast, setToast]                   = useState(null);
 
@@ -140,14 +140,9 @@ export default function ShockCalculatorPage() {
         }));
       } catch {}
 
-      if (betaMode && !betaDone) {
-        setModalSource('result');
-        setEmailModalOpen(true);
-      } else {
-        setTimeout(() => {
-          document.getElementById('shock-result')?.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      }
+      setTimeout(() => {
+        document.getElementById('shock-result')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -206,11 +201,6 @@ export default function ShockCalculatorPage() {
       setBetaDone(true);
       setToast('사전 신청이 완료되었습니다. 6월 출시 시 이메일로 먼저 안내드립니다.');
       setTimeout(() => setToast(null), 4000);
-      if (modalSource === 'result') {
-        setTimeout(() => {
-          document.getElementById('shock-result')?.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      }
     } catch (err) {
       setPdfError(err.message ?? '신청에 실패했습니다. 잠시 후 다시 시도해 주세요.');
     } finally {
@@ -573,7 +563,7 @@ export default function ShockCalculatorPage() {
       </form>
 
       {/* ── Shock Result ── */}
-      {result && (!betaMode || betaDone) && (
+      {result && (
         <div id="shock-result" className={styles.resultSection}>
 
           {/* 1. Shock */}
@@ -856,36 +846,16 @@ export default function ShockCalculatorPage() {
             onClick={(e) => e.stopPropagation()}
           >
             <p className={styles.modalTitle}>
-              {isBetaMode()
-                ? (modalSource === 'result' ? '분석 결과 확인하기' : '출시 알림 · 사전 신청')
-                : '리포트를 받을 이메일'}
+              {isBetaMode() ? '출시 알림 · 사전 신청' : '리포트를 받을 이메일'}
             </p>
             <p className={styles.modalDesc}>
               {isBetaMode()
-                ? (modalSource === 'result'
-                    ? '이메일을 등록하면 분담금 분석 결과를 즉시 확인하고, 6월 출시 시 우선 안내받을 수 있습니다.'
-                    : '이메일을 등록하시면 6월 정식 출시 시 결제 링크와 함께 우선 안내드립니다.')
+                ? '이메일을 등록하시면 6월 정식 출시 시 결제 링크와 함께 우선 안내드립니다.'
                 : '이메일을 등록하면 리포트가 즉시 생성됩니다.'}
             </p>
 
             <ul className={styles.modalBenefits}>
               {isBetaMode() ? (
-                modalSource === 'result' ? (
-                  <>
-                    <li className={styles.modalBenefit}>
-                      <span className={styles.modalBenefitIcon}>✓</span>
-                      <span>분담금 분석 결과 <strong>즉시 확인</strong></span>
-                    </li>
-                    <li className={styles.modalBenefit}>
-                      <span className={styles.modalBenefitIcon}>✓</span>
-                      <span>전략별 절감액 <strong>시뮬레이션 공개</strong></span>
-                    </li>
-                    <li className={styles.modalBenefit}>
-                      <span className={styles.modalBenefitIcon}>✓</span>
-                      <span>6월 출시 시 <strong>이메일 우선 안내</strong></span>
-                    </li>
-                  </>
-                ) : (
                 <>
                   <li className={styles.modalBenefit}>
                     <span className={styles.modalBenefitIcon}>✓</span>
@@ -900,7 +870,6 @@ export default function ShockCalculatorPage() {
                     <span>공사비 상승 시 <strong>업데이트 알림</strong> 수신</span>
                   </li>
                 </>
-                )
               ) : (
                 <>
                   <li className={styles.modalBenefit}>
@@ -930,6 +899,10 @@ export default function ShockCalculatorPage() {
                   type="email"
                   value={email}
                   onChange={(e) => { setEmail(e.target.value); setEmailError(''); }}
+                  onBlur={() => {
+                    if (email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))
+                      setEmailError('올바른 이메일 주소를 입력해 주세요.');
+                  }}
                   placeholder="이메일 주소를 입력해 주세요"
                   autoComplete="email"
                   autoFocus
@@ -948,6 +921,10 @@ export default function ShockCalculatorPage() {
                   type="tel"
                   value={phone}
                   onChange={(e) => { setPhone(formatPhoneInput(e.target.value)); setEmailError(''); }}
+                  onBlur={() => {
+                    if (phone && !PHONE_DISPLAY_RE.test(phone))
+                      setEmailError('휴대폰 번호를 정확히 입력해 주세요. (예: 010-1234-5678)');
+                  }}
                   placeholder="010-0000-0000"
                   autoComplete="tel"
                   inputMode="numeric"
@@ -975,9 +952,7 @@ export default function ShockCalculatorPage() {
               )}
 
               <button className={styles.modalSubmitBtn} type="submit">
-                {isBetaMode()
-                  ? (modalSource === 'result' ? '결과 확인하기' : '사전 신청하기')
-                  : '리포트 생성하기'}
+                {isBetaMode() ? '사전 신청하기' : '리포트 생성하기'}
               </button>
               <button
                 className={styles.modalCancelBtn}

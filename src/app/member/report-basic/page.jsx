@@ -8,7 +8,7 @@ import { isBetaMode } from '@/lib/feature-flags';
 import AssetShockCard from '@/components/report/AssetShockCard';
 import styles from './page.module.css';
 
-const RISK_COLOR = { R1: '#16a34a', R2: '#d97706', R3: '#e63946', R4: '#b91c1c' };
+const RISK_COLOR = { R1: 'var(--success)', R2: 'var(--warning)', R3: 'var(--danger)', R4: 'var(--danger)' };
 const RISK_LABEL = { R1: '안정', R2: '중위험', R3: '고위험', R4: '최고위험' };
 
 const REPORT_CONTENTS = [
@@ -94,7 +94,9 @@ export default function ReportBasicPage() {
   const erosionRate = context
     ? ((Number(context.expectedExtra) / Number(context.assetValue)) * 100).toFixed(1)
     : null;
-  const isCTADisabled = loading || !isPrivacyAgreed || (!isBetaMode() && !isRefundAgreed) || !email.trim();
+  const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  const isPhoneValid = PHONE_RE.test(phone.replace(/\D/g, ''));
+  const isCTADisabled = loading || !isPrivacyAgreed || (!isBetaMode() && !isRefundAgreed) || !isEmailValid || !isPhoneValid;
 
   const handlePurchase = async () => {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
@@ -221,24 +223,7 @@ export default function ReportBasicPage() {
         </div>
       )}
 
-      {/* ── 3. R3/R4: 프리미엄 강력 유도 ── */}
-      {isHighRisk && (
-        <div className={styles.premiumNudge}>
-          <p className={styles.premiumNudgeTitle}>
-            {RISK_LABEL[context.riskGrade]}({context.riskGrade}) 등급 — 베이직 리포트로는 부족합니다
-          </p>
-          <p className={styles.premiumNudgeDesc}>
-            자산 대비 분담금 비율 <strong>{erosionRate}%</strong>에 달하는 리스크는
-            협상 전략과 총회 발언 스크립트 없이 대응하기 어렵습니다.
-          </p>
-          <Link href="/member/report-premium" className={styles.premiumNudgeBtn}>
-            프리미엄 전략 리포트 보기 →
-          </Link>
-          <p className={styles.premiumNudgeSkip}>베이직 리포트만 신청하려면 아래로 스크롤하세요</p>
-        </div>
-      )}
-
-      {/* ── 4. 시뮬레이션 ── */}
+      {/* ── 3. 시뮬레이션 ── */}
       {context && (
         <AssetShockCard
           assetValue={Number(context.assetValue)}
@@ -247,7 +232,7 @@ export default function ReportBasicPage() {
         />
       )}
 
-      {/* ── 5. 리포트 포함 내용 ── */}
+      {/* ── 4. 리포트 포함 내용 ── */}
       <div className={styles.contentsCard}>
         <p className={styles.contentsHeading}>5페이지 베이직 리포트에 포함된 내용</p>
         <ul className={styles.contentsList}>
@@ -301,6 +286,9 @@ export default function ReportBasicPage() {
           placeholder="이메일 주소"
           value={email}
           onChange={(e) => { setEmail(e.target.value); setEmailError(''); }}
+          onBlur={() => {
+            if (email.trim() && !isEmailValid) setEmailError('올바른 이메일 주소를 입력해 주세요.');
+          }}
           autoComplete="email"
         />
         {emailError && <p className={styles.fieldError}>{emailError}</p>}
@@ -311,6 +299,9 @@ export default function ReportBasicPage() {
           placeholder="010-0000-0000"
           value={phone}
           onChange={(e) => { setPhone(formatPhoneInput(e.target.value)); setPhoneError(''); }}
+          onBlur={() => {
+            if (phone && !isPhoneValid) setPhoneError('휴대폰 번호를 정확히 입력해 주세요. (예: 010-1234-5678)');
+          }}
           autoComplete="tel"
           inputMode="numeric"
         />
@@ -349,14 +340,20 @@ export default function ReportBasicPage() {
             : '결제 완료 즉시 입력하신 이메일로 PDF가 발송됩니다'}
         </p>
 
+        <p className={styles.guarantee}>
+          리포트 품질에 만족하지 못하실 경우 help@mdeeno.com으로 사유를 보내주시면 검토 후 안내드립니다.
+        </p>
+
         <p className={styles.disclaimer}>
           본 리포트는 참고용 분석 자료이며 투자·법률·세무 자문이 아닙니다.
           수집된 연락처는 출시 안내 및 서비스 알림 목적으로만 사용됩니다.
         </p>
         {isCTADisabled && !loading && (
           <p className={styles.ctaHint}>
-            {!email.trim()
-              ? '이메일을 입력하면 신청 버튼이 활성화됩니다'
+            {!isEmailValid
+              ? '이메일을 입력해 주세요'
+              : !isPhoneValid
+              ? '휴대폰 번호를 입력해 주세요'
               : '위 동의 항목을 체크하면 신청 버튼이 활성화됩니다'}
           </p>
         )}
@@ -365,7 +362,23 @@ export default function ReportBasicPage() {
         )}
       </div>
 
-      {/* ── 7. 비교표 (참고용) ── */}
+      {/* ── 7. R3/R4: 프리미엄 업셀 ── */}
+      {isHighRisk && (
+        <div className={styles.premiumNudge}>
+          <p className={styles.premiumNudgeTitle}>
+            더 강력한 전략이 필요하다면?
+          </p>
+          <p className={styles.premiumNudgeDesc}>
+            자산 대비 분담금 비율 <strong>{erosionRate}%</strong>에 달하는 {RISK_LABEL[context.riskGrade]} 등급은
+            협상 전략과 총회 발언 스크립트가 포함된 프리미엄 리포트로 대응하면 더 효과적입니다.
+          </p>
+          <Link href="/member/report-premium" className={styles.premiumNudgeBtn}>
+            프리미엄 전략 리포트 보기 →
+          </Link>
+        </div>
+      )}
+
+      {/* ── 8. 비교표 (참고용) ── */}
       <div className={styles.compareBox}>
         <p className={styles.compareEyebrow}>리포트 비교</p>
         <h3 className={styles.compareHeading}>베이직 vs 프리미엄</h3>
