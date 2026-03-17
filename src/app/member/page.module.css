@@ -353,7 +353,7 @@
 }
 
 .label {
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #1e293b;
 }
@@ -363,8 +363,8 @@
 }
 
 .fieldHint {
-  font-size: 0.72rem;
-  color: #94a3b8;
+  font-size: 0.875rem;
+  color: #64748b;
   line-height: 1.45;
   margin: 0;
   flex-grow: 1;
@@ -376,7 +376,7 @@
 
 .input {
   width: 100%;
-  padding: 11px 14px;
+  padding: 14px 16px;
   border: 1.5px solid #e2e8f0;
   border-radius: 6px;
   font-size: 0.95rem;
@@ -972,7 +972,7 @@
 }
 
 .modalDesc {
-  font-size: 0.85rem;
+  font-size: 1rem;
   color: #64748b;
   line-height: 1.6;
   margin-bottom: 14px;
