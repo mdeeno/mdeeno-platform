@@ -429,7 +429,7 @@
   display: inline-block;
   margin-top: 20px;
   padding: 14px 24px;
-  background: #e63946;
+  background: var(--primary);
   color: #ffffff;
   font-size: 0.95rem;
   font-weight: 800;
@@ -439,7 +439,7 @@
 }
 
 .ctaBtnTop:hover {
-  background: #c1121f;
+  background: var(--primary-hover);
   transform: translateY(-1px);
 }
 
@@ -538,7 +538,7 @@
 .ctaBtn {
   display: inline-block;
   padding: 16px 28px;
-  background: #e63946;
+  background: var(--primary);
   color: #ffffff;
   font-size: 1rem;
   font-weight: 800;
@@ -548,7 +548,7 @@
 }
 
 .ctaBtn:hover {
-  background: #c1121f;
+  background: var(--primary-hover);
   transform: translateY(-1px);
 }
 

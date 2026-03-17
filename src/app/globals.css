@@ -33,6 +33,15 @@
   }
 }
 
+@media (max-width: 480px) {
+  :root {
+    --font-h1: 26px;
+    --font-h2: 20px;
+    --font-body: 15px;
+    --font-number: 28px;
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

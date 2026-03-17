@@ -194,7 +194,7 @@
 .ctaBtn {
   display: inline-block;
   padding: 14px 32px;
-  background: #e63946;
+  background: var(--primary);
   color: #ffffff;
   font-size: 1rem;
   font-weight: 800;
@@ -204,7 +204,7 @@
 }
 
 .ctaBtn:hover {
-  background: #c1121f;
+  background: var(--primary-hover);
 }
 
 /* ── Tablet ───────────────────────────────────────────────── */

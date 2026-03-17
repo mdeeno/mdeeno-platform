@@ -1374,7 +1374,7 @@
   }
 
   .subtitleEyebrow {
-    font-size: 11px;
+    font-size: 0.75rem;
     margin-bottom: 6px;
   }
 
@@ -1395,7 +1395,7 @@
   }
 
   .heroBtnNote {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
   }
 
   /* 소셜 프루프 */
@@ -1404,7 +1404,7 @@
   }
 
   .socialProofEyebrow {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     margin-bottom: 14px;
   }
 
@@ -1422,7 +1422,7 @@
   }
 
   .spCause {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     margin-bottom: 0;
   }
 
@@ -1431,7 +1431,7 @@
   }
 
   .spLabel {
-    font-size: 0.68rem;
+    font-size: 0.75rem;
   }
 
   /* 긴급 섹션 */
@@ -1500,7 +1500,7 @@
   }
 
   .caseStatLabel {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
   }
 
   .caseStatValue {
