@@ -23,6 +23,7 @@ export const AUDIT_EVENT = {
   PDF_FAILED         : 'pdf.failed',
   EMAIL_SENT         : 'email.sent',
   EMAIL_FAILED       : 'email.failed',
+  CALC_COMPLETED     : 'calc.completed',
 };
 
 /**
