@@ -937,7 +937,7 @@
 .urgencyBtn {
   display: inline-block;
   padding: 16px 28px;
-  background: #2563eb;
+  background: #1e40af;
   color: #ffffff;
   font-size: 1rem;
   font-weight: 800;
@@ -947,7 +947,7 @@
 }
 
 .urgencyBtn:hover {
-  background: #1d4ed8;
+  background: #1e3a8a;
   transform: translateY(-1px);
 }
 
@@ -1016,14 +1016,17 @@
 
 .landingLeadForm {
   display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  margin: 0 auto 16px;
+  width: 100%;
+  max-width: 360px;
 }
 
 .landingLeadInput {
-  width: 300px;
+  width: 100%;
+  box-sizing: border-box;
   padding: 14px 16px;
   border: 1.5px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
@@ -1047,8 +1050,9 @@
 }
 
 .landingLeadBtn {
+  width: 100%;
   padding: 14px 24px;
-  background: #2563eb;
+  background: #1e40af;
   color: #ffffff;
   font-size: 0.95rem;
   font-weight: 800;
@@ -1060,7 +1064,7 @@
 }
 
 .landingLeadBtn:hover:not(:disabled) {
-  background: #1d4ed8;
+  background: #1e3a8a;
 }
 
 .landingLeadBtn:disabled {
@@ -1072,7 +1076,6 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin-top: 8px;
 }
 
 .landingLeadPhoneLabel {
@@ -1137,7 +1140,7 @@
 .landingLeadSuccessBtn {
   display: inline-block;
   padding: 13px 28px;
-  background: #2563eb;
+  background: #1e40af;
   color: #ffffff;
   font-size: 0.95rem;
   font-weight: 800;
@@ -1148,7 +1151,7 @@
 }
 
 .landingLeadSuccessBtn:hover {
-  background: #1d4ed8;
+  background: #1e3a8a;
 }
 
 /* 반응형 */
@@ -1238,18 +1241,7 @@
     min-width: calc(50% - 5px);
   }
 
-  .landingLeadInput {
-    width: 100%;
-  }
-
-  .landingLeadForm {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .landingLeadBtn {
-    width: 100%;
-  }
+  /* landingLeadForm은 이미 column/100% — 별도 override 불필요 */
 }
 
 @media (max-width: 480px) {

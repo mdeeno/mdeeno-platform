@@ -82,6 +82,14 @@ export default function ReportBasicPage() {
   }, []);
 
   const PHONE_RE = /^010\d{7,8}$/;
+
+  function formatPhoneInput(raw) {
+    const digits = raw.replace(/\D/g, '').slice(0, 11);
+    if (digits.length < 4)  return digits;
+    if (digits.length < 8)  return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+    return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7)}`;
+  }
+
   const isHighRisk = context?.riskGrade === 'R3' || context?.riskGrade === 'R4';
   const erosionRate = context
     ? ((Number(context.expectedExtra) / Number(context.assetValue)) * 100).toFixed(1)
@@ -300,10 +308,11 @@ export default function ReportBasicPage() {
         <input
           className={`${styles.input}${phoneError ? ` ${styles.inputError}` : ''}`}
           type="tel"
-          placeholder="휴대폰 번호 (예: 01012345678)"
+          placeholder="010-0000-0000"
           value={phone}
-          onChange={(e) => { setPhone(e.target.value); setPhoneError(''); }}
+          onChange={(e) => { setPhone(formatPhoneInput(e.target.value)); setPhoneError(''); }}
           autoComplete="tel"
+          inputMode="numeric"
         />
         {phoneError && <p className={styles.fieldError}>{phoneError}</p>}
 

@@ -100,6 +100,14 @@ export default function PremiumReportPaywall() {
   }, []);
 
   const PHONE_RE = /^010\d{7,8}$/;
+
+  function formatPhoneInput(raw) {
+    const digits = raw.replace(/\D/g, '').slice(0, 11);
+    if (digits.length < 4)  return digits;
+    if (digits.length < 8)  return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+    return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7)}`;
+  }
+
   const erosionRate = context
     ? ((Number(context.expectedExtra) / Number(context.assetValue)) * 100).toFixed(1)
     : null;
@@ -448,10 +456,11 @@ export default function PremiumReportPaywall() {
             <input
               className={`${styles.ctaInput}${phoneError ? ` ${styles.ctaInputError}` : ''}`}
               type="tel"
-              placeholder="휴대폰 번호 (예: 01012345678)"
+              placeholder="010-0000-0000"
               value={phone}
-              onChange={(e) => { setPhone(e.target.value); setPhoneError(''); }}
+              onChange={(e) => { setPhone(formatPhoneInput(e.target.value)); setPhoneError(''); }}
               autoComplete="tel"
+              inputMode="numeric"
             />
             {phoneError && <p className={styles.ctaError}>{phoneError}</p>}
 
