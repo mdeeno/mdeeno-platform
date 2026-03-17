@@ -39,6 +39,9 @@ function PaymentFailContent() {
           <Link href="/member" className={styles.homeBtn}>
             계산기로 돌아가기
           </Link>
+          <Link href="/" className={styles.homeBtn}>
+            홈으로 돌아가기
+          </Link>
         </div>
       </div>
     </div>
