@@ -31,7 +31,7 @@ export default function SampleReport() {
 
         {/* 목차 */}
         <div className={styles.tocBox}>
-          <div className={styles.tocTitle}>📋 리포트 구성 (총 34페이지)</div>
+          <div className={styles.tocTitle}>📋 리포트 구성 (총 약 20페이지)</div>
           <div className={styles.tocGrid}>
             <div className={styles.tocItem}><span className={styles.tocNum}>1</span> 종합 리스크 진단 요약</div>
             <div className={styles.tocItem}><span className={styles.tocNum}>2</span> 공사비 시나리오별 분담금 추정</div>
@@ -157,7 +157,7 @@ export default function SampleReport() {
             <div className={styles.lockTitle}>프리미엄 리포트에서 확인 가능</div>
             <div className={styles.lockDesc}>
               협상 전략 · 총회 발언 스크립트 · 행동 타임라인<br />
-              총 <strong>30~40페이지</strong> 완전 분석본
+              총 <strong>약 20페이지</strong> 완전 분석본
             </div>
             <Link href="/member" className={styles.lockCta}>
               프리미엄 리포트 받기 — 99,000원 →
@@ -178,7 +178,7 @@ export default function SampleReport() {
             <div className={`${styles.ctaPlan} ${styles.ctaPlanPremium}`}>
               <div className={styles.ctaPlanBadge}>추천</div>
               <div className={styles.ctaPlanName}>프리미엄</div>
-              <div className={styles.ctaPlanDesc}>30~40p 전략 리포트 + 협상 전술 + 총회 스크립트</div>
+              <div className={styles.ctaPlanDesc}>약 20p 전략 리포트 + 협상 전술 + 총회 스크립트</div>
               <div className={styles.ctaPlanPrice}>99,000원</div>
             </div>
           </div>
