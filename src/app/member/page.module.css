@@ -526,7 +526,98 @@
   margin-top: 48px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
+}
+
+/* ── Summary Card (핵심 요약) ── */
+.summaryCard {
+  background: #0f172a;
+  border-radius: 12px;
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.summaryRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.summaryGrade {
+  font-size: 1rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.summaryAmount {
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--danger);
+  letter-spacing: -1.5px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.summaryDuration {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 12px;
+}
+
+.summaryDuration strong {
+  color: #fca5a5;
+  font-weight: 800;
+}
+
+.summarySub {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
+.summarySub strong {
+  color: #fca5a5;
+}
+
+.summaryReduction {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 14px;
+  background: rgba(74, 222, 128, 0.15);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #4ade80;
+}
+
+/* ── Detail Toggle ── */
+.detailToggle {
+  width: 100%;
+  padding: 12px;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.detailToggle:hover {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+/* ── Detail Section (접기 영역) ── */
+.detailSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 /* ── Risk Badge ── */
@@ -1567,6 +1658,15 @@
   .backBtn {
     padding: 14px 16px;
     font-size: 0.88rem;
+  }
+
+  /* Summary Card */
+  .summaryCard {
+    padding: 22px 16px;
+  }
+
+  .summaryAmount {
+    font-size: 1.8rem;
   }
 
   /* Shock Box */

@@ -33,6 +33,17 @@ function formatAmount(eokValue) {
   return `${manwon.toLocaleString()}만 원`;
 }
 
+function formatRepayDuration(eokValue) {
+  if (eokValue == null || Number.isNaN(eokValue)) return '—';
+  const months = Math.round(eokValue * 10000 / 100);
+  if (months >= 12) {
+    const years = Math.floor(months / 12);
+    const remainder = months % 12;
+    return remainder > 0 ? `${years}년 ${remainder}개월` : `${years}년`;
+  }
+  return `${months}개월`;
+}
+
 const RISK_LABELS = { R1: '안정', R2: '중위험', R3: '고위험', R4: '최고위험' };
 
 export default function ShockCalculatorPage() {
@@ -57,6 +68,7 @@ export default function ShockCalculatorPage() {
   const [modalSource, setModalSource]       = useState('report');
   const [step, setStep]                     = useState(1);
   const [toast, setToast]                   = useState(null);
+  const [detailOpen, setDetailOpen]         = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -566,64 +578,68 @@ export default function ShockCalculatorPage() {
       {result && (
         <div id="shock-result" className={styles.resultSection}>
 
-          {/* 1. Shock */}
-          <div className={styles.riskBadgeRow}>
-            <span className={`${styles.riskBadge} ${styles[`riskBadge${result.risk_level}`]}`}>
-              {result.risk_level}
-            </span>
-            <span className={styles.riskBadgeLabel}>
-              {RISK_LABELS[result.risk_level]} — 위험 등급
-            </span>
+          {/* ── 핵심 요약 (항상 보임) ── */}
+          <div className={styles.summaryCard}>
+            <div className={styles.summaryRow}>
+              <span className={`${styles.riskBadge} ${styles[`riskBadge${result.risk_level}`]}`}>
+                {result.risk_level}
+              </span>
+              <span className={styles.summaryGrade}>
+                {RISK_LABELS[result.risk_level]} 등급
+              </span>
+            </div>
+            <p className={styles.summaryAmount}>{formatAmount(result.expected_contribution)}</p>
+            <p className={styles.summaryDuration}>
+              월 100만 원씩 <strong>{formatRepayDuration(result.expected_contribution)}</strong>
+            </p>
+            <p className={styles.summarySub}>
+              자산 잠식률 {(result.expected_contribution / Number(form.asset_value) * 100).toFixed(1)}%
+              {result.next_grade_info && (
+                <> · 공사비 {result.next_grade_info.additional_rate}% 더 오르면 <strong>{result.next_grade_info.next_grade}</strong> 등급</>
+              )}
+            </p>
+            {result.comparison_contribution < result.expected_contribution && (
+              <p className={styles.summaryReduction}>전략 적용 시 절감 가능</p>
+            )}
           </div>
-          <p className={styles.riskBadgeReason}>
-            자산 대비 분담금 비율{' '}
-            <strong>
-              {(result.expected_contribution / Number(form.asset_value) * 100).toFixed(1)}%
-            </strong>
-            {' '}· 공사비 {form.cost_increase_rate}% 상승 시나리오 기준 판정
-          </p>
 
-          <div className={styles.shockBox}>
-            <p className={styles.shockLead}>현재 구조라면</p>
-            <p className={styles.shockAmount}>{formatAmount(result.expected_contribution)}</p>
-            <p className={styles.shockSub}>의 추가 분담금이 발생할 가능성이 매우 높습니다.</p>
-            <p className={styles.shockMessage}>{result.shock_message}</p>
-          </div>
+          {/* ── 상세 분석 (접기/펼치기) ── */}
+          <button
+            className={styles.detailToggle}
+            type="button"
+            onClick={() => setDetailOpen((prev) => !prev)}
+          >
+            {detailOpen ? '상세 분석 접기 ▲' : '상세 분석 보기 ▼'}
+          </button>
 
-          {/* 2. Benchmark Warning */}
-          {result.benchmark_warning && result.benchmark_status !== 'normal' && result.benchmark_status !== 'unknown' && (
-            <div className={result.benchmark_status === 'high' ? styles.benchmarkHigh : styles.benchmarkLow}>
-              <p className={styles.benchmarkText}>{result.benchmark_warning}</p>
-              <p className={styles.benchmarkSource}>
-                출처: (사)주거환경연구원 실태조사 (2024년 실측) + 언론·업계 전망 보정 (2026년 기준) ※ 시·도별 공식 통계 미존재, 참고용 추정값
-              </p>
+          {detailOpen && (
+            <div className={styles.detailSection}>
+              {/* Shock Message */}
+              <div className={styles.shockBox}>
+                <p className={styles.shockMessage}>{result.shock_message}</p>
+              </div>
+
+              {/* Benchmark Warning */}
+              {result.benchmark_warning && result.benchmark_status !== 'normal' && result.benchmark_status !== 'unknown' && (
+                <div className={result.benchmark_status === 'high' ? styles.benchmarkHigh : styles.benchmarkLow}>
+                  <p className={styles.benchmarkText}>{result.benchmark_warning}</p>
+                  <p className={styles.benchmarkSource}>
+                    출처: (사)주거환경연구원 실태조사 (2024년 실측) + 언론·업계 전망 보정 (2026년 기준) ※ 시·도별 공식 통계 미존재, 참고용 추정값
+                  </p>
+                </div>
+              )}
+
+              {/* Threshold Warning */}
+              {result.next_grade_info && (
+                <div className={styles.thresholdWarning}>
+                  <p className={styles.thresholdText}>
+                    공사비가 <strong>{result.next_grade_info.additional_rate}%</strong> 더 오르면{' '}
+                    위험 등급이 <strong>{result.next_grade_info.next_grade}</strong>({RISK_LABELS[result.next_grade_info.next_grade]})로 악화됩니다.
+                  </p>
+                </div>
+              )}
             </div>
           )}
-
-          {/* 3. Threshold Warning — 등급 악화 임계점 */}
-          {result.next_grade_info && (
-            <div className={styles.thresholdWarning}>
-              <p className={styles.thresholdIcon}>⚠</p>
-              <p className={styles.thresholdText}>
-                공사비가 <strong>{result.next_grade_info.additional_rate}%</strong> 더 오르면{' '}
-                위험 등급이 <strong>{result.next_grade_info.next_grade}</strong>({RISK_LABELS[result.next_grade_info.next_grade]})로 악화됩니다.
-              </p>
-              <p className={styles.thresholdSub}>
-                현재 {result.risk_level} 등급 유지를 위해 공사비 상승 추이를 반드시 모니터링하세요.
-              </p>
-            </div>
-          )}
-
-          {/* 3-b. Reduction Possibility — 절감 가능 여부 (금액 미공개) */}
-          <div className={styles.reductionHint}>
-            <p className={styles.reductionLabel}>전략 적용 시 절감 가능 여부</p>
-            <p className={styles.reductionAnswer}>
-              {result.comparison_contribution < result.expected_contribution ? '절감 가능' : '현재 구조 유지'}
-            </p>
-            <p className={styles.reductionNote}>
-              구체적인 절감 금액과 전략은 리포트에서 확인할 수 있습니다.
-            </p>
-          </div>
 
           {/* 4. Risk-based Tier Recommendation */}
           <div className={
