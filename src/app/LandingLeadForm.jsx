@@ -10,10 +10,17 @@ const BENEFITS = [
   '서비스 업데이트 · 신기능 출시 알림 우선 수신',
 ];
 
-const PHONE_DISPLAY_RE = /^01[016789]-\d{3,4}-\d{4}$/;
+function getPhoneDigits(val) {
+  return val.replace(/\D/g, '');
+}
+
+function isValidPhone(val) {
+  const digits = getPhoneDigits(val);
+  return /^01[016789]\d{7,8}$/.test(digits);
+}
 
 function formatPhoneInput(raw) {
-  const digits = raw.replace(/\D/g, '').slice(0, 11);
+  const digits = getPhoneDigits(raw).slice(0, 11);
   if (digits.length < 4)  return digits;
   if (digits.length < 8)  return `${digits.slice(0, 3)}-${digits.slice(3)}`;
   return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7)}`;
@@ -34,11 +41,11 @@ export default function LandingLeadForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      setError('올바른 이메일 주소를 입력해 주세요.');
+      setError('이메일 주소를 다시 확인해 주세요. 예) hong@email.com');
       return;
     }
-    if (!phone || !PHONE_DISPLAY_RE.test(phone)) {
-      setError('휴대폰 번호를 입력해 주세요. (예: 010-1234-5678)');
+    if (!phone || !isValidPhone(phone)) {
+      setError('휴대폰 번호 11자리를 입력해 주세요. 예) 010-1234-5678');
       return;
     }
     setLoading(true);
@@ -71,7 +78,7 @@ export default function LandingLeadForm() {
               6월 정식 출시 시 할인 결제 링크를 이메일로 보내드립니다.
             </p>
             <Link href="/member" className={styles.landingLeadSuccessBtn}>
-              지금 바로 무료 분담금 계산하기 →
+              내 분담금 정밀 진단 시작하기 →
             </Link>
           </div>
         ) : (
@@ -129,7 +136,7 @@ export default function LandingLeadForm() {
             <p className={styles.landingLeadAlt}>
               지금 바로 사용하고 싶다면?{' '}
               <Link href="/member" className={styles.landingLeadAltLink}>
-                무료 분담금 계산 시작 →
+                분담금 정밀 진단 시작 →
               </Link>
             </p>
           </>
