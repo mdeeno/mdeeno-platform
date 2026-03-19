@@ -222,8 +222,8 @@ export default function Home() {
               <span className={styles.urgencyStatLabel}>전국 정비사업 구역 수</span>
             </div>
             <div className={styles.urgencyStat}>
-              <span className={styles.urgencyStatNum}>30~100만원</span>
-              <span className={styles.urgencyStatLabel}>분담금 자문 1회 비용</span>
+              <span className={styles.urgencyStatNum}>수억 원</span>
+              <span className={styles.urgencyStatLabel}>평균 분담금 규모</span>
             </div>
           </div>
           <p className={styles.urgencyText}>
