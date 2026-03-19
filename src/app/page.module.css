@@ -1498,6 +1498,7 @@
     max-width: 560px;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: flex-start;
     gap: 10px;
   }
 
@@ -1506,8 +1507,13 @@
     min-width: 200px;
   }
 
+  .landingLeadForm .landingLeadPhoneWrap {
+    flex: 1;
+    min-width: 200px;
+  }
+
   .landingLeadBtn {
-    flex: 0 0 auto;
+    flex: 0 0 100%;
     white-space: nowrap;
   }
 }
@@ -1520,6 +1526,7 @@
 
   .heroInner {
     flex-direction: column;
+    align-items: center;
     gap: 28px;
   }
 
