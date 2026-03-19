@@ -27,7 +27,7 @@ export default function Home() {
               <Link href="/member" className={styles.primaryBtn}>
                 내 분담금 분석 시작하기
               </Link>
-              <p className={styles.heroBtnNote}>무료 · 로그인 없음 · 30초 완료</p>
+              <p className={styles.heroBtnNote}>로그인 없음 · 30초 완료 · 전문가 수준 분석</p>
             </div>
 
             <Link href="/reports" className={styles.secondaryBtn}>
@@ -37,30 +37,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Social Proof ── */}
+      {/* ── 공사비 상승 현황 ── */}
       <section className={styles.socialProof}>
         <div className={styles.container}>
-          <p className={styles.socialProofEyebrow}>실제 재건축 피해 사례</p>
+          <p className={styles.socialProofEyebrow}>2026년 공사비 현황</p>
           <div className={styles.socialProofGrid}>
             <div className={styles.socialProofCard}>
-              <p className={styles.spComplex}>잠실 A단지</p>
-              <p className={styles.spCause}>공사비 상승</p>
-              <p className={styles.spAmount}>+1.2억</p>
-              <p className={styles.spLabel}>추가 분담금</p>
+              <p className={styles.spComplex}>서울 평균 평당 공사비</p>
+              <p className={styles.spAmount}>950만원대</p>
+              <p className={styles.spLabel}>2024년 843만원 대비 상승</p>
             </div>
             <div className={styles.socialProofCard}>
-              <p className={styles.spComplex}>압구정 B단지</p>
-              <p className={styles.spCause}>사업 지연</p>
-              <p className={styles.spAmount}>+8,000만</p>
-              <p className={styles.spLabel}>추가 분담금</p>
+              <p className={styles.spComplex}>강남권 최고 계약 단가</p>
+              <p className={styles.spAmount}>1,300만원</p>
+              <p className={styles.spLabel}>신반포22차 2025년 입찰 기준</p>
             </div>
             <div className={styles.socialProofCard}>
-              <p className={styles.spComplex}>목동 C단지</p>
-              <p className={styles.spCause}>설계 변경</p>
-              <p className={styles.spAmount}>+1.5억</p>
-              <p className={styles.spLabel}>추가 분담금</p>
+              <p className={styles.spComplex}>전국 평균 공사비</p>
+              <p className={styles.spAmount}>820만원대</p>
+              <p className={styles.spLabel}>2024년 770만원 대비 상승 전망</p>
             </div>
           </div>
+          <p className={styles.socialProofSource}>
+            출처: 주거환경연구원 정비사업 공사비 실태조사(2024) + 업계 전망 기반 추정
+          </p>
         </div>
       </section>
 
@@ -74,7 +74,7 @@ export default function Home() {
           <Link href="/member" className={styles.urgencyBtn}>
             내 분담금 분석 시작하기
           </Link>
-          <p className={styles.urgencyNote}>무료 · 로그인 없음 · 30초 완료</p>
+          <p className={styles.urgencyNote}>로그인 없음 · 30초 완료</p>
         </div>
       </section>
 
@@ -107,60 +107,66 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 실제 재건축 사례 분석 ── */}
+      {/* ── 시뮬레이션 예시 ── */}
       <section className={styles.cases}>
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>실제 재건축 사례 분석</h2>
+          <h2 className={styles.sectionTitle}>공사비 상승 시 분담금 변화 시뮬레이션</h2>
+          <p className={styles.caseDisclaimer}>
+            아래는 M-DEENO 분석 엔진 기반 시뮬레이션 예시이며, 실제 특정 단지의 사례가 아닙니다.
+          </p>
 
           <div className={styles.caseGrid}>
             <div className={styles.caseCard}>
-              <p className={styles.caseRegion}>서울 ○○아파트</p>
+              <p className={styles.caseRegion}>시뮬레이션 A</p>
+              <p className={styles.caseCondition}>종전자산 5억 · 평당 공사비 900만원 · 34평</p>
               <div className={styles.caseStats}>
                 <div className={styles.caseStat}>
-                  <span className={styles.caseStatLabel}>공사비 상승</span>
-                  <span className={`${styles.caseStatValue} ${styles.caseStatDanger}`}>+18%</span>
+                  <span className={styles.caseStatLabel}>공사비 +10% 시</span>
+                  <span className={`${styles.caseStatValue} ${styles.caseStatDanger}`}>+3,060만원</span>
                 </div>
                 <div className={styles.caseStat}>
-                  <span className={styles.caseStatLabel}>조합원 평균 손실</span>
-                  <span className={styles.caseStatValue}>1.2억원</span>
+                  <span className={styles.caseStatLabel}>위험등급</span>
+                  <span className={styles.caseStatValue}>R2 (중위험)</span>
                 </div>
               </div>
               <p className={styles.caseNote}>
-                총회 전 대응 전략 없이 원안 가결 — 조합원당 평균 1.2억 추가 분담 확정
+                공사비 상승률이 15%를 넘으면 R3 등급으로 악화될 수 있습니다.
               </p>
             </div>
 
             <div className={styles.caseCard}>
-              <p className={styles.caseRegion}>경기 ○○재건축</p>
+              <p className={styles.caseRegion}>시뮬레이션 B</p>
+              <p className={styles.caseCondition}>종전자산 3억 · 평당 공사비 1,100만원 · 25평</p>
               <div className={styles.caseStats}>
                 <div className={styles.caseStat}>
-                  <span className={styles.caseStatLabel}>공사비 상승</span>
-                  <span className={`${styles.caseStatValue} ${styles.caseStatDanger}`}>+23%</span>
+                  <span className={styles.caseStatLabel}>공사비 +20% 시</span>
+                  <span className={`${styles.caseStatValue} ${styles.caseStatDanger}`}>+5,500만원</span>
                 </div>
                 <div className={styles.caseStat}>
-                  <span className={styles.caseStatLabel}>조합원 평균 손실</span>
-                  <span className={styles.caseStatValue}>2.1억원</span>
+                  <span className={styles.caseStatLabel}>위험등급</span>
+                  <span className={styles.caseStatValue}>R3 (고위험)</span>
                 </div>
               </div>
               <p className={styles.caseNote}>
-                공사비 원가 검증 요청 없이 시공사 단가 그대로 승인 — 순자산 감소 확정
+                자산 잠식률 18% — 총회 전 대응 전략 수립이 필요한 구간입니다.
               </p>
             </div>
 
             <div className={styles.caseCard}>
-              <p className={styles.caseRegion}>서울 ○○주택재개발</p>
+              <p className={styles.caseRegion}>시뮬레이션 C</p>
+              <p className={styles.caseCondition}>종전자산 2억 · 평당 공사비 850만원 · 34평</p>
               <div className={styles.caseStats}>
                 <div className={styles.caseStat}>
-                  <span className={styles.caseStatLabel}>공사비 상승</span>
-                  <span className={`${styles.caseStatValue} ${styles.caseStatDanger}`}>+31%</span>
+                  <span className={styles.caseStatLabel}>공사비 +30% 시</span>
+                  <span className={`${styles.caseStatValue} ${styles.caseStatDanger}`}>+8,670만원</span>
                 </div>
                 <div className={styles.caseStat}>
-                  <span className={styles.caseStatLabel}>조합원 평균 손실</span>
-                  <span className={styles.caseStatValue}>3.4억원</span>
+                  <span className={styles.caseStatLabel}>위험등급</span>
+                  <span className={styles.caseStatValue}>R4 (최고위험)</span>
                 </div>
               </div>
               <p className={styles.caseNote}>
-                협상 전략 없이 연속 총회 패배 — 분양가 조정 불가 상태에서 분담금 폭증
+                자산 잠식률 43% — 즉각적인 집단 대응이 필요한 최고위험 구간입니다.
               </p>
             </div>
           </div>
