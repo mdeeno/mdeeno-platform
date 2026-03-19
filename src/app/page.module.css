@@ -1189,7 +1189,7 @@
 
 .urgencyBtn {
   display: inline-block;
-  padding: 14px 28px;
+  padding: 14px 48px;
   background: var(--primary);
   color: #ffffff;
   font-size: 1rem;
