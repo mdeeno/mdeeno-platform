@@ -13,7 +13,7 @@ function BasicSamplePages() {
     <>
       {/* P1 — Cover */}
       <div className={styles.samplePage}>
-        <p className={styles.samplePageEyebrow}>M-DEENO Prop-Logic™</p>
+        <p className={styles.samplePageEyebrow}>M-DEENO</p>
         <h3 className={styles.samplePageTitle}>
           재건축 분담금<br />위험도 분석 리포트
         </h3>
@@ -29,7 +29,7 @@ function BasicSamplePages() {
 
       {/* P2 — Scenario Table */}
       <div className={styles.samplePage}>
-        <p className={styles.samplePageSectionEyebrow}>SECTION 01</p>
+        <p className={styles.samplePageSectionEyebrow}>섹션 01</p>
         <h4 className={styles.samplePageSectionTitle}>시나리오별 분담금 분석</h4>
         <table className={styles.sampleTable}>
           <thead>
@@ -68,7 +68,7 @@ function BasicSamplePages() {
 
       {/* P3 — Asset Erosion Threshold */}
       <div className={styles.samplePage}>
-        <p className={styles.samplePageSectionEyebrow}>SECTION 02</p>
+        <p className={styles.samplePageSectionEyebrow}>섹션 02</p>
         <h4 className={styles.samplePageSectionTitle}>자산 잠식 임계점 분석</h4>
         <div className={styles.sampleThresholdBox}>
           <div className={styles.sampleThresholdNum}>+14.8%</div>
@@ -110,7 +110,7 @@ function BasicSamplePages() {
 
       {/* P4 — Assembly Questions (partial reveal) */}
       <div className={styles.samplePage}>
-        <p className={styles.samplePageSectionEyebrow}>SECTION 03</p>
+        <p className={styles.samplePageSectionEyebrow}>섹션 03</p>
         <h4 className={styles.samplePageSectionTitle}>총회 핵심 질문 리스트</h4>
         <ol className={styles.sampleQuestionList}>
           <li className={styles.sampleQuestionItem}>
@@ -141,7 +141,7 @@ function BasicSamplePages() {
       {/* P5 — Full Blur */}
       <div className={`${styles.samplePage} ${styles.samplePageBlur}`}>
         <div className={styles.blurContent}>
-          <p className={styles.samplePageSectionEyebrow}>SECTION 04</p>
+          <p className={styles.samplePageSectionEyebrow}>섹션 04</p>
           <h4 className={styles.samplePageSectionTitle}>
             손실 체감 분석 및 총회 대응 전략
           </h4>
@@ -168,7 +168,7 @@ function PremiumSamplePages() {
       {/* P1 — Cover (dark) */}
       <div className={`${styles.samplePage} ${styles.samplePageDark}`}>
         <div className={styles.samplePageAccentBar} />
-        <p className={styles.samplePageLogoLight}>M — DEENO · Prop-Logic™</p>
+        <p className={styles.samplePageLogoLight}>M-DEENO</p>
         <p className={styles.samplePageEyebrowLight}>조합원 전략 리포트</p>
         <h3 className={styles.samplePageTitleLight}>
           재건축 공사비 리스크<br />총회 대응 전략 패키지
@@ -185,7 +185,7 @@ function PremiumSamplePages() {
 
       {/* P2 — Executive Summary */}
       <div className={styles.samplePage}>
-        <p className={styles.samplePageSectionEyebrow}>EXECUTIVE SUMMARY</p>
+        <p className={styles.samplePageSectionEyebrow}>핵심 요약</p>
         <h4 className={styles.samplePageSectionTitle}>핵심 위험 지표</h4>
         <div className={styles.sampleShockNumber}>+1,200만원</div>
         <p className={styles.sampleShockLabel}>
@@ -215,7 +215,7 @@ function PremiumSamplePages() {
 
       {/* P3 — Negotiation Simulation */}
       <div className={styles.samplePage}>
-        <p className={styles.samplePageSectionEyebrow}>SECTION 02</p>
+        <p className={styles.samplePageSectionEyebrow}>섹션 02</p>
         <h4 className={styles.samplePageSectionTitle}>협상 절감 시뮬레이션</h4>
         <table className={styles.sampleTable}>
           <thead>
@@ -255,7 +255,7 @@ function PremiumSamplePages() {
 
       {/* P4 — Speech Script (partial reveal) */}
       <div className={styles.samplePage}>
-        <p className={styles.samplePageSectionEyebrow}>SECTION 03</p>
+        <p className={styles.samplePageSectionEyebrow}>섹션 03</p>
         <h4 className={styles.samplePageSectionTitle}>총회 발언 스크립트</h4>
         <div className={styles.sampleScriptBox}>
           <p className={styles.sampleScriptLabel}>발언 오프닝 — 공사비 원가 공개 요구</p>
@@ -282,7 +282,7 @@ function PremiumSamplePages() {
       {/* P5 — Full Blur */}
       <div className={`${styles.samplePage} ${styles.samplePageBlur}`}>
         <div className={styles.blurContent}>
-          <p className={styles.samplePageSectionEyebrow}>SECTION 04</p>
+          <p className={styles.samplePageSectionEyebrow}>섹션 04</p>
           <h4 className={styles.samplePageSectionTitle}>
             행동 타임라인 및 사후 대응 전략
           </h4>

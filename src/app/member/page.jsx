@@ -101,6 +101,13 @@ export default function ShockCalculatorPage() {
     if (error) setError(null);
   }
 
+  // 비현실적 값 경고
+  const warnings = [];
+  if (Number(form.expected_extra) > 50) warnings.push('추가 분담금이 50억을 초과합니다. 단위가 억원인지 확인해 주세요.');
+  if (Number(form.asset_value) > 100) warnings.push('종전자산이 100억을 초과합니다. 단위가 억원인지 확인해 주세요.');
+  if (Number(form.cost_increase_rate) > 100) warnings.push('공사비 상승률이 100%를 초과합니다. 입력값을 확인해 주세요.');
+  if (Number(form.construction_cost) > 2000) warnings.push('평당 공사비가 2,000만원을 초과합니다. 입력값을 확인해 주세요.');
+
   const betaMode = isBetaMode();
   const isStep1Valid =
     form.expected_extra     !== '' && Number(form.expected_extra)     > 0 &&
@@ -261,13 +268,16 @@ export default function ShockCalculatorPage() {
 
       {/* ── Header ── */}
       <div className={styles.header}>
-        <p className={styles.eyebrow}>M-DEENO Prop-Logic™</p>
+        <p className={styles.eyebrow}>M-DEENO</p>
         <h1 className={styles.title}>
           내 분담금,<br />정밀 진단받기
         </h1>
         <p className={styles.subtitle}>
           자산 잠식률 · 위험 등급 · 공사비 벤치마크까지<br />
           전문가 수준으로 즉시 분석합니다.
+        </p>
+        <p className={styles.privacyNotice}>
+          입력하신 정보는 분석에만 사용되며, 외부에 공유되지 않습니다.
         </p>
       </div>
 
@@ -289,6 +299,13 @@ export default function ShockCalculatorPage() {
             <span className={`${styles.stepLabel} ${step === 2 ? styles.stepLabelActive : ''}`}>단지 정보</span>
           </div>
         </div>
+
+        {/* ── 비현실적 값 경고 ── */}
+        {warnings.length > 0 && (
+          <div className={styles.warningBox}>
+            {warnings.map((w) => <p key={w} className={styles.warningText}>{w}</p>)}
+          </div>
+        )}
 
         {/* ── Step 1: 자산 정보 ── */}
         {step === 1 && (
@@ -562,7 +579,7 @@ export default function ShockCalculatorPage() {
                     분석 중...
                   </span>
                 ) : (
-                  '내 분담금 분석 시작하기'
+                  '내 분담금 위험도 분석하기'
                 )}
               </button>
             </div>
