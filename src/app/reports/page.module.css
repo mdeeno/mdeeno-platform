@@ -2,8 +2,22 @@
   width: 100%;
 }
 
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 36px;
+}
+
+/* ── 헤더 ── */
 .heroBar {
-  padding: 80px 20px 64px;
+  padding: 72px 20px 56px;
   text-align: center;
   background: linear-gradient(180deg, #f0f4ff 0%, #f8fafc 100%);
   border-bottom: 1px solid #e2e8f0;
@@ -30,17 +44,25 @@
   font-size: 1rem;
   color: #64748b;
   line-height: 1.7;
-  margin-bottom: 28px;
+  margin-bottom: 16px;
+}
+
+.heroSub {
+  max-width: 640px;
+  margin: 0 auto 28px;
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.7;
 }
 
 .ctaBtn {
   display: inline-block;
-  padding: 13px 26px;
+  padding: 14px 28px;
   background: #1e40af;
   color: #ffffff;
   font-size: 0.95rem;
   font-weight: 800;
-  border-radius: 8px;
+  border-radius: 10px;
   text-decoration: none;
   transition: background 0.15s, transform 0.1s;
 }
@@ -50,9 +72,176 @@
   transform: translateY(-2px);
 }
 
+/* ── 비교표 ── */
+.compareSection {
+  padding: 56px 20px;
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+}
+
+.compareTableWrap {
+  max-width: 720px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.compareTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.compareTable thead tr {
+  background: #f8fafc;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.compareTable th {
+  padding: 14px 16px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #334155;
+}
+
+.compareTable th:first-child {
+  text-align: left;
+}
+
+.comparePremiumHead {
+  color: #1e40af !important;
+  background: #eff6ff !important;
+}
+
+.compareTable td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+}
+
+.compareTable td:first-child {
+  font-weight: 600;
+}
+
+.compareCheck {
+  text-align: center;
+  color: #16a34a;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.compareMiss {
+  text-align: center;
+  color: #cbd5e1;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* ── 추천 섹션 ── */
+.recommendSection {
+  padding: 56px 20px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.recommendGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.recommendCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 28px 24px;
+  position: relative;
+}
+
+.recommendCardPremium {
+  border-color: #1e40af;
+  border-width: 2px;
+}
+
+.recommendBadge {
+  position: absolute;
+  top: -10px;
+  right: 16px;
+  background: #1e40af;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.recommendLabel {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 16px;
+}
+
+.recommendList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recommendList li {
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.5;
+  padding-left: 20px;
+  position: relative;
+}
+
+.recommendList li::before {
+  content: '·';
+  position: absolute;
+  left: 4px;
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: #94a3b8;
+  line-height: 1.2;
+}
+
+.recommendPrice {
+  font-size: 1rem;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+/* ── 하단 CTA ── */
+.bottomCta {
+  padding: 56px 20px;
+  background: #0f172a;
+  text-align: center;
+}
+
+.bottomCtaText {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.bottomCtaNote {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ── 반응형 ── */
 @media (max-width: 768px) {
   .heroBar {
-    padding: 56px 18px 44px;
+    padding: 48px 18px 40px;
   }
 
   .title {
@@ -62,6 +251,11 @@
 
   .desc {
     font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+
+  .heroSub {
+    font-size: 0.85rem;
     margin-bottom: 22px;
   }
 
@@ -70,11 +264,40 @@
     text-align: center;
     box-sizing: border-box;
   }
+
+  .sectionTitle {
+    font-size: 1.4rem;
+    margin-bottom: 24px;
+  }
+
+  .compareSection,
+  .recommendSection {
+    padding: 40px 16px;
+  }
+
+  .compareTable th,
+  .compareTable td {
+    padding: 10px 10px;
+    font-size: 0.82rem;
+  }
+
+  .recommendGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .bottomCta {
+    padding: 40px 16px;
+  }
+
+  .bottomCtaText {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
   .heroBar {
-    padding: 44px 16px 36px;
+    padding: 36px 14px 28px;
   }
 
   .eyebrow {
@@ -89,12 +312,34 @@
 
   .desc {
     font-size: 0.85rem;
-    margin-bottom: 20px;
     line-height: 1.6;
+  }
+
+  .heroSub {
+    font-size: 0.82rem;
+    margin-bottom: 18px;
   }
 
   .ctaBtn {
     padding: 12px 22px;
     font-size: 0.9rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+
+  .compareSection,
+  .recommendSection {
+    padding: 28px 12px;
+  }
+
+  .recommendCard {
+    padding: 22px 18px;
+  }
+
+  .bottomCta {
+    padding: 28px 12px;
   }
 }
