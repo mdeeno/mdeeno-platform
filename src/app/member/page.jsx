@@ -251,11 +251,11 @@ export default function ShockCalculatorPage() {
       <div className={styles.header}>
         <p className={styles.eyebrow}>M-DEENO Prop-Logic™</p>
         <h1 className={styles.title}>
-          내 자산이 얼마나<br />위험한지 지금 확인하세요
+          내 분담금,<br />정밀 진단받기
         </h1>
         <p className={styles.subtitle}>
-          추가 분담금 규모와 사업 단계를 입력하면<br />
-          내 자산 위험도를 즉시 분석합니다.
+          자산 잠식률 · 위험 등급 · 공사비 벤치마크까지<br />
+          전문가 수준으로 즉시 분석합니다.
         </p>
       </div>
 
