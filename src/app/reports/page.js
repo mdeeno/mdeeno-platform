@@ -12,7 +12,7 @@ export default function ReportsPage() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.heroBar}>
-        <p className={styles.eyebrow}>M-DEENO Prop-Logic™</p>
+        <p className={styles.eyebrow}>M-DEENO</p>
         <h1 className={styles.title}>리포트 소개</h1>
         <p className={styles.desc}>
           내 분담금이 얼마나 위험한지 수치로 확인하고<br />

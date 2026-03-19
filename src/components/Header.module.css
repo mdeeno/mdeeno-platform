@@ -27,17 +27,28 @@
 .nav {
   display: flex;
   gap: 32px;
+  align-items: center;
 }
 
-.navLink {
+/* 데스크톱 네비게이션 항목 */
+.navItem {
   font-weight: 500;
-  color: var(--text-muted);
+  color: #6B7280;
   font-size: 0.95rem;
   transition: color 0.2s ease;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
 }
 
-.navLink:hover {
-  color: var(--primary);
+.navItem:hover {
+  color: #111827;
+}
+
+/* 현재 페이지 강조 */
+.navActive {
+  color: #111827;
+  font-weight: 600;
+  border-bottom: 2px solid #2563EB;
 }
 
 .actions {
@@ -60,7 +71,7 @@
   background-color: var(--primary);
   color: white;
   padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: 600;
   font-size: 0.95rem;
   transition: background-color 0.2s ease;
@@ -72,9 +83,8 @@
 
 /* --- 모바일 메뉴 관련 스타일 --- */
 
-/* 1. 햄버거 버튼 디자인 */
 .hamburger {
-  display: none; /* 기본적으로 숨김 */
+  display: none;
   flex-direction: column;
   justify-content: space-between;
   width: 24px;
@@ -96,13 +106,12 @@
   transition: all 0.3s ease;
 }
 
-/* 2. 모바일 메뉴 레이어 */
 .mobileMenu {
   position: fixed;
-  top: 64px; /* 헤더 높이만큼 띄움 */
+  top: 64px;
   left: 0;
   width: 100%;
-  height: 0; /* 평소에는 높이 0 */
+  height: 0;
   background-color: white;
   overflow: hidden;
   transition: height 0.3s ease;
@@ -111,7 +120,7 @@
 }
 
 .menuOpen {
-  height: calc(100vh - 64px); /* 전체 화면 채움 */
+  height: calc(100vh - 64px);
   border-bottom-width: 1px;
 }
 
@@ -127,6 +136,13 @@
   font-weight: 600;
   color: var(--text-main);
   padding: 10px 0;
+}
+
+/* 모바일 메뉴 현재 페이지 강조 */
+.mobileActive {
+  color: #2563EB !important;
+  border-left: 3px solid #2563EB;
+  padding-left: 12px !important;
 }
 
 .divider {
@@ -146,7 +162,6 @@
 
 /* --- 반응형 미디어 쿼리 --- */
 @media (max-width: 768px) {
-  /* 햄버거 + 풀스크린 메뉴 제거 → 핵심 링크 직접 노출 */
   .actions,
   .hamburger,
   .mobileMenu {
@@ -158,23 +173,22 @@
     gap: 8px;
   }
 
-  /* 외부 링크는 모바일에서 숨김 — 핵심 CTA만 노출 */
-  .navLink {
+  /* 데스크톱 스타일 리셋 */
+  .navItem {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .navActive {
+    border-bottom: none;
+  }
+
+  /* 외부 링크는 모바일에서 숨김 */
+  .nav .navItem:last-child {
     display: none;
   }
 
-  .primaryBtn {
-    display: inline-block;
-    font-size: 0.82rem;
-    font-weight: 700;
-    padding: 8px 12px;
-    background: var(--primary);
-    color: #fff;
-    border-radius: 6px;
-    white-space: nowrap;
-  }
-
-  .secondaryBtn {
+  .nav .navItem {
     display: inline-block;
     font-size: 0.82rem;
     font-weight: 700;
@@ -182,10 +196,26 @@
     border: 1.5px solid var(--border-color);
     border-radius: 6px;
     white-space: nowrap;
+    color: var(--text-main);
+  }
+
+  .nav .navItem:first-child {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+
+  .nav .navActive {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  .nav .navItem:first-child.navActive {
+    background: var(--primary);
+    color: #fff;
   }
 }
 
-/* 반응형 — 추가 축소 */
 @media (max-width: 480px) {
   .container {
     padding: 0 12px;
@@ -196,12 +226,7 @@
     font-size: 1.25rem;
   }
 
-  .primaryBtn {
-    font-size: 0.75rem;
-    padding: 7px 10px;
-  }
-
-  .secondaryBtn {
+  .nav .navItem {
     font-size: 0.75rem;
     padding: 7px 10px;
   }

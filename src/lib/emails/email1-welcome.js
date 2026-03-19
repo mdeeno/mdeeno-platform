@@ -24,7 +24,7 @@ export function buildEmail1({ email, riskGrade, assetValue, expectedExtra }) {
         <!-- Header -->
         <tr>
           <td style="background:#0f172a;padding:28px 36px;">
-            <p style="margin:0;font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);">M — DEENO · Prop-Logic™</p>
+            <p style="margin:0;font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);">M-DEENO</p>
             <h1 style="margin:10px 0 0;font-size:22px;font-weight:900;color:#ffffff;line-height:1.3;">
               재건축 분담금 분석이<br>완료되었습니다
             </h1>

@@ -194,7 +194,7 @@ export default function ReportBasicPage() {
 
       {/* ── 1. Header ── */}
       <div className={styles.hero}>
-        <p className={styles.eyebrow}>M-DEENO Prop-Logic™ — 베이직 리포트</p>
+        <p className={styles.eyebrow}>M-DEENO — 베이직 리포트</p>
         <h1>공사비가 오르면<br />내가 얼마나 더 내야 하나</h1>
         <p className={styles.subtitle}>
           공사비 상승 시나리오별 추가 부담금과 내 자산 위험 시점을<br />

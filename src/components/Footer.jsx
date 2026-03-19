@@ -7,7 +7,7 @@ export default function Footer() {
       <div className={styles.container}>
         <div className={styles.info}>
           <h2 className={styles.logo}>M-DEENO</h2>
-          <p className={styles.desc}>재건축·재개발 분담금 분석 서비스</p>
+          <p className={styles.desc}>재건축 분담금 리스크 분석 서비스</p>
         </div>
         <div className={styles.links}>
           <Link href="/terms">이용약관</Link>

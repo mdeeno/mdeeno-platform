@@ -24,7 +24,7 @@ export default function SampleReport() {
           </div>
           <div className={styles.metaInfo}>
             <strong>분석 대상:</strong> OOO 아파트 (34평형)<br />
-            <strong>발행 기관:</strong> M-DEENO Prop-Logic™<br />
+            <strong>발행 기관:</strong> M-DEENO<br />
             <strong>발행 일자:</strong> 2026. 00. 00.
           </div>
         </div>
@@ -49,7 +49,7 @@ export default function SampleReport() {
         <h2 className={styles.sectionTitle}>📊 1. 종합 리스크 진단 요약</h2>
         <div className={styles.summaryBox}>
           <div className={styles.scoreWrap}>
-            <span className={styles.scoreLabel}>현재 시공사 요구 기준 사업 안정성 (R-Score)</span>
+            <span className={styles.scoreLabel}>현재 시공사 요구 기준 사업 안정성 (위험 등급)</span>
             <span className={styles.scoreValue}>
               91.2점{' '}
               <span style={{ fontSize: '1rem', color: '#e21d48' }}>(주의 구간)</span>
@@ -190,7 +190,7 @@ export default function SampleReport() {
         {/* 푸터 */}
         <div className={styles.footer}>
           <span>* 본 리포트는 입력된 추정치 기반의 시뮬레이션 결과로, 법적 분쟁의 직접적 증거로 사용될 수 없습니다.</span>
-          <span style={{ fontWeight: '700', color: '#334155' }}>M-DEENO Prop-Logic™</span>
+          <span style={{ fontWeight: '700', color: '#334155' }}>M-DEENO</span>
         </div>
       </div>
     </div>

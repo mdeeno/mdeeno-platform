@@ -1,15 +1,23 @@
-'use client'; // 상태 관리를 위해 클라이언트 컴포넌트로 선언
+'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import styles from './Header.module.css';
 import { TECH_URL } from '@/lib/constants';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const isActive = (href) => {
+    if (href === '/member') return pathname.startsWith('/member');
+    if (href === '/reports') return pathname === '/reports';
+    return false;
   };
 
   return (
@@ -21,20 +29,25 @@ export default function Header() {
 
         {/* 데스크톱 메뉴 */}
         <nav className={styles.nav}>
-          <Link href="/member" className={styles.primaryBtn}>
+          <Link
+            href="/member"
+            className={`${styles.navItem} ${isActive('/member') ? styles.navActive : ''}`}
+          >
             무료 분석
           </Link>
-
-          <Link href="/reports" className={styles.secondaryBtn}>
+          <Link
+            href="/reports"
+            className={`${styles.navItem} ${isActive('/reports') ? styles.navActive : ''}`}
+          >
             리포트 소개
           </Link>
           <a
             href={TECH_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.navLink}
+            className={styles.navItem}
           >
-            블로그
+            블로그 ↗
           </a>
         </nav>
 
@@ -48,7 +61,7 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* 🍔 햄버거 버튼 (모바일 전용) */}
+        {/* 햄버거 버튼 (모바일 전용) */}
         <button
           className={`${styles.hamburger} ${isMenuOpen ? styles.active : ''}`}
           onClick={toggleMenu}
@@ -60,20 +73,27 @@ export default function Header() {
         </button>
       </div>
 
-      {/* 📱 모바일 전체 메뉴 레이어 */}
+      {/* 모바일 전체 메뉴 레이어 */}
       <div
         className={`${styles.mobileMenu} ${isMenuOpen ? styles.menuOpen : ''}`}
       >
         <nav className={styles.mobileNav}>
-          <Link href="/member" className={styles.primaryBtn} onClick={toggleMenu}>
+          <Link
+            href="/member"
+            className={isActive('/member') ? styles.mobileActive : ''}
+            onClick={toggleMenu}
+          >
             무료 분석
           </Link>
-
-          <Link href="/reports" className={styles.secondaryBtn} onClick={toggleMenu}>
+          <Link
+            href="/reports"
+            className={isActive('/reports') ? styles.mobileActive : ''}
+            onClick={toggleMenu}
+          >
             리포트 소개
           </Link>
           <a href={TECH_URL} target="_blank" rel="noopener noreferrer" onClick={toggleMenu}>
-            블로그
+            블로그 ↗
           </a>
           <hr className={styles.divider} />
           <Link href="/login" onClick={toggleMenu}>

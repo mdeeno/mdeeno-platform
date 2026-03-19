@@ -180,7 +180,7 @@ function buildReportReadyHtml({ order, fileName }) {
     <tr><td align="center">
       <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;">
         <tr><td style="background:#0f2d6b;padding:32px;text-align:center;">
-          <p style="color:#93c5fd;font-size:12px;margin:0 0 8px;">M-DEENO Prop-Logic™</p>
+          <p style="color:#93c5fd;font-size:12px;margin:0 0 8px;">M-DEENO</p>
           <h1 style="color:#ffffff;font-size:22px;margin:0;">리포트가 준비되었습니다</h1>
         </td></tr>
         <tr><td style="padding:32px;">

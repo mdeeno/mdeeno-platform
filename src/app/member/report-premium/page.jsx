@@ -264,7 +264,7 @@ export default function PremiumReportPaywall() {
         {/* P1 — Cover */}
         <div className={`${styles.reportPage} ${styles.reportPageDark}`}>
           <div className={styles.accentBar} />
-          <p className={styles.pageLogoLight}>M — DEENO · Prop-Logic™</p>
+          <p className={styles.pageLogoLight}>M-DEENO</p>
           <p className={styles.pageEyebrowLight}>조합원 전략 리포트</p>
           <h2 className={styles.pageTitleLight}>
             재건축 공사비 리스크<br />총회 대응 전략 패키지

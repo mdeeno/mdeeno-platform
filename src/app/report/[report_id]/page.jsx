@@ -118,7 +118,7 @@ export default function ReportSharePage() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <p className={styles.eyebrow}>M-DEENO Prop-Logic™</p>
+        <p className={styles.eyebrow}>M-DEENO</p>
         <h1 className={styles.title}>분담금 리스크 분석 결과</h1>
         {(record.complex_name || record.location) && (
           <p className={styles.subtitle}>

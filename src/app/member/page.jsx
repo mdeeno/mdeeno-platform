@@ -311,7 +311,7 @@ export default function ShockCalculatorPage() {
         {step === 1 && (
           <div className={`${styles.formCard} ${styles.formCardActive}`}>
             <p className={styles.formSectionLabel}>
-              <span className={styles.stepBadge}>STEP 1</span>
+              <span className={styles.stepBadge}>1단계</span>
               자산 정보 입력
             </p>
 
@@ -434,7 +434,7 @@ export default function ShockCalculatorPage() {
         {step === 2 && (
           <div className={`${styles.formCard} ${styles.formCardActive}`}>
             <p className={styles.formSectionLabel}>
-              <span className={styles.stepBadge}>STEP 2</span>
+              <span className={styles.stepBadge}>2단계</span>
               단지 정보
             </p>
             <p className={styles.fieldHint} style={{ marginBottom: '12px' }}>
