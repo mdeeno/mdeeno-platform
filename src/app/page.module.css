@@ -9,13 +9,107 @@
     var(--secondary) 0%,
     var(--bg-white) 100%
   );
-  padding: 120px 20px 80px;
-  text-align: center;
+  padding: 80px 20px 56px;
+}
+
+.heroInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 48px;
 }
 
 .heroContent {
-  max-width: 800px;
-  margin: 0 auto;
+  flex: 1;
+  text-align: left;
+}
+
+.heroSubLink {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.heroSubLink:hover {
+  text-decoration: underline;
+}
+
+/* 히어로 결과 목업 */
+.heroMockup {
+  flex: 0 0 340px;
+}
+
+.mockupCard {
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  border-radius: 16px;
+  padding: 28px 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.mockupEyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+.mockupGrade {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.mockupGradeBadge {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--grade-r3);
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.mockupGradeLabel {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--grade-r3);
+}
+
+.mockupStats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.mockupStat {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.mockupStatLabel {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.mockupStatValue {
+  font-size: 0.95rem;
+  font-weight: 900;
+  color: var(--danger);
+}
+
+.mockupNote {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  text-align: center;
 }
 
 .title {
@@ -106,8 +200,9 @@
 
 /* ── 이런 분께 필요합니다 ── */
 .audience {
-  padding: 80px 20px;
+  padding: 56px 20px;
   background-color: var(--bg-light);
+  border-top: 1px solid var(--border-color);
 }
 
 .audienceGrid {
@@ -144,8 +239,20 @@
 
 /* 기능 소개 섹션 */
 .features {
-  padding: 80px 20px;
+  padding: 56px 20px;
   background-color: var(--bg-white);
+  border-top: 1px solid var(--border-color);
+}
+
+.cardExample {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--primary);
+  font-weight: 600;
+  background: var(--secondary);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 3px solid var(--primary);
 }
 
 .container {
@@ -194,7 +301,7 @@
 
 /* ── 실제 재건축 사례 분석 ── */
 .cases {
-  padding: 80px 20px;
+  padding: 56px 20px;
   background-color: #0f172a;
 }
 
@@ -278,6 +385,18 @@
   line-height: 1.7;
 }
 
+.caseBadge {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #93c5fd;
+  background: rgba(37, 99, 235, 0.15);
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.3px;
+}
+
 @media (max-width: 768px) {
   .caseGrid {
     grid-template-columns: 1fr;
@@ -286,7 +405,7 @@
 
 /* ── Report Samples Section ── */
 .reportSamples {
-  padding: 80px 20px;
+  padding: 56px 20px;
   background: #f8fafc;
   border-top: 1px solid #e2e8f0;
 }
@@ -316,6 +435,21 @@
 
 .sampleCardFeatured {
   border-color: #0f2d6b;
+  position: relative;
+}
+
+.popularBadge {
+  position: absolute;
+  top: -12px;
+  right: 16px;
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 20px;
+  z-index: 1;
+  letter-spacing: 0.3px;
 }
 
 /* Cover thumbnail */
@@ -912,9 +1046,36 @@
 
 /* ── Social Proof Section ── */
 .socialProof {
-  padding: 60px 20px;
+  padding: 56px 20px;
   background: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
+  border-top: 1px solid #e2e8f0;
+}
+
+.spResult {
+  font-size: 0.82rem;
+  color: var(--danger);
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.sectionCta {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.sectionCtaBtn {
+  display: inline-block;
+  padding: 14px 28px;
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 10px;
+  transition: background 0.15s;
+}
+
+.sectionCtaBtn:hover {
+  background: var(--primary-hover);
 }
 
 .socialProofEyebrow {
@@ -981,7 +1142,7 @@
 /* ── Urgency Section ── */
 .urgencySection {
   background: #0f172a;
-  padding: 72px 20px;
+  padding: 56px 20px;
   text-align: center;
 }
 
@@ -1016,9 +1177,74 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
+/* ── 비교표 섹션 ── */
+.compareSection {
+  padding: 56px 20px;
+  background: var(--bg-white);
+  border-top: 1px solid var(--border-color);
+}
+
+.compareTableWrap {
+  max-width: 720px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.compareTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.compareTable thead tr {
+  background: #f8fafc;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.compareTable th {
+  padding: 14px 16px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #334155;
+}
+
+.compareTable th:first-child {
+  text-align: left;
+}
+
+.comparePremiumHead {
+  color: var(--primary) !important;
+  background: var(--secondary) !important;
+}
+
+.compareTable td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+}
+
+.compareTable td:first-child {
+  font-weight: 600;
+}
+
+.compareCheck {
+  text-align: center;
+  color: var(--success);
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.compareMiss {
+  text-align: center;
+  color: #cbd5e1;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
 /* ── Landing Lead Capture ── */
 .landingLead {
-  padding: 80px 20px;
+  padding: 56px 20px;
   background: #0f172a;
   text-align: center;
 }
@@ -1216,7 +1442,23 @@
 /* 반응형 */
 @media (max-width: 768px) {
   .hero {
-    padding: 64px 16px 48px;
+    padding: 48px 16px 36px;
+  }
+
+  .heroInner {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .heroContent {
+    text-align: center;
+  }
+
+  .heroMockup {
+    flex: none;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
   }
 
   .title {
@@ -1229,6 +1471,11 @@
     padding: 0;
     margin-bottom: 28px;
     font-size: 0.95rem;
+  }
+
+  .heroSubLink {
+    display: block;
+    text-align: center;
   }
 
   .btnGroup {
@@ -1256,7 +1503,7 @@
 
   /* 섹션 공통 */
   .audience {
-    padding: 48px 16px;
+    padding: 40px 16px;
   }
 
   .audienceGrid {
@@ -1264,15 +1511,25 @@
   }
 
   .features {
-    padding: 48px 16px;
+    padding: 40px 16px;
   }
 
   .cases {
-    padding: 48px 16px;
+    padding: 40px 16px;
   }
 
   .reportSamples {
-    padding: 48px 16px;
+    padding: 40px 16px;
+  }
+
+  .compareSection {
+    padding: 40px 16px;
+  }
+
+  .compareTable th,
+  .compareTable td {
+    padding: 10px 10px;
+    font-size: 0.82rem;
   }
 
   .sectionTitle {
@@ -1436,7 +1693,23 @@
 @media (max-width: 480px) {
   /* 히어로 */
   .hero {
-    padding: 40px 14px 32px;
+    padding: 32px 14px 24px;
+  }
+
+  .heroMockup {
+    max-width: 100%;
+  }
+
+  .mockupCard {
+    padding: 20px 16px;
+  }
+
+  .mockupGradeBadge {
+    font-size: 2rem;
+  }
+
+  .compareSection {
+    padding: 28px 12px;
   }
 
   .title {

@@ -336,7 +336,7 @@ export default function ReportSamplesSection() {
                 <ul className={styles.sampleCardFeatures}>
                   <li>시나리오별 분담금 자동 계산 (5페이지)</li>
                   <li>자산 잠식 임계점 분석</li>
-                  <li>총회 대응 핵심 질문 5가지</li>
+                  <li>총회 핵심 질문 5가지 (인쇄 가능)</li>
                 </ul>
                 <div className={styles.sampleCardBtns}>
                   <button
@@ -357,6 +357,7 @@ export default function ReportSamplesSection() {
 
             {/* ── Premium ── */}
             <div id="premium" className={`${styles.sampleCard} ${styles.sampleCardFeatured}`}>
+              <div className={styles.popularBadge}>가장 많이 선택</div>
               <div className={`${styles.sampleCoverThumb} ${styles.sampleCoverThumbDark}`}>
                 <p className={styles.sampleCoverEyebrowDark}>M-DEENO</p>
                 <p className={styles.sampleCoverTitleDark}>프리미엄 전략 리포트</p>
@@ -375,7 +376,8 @@ export default function ReportSamplesSection() {
                 <ul className={styles.sampleCardFeatures}>
                   <li>20페이지 이상 심층 분석</li>
                   <li>협상 절감 시뮬레이션 + 실행 스크립트</li>
-                  <li>총회 발언문 5종 · 행동 타임라인</li>
+                  <li>총회 발언 대본 (마이크 앞에서 바로 읽기 가능)</li>
+                  <li>30일 행동 타임라인 + 체크리스트</li>
                 </ul>
                 <div className={styles.sampleCardBtns}>
                   <button
