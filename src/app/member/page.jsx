@@ -595,7 +595,7 @@ export default function ShockCalculatorPage() {
             <div className={result.benchmark_status === 'high' ? styles.benchmarkHigh : styles.benchmarkLow}>
               <p className={styles.benchmarkText}>{result.benchmark_warning}</p>
               <p className={styles.benchmarkSource}>
-                출처: (사)주거환경연구원 실태조사 (2024년 실측) + 언론·업계 전망 보정 (2026년 기준, 참고용)
+                ※ 지역 평균 공사비는 업계 공개 계약 사례 및 언론 보도 기반 추정값입니다 (공식 통계 아님)
               </p>
             </div>
           )}
