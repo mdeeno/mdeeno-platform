@@ -1056,6 +1056,7 @@
   color: var(--danger);
   font-weight: 700;
   margin-top: 6px;
+  margin-bottom: 16px;
 }
 
 .sectionCta {
@@ -1100,7 +1101,7 @@
   border: 1px solid #e2e8f0;
   border-top: 2px solid var(--primary);
   border-radius: 10px;
-  padding: 24px 16px;
+  padding: 28px 20px;
   text-align: center;
 }
 
@@ -1119,18 +1120,21 @@
 }
 
 .spAmount {
+  display: block;
   font-size: 2rem;
   font-weight: 900;
   color: #0f172a;
   letter-spacing: -1px;
   line-height: 1;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .spLabel {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: #64748b;
   font-weight: 600;
+  display: block;
+  margin-top: 2px;
 }
 
 .socialProofSource {
