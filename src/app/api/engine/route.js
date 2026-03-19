@@ -10,15 +10,23 @@ export async function POST(req) {
       process.env.NODE_ENV === 'development'
         ? 'http://127.0.0.1:8000/v1/calc'
         : 'https://prop-logic-engine-v2.onrender.com/v1/calc';
-    const response = await fetch(backendUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Origin: origin,
-      },
-      body: JSON.stringify(body),
-      cache: 'no-store',
-    });
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10_000);
+    let response;
+    try {
+      response = await fetch(backendUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Origin: origin,
+        },
+        body: JSON.stringify(body),
+        cache: 'no-store',
+        signal: controller.signal,
+      });
+    } finally {
+      clearTimeout(timeoutId);
+    }
 
     if (!response.ok) {
       const errorText = await response.text();

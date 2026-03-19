@@ -96,6 +96,8 @@ async function parseBackendError(response) {
  */
 export async function fetchJsonFromBackend(endpoint, payload, origin) {
   let response;
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10_000);
 
   try {
     response = await fetch(`${BACKEND_URL}${endpoint}`, {
@@ -106,13 +108,19 @@ export async function fetchJsonFromBackend(endpoint, payload, origin) {
       },
       body: JSON.stringify(payload),
       cache: 'no-store',
+      signal: controller.signal,
     });
-  } catch {
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      throw { code: 'TIMEOUT', message: '요청 시간이 초과되었습니다', status: 504 };
+    }
     throw {
       code: 'NETWORK_ERROR',
       message: '백엔드 서버에 연결할 수 없습니다',
       status: 503,
     };
+  } finally {
+    clearTimeout(timeoutId);
   }
 
   if (!response.ok) {
@@ -125,15 +133,23 @@ export async function fetchJsonFromBackend(endpoint, payload, origin) {
 export async function fetchPdfFromBackend(endpoint, payload, origin) {
   // ── 1. PDF 생성 요청 → job_id 수신 ────────────────────────────────────────
   let response;
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 30_000);
   try {
     response = await fetch(`${BACKEND_URL}${endpoint}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Origin: origin },
       body: JSON.stringify(payload),
       cache: 'no-store',
+      signal: controller.signal,
     });
-  } catch {
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      throw { code: 'TIMEOUT', message: 'PDF 생성 요청 시간이 초과되었습니다', status: 504 };
+    }
     throw { code: 'NETWORK_ERROR', message: '백엔드 서버에 연결할 수 없습니다', status: 503 };
+  } finally {
+    clearTimeout(timeoutId);
   }
 
   if (!response.ok) {
@@ -150,13 +166,21 @@ export async function fetchPdfFromBackend(endpoint, payload, origin) {
     await new Promise((r) => setTimeout(r, INTERVAL_MS));
 
     let pollRes;
+    const pollController = new AbortController();
+    const pollTimeoutId = setTimeout(() => pollController.abort(), 10_000);
     try {
       pollRes = await fetch(`${BACKEND_URL}/v1/pdf-status/${job_id}`, {
         headers: { Origin: origin },
         cache: 'no-store',
+        signal: pollController.signal,
       });
-    } catch {
+    } catch (err) {
+      if (err.name === 'AbortError') {
+        throw { code: 'TIMEOUT', message: '상태 확인 요청 시간이 초과되었습니다', status: 504 };
+      }
       throw { code: 'NETWORK_ERROR', message: '상태 확인 중 연결이 끊어졌습니다', status: 503 };
+    } finally {
+      clearTimeout(pollTimeoutId);
     }
 
     if (!pollRes.ok) {

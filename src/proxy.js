@@ -11,8 +11,23 @@
 import { NextResponse } from 'next/server';
 import { checkRateLimit } from '@/lib/rateLimiter';
 
+// ── CSP (Content Security Policy) ─────────────────────────────────────────────
+const CSP_DIRECTIVES = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob:",
+  "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://region1.google-analytics.com",
+  "font-src 'self'",
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+].join('; ');
+
 // ── 보안 헤더 (모든 응답에 적용) ────────────────────────────────────────────
 const SECURITY_RESPONSE_HEADERS = {
+  'Content-Security-Policy' : CSP_DIRECTIVES,       // CSP
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', // HSTS
   'X-Frame-Options'        : 'DENY',               // 클릭재킹 방지
   'X-Content-Type-Options' : 'nosniff',            // MIME 스니핑 방지
   'Referrer-Policy'        : 'strict-origin-when-cross-origin',
