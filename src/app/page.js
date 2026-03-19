@@ -216,6 +216,16 @@ export default function Home() {
       {/* ── Urgency ── */}
       <section className={styles.urgencySection}>
         <div className={styles.container}>
+          <div className={styles.urgencyStats}>
+            <div className={styles.urgencyStat}>
+              <span className={styles.urgencyStatNum}>2,424</span>
+              <span className={styles.urgencyStatLabel}>전국 정비사업 구역 수</span>
+            </div>
+            <div className={styles.urgencyStat}>
+              <span className={styles.urgencyStatNum}>65개 구역</span>
+              <span className={styles.urgencyStatLabel}>공사비 실태조사 표본</span>
+            </div>
+          </div>
           <p className={styles.urgencyText}>
             공사비가 5%만 올라가도<br />
             조합원 분담금은 크게 늘어납니다.

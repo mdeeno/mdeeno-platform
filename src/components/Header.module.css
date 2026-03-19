@@ -192,11 +192,13 @@
     display: inline-block;
     font-size: 0.82rem;
     font-weight: 700;
-    padding: 8px 12px;
+    padding: 10px 14px;
     border: 1.5px solid var(--border-color);
     border-radius: 6px;
     white-space: nowrap;
     color: var(--text-main);
+    min-height: 44px;
+    box-sizing: border-box;
   }
 
   .nav .navItem:first-child {
@@ -228,6 +230,6 @@
 
   .nav .navItem {
     font-size: 0.75rem;
-    padding: 7px 10px;
+    padding: 9px 12px;
   }
 }

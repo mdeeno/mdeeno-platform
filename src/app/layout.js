@@ -30,6 +30,12 @@ export const metadata = {
     locale: 'ko_KR',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'M-DEENO | 재건축 분담금, 실제로 얼마나 늘어날까요?',
+    description: '공사비 상승 시 내 분담금 변화를 30초 만에 분석합니다',
+    images: ['/og-image.png'],
+  },
 };
 
 export default function RootLayout({ children }) {

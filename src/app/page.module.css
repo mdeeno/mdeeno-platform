@@ -151,7 +151,7 @@
 .btnGroup {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
 }
 
@@ -159,7 +159,7 @@
   margin-top: 8px;
   font-size: 0.82rem;
   color: #64748b;
-  text-align: center;
+  text-align: left;
 }
 
 .primaryBtn {
@@ -326,8 +326,8 @@
   text-align: center;
   font-size: 0.82rem;
   color: #94a3b8;
-  margin-top: -32px;
-  margin-bottom: 32px;
+  margin-top: -20px;
+  margin-bottom: 36px;
 }
 
 .caseRegion {
@@ -340,7 +340,7 @@
 }
 
 .caseCondition {
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   color: #64748b;
   margin-bottom: 18px;
 }
@@ -614,6 +614,7 @@
   cursor: pointer;
   transition: border-color 0.15s, color 0.15s;
   white-space: nowrap;
+  min-height: var(--btn-min-height);
 }
 
 .previewBtn:hover {
@@ -638,6 +639,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: var(--btn-min-height);
 }
 
 .applyBtn:hover {
@@ -1072,6 +1074,7 @@
   font-weight: 700;
   border-radius: 10px;
   transition: background 0.15s;
+  min-height: var(--btn-min-height);
 }
 
 .sectionCtaBtn:hover {
@@ -1090,7 +1093,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;
-  max-width: 760px;
+  max-width: 860px;
   margin: 0 auto;
 }
 
@@ -1146,6 +1149,33 @@
   text-align: center;
 }
 
+.urgencyStats {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-bottom: 32px;
+}
+
+.urgencyStat {
+  text-align: center;
+}
+
+.urgencyStatNum {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.urgencyStatLabel {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+}
+
 .urgencyText {
   font-size: var(--font-h2);
   font-weight: 900;
@@ -1164,6 +1194,7 @@
   border-radius: 10px;
   text-decoration: none;
   transition: background 0.15s, transform 0.1s;
+  min-height: var(--btn-min-height);
 }
 
 .urgencyBtn:hover {
@@ -1185,7 +1216,7 @@
 }
 
 .compareTableWrap {
-  max-width: 720px;
+  max-width: 800px;
   margin: 0 auto;
   overflow-x: auto;
 }
@@ -1346,6 +1377,7 @@
   cursor: pointer;
   transition: background 0.15s;
   white-space: nowrap;
+  min-height: var(--btn-min-height);
 }
 
 .landingLeadBtn:hover:not(:disabled) {
@@ -1439,6 +1471,46 @@
   background: var(--primary-hover);
 }
 
+/* ── 데스크톱 레이아웃 보강 ── */
+@media (min-width: 1024px) {
+  .socialProof,
+  .features,
+  .cases,
+  .reportSamples,
+  .compareSection {
+    padding: 80px 40px;
+  }
+
+  .hero {
+    padding: 100px 40px 72px;
+  }
+
+  .urgencySection {
+    padding: 72px 40px;
+  }
+
+  .landingLead {
+    padding: 80px 40px;
+  }
+
+  .landingLeadForm {
+    max-width: 560px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .landingLeadForm .landingLeadInput {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .landingLeadBtn {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}
+
 /* 반응형 */
 @media (max-width: 768px) {
   .hero {
@@ -1480,8 +1552,13 @@
 
   .btnGroup {
     flex-direction: column;
+    align-items: center;
     gap: 10px;
     padding: 0;
+  }
+
+  .heroBtnNote {
+    text-align: center;
   }
 
   .btnGroup > div {
@@ -1529,7 +1606,32 @@
   .compareTable th,
   .compareTable td {
     padding: 10px 10px;
-    font-size: 0.82rem;
+    font-size: 0.85rem;
+  }
+
+  .compareCheck,
+  .compareMiss {
+    font-size: 1.15rem;
+  }
+
+  .landingLeadBenefit {
+    font-size: 0.875rem;
+  }
+
+  .card p {
+    font-size: 0.875rem;
+  }
+
+  .caseNote {
+    font-size: 0.875rem;
+  }
+
+  .urgencyStats {
+    gap: 32px;
+  }
+
+  .urgencyStatNum {
+    font-size: 1.8rem;
   }
 
   .sectionTitle {

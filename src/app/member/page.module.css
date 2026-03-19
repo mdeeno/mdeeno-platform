@@ -393,6 +393,7 @@
   cursor: pointer;
   margin-top: 20px;
   transition: background 0.15s, transform 0.1s;
+  min-height: var(--btn-min-height);
 }
 
 .nextBtn:hover:not(:disabled) {
@@ -425,6 +426,7 @@
   white-space: nowrap;
   transition: border-color 0.15s, color 0.15s;
   flex-shrink: 0;
+  min-height: var(--btn-min-height);
 }
 
 .backBtn:hover {
@@ -578,6 +580,7 @@
   border-radius: 10px;
   cursor: pointer;
   transition: background 0.15s, transform 0.1s;
+  min-height: var(--btn-min-height);
 }
 
 .submitBtn:hover:not(:disabled) {
@@ -1154,6 +1157,7 @@
   text-decoration: none;
   transition: background 0.15s, transform 0.1s;
   min-width: 260px;
+  min-height: var(--btn-min-height);
 }
 
 .ctaBtn:hover:not(:disabled) {
@@ -1411,6 +1415,7 @@
   cursor: pointer;
   margin-bottom: 10px;
   transition: background 0.15s;
+  min-height: var(--btn-min-height);
 }
 
 .modalSubmitBtn:hover {
@@ -1427,6 +1432,7 @@
   border: none;
   cursor: pointer;
   transition: color 0.15s;
+  min-height: 44px;
 }
 
 .modalCancelBtn:hover {
@@ -1782,7 +1788,19 @@
   }
 
   .fieldHint {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    margin-bottom: 4px;
+  }
+
+  .stepHint {
+    font-size: 0.875rem;
+  }
+
+  .tierRecommendDesc,
+  .reportTocItem,
+  .modalDesc {
+    font-size: 0.875rem;
   }
 
   .input {
