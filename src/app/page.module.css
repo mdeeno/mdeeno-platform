@@ -32,12 +32,11 @@
 }
 
 .subtitleEyebrow {
-  font-size: 12px;
+  font-size: 0.85rem;
   font-weight: 600;
-  color: var(--text-muted);
+  color: #64748b;
   letter-spacing: 0.05em;
   margin-bottom: 10px;
-  opacity: 0.7;
 }
 
 .subtitle {
@@ -64,7 +63,7 @@
 
 .heroBtnNote {
   margin-top: 8px;
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   color: #64748b;
   text-align: center;
 }
@@ -202,7 +201,7 @@
 
 .caseStatLabel {
   display: block;
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #64748b;
   margin-bottom: 6px;
@@ -221,9 +220,9 @@
 }
 
 .caseNote {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   color: #64748b;
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 @media (max-width: 768px) {
@@ -286,7 +285,7 @@
 }
 
 .sampleCoverEyebrow {
-  font-size: 0.6rem;
+  font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -294,11 +293,11 @@
 }
 
 .sampleCoverEyebrowDark {
-  font-size: 0.6rem;
+  font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .sampleCoverTitle {
@@ -348,7 +347,7 @@
 }
 
 .sampleCardLabel {
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--primary);
   margin-bottom: 6px;
@@ -379,7 +378,7 @@
 }
 
 .sampleCardDesc {
-  font-size: 0.83rem;
+  font-size: 0.88rem;
   color: #475569;
   line-height: 1.65;
   margin-bottom: 16px;
@@ -395,9 +394,9 @@
 }
 
 .sampleCardFeatures li {
-  font-size: 0.83rem;
+  font-size: 0.88rem;
   color: #334155;
-  line-height: 1.5;
+  line-height: 1.55;
   padding-left: 16px;
   position: relative;
 }
@@ -554,7 +553,7 @@
 }
 
 .samplePageEyebrow {
-  font-size: 0.6rem;
+  font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -563,16 +562,16 @@
 }
 
 .samplePageLogoLight {
-  font-size: 0.6rem;
+  font-size: 0.72rem;
   font-weight: 900;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.28);
+  color: rgba(255, 255, 255, 0.35);
   margin-bottom: 20px;
 }
 
 .samplePageEyebrowLight {
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -615,7 +614,7 @@
 }
 
 .samplePageSectionEyebrow {
-  font-size: 0.58rem;
+  font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -703,7 +702,7 @@
 
 .sampleMetricLabel {
   display: block;
-  font-size: 0.6rem;
+  font-size: 0.72rem;
   color: #94a3b8;
   font-weight: 700;
   text-transform: uppercase;
@@ -867,9 +866,9 @@
 
 .socialProofEyebrow {
   text-align: center;
-  font-size: 0.78rem;
+  font-size: 0.88rem;
   font-weight: 700;
-  color: #64748b;
+  color: #475569;
   margin-bottom: 28px;
 }
 
@@ -898,7 +897,7 @@
 }
 
 .spCause {
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #64748b;
   margin-bottom: 14px;
@@ -914,7 +913,7 @@
 }
 
 .spLabel {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   color: #64748b;
   font-weight: 600;
 }
@@ -953,8 +952,8 @@
 
 .urgencyNote {
   margin-top: 12px;
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* ── Landing Lead Capture ── */
@@ -1178,6 +1177,10 @@
     padding: 0;
   }
 
+  .btnGroup > div {
+    width: 100%;
+  }
+
   .primaryBtn,
   .secondaryBtn {
     width: 100%;
@@ -1188,7 +1191,7 @@
   }
 
   .heroBtnNote {
-    font-size: 0.72rem;
+    font-size: 0.8rem;
   }
 
   /* 섹션 공통 */
@@ -1269,7 +1272,7 @@
 
   .socialProofEyebrow {
     margin-bottom: 20px;
-    font-size: 0.72rem;
+    font-size: 0.82rem;
   }
 
   .socialProofGrid {
@@ -1395,7 +1398,7 @@
   }
 
   .heroBtnNote {
-    font-size: 0.75rem;
+    font-size: 0.78rem;
   }
 
   /* 소셜 프루프 */
@@ -1404,7 +1407,7 @@
   }
 
   .socialProofEyebrow {
-    font-size: 0.75rem;
+    font-size: 0.82rem;
     margin-bottom: 14px;
   }
 
@@ -1413,25 +1416,25 @@
   }
 
   .socialProofCard {
-    padding: 12px 10px;
+    padding: 14px 12px;
     gap: 10px;
   }
 
   .spComplex {
-    font-size: 0.78rem;
+    font-size: 0.82rem;
   }
 
   .spCause {
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     margin-bottom: 0;
   }
 
   .spAmount {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
 
   .spLabel {
-    font-size: 0.75rem;
+    font-size: 0.78rem;
   }
 
   /* 긴급 섹션 */
@@ -1500,15 +1503,15 @@
   }
 
   .caseStatLabel {
-    font-size: 0.75rem;
+    font-size: 0.78rem;
   }
 
   .caseStatValue {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
 
   .caseNote {
-    font-size: 0.78rem;
+    font-size: 0.82rem;
   }
 
   /* 샘플 리포트 */

@@ -265,8 +265,8 @@
 }
 
 .stepHint {
-  font-size: 0.78rem;
-  color: #94a3b8;
+  font-size: 0.85rem;
+  color: #64748b;
   text-align: center;
   margin-top: 8px;
   margin-bottom: 0;
@@ -364,8 +364,8 @@
 
 .fieldHint {
   font-size: 0.875rem;
-  color: #64748b;
-  line-height: 1.45;
+  color: #475569;
+  line-height: 1.55;
   margin: 0;
   flex-grow: 1;
 }
@@ -557,11 +557,11 @@
 }
 
 .riskBadgeReason {
-  font-size: 0.82rem;
-  color: #64748b;
+  font-size: 0.88rem;
+  color: #475569;
   margin-top: 8px;
   margin-bottom: 0;
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 .riskBadgeReason strong {
@@ -689,7 +689,7 @@
 }
 
 .comparisonNote {
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   color: #64748b;
   line-height: 1.5;
 }
@@ -995,9 +995,9 @@
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  font-size: 0.83rem;
+  font-size: 0.88rem;
   color: #334155;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .modalBenefit strong {
@@ -1049,8 +1049,8 @@
 }
 
 .modalPhoneHint {
-  font-size: 0.75rem;
-  color: #94a3b8;
+  font-size: 0.8rem;
+  color: #64748b;
   margin: 0;
 }
 
@@ -1063,17 +1063,17 @@
 }
 
 .modalPrivacyRow input[type="checkbox"] {
-  margin-top: 3px;
+  margin-top: 2px;
   flex-shrink: 0;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   accent-color: var(--primary);
 }
 
 .modalPrivacyText {
-  font-size: 0.78rem;
-  color: #6b7280;
-  line-height: 1.5;
+  font-size: 0.85rem;
+  color: #4b5563;
+  line-height: 1.55;
 }
 
 .modalError {
@@ -1152,7 +1152,7 @@
 
 /* ── Privacy Note ── */
 .privacyNote {
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   color: #64748b;
   text-align: center;
   margin-bottom: 12px;
@@ -1160,7 +1160,7 @@
 
 /* ── Savings Disclaimer ── */
 .savingsDisclaimer {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: #86efac;
   margin-top: 8px;
 }
@@ -1216,7 +1216,7 @@
 
 /* ── Disclaimer ── */
 .disclaimer {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: #94a3b8;
   text-align: center;
   margin-top: 40px;
@@ -1336,7 +1336,7 @@
 }
 
 .simCardSavingNote {
-  font-size: 0.7rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: #64748b;
 }
@@ -1461,16 +1461,16 @@
   }
 
   .label {
-    font-size: 0.92rem;
+    font-size: 0.95rem;
   }
 
   .fieldHint {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
 
   .input {
-    padding: 12px 14px;
-    font-size: 0.92rem;
+    padding: 13px 14px;
+    font-size: 1rem;
   }
 
   .nextBtn,

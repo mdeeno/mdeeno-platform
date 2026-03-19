@@ -103,11 +103,12 @@
   }
 
   .links a {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
+    padding: 4px 0;
   }
 
   .copyright {
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     padding-top: 14px;
   }
 }

@@ -79,12 +79,14 @@
   justify-content: space-between;
   width: 24px;
   height: 18px;
-  padding: 13px 10px;
+  padding: 14px 12px;
   box-sizing: content-box;
   background: none;
   border: none;
   cursor: pointer;
   z-index: 1001;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .bar {
@@ -117,13 +119,14 @@
   display: flex;
   flex-direction: column;
   padding: 40px 24px;
-  gap: 24px;
+  gap: 12px;
 }
 
 .mobileNav a {
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--text-main);
+  padding: 10px 0;
 }
 
 .divider {
@@ -143,24 +146,42 @@
 
 /* --- 반응형 미디어 쿼리 --- */
 @media (max-width: 768px) {
-  .nav,
-  .actions {
-    display: none; /* 데스크톱 메뉴 숨김 */
+  /* 햄버거 + 풀스크린 메뉴 제거 → 핵심 링크 직접 노출 */
+  .actions,
+  .hamburger,
+  .mobileMenu {
+    display: none !important;
   }
 
-  .hamburger {
-    display: flex; /* 햄버거 버튼 등장 */
+  .nav {
+    display: flex;
+    gap: 8px;
   }
 
-  /* 클릭 시 X 모양으로 변신 */
-  .active .bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+  /* 외부 링크는 모바일에서 숨김 — 핵심 CTA만 노출 */
+  .navLink {
+    display: none;
   }
-  .active .bar:nth-child(2) {
-    opacity: 0;
+
+  .primaryBtn {
+    display: inline-block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 8px 12px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 6px;
+    white-space: nowrap;
   }
-  .active .bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+
+  .secondaryBtn {
+    display: inline-block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 8px 12px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 6px;
+    white-space: nowrap;
   }
 }
 
@@ -175,11 +196,13 @@
     font-size: 1.25rem;
   }
 
-  .mobileMenu {
-    top: 56px;
+  .primaryBtn {
+    font-size: 0.75rem;
+    padding: 7px 10px;
   }
 
-  .menuOpen {
-    height: calc(100vh - 56px);
+  .secondaryBtn {
+    font-size: 0.75rem;
+    padding: 7px 10px;
   }
 }

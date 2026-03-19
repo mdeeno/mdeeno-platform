@@ -42,6 +42,13 @@
   }
 }
 
+/* iOS Safari: input 16px 미만이면 자동 줌 발생 — 50~60대 혼란 유발 방지 */
+@media (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
