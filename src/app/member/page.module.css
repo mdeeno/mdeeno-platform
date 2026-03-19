@@ -1,8 +1,119 @@
 /* ── Page ── */
 .page {
-  max-width: 560px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 60px 20px 100px;
+  padding: 48px 20px 100px;
+}
+
+/* ── 2컬럼 레이아웃 (데스크톱) ── */
+.formLayout {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.formArea {
+  flex: 1;
+  max-width: 560px;
+}
+
+.motivationSidebar {
+  flex: 0 0 300px;
+  position: sticky;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  order: 2;
+}
+
+.motivationCard {
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px 20px;
+}
+
+.motivationTitle {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.motivationText {
+  font-size: 0.88rem;
+  color: #475569;
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+.motivationText strong {
+  color: var(--danger);
+}
+
+.motivationStat {
+  font-size: 0.82rem;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.motivationList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.motivationList li {
+  font-size: 0.88rem;
+  color: #334155;
+  line-height: 1.5;
+  padding-left: 20px;
+  position: relative;
+}
+
+.motivationList li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 0.82rem;
+}
+
+@media (max-width: 768px) {
+  .formLayout {
+    flex-direction: column;
+  }
+
+  .motivationSidebar {
+    position: static;
+    flex: none;
+    order: -1;
+    width: 100%;
+  }
+
+  .formArea {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .motivationCard {
+    padding: 18px 16px;
+  }
+
+  .motivationTitle {
+    font-size: 0.9rem;
+  }
+
+  .motivationText {
+    font-size: 0.85rem;
+  }
 }
 
 /* ── Header ── */

@@ -281,6 +281,33 @@ export default function ShockCalculatorPage() {
         </p>
       </div>
 
+      <div className={styles.formLayout}>
+        {/* ── 동기부여 사이드바 (데스크톱: 우측 / 모바일: 상단) ── */}
+        <aside className={styles.motivationSidebar}>
+          <div className={styles.motivationCard}>
+            <h3 className={styles.motivationTitle}>왜 분석해야 하나요?</h3>
+            <p className={styles.motivationText}>
+              공사비 10% 상승 시 분담금이<br />
+              <strong>2.5~7.0배</strong>까지 증가할 수 있습니다.
+            </p>
+            <p className={styles.motivationStat}>
+              전국 2,424개 단지 조합원이 같은 고민을 하고 있습니다.
+            </p>
+          </div>
+          <div className={styles.motivationCard}>
+            <h3 className={styles.motivationTitle}>분석하면 이걸 알 수 있습니다</h3>
+            <ul className={styles.motivationList}>
+              <li>내 위험 등급 (R1~R4)</li>
+              <li>공사비 상승 시 추가 분담금 예상액</li>
+              <li>자산이 위험해지는 정확한 시점</li>
+              <li>총회에서 해야 할 질문 5가지</li>
+            </ul>
+          </div>
+        </aside>
+
+        {/* ── 폼 영역 ── */}
+        <div className={styles.formArea}>
+
       {/* ── Input Form ── */}
       <div id="calc-form-top" />
       <form className={styles.form} onSubmit={handleSubmit} noValidate>
@@ -590,6 +617,9 @@ export default function ShockCalculatorPage() {
         )}
 
       </form>
+
+        </div>{/* end formArea */}
+      </div>{/* end formLayout */}
 
       {/* ── Shock Result ── */}
       {result && (
