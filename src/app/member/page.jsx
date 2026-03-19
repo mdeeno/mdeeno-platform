@@ -339,7 +339,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="cost_increase_rate">
                   예상 공사비 상승률 <span className={styles.req}>*</span>
                 </label>
-                <p id="cost_increase_rate_hint" className={styles.fieldHint}>시공사 요청 인상률 — 2025~2026 시장 평균 8~15%, 모르면 10 입력</p>
+                <p id="cost_increase_rate_hint" className={styles.fieldHint}>공사비가 오르면 분담금이 얼마나 늘어나는지 분석합니다 — 시공사 요청 인상률 기준, 모르면 10 입력</p>
                 <div className={styles.inputWrap}>
                   <input
                     className={styles.input}
@@ -479,7 +479,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="construction_cost">
                   평당 공사비 <span className={styles.req}>*</span>
                 </label>
-                <p id="construction_cost_hint" className={styles.fieldHint}>조합·시공사가 제시한 평당 공사비 — 2025~2026 시장 기준 800~1,100만원, 모르면 900 입력</p>
+                <p id="construction_cost_hint" className={styles.fieldHint}>조합·시공사가 제시한 현재 평당 공사비 (상승 전 금액) — 모르면 900 입력</p>
                 <div className={styles.inputWrap}>
                   <input
                     className={styles.input}
