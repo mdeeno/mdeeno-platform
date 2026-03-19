@@ -68,7 +68,7 @@ export default function ShockCalculatorPage() {
   const [modalSource, setModalSource]       = useState('report');
   const [step, setStep]                     = useState(1);
   const [toast, setToast]                   = useState(null);
-  const [detailOpen, setDetailOpen]         = useState(false);
+  const [detailOpen, setDetailOpen]         = useState(true);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -299,7 +299,7 @@ export default function ShockCalculatorPage() {
             <ul className={styles.motivationList}>
               <li>내 위험 등급 (R1~R4)</li>
               <li>공사비 상승 시 추가 분담금 예상액</li>
-              <li>자산이 위험해지는 정확한 시점</li>
+              <li>공사비 몇 % 오르면 내 돈이 줄어드는지</li>
               <li>총회에서 해야 할 질문 5가지</li>
             </ul>
           </div>
@@ -347,7 +347,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="expected_extra">
                   예상 추가 분담금 <span className={styles.req}>*</span>
                 </label>
-                <p id="expected_extra_hint" className={styles.fieldHint}>조합이 통보한 추가 분담금 예정액입니다. 조합 안내문·총회 자료에 기재되어 있습니다. 모르시면 조합 사무실에 문의하세요.</p>
+                <p id="expected_extra_hint" className={styles.fieldHint}>조합이 통보한 추가 분담금 예정액입니다. 조합 안내문·총회 자료에 기재되어 있습니다. 대략적인 값을 입력해도 괜찮습니다 — 시뮬레이션이니까요.</p>
                 <div className={styles.inputWrap}>
                   <input
                     className={styles.input}

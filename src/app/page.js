@@ -46,7 +46,7 @@ export default function Home() {
                   <span className={styles.mockupStatValue}>+8,050만원</span>
                 </div>
                 <div className={styles.mockupStat}>
-                  <span className={styles.mockupStatLabel}>자산 잠식률</span>
+                  <span className={styles.mockupStatLabel}>내 자산 손실 비율</span>
                   <span className={styles.mockupStatValue}>24.0%</span>
                 </div>
               </div>
