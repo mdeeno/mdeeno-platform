@@ -291,7 +291,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="expected_extra">
                   예상 추가 분담금 <span className={styles.req}>*</span>
                 </label>
-                <p id="expected_extra_hint" className={styles.fieldHint}>조합이 통보한 추가 분담금 예정액 — 조합 안내문·총회 자료에서 확인</p>
+                <p id="expected_extra_hint" className={styles.fieldHint}>조합이 통보한 추가 분담금 예정액입니다. 조합 안내문·총회 자료에 기재되어 있습니다. 모르시면 조합 사무실에 문의하세요.</p>
                 <div className={styles.inputWrap}>
                   <input
                     className={styles.input}
@@ -315,7 +315,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="asset_value">
                   종전자산 평가액 <span className={styles.req}>*</span>
                 </label>
-                <p id="asset_value_hint" className={styles.fieldHint}>관리처분계획서 또는 감정평가서의 종전자산평가액</p>
+                <p id="asset_value_hint" className={styles.fieldHint}>감정평가서 또는 관리처분계획서에 적힌 '종전자산평가액'입니다. 조합에서 받은 공문이나 우편물을 확인하세요.</p>
                 <div className={styles.inputWrap}>
                   <input
                     className={styles.input}
@@ -339,7 +339,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="cost_increase_rate">
                   예상 공사비 상승률 <span className={styles.req}>*</span>
                 </label>
-                <p id="cost_increase_rate_hint" className={styles.fieldHint}>공사비가 오르면 분담금이 얼마나 늘어나는지 분석합니다 — 시공사 요청 인상률 기준, 모르면 10 입력</p>
+                <p id="cost_increase_rate_hint" className={styles.fieldHint}>공사비가 오르면 분담금이 얼마나 늘어나는지 분석합니다. 시공사가 요청한 인상률 기준이며, 모르시면 10을 입력하세요.</p>
                 <div className={styles.inputWrap}>
                   <input
                     className={styles.input}
@@ -364,7 +364,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="project_stage">
                   현재 사업 단계 <span className={styles.req}>*</span>
                 </label>
-                <p id="project_stage_hint" className={styles.fieldHint}>단계가 뒤로 갈수록 공사비가 확정에 가까워져 위험도가 높아집니다</p>
+                <p id="project_stage_hint" className={styles.fieldHint}>조합 공문이나 안내문에서 현재 진행 단계를 확인하세요. 단계가 뒤로 갈수록 위험도가 높아집니다.</p>
                 <select
                   className={styles.input}
                   id="project_stage"
@@ -417,7 +417,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="complex_name">
                   아파트 단지명 <span className={styles.req}>*</span>
                 </label>
-                <p id="complex_name_hint" className={styles.fieldHint}>예: 은마아파트, 목동 7단지</p>
+                <p id="complex_name_hint" className={styles.fieldHint}>정비사업이 진행 중인 아파트 단지명을 입력하세요. 예: 은마아파트, 목동 7단지</p>
                 <input
                   className={styles.input}
                   id="complex_name"
@@ -436,7 +436,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="location">
                   사업장 지역 <span className={styles.req}>*</span>
                 </label>
-                <p id="location_hint" className={styles.fieldHint}>예: 서울 강남구, 경기 분당구</p>
+                <p id="location_hint" className={styles.fieldHint}>지역별 공사비 비교에 사용됩니다. 예: 서울 강남구, 경기 분당구</p>
                 <input
                   className={styles.input}
                   id="location"
@@ -455,7 +455,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="pyeong">
                   내 아파트 평형 <span className={styles.req}>*</span>
                 </label>
-                <p id="pyeong_hint" className={styles.fieldHint}>등기부등본·분양계약서의 전용면적을 평으로 환산 (㎡ ÷ 3.305)</p>
+                <p id="pyeong_hint" className={styles.fieldHint}>등기부등본이나 분양계약서에 적힌 전용면적을 평으로 환산하세요. (㎡ ÷ 3.3 = 평)</p>
                 <div className={styles.inputWrap}>
                   <input
                     className={styles.input}
@@ -479,7 +479,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="construction_cost">
                   평당 공사비 <span className={styles.req}>*</span>
                 </label>
-                <p id="construction_cost_hint" className={styles.fieldHint}>조합·시공사가 제시한 현재 평당 공사비 (상승 전 금액) — 모르면 900 입력</p>
+                <p id="construction_cost_hint" className={styles.fieldHint}>시공사 계약서나 조합 공문에 적힌 평당 공사비입니다. (상승 전 금액) 모르시면 900을 입력하세요.</p>
                 <div className={styles.inputWrap}>
                   <input
                     className={styles.input}
