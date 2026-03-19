@@ -8,10 +8,10 @@ import { isBetaMode } from '@/lib/feature-flags';
 import styles from './page.module.css';
 
 const STAGE_OPTIONS = [
-  { value: 'planning',     label: '기본계획 수립 단계 (사업 초기)' },
-  { value: 'approval',     label: '사업시행인가 단계 (공사 계획 승인)' },
-  { value: 'management',   label: '관리처분인가 단계 (이주·철거 전후)' },
-  { value: 'construction', label: '착공 / 공사 진행 단계' },
+  { value: 'planning',     label: '아직 계획 단계 (공사 시작 전)' },
+  { value: 'approval',     label: '공사 계획 승인됨 (공사는 안 시작)' },
+  { value: 'management',   label: '이주·철거 준비 중 (공사 곧 시작)' },
+  { value: 'construction', label: '이미 공사가 시작됨' },
 ];
 
 const INITIAL_FORM = {
@@ -273,8 +273,8 @@ export default function ShockCalculatorPage() {
           내 분담금,<br />정밀 진단받기
         </h1>
         <p className={styles.subtitle}>
-          자산 잠식률 · 위험 등급 · 공사비 벤치마크까지<br />
-          전문가 수준으로 즉시 분석합니다.
+          내 돈이 얼마나 깎이는지 · 위험 등급 · 다른 단지와 공사비 비교까지<br />
+          1분 안에 전문가처럼 진단합니다.
         </p>
         <p className={styles.privacyNotice}>
           입력하신 정보는 분석에만 사용되며, 외부에 공유되지 않습니다.
@@ -371,7 +371,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="asset_value">
                   종전자산 평가액 <span className={styles.req}>*</span>
                 </label>
-                <p id="asset_value_hint" className={styles.fieldHint}>감정평가서 또는 관리처분계획서에 적힌 '종전자산평가액'입니다. 조합에서 받은 공문이나 우편물을 확인하세요.</p>
+                <p id="asset_value_hint" className={styles.fieldHint}>현재 살고 있는 아파트의 평가액입니다. 조합에서 받은 감정평가서 또는 공문에서 '종전자산평가액' 항목을 찾으세요.</p>
                 <div className={styles.inputWrap}>
                   <input
                     className={styles.input}
@@ -395,7 +395,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="cost_increase_rate">
                   예상 공사비 상승률 <span className={styles.req}>*</span>
                 </label>
-                <p id="cost_increase_rate_hint" className={styles.fieldHint}>공사비가 오르면 분담금이 얼마나 늘어나는지 분석합니다. 시공사가 요청한 인상률 기준이며, 모르시면 10을 입력하세요.</p>
+                <p id="cost_increase_rate_hint" className={styles.fieldHint}>시공사가 공사비를 몇 % 올리려고 하는지입니다. 조합 공문을 확인하세요. 정확히 모르시면 최근 평균인 10을 입력하세요.</p>
                 <div className={styles.inputWrap}>
                   <input
                     className={styles.input}
@@ -465,7 +465,7 @@ export default function ShockCalculatorPage() {
               단지 정보
             </p>
             <p className={styles.fieldHint} style={{ marginBottom: '12px' }}>
-              지역별 공사비 벤치마크 비교와 맞춤 분석에 사용됩니다
+              다른 지역 단지와 공사비를 비교하고 맞춤 분석하는 데 사용됩니다
             </p>
 
             <div className={styles.fieldGrid}>
@@ -490,7 +490,7 @@ export default function ShockCalculatorPage() {
 
               <div className={styles.field}>
                 <label className={styles.label} htmlFor="location">
-                  사업장 지역 <span className={styles.req}>*</span>
+                  단지 소재 지역 <span className={styles.req}>*</span>
                 </label>
                 <p id="location_hint" className={styles.fieldHint}>지역별 공사비 비교에 사용됩니다. 예: 서울 강남구, 경기 분당구</p>
                 <input
@@ -511,7 +511,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="pyeong">
                   내 아파트 평형 <span className={styles.req}>*</span>
                 </label>
-                <p id="pyeong_hint" className={styles.fieldHint}>등기부등본이나 분양계약서에 적힌 전용면적을 평으로 환산하세요. (㎡ ÷ 3.3 = 평)</p>
+                <p id="pyeong_hint" className={styles.fieldHint}>등기부등본의 전용면적을 평으로 바꿔 입력하세요. 예: 82.5㎡ → 약 25평, 112㎡ → 약 34평</p>
                 <div className={styles.inputWrap}>
                   <input
                     className={styles.input}
@@ -535,7 +535,7 @@ export default function ShockCalculatorPage() {
                 <label className={styles.label} htmlFor="construction_cost">
                   평당 공사비 <span className={styles.req}>*</span>
                 </label>
-                <p id="construction_cost_hint" className={styles.fieldHint}>시공사 계약서나 조합 공문에 적힌 평당 공사비입니다. (상승 전 금액) 모르시면 900을 입력하세요.</p>
+                <p id="construction_cost_hint" className={styles.fieldHint}>조합 공문에 적힌 평당 공사비(상승 전 금액)입니다. 모르시면 조합에 문의하세요. 참고: 서울 평균 약 900만원</p>
                 <div className={styles.inputWrap}>
                   <input
                     className={styles.input}
@@ -640,7 +640,7 @@ export default function ShockCalculatorPage() {
               월 100만 원씩 <strong>{formatRepayDuration(result.expected_contribution)}</strong>
             </p>
             <p className={styles.summarySub}>
-              자산 잠식률 {(result.expected_contribution / Number(form.asset_value) * 100).toFixed(1)}%
+              내 자산 중 {(result.expected_contribution / Number(form.asset_value) * 100).toFixed(1)}%가 추가로 나감
               {result.next_grade_info && (
                 <> · 공사비 {result.next_grade_info.additional_rate}% 더 오르면 <strong>{result.next_grade_info.next_grade}</strong> 등급</>
               )}
@@ -671,7 +671,7 @@ export default function ShockCalculatorPage() {
                 <div className={result.benchmark_status === 'high' ? styles.benchmarkHigh : styles.benchmarkLow}>
                   <p className={styles.benchmarkText}>{result.benchmark_warning}</p>
                   <p className={styles.benchmarkSource}>
-                    출처: (사)주거환경연구원 실태조사 (2024년 실측) + 언론·업계 전망 보정 (2026년 기준) ※ 시·도별 공식 통계 미존재, 참고용 추정값
+                    출처: 주거환경연구원(2024년, 65개 단지 실측) 기반 추정값 ※ 정확하지 않을 수 있으므로 조합에 꼭 확인하세요
                   </p>
                 </div>
               )}
@@ -701,8 +701,8 @@ export default function ShockCalculatorPage() {
             </p>
             <p className={styles.tierRecommendDesc}>
               {['R1', 'R2'].includes(result.risk_level)
-                ? '자산 구조 검증과 총회 질문 5개를 담은 베이직 리포트로 핵심 리스크를 확인하세요.'
-                : '협상 전략·총회 발언 스크립트·행동 타임라인이 포함된 프리미엄 리포트로 총회에서 이기세요.'}
+                ? '내 분담금 구조 검증과 총회에서 물어야 할 질문 5개를 담은 베이직 리포트로 핵심 위험을 확인하세요.'
+                : '공사비를 깎을 수 있는 협상 전략, 총회에서 읽을 발언 대본, 30일 행동 계획이 포함된 프리미엄 리포트로 대응하세요.'}
             </p>
             <Link
               href={['R1', 'R2'].includes(result.risk_level) ? '/reports#basic' : '/reports#premium'}
@@ -958,7 +958,7 @@ export default function ShockCalculatorPage() {
                   aria-invalid={emailError ? 'true' : undefined}
                   aria-describedby="modal_phone_hint"
                 />
-                <p id="modal_phone_hint" className={styles.modalPhoneHint}>서비스 오픈 시 알림톡으로 먼저 안내해 드립니다</p>
+                <p id="modal_phone_hint" className={styles.modalPhoneHint}>서비스 오픈 시 카카오톡 또는 문자로 먼저 안내해 드립니다</p>
               </div>
 
               <label className={styles.modalPrivacyRow}>

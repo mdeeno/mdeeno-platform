@@ -62,14 +62,14 @@ function BasicSamplePages() {
           </tbody>
         </table>
         <p className={styles.samplePageNote}>
-          공사비 20% 상승 시 자산 잠식률 28.8% — 협상 대응 필요
+          공사비 20% 상승 시 내 자산의 28.8%가 추가로 나감 — 협상 대응 필요
         </p>
       </div>
 
       {/* P3 — Asset Erosion Threshold */}
       <div className={styles.samplePage}>
         <p className={styles.samplePageSectionEyebrow}>섹션 02</p>
-        <h4 className={styles.samplePageSectionTitle}>자산 잠식 임계점 분석</h4>
+        <h4 className={styles.samplePageSectionTitle}>손실이 시작되는 한계선 분석</h4>
         <div className={styles.sampleThresholdBox}>
           <div className={styles.sampleThresholdNum}>+14.8%</div>
           <div className={styles.sampleThresholdDesc}>
@@ -82,7 +82,7 @@ function BasicSamplePages() {
             <tr>
               <th>공사비 변동</th>
               <th>순자산 변화</th>
-              <th>자산 잠식 여부</th>
+              <th>손실 여부</th>
             </tr>
           </thead>
           <tbody>
@@ -93,7 +93,7 @@ function BasicSamplePages() {
             </tr>
             <tr className={styles.tableRowHighlight}>
               <td>+14.8%</td>
-              <td>0원 (임계점)</td>
+              <td>0원 (한계선)</td>
               <td className={styles.tdWarn}>경계 구간</td>
             </tr>
             <tr className={styles.tableRowHighlight}>
@@ -104,7 +104,7 @@ function BasicSamplePages() {
           </tbody>
         </table>
         <p className={styles.samplePageNote}>
-          현재 조합 제시안 기준 — 임계점 초과 시 추가 대응 전략 필수
+          현재 조합 제시안 기준 — 이 한계선을 넘으면 추가 대응 전략 필수
         </p>
       </div>
 
@@ -193,7 +193,7 @@ function PremiumSamplePages() {
         </p>
         <div className={styles.sampleMetricRow}>
           <div className={styles.sampleMetric}>
-            <span className={styles.sampleMetricLabel}>자산 잠식률</span>
+            <span className={styles.sampleMetricLabel}>추가 손실 비율</span>
             <span className={`${styles.sampleMetricValue} ${styles.valueDanger}`}>
               24.0%
             </span>
@@ -205,7 +205,7 @@ function PremiumSamplePages() {
             </span>
           </div>
           <div className={styles.sampleMetric}>
-            <span className={styles.sampleMetricLabel}>협상 절감 가능</span>
+            <span className={styles.sampleMetricLabel}>공사비 깎기 가능</span>
             <span className={`${styles.sampleMetricValue} ${styles.valueSafe}`}>
               ~264만원
             </span>
@@ -216,7 +216,7 @@ function PremiumSamplePages() {
       {/* P3 — Negotiation Simulation */}
       <div className={styles.samplePage}>
         <p className={styles.samplePageSectionEyebrow}>섹션 02</p>
-        <h4 className={styles.samplePageSectionTitle}>협상 절감 시뮬레이션</h4>
+        <h4 className={styles.samplePageSectionTitle}>공사비 깎기 전략 시뮬레이션</h4>
         <table className={styles.sampleTable}>
           <thead>
             <tr>
@@ -335,7 +335,7 @@ export default function ReportSamplesSection() {
                 </p>
                 <ul className={styles.sampleCardFeatures}>
                   <li>시나리오별 분담금 자동 계산 (6페이지)</li>
-                  <li>자산 잠식 임계점 분석</li>
+                  <li>손실 시작 한계선 분석</li>
                   <li>총회 핵심 질문 5가지 (인쇄 가능)</li>
                 </ul>
                 <div className={styles.sampleCardBtns}>

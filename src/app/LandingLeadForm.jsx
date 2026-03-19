@@ -143,7 +143,7 @@ export default function LandingLeadForm() {
                 {loading ? '처리 중...' : '출시 알림 신청하기'}
               </button>
             </form>
-            <p className={styles.landingLeadPhoneHint}>출시 시 이메일과 알림톡으로 가장 먼저 안내해 드립니다</p>
+            <p className={styles.landingLeadPhoneHint}>출시 시 이메일과 카카오톡(또는 문자)으로 가장 먼저 안내해 드립니다</p>
             {error && <p className={styles.landingLeadError}>{error}</p>}
 
             <p className={styles.landingLeadAlt}>

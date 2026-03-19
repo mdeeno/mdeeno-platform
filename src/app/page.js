@@ -112,14 +112,14 @@ export default function Home() {
       {/* ── 단순 계산기가 아닙니다 ── */}
       <section className={styles.features}>
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>단순 계산기가 아닙니다</h2>
+          <h2 className={styles.sectionTitle}>전문가처럼 분석해 줍니다</h2>
 
           <div className={styles.grid}>
             <div className={styles.card}>
               <div className={styles.iconWrapper}>📉</div>
-              <h3 className={styles.cardTitle}>손실 시점 예측</h3>
+              <h3 className={styles.cardTitle}>손실 시작 시점 계산</h3>
               <p>
-                내 자산이 잠식되기 시작하는 임계점을 자동으로 계산합니다
+                공사비가 몇 % 오르면 내 돈이 줄어드는지, 그 한계선을 찾아줍니다
               </p>
               <p className={styles.cardExample}>
                 예: 공사비가 +10.9% 오르면 고위험 단계 진입
@@ -128,8 +128,8 @@ export default function Home() {
 
             <div className={styles.card}>
               <div className={styles.iconWrapper}>🎤</div>
-              <h3 className={styles.cardTitle}>총회 질문 자동 생성</h3>
-              <p>귀하의 위험 등급에 맞춘 질문과 발언 스크립트를 제공합니다</p>
+              <h3 className={styles.cardTitle}>총회 질문·발언 대본 제공</h3>
+              <p>내 위험 등급에 맞춰 총회에서 바로 읽을 수 있는 질문과 발언 대본을 드립니다</p>
               <p className={styles.cardExample}>
                 예: 시공사에 원가 분리 소명을 요구하는 질문 5개
               </p>
@@ -137,8 +137,8 @@ export default function Home() {
 
             <div className={styles.card}>
               <div className={styles.iconWrapper}>💵</div>
-              <h3 className={styles.cardTitle}>공사비 적정성 분석</h3>
-              <p>공사비 상승률별 시나리오를 비교하고, 월 상환 기준으로 환산합니다</p>
+              <h3 className={styles.cardTitle}>공사비 비교 분석</h3>
+              <p>다른 단지와 공사비를 비교하고, 매달 얼마씩 부담하는지 계산합니다</p>
               <p className={styles.cardExample}>
                 예: 인근 단지 대비 평당 40만원 높은 것으로 분석
               </p>
