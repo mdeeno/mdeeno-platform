@@ -9,7 +9,7 @@
     var(--secondary) 0%,
     var(--bg-white) 100%
   );
-  padding: 80px 20px 56px;
+  padding: 80px 20px 48px;
 }
 
 .heroInner {
@@ -28,7 +28,7 @@
 
 .heroSubLink {
   display: inline-block;
-  margin-top: 12px;
+  margin-top: 16px;
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--primary);
@@ -154,12 +154,13 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 0;
 }
 
 .heroBtnNote {
-  margin-top: 6px;
-  font-size: 0.8rem;
+  margin-top: 10px;
+  margin-bottom: 0;
+  font-size: 0.82rem;
   color: #64748b;
   text-align: left;
 }
@@ -168,9 +169,9 @@
   display: inline-block;
   background-color: var(--primary);
   color: #ffffff;
-  padding: 16px 32px;
+  padding: 14px 28px;
   border-radius: 8px;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
   text-align: center;
   min-height: var(--btn-min-height);
@@ -1483,7 +1484,7 @@
   }
 
   .hero {
-    padding: 100px 40px 72px;
+    padding: 88px 40px 56px;
   }
 
   .urgencySection {
