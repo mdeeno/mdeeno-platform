@@ -600,75 +600,30 @@ export default function ShockCalculatorPage() {
             </div>
           )}
 
-          {/* 3. Comparison */}
-          <div className={styles.comparisonGrid}>
-            <div className={styles.comparisonCard}>
-              <p className={styles.comparisonLabel}>현재 구조</p>
-              <p className={styles.comparisonValueRed}>{formatAmount(result.expected_contribution)}</p>
-              <p className={styles.comparisonNote}>아무 행동도 하지 않을 경우</p>
+          {/* 3. Threshold Warning — 등급 악화 임계점 */}
+          {result.next_grade_info && (
+            <div className={styles.thresholdWarning}>
+              <p className={styles.thresholdIcon}>⚠</p>
+              <p className={styles.thresholdText}>
+                공사비가 <strong>{result.next_grade_info.additional_rate}%</strong> 더 오르면{' '}
+                위험 등급이 <strong>{result.next_grade_info.next_grade}</strong>({RISK_LABELS[result.next_grade_info.next_grade]})로 악화됩니다.
+              </p>
+              <p className={styles.thresholdSub}>
+                현재 {result.risk_level} 등급 유지를 위해 공사비 상승 추이를 반드시 모니터링하세요.
+              </p>
             </div>
-            <div className={styles.comparisonDivider}>VS</div>
-            <div className={styles.comparisonCard}>
-              <p className={styles.comparisonLabel}>전략 적용</p>
-              <p className={styles.comparisonValueBlue}>{formatAmount(result.comparison_contribution)}</p>
-              <p className={styles.comparisonNote}>협상 전략 실행 후</p>
-            </div>
-          </div>
+          )}
 
-          <div className={styles.savingsHighlight}>
-            <p className={styles.savingsLabel}>예상 절감액</p>
-            <p className={styles.savingsAmount}>
-              {formatAmount(result.expected_contribution - result.comparison_contribution)}
+          {/* 3-b. Reduction Possibility — 절감 가능 여부 (금액 미공개) */}
+          <div className={styles.reductionHint}>
+            <p className={styles.reductionLabel}>전략 적용 시 절감 가능 여부</p>
+            <p className={styles.reductionAnswer}>
+              {result.comparison_contribution < result.expected_contribution ? '절감 가능' : '현재 구조 유지'}
             </p>
-            <p className={styles.savingsNote}>전략 리포트 적용 시 최대 절감 가능 금액</p>
-            <p className={styles.savingsDisclaimer}>
-              * 공사비 10% 상승 가정, 협상·총회 전략 실행 시 시뮬레이션 결과입니다.
+            <p className={styles.reductionNote}>
+              구체적인 절감 금액과 전략은 리포트에서 확인할 수 있습니다.
             </p>
           </div>
-
-          {/* 3. Strategy Simulation Preview */}
-          {(() => {
-            const negotiation = result.expected_contribution - result.comparison_contribution;
-            const assembly    = Math.round(negotiation * 0.4 * 100) / 100;
-            const appraisal   = Math.round(negotiation * 0.2 * 100) / 100;
-            const strategies  = [
-              {
-                title:  '협상 전략',
-                desc:   '공사비 원가 검증 및 시공사 협상 실행',
-                saving: negotiation,
-              },
-              {
-                title:  '총회 대응 전략',
-                desc:   '총회 발언·집단 대응으로 인상안 저지',
-                saving: assembly,
-              },
-              {
-                title:  '감정평가 대응',
-                desc:   '종전자산 재평가 요구로 분담금 구조 개선',
-                saving: appraisal,
-              },
-            ];
-            return (
-              <div className={styles.simSection}>
-                <p className={styles.simLabel}>전략별 예상 절감 효과</p>
-                <p className={styles.simNote}>
-                  위험 등급 {result.risk_level} 기준으로 M-DEENO 전략 엔진이 시뮬레이션한 결과입니다.
-                </p>
-                <div className={styles.simGrid}>
-                  {strategies.map((s) => (
-                    <div key={s.title} className={styles.simCard}>
-                      <p className={styles.simCardTitle}>{s.title}</p>
-                      <p className={styles.simCardDesc}>{s.desc}</p>
-                      <p className={styles.simCardSaving}>
-                        -{formatAmount(s.saving)}
-                        <span className={styles.simCardSavingNote}> 절감 가능</span>
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })()}
 
           {/* 4. Risk-based Tier Recommendation */}
           <div className={
@@ -694,27 +649,34 @@ export default function ShockCalculatorPage() {
             </Link>
           </div>
 
-          {/* 5. Strategy Blur + CTA */}
+          {/* 5. Report TOC + CTA */}
           <div className={styles.strategyWrap}>
-            <div className={styles.strategyBlur} aria-hidden="true">
-              <p className={styles.strategyBlurTitle}>M-DEENO 맞춤 전략 분석</p>
-              <ul className={styles.strategyList}>
-                <li className={styles.strategyItem}>공사비 협상 전략</li>
-                <li className={styles.strategyItem}>총회 발언 스크립트</li>
-                <li className={styles.strategyItem}>사업 구조 분석</li>
-                <li className={styles.strategyItem}>협상 포인트</li>
-                <li className={styles.strategyItem}>총회 대응 전략</li>
+            <div className={styles.reportToc}>
+              <p className={styles.reportTocTitle}>리포트에 포함된 내용</p>
+              <ul className={styles.reportTocList}>
+                {['R3', 'R4'].includes(result.risk_level) ? (
+                  <>
+                    <li className={styles.reportTocItem}><span className={styles.tocCheck}>✓</span> 자산 구조 정밀 분석 (잠식률·분담금 시나리오)</li>
+                    <li className={styles.reportTocItem}><span className={styles.tocCheck}>✓</span> 공사비 협상 전략 및 원가 검증 포인트</li>
+                    <li className={styles.reportTocItem}><span className={styles.tocCheck}>✓</span> 총회 발언 스크립트 (즉시 활용 가능)</li>
+                    <li className={styles.reportTocItem}><span className={styles.tocCheck}>✓</span> 시공사 대응 전략 및 협상 질문 리스트</li>
+                    <li className={styles.reportTocItem}><span className={styles.tocCheck}>✓</span> 감정평가 대응 및 재평가 요구 근거</li>
+                    <li className={styles.reportTocItem}><span className={styles.tocCheck}>✓</span> 행동 타임라인 (총회 전·중·후)</li>
+                  </>
+                ) : (
+                  <>
+                    <li className={styles.reportTocItem}><span className={styles.tocCheck}>✓</span> 자산 구조 검증 리포트</li>
+                    <li className={styles.reportTocItem}><span className={styles.tocCheck}>✓</span> 분담금 시나리오 분석</li>
+                    <li className={styles.reportTocItem}><span className={styles.tocCheck}>✓</span> 총회 핵심 질문 5가지</li>
+                    <li className={styles.reportTocItem}><span className={styles.tocCheck}>✓</span> 공사비 벤치마크 비교</li>
+                  </>
+                )}
               </ul>
             </div>
             <div className={styles.strategyOverlay}>
               <p className={styles.premiumHeadline}>
-                총회에서 이길 전략까지<br />제공합니다
+                위험을 확인했다면<br />대응 전략이 필요합니다
               </p>
-              <ul className={styles.upsellList}>
-                <li className={styles.upsellItem}>협상 질문 리스트</li>
-                <li className={styles.upsellItem}>총회 발언 스크립트</li>
-                <li className={styles.upsellItem}>시공사 대응 전략</li>
-              </ul>
               {!isBetaMode() && (
                 <p className={styles.ctaPrice}>
                   <span className={styles.ctaPriceBeta}>출시 특가 99,000원 · 정가 149,000원</span>

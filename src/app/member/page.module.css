@@ -763,6 +763,113 @@
   line-height: 1.5;
 }
 
+/* ── Threshold Warning ── */
+.thresholdWarning {
+  background: #fff7ed;
+  border: 1.5px solid #fed7aa;
+  border-left: 4px solid #ea580c;
+  border-radius: 8px;
+  padding: 18px 20px;
+  text-align: center;
+}
+
+.thresholdIcon {
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+
+.thresholdText {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #9a3412;
+  line-height: 1.65;
+  margin-bottom: 6px;
+}
+
+.thresholdText strong {
+  color: #c2410c;
+  font-weight: 900;
+}
+
+.thresholdSub {
+  font-size: 0.82rem;
+  color: #c2410c;
+  line-height: 1.55;
+}
+
+/* ── Reduction Hint ── */
+.reductionHint {
+  background: #f0fdf4;
+  border: 1.5px solid #bbf7d0;
+  border-radius: 8px;
+  padding: 18px 20px;
+  text-align: center;
+}
+
+.reductionLabel {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #15803d;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
+.reductionAnswer {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #166534;
+  margin-bottom: 8px;
+}
+
+.reductionNote {
+  font-size: 0.82rem;
+  color: #15803d;
+  line-height: 1.55;
+}
+
+/* ── Report TOC ── */
+.reportToc {
+  padding: 28px 24px 20px;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px 10px 0 0;
+}
+
+.reportTocTitle {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #64748b;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.reportTocList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reportTocItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #334155;
+  line-height: 1.5;
+}
+
+.tocCheck {
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
 /* ── Strategy Blur + CTA ── */
 .strategyWrap {
   position: relative;
@@ -770,38 +877,16 @@
   overflow: hidden;
 }
 
-.strategyBlur {
-  padding: 32px 28px;
-  background: #f8fafc;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 10px;
-  filter: blur(5px);
-  user-select: none;
-  pointer-events: none;
-  line-height: 2.4;
-  font-size: 0.95rem;
-  color: #334155;
-}
-
-.strategyBlurTitle {
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #0f2d6b;
-  margin-bottom: 12px;
-}
-
 .strategyOverlay {
-  position: absolute;
-  inset: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(15, 23, 42, 0.75);
+  background: #0f172a;
   padding: 28px 24px;
   text-align: center;
   gap: 14px;
-  border-radius: 10px;
+  border-radius: 0 0 10px 10px;
 }
 
 .ctaTitle {
