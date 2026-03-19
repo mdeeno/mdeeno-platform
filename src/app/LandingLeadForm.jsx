@@ -101,17 +101,14 @@ export default function LandingLeadForm() {
             </ul>
 
             <form className={styles.landingLeadForm} onSubmit={handleSubmit} noValidate>
-              <div className={styles.landingLeadEmailWrap}>
-                <input
-                  className={`${styles.landingLeadInput}${error ? ` ${styles.landingLeadInputError}` : ''}`}
-                  type="email"
-                  placeholder="이메일 주소 입력"
-                  value={email}
-                  onChange={(e) => { setEmail(e.target.value); setError(''); }}
-                  autoComplete="email"
-                />
-                <p className={styles.landingLeadPhoneHint}>출시 시 이메일과 알림톡으로 가장 먼저 안내해 드립니다</p>
-              </div>
+              <input
+                className={`${styles.landingLeadInput}${error ? ` ${styles.landingLeadInputError}` : ''}`}
+                type="email"
+                placeholder="이메일 주소 입력"
+                value={email}
+                onChange={(e) => { setEmail(e.target.value); setError(''); }}
+                autoComplete="email"
+              />
               <input
                 className={`${styles.landingLeadInput}${error ? ` ${styles.landingLeadInputError}` : ''}`}
                 id="landing_phone"
@@ -131,6 +128,7 @@ export default function LandingLeadForm() {
                 {loading ? '처리 중...' : '출시 알림 신청하기'}
               </button>
             </form>
+            <p className={styles.landingLeadPhoneHint}>출시 시 이메일과 알림톡으로 가장 먼저 안내해 드립니다</p>
             {error && <p className={styles.landingLeadError}>{error}</p>}
 
             <p className={styles.landingLeadAlt}>

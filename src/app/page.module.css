@@ -473,6 +473,8 @@
   border-radius: 12px;
   overflow: visible;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .sampleCardFeatured {
@@ -573,6 +575,9 @@
 /* Card body */
 .sampleCardBody {
   padding: 20px 24px 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .sampleCardLabel {
@@ -642,6 +647,7 @@
 .sampleCardBtns {
   display: flex;
   gap: 8px;
+  margin-top: auto;
 }
 
 .previewBtn {
@@ -1456,9 +1462,10 @@
 }
 
 .landingLeadPhoneHint {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.35);
-  margin: 0;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 4px 0 0;
+  text-align: center;
 }
 
 .landingLeadError {
@@ -1551,11 +1558,6 @@
   }
 
   .landingLeadForm .landingLeadInput {
-    flex: 1;
-    min-width: 200px;
-  }
-
-  .landingLeadForm .landingLeadEmailWrap {
     flex: 1;
     min-width: 200px;
   }
