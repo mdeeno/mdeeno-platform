@@ -13,21 +13,22 @@
 }
 
 .heroInner {
-  max-width: 1200px;
+  max-width: 1080px;
   margin: 0 auto;
   display: flex;
-  align-items: center;
-  gap: 48px;
+  align-items: flex-start;
+  gap: 56px;
 }
 
 .heroContent {
   flex: 1;
+  max-width: 540px;
   text-align: left;
 }
 
 .heroSubLink {
   display: inline-block;
-  margin-top: 16px;
+  margin-top: 12px;
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--primary);
@@ -39,7 +40,8 @@
 
 /* 히어로 결과 목업 */
 .heroMockup {
-  flex: 0 0 340px;
+  flex: 0 0 380px;
+  margin-top: 12px;
 }
 
 .mockupCard {
@@ -117,7 +119,7 @@
   font-weight: 900;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   color: #0f172a;
 }
 
@@ -136,7 +138,7 @@
 .subtitle {
   font-size: var(--font-body);
   color: var(--text-muted);
-  margin-bottom: 40px;
+  margin-bottom: 32px;
   line-height: 1.7;
 }
 
@@ -152,27 +154,27 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: 8px;
 }
 
 .heroBtnNote {
-  margin-top: 8px;
-  font-size: 0.82rem;
+  margin-top: 6px;
+  font-size: 0.8rem;
   color: #64748b;
   text-align: left;
 }
 
 .primaryBtn {
-  display: block;
+  display: inline-block;
   background-color: var(--primary);
   color: #ffffff;
-  padding: 18px 36px;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: 800;
+  padding: 16px 32px;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
   text-align: center;
   min-height: var(--btn-min-height);
-  box-shadow: 0 4px 16px rgba(30, 64, 175, 0.3);
+  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.2);
   transition: background 0.15s, transform 0.1s;
 }
 
@@ -1050,7 +1052,6 @@
 .socialProof {
   padding: 56px 20px;
   background: #ffffff;
-  border-top: 1px solid #e2e8f0;
 }
 
 .spResult {
@@ -1523,6 +1524,7 @@
   }
 
   .heroContent {
+    max-width: 100%;
     text-align: center;
   }
 
@@ -1531,6 +1533,7 @@
     width: 100%;
     max-width: 360px;
     margin: 0 auto;
+    margin-top: 0;
   }
 
   .title {
@@ -1567,6 +1570,7 @@
 
   .primaryBtn,
   .secondaryBtn {
+    display: block;
     width: 100%;
     padding: 15px 24px;
     font-size: 1rem;
