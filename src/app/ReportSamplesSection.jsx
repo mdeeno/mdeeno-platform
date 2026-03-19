@@ -334,7 +334,7 @@ export default function ReportSamplesSection() {
                   </span>
                 </p>
                 <ul className={styles.sampleCardFeatures}>
-                  <li>시나리오별 분담금 자동 계산 (5페이지)</li>
+                  <li>시나리오별 분담금 자동 계산 (6페이지)</li>
                   <li>자산 잠식 임계점 분석</li>
                   <li>총회 핵심 질문 5가지 (인쇄 가능)</li>
                 </ul>

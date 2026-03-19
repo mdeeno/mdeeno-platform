@@ -29,6 +29,7 @@ function formatPhoneInput(raw) {
 export default function LandingLeadForm() {
   const [email, setEmail]         = useState('');
   const [phone, setPhone]         = useState('');
+  const [privacyAgreed, setPrivacyAgreed] = useState(false);
   const [error, setError]         = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading]     = useState(false);
@@ -46,6 +47,10 @@ export default function LandingLeadForm() {
     }
     if (!phone || !isValidPhone(phone)) {
       setError('휴대폰 번호 11자리를 입력해 주세요. 예) 010-1234-5678');
+      return;
+    }
+    if (!privacyAgreed) {
+      setError('개인정보 수집·이용에 동의해 주세요.');
       return;
     }
     setLoading(true);
@@ -120,6 +125,16 @@ export default function LandingLeadForm() {
                 inputMode="numeric"
                 required
               />
+              <label className={styles.landingLeadPrivacy}>
+                <input
+                  type="checkbox"
+                  checked={privacyAgreed}
+                  onChange={(e) => { setPrivacyAgreed(e.target.checked); setError(''); }}
+                />
+                <span className={styles.landingLeadPrivacyText}>
+                  개인정보 수집·이용에 동의합니다 (이메일·휴대폰 번호 수집, 출시 안내 목적)
+                </span>
+              </label>
               <button
                 className={styles.landingLeadBtn}
                 type="submit"

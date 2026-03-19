@@ -289,6 +289,11 @@ export default function Home() {
               </tbody>
             </table>
           </div>
+          <div className={styles.sectionCta}>
+            <Link href="/member" className={styles.sectionCtaBtn}>
+              내 분담금 무료 분석하기 →
+            </Link>
+          </div>
         </div>
       </section>
 

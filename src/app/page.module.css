@@ -1468,6 +1468,31 @@
   text-align: center;
 }
 
+.landingLeadPrivacy {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.landingLeadPrivacy input[type="checkbox"] {
+  margin-top: 2px;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+}
+
+.landingLeadPrivacyText {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+  text-align: left;
+}
+
 .landingLeadError {
   margin-top: 10px;
   font-size: 0.82rem;
@@ -1560,6 +1585,11 @@
   .landingLeadForm .landingLeadInput {
     flex: 1;
     min-width: 200px;
+  }
+
+  .landingLeadPrivacy {
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 
   .landingLeadBtn {
