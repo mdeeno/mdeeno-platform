@@ -32,8 +32,8 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* 히어로 우측 — 결과 미리보기 목업 */}
-          <div className={styles.heroMockup}>
+          {/* 히어로 우측 — 결과 미리보기 목업 (티저) */}
+          <Link href="/member" className={styles.heroMockup}>
             <div className={styles.mockupCard}>
               <p className={styles.mockupEyebrow}>M-DEENO 분석 결과 예시</p>
               <div className={styles.mockupGrade}>
@@ -51,8 +51,11 @@ export default function Home() {
                 </div>
               </div>
               <p className={styles.mockupNote}>공사비 10% 상승 시나리오 기준</p>
+              <div className={styles.mockupOverlay}>
+                <span className={styles.mockupOverlayBtn}>내 결과 확인하기 →</span>
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       </section>
 
