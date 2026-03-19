@@ -101,28 +101,28 @@ export default function LandingLeadForm() {
             </ul>
 
             <form className={styles.landingLeadForm} onSubmit={handleSubmit} noValidate>
-              <input
-                className={`${styles.landingLeadInput}${error ? ` ${styles.landingLeadInputError}` : ''}`}
-                type="email"
-                placeholder="이메일 주소 입력"
-                value={email}
-                onChange={(e) => { setEmail(e.target.value); setError(''); }}
-                autoComplete="email"
-              />
-              <div className={styles.landingLeadPhoneWrap}>
+              <div className={styles.landingLeadEmailWrap}>
                 <input
                   className={`${styles.landingLeadInput}${error ? ` ${styles.landingLeadInputError}` : ''}`}
-                  id="landing_phone"
-                  type="tel"
-                  placeholder="휴대폰 번호 (010-0000-0000)"
-                  value={phone}
-                  onChange={handlePhoneChange}
-                  autoComplete="tel"
-                  inputMode="numeric"
-                  required
+                  type="email"
+                  placeholder="이메일 주소 입력"
+                  value={email}
+                  onChange={(e) => { setEmail(e.target.value); setError(''); }}
+                  autoComplete="email"
                 />
-                <p className={styles.landingLeadPhoneHint}>출시 시 알림톡으로 가장 먼저 안내해 드립니다</p>
+                <p className={styles.landingLeadPhoneHint}>출시 시 이메일과 알림톡으로 가장 먼저 안내해 드립니다</p>
               </div>
+              <input
+                className={`${styles.landingLeadInput}${error ? ` ${styles.landingLeadInputError}` : ''}`}
+                id="landing_phone"
+                type="tel"
+                placeholder="휴대폰 번호 (010-0000-0000)"
+                value={phone}
+                onChange={handlePhoneChange}
+                autoComplete="tel"
+                inputMode="numeric"
+                required
+              />
               <button
                 className={styles.landingLeadBtn}
                 type="submit"

@@ -1390,6 +1390,12 @@
   cursor: not-allowed;
 }
 
+.landingLeadEmailWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .landingLeadPhoneWrap {
   display: flex;
   flex-direction: column;
@@ -1507,7 +1513,7 @@
     min-width: 200px;
   }
 
-  .landingLeadForm .landingLeadPhoneWrap {
+  .landingLeadForm .landingLeadEmailWrap {
     flex: 1;
     min-width: 200px;
   }
