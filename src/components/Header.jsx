@@ -22,11 +22,11 @@ export default function Header() {
         {/* 데스크톱 메뉴 */}
         <nav className={styles.nav}>
           <Link href="/member" className={styles.primaryBtn}>
-            📊 무료 구조 진단
+            무료 분석
           </Link>
 
           <Link href="/reports" className={styles.secondaryBtn}>
-            📄 리포트 보기
+            리포트 소개
           </Link>
           <a
             href={TECH_URL}
@@ -34,7 +34,7 @@ export default function Header() {
             rel="noopener noreferrer"
             className={styles.navLink}
           >
-            전문가 부동산 리포트 ↗
+            블로그
           </a>
         </nav>
 
@@ -44,7 +44,7 @@ export default function Header() {
             로그인
           </Link>
           <Link href="/member" className={styles.startBtn}>
-            무료로 시작하기
+            무료 분석 시작
           </Link>
         </div>
 
@@ -66,14 +66,14 @@ export default function Header() {
       >
         <nav className={styles.mobileNav}>
           <Link href="/member" className={styles.primaryBtn} onClick={toggleMenu}>
-            📊 무료 구조 진단
+            무료 분석
           </Link>
 
           <Link href="/reports" className={styles.secondaryBtn} onClick={toggleMenu}>
-            📄 리포트 보기
+            리포트 소개
           </Link>
           <a href={TECH_URL} target="_blank" rel="noopener noreferrer" onClick={toggleMenu}>
-            전문가 부동산 리포트 ↗
+            블로그
           </a>
           <hr className={styles.divider} />
           <Link href="/login" onClick={toggleMenu}>
@@ -84,7 +84,7 @@ export default function Header() {
             className={styles.mobileStartBtn}
             onClick={toggleMenu}
           >
-            무료로 시작하기
+            무료 분석 시작
           </Link>
         </nav>
       </div>

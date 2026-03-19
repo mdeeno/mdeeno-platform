@@ -56,9 +56,9 @@
 
 .btnGroup {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 16px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .heroBtnNote {
@@ -72,11 +72,12 @@
   display: block;
   background-color: var(--primary);
   color: #ffffff;
-  padding: 16px 28px;
-  border-radius: 10px;
-  font-size: 1rem;
+  padding: 18px 36px;
+  border-radius: 12px;
+  font-size: 1.1rem;
   font-weight: 800;
   text-align: center;
+  min-height: var(--btn-min-height);
   box-shadow: 0 4px 16px rgba(30, 64, 175, 0.3);
   transition: background 0.15s, transform 0.1s;
 }
@@ -101,6 +102,44 @@
 
 .secondaryBtn:hover {
   background-color: var(--bg-light);
+}
+
+/* ── 이런 분께 필요합니다 ── */
+.audience {
+  padding: 80px 20px;
+  background-color: var(--bg-light);
+}
+
+.audienceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.audienceCard {
+  background: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.audienceIcon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.audienceCardTitle {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: var(--text-main);
+}
+
+.audienceCardDesc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.7;
 }
 
 /* 기능 소개 섹션 */
@@ -1216,6 +1255,14 @@
   }
 
   /* 섹션 공통 */
+  .audience {
+    padding: 48px 16px;
+  }
+
+  .audienceGrid {
+    grid-template-columns: 1fr;
+  }
+
   .features {
     padding: 48px 16px;
   }

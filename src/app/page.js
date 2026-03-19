@@ -6,6 +6,7 @@ import ReportSamplesSection from './ReportSamplesSection';
 export default function Home() {
   return (
     <div className={styles.wrapper}>
+      {/* ── 히어로 ── */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <h1 className={styles.title}>
@@ -14,94 +15,75 @@ export default function Home() {
             <span className={styles.highlight}>실제로 얼마나 늘어날까요?</span>
           </h1>
 
-          <p className={styles.subtitleEyebrow}>
-            재건축·재개발 정비사업 조합원을 위한 분담금 리스크 분석
-          </p>
           <p className={styles.subtitle}>
-            M-DEENO는 조합원의 자산 기준으로<br />
-            공사비 상승 시 분담금 변화를 분석합니다.
+            공사비 10% 오르면 내 분담금은?<br />
+            30초면 확인합니다.
           </p>
 
           <div className={styles.btnGroup}>
-            <div>
-              <Link href="/member" className={styles.primaryBtn}>
-                내 분담금 분석 시작하기
-              </Link>
-              <p className={styles.heroBtnNote}>로그인 없음 · 30초 완료 · 전문가 수준 분석</p>
-            </div>
-
-            <Link href="/reports" className={styles.secondaryBtn}>
-              📄 리포트 샘플 보기
+            <Link href="/member" className={styles.primaryBtn}>
+              내 분담금 무료 분석하기
             </Link>
+            <p className={styles.heroBtnNote}>무료 · 회원가입 불필요 · 30초 완료</p>
           </div>
         </div>
       </section>
 
-      {/* ── 공사비 상승 현황 ── */}
-      <section className={styles.socialProof}>
+      {/* ── 이런 분께 필요합니다 ── */}
+      <section className={styles.audience}>
         <div className={styles.container}>
-          <p className={styles.socialProofEyebrow}>2026년 공사비 현황</p>
-          <div className={styles.socialProofGrid}>
-            <div className={styles.socialProofCard}>
-              <p className={styles.spComplex}>서울 평균 평당 공사비</p>
-              <p className={styles.spAmount}>950만원대</p>
-              <p className={styles.spLabel}>2024년 843만원 대비 상승</p>
+          <h2 className={styles.sectionTitle}>이런 분께 필요합니다</h2>
+          <div className={styles.audienceGrid}>
+            <div className={styles.audienceCard}>
+              <div className={styles.audienceIcon}>🗳</div>
+              <h3 className={styles.audienceCardTitle}>총회를 앞두고 계신 조합원</h3>
+              <p className={styles.audienceCardDesc}>
+                시공사가 제시한 공사비가 적정한지, 총회에서 어떤 질문을 해야 하는지 알려드립니다.
+              </p>
             </div>
-            <div className={styles.socialProofCard}>
-              <p className={styles.spComplex}>강남권 최고 계약 단가</p>
-              <p className={styles.spAmount}>1,300만원</p>
-              <p className={styles.spLabel}>신반포22차 2025년 입찰 기준</p>
+            <div className={styles.audienceCard}>
+              <div className={styles.audienceIcon}>💰</div>
+              <h3 className={styles.audienceCardTitle}>분담금 통보를 받으셨나요?</h3>
+              <p className={styles.audienceCardDesc}>
+                추가 분담금이 정말 이 금액이 맞는지, 공사비가 더 오르면 얼마나 늘어나는지 확인하세요.
+              </p>
             </div>
-            <div className={styles.socialProofCard}>
-              <p className={styles.spComplex}>전국 평균 공사비</p>
-              <p className={styles.spAmount}>820만원대</p>
-              <p className={styles.spLabel}>2024년 770만원 대비 상승 전망</p>
+            <div className={styles.audienceCard}>
+              <div className={styles.audienceIcon}>📈</div>
+              <h3 className={styles.audienceCardTitle}>공사비 인상이 걱정되시나요?</h3>
+              <p className={styles.audienceCardDesc}>
+                공사비가 몇 % 오르면 내 자산이 위험해지는지, 그 임계점을 정확히 계산해 드립니다.
+              </p>
             </div>
           </div>
-          <p className={styles.socialProofSource}>
-            출처: 주거환경연구원 정비사업 공사비 실태조사(2024) + 업계 전망 기반 추정
-          </p>
         </div>
       </section>
 
-      {/* ── Urgency ── */}
-      <section className={styles.urgencySection}>
-        <div className={styles.container}>
-          <p className={styles.urgencyText}>
-            공사비가 5%만 올라가도<br />
-            조합원 분담금은 크게 늘어납니다.
-          </p>
-          <Link href="/member" className={styles.urgencyBtn}>
-            내 분담금 분석 시작하기
-          </Link>
-          <p className={styles.urgencyNote}>로그인 없음 · 30초 완료</p>
-        </div>
-      </section>
-
+      {/* ── 분석하면 이런 걸 알 수 있습니다 ── */}
       <section className={styles.features}>
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>단순 계산기가 아닙니다</h2>
+          <h2 className={styles.sectionTitle}>분석하면 이런 걸 알 수 있습니다</h2>
 
           <div className={styles.grid}>
             <div className={styles.card}>
               <div className={styles.iconWrapper}>📉</div>
-              <h3 className={styles.cardTitle}>내 손실이 시작되는 시점 예측</h3>
+              <h3 className={styles.cardTitle}>공사비 몇 % 오르면 위험한지</h3>
               <p>
-                공사비가 몇 % 오를 때 내 순자산이 줄어들기 시작하는지
+                내 자산이 잠식되기 시작하는 임계점을
                 자동으로 계산합니다
               </p>
             </div>
 
             <div className={styles.card}>
-              <div className={styles.iconWrapper}>📑</div>
-              <h3 className={styles.cardTitle}>총회 당일 쓸 수 있는 질문 제공</h3>
-              <p>시공사에 요구할 질문 리스트와 발언 스크립트를 리포트에 담아드립니다</p>
+              <div className={styles.iconWrapper}>💵</div>
+              <h3 className={styles.cardTitle}>추가 분담금이 실제 얼마인지</h3>
+              <p>공사비 상승률별 시나리오를 비교하고, 월 상환 기준으로 환산해 드립니다</p>
             </div>
 
             <div className={styles.card}>
-              <div className={styles.iconWrapper}>🏗</div>
-              <h3 className={styles.cardTitle}>공사비가 적정한지 직접 확인</h3>
-              <p>조합이 제시한 공사비가 시장 기준 대비 얼마나 높은지 분석합니다</p>
+              <div className={styles.iconWrapper}>🎤</div>
+              <h3 className={styles.cardTitle}>총회에서 어떤 질문을 해야 하는지</h3>
+              <p>귀하의 위험 등급에 맞춘 질문 5가지와 발언 스크립트를 제공합니다</p>
             </div>
           </div>
         </div>
@@ -170,6 +152,20 @@ export default function Home() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ── Urgency ── */}
+      <section className={styles.urgencySection}>
+        <div className={styles.container}>
+          <p className={styles.urgencyText}>
+            공사비가 5%만 올라가도<br />
+            조합원 분담금은 크게 늘어납니다.
+          </p>
+          <Link href="/member" className={styles.urgencyBtn}>
+            내 분담금 무료 분석하기
+          </Link>
+          <p className={styles.urgencyNote}>회원가입 불필요 · 30초 완료</p>
         </div>
       </section>
 

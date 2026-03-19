@@ -10,6 +10,12 @@
   --success: #16a34a;
   --warning: #d97706;
 
+  /* 등급별 컬러 */
+  --grade-r1: #22C55E;
+  --grade-r2: #EAB308;
+  --grade-r3: #F97316;
+  --grade-r4: #EF4444;
+
   --text-main: #111827;
   --text-muted: #4b5563;
   --bg-white: #ffffff;
@@ -19,25 +25,30 @@
   /* ── Typography scale — desktop ── */
   --font-h1: 42px;
   --font-h2: 28px;
-  --font-body: 17px;
+  --font-body: 18px;
   --font-number: 44px;
+
+  /* ── 버튼/터치 영역 ── */
+  --btn-min-height: 52px;
+  --touch-min: 48px;
 }
 
-/* ── Typography scale — mobile ─────────────────────────────── */
+/* ── Typography scale — mobile (tablet) ── */
 @media (max-width: 768px) {
   :root {
-    --font-h1: 30px;
-    --font-h2: 22px;
+    --font-h1: 32px;
+    --font-h2: 24px;
     --font-body: 16px;
     --font-number: 32px;
   }
 }
 
+/* ── Typography scale — mobile (small) ── */
 @media (max-width: 480px) {
   :root {
-    --font-h1: 26px;
+    --font-h1: 24px;
     --font-h2: 20px;
-    --font-body: 15px;
+    --font-body: 16px;
     --font-number: 28px;
   }
 }
@@ -62,7 +73,7 @@ body {
     sans-serif;
   color: var(--text-main);
   background-color: var(--bg-white);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 a {

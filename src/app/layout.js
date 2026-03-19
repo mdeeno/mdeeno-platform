@@ -6,9 +6,9 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata = {
   metadataBase: new URL('https://mdeeno.com'),
-  title: 'M-DEENO Prop-Logic™ | 정비사업 리스크 데이터 플랫폼',
+  title: 'M-DEENO | 재건축 분담금 리스크 분석',
   description:
-    '공사비 변화에 따른 정비사업 사업안전도를 구조적으로 분석합니다. Prop-Logic™ 엔진 기반 실시간 시뮬레이션 및 조합 제출용 분석 리포트 제공.',
+    '공사비 상승 시 내 분담금이 얼마나 늘어나는지 30초 만에 분석합니다. 위험 등급 판정, 시나리오 비교, 총회 대응 전략까지.',
   verification: {
     google: 'egpUo4dD8e73c7-Sgf7SNHoeFg6kOsPtJf6JoYGE6pw',
     other: {
@@ -16,8 +16,8 @@ export const metadata = {
     },
   },
   openGraph: {
-    title: 'M-DEENO Prop-Logic | Master Digital Economic Innovation',
-    description: '실시간 공사비 시뮬레이션으로 확인하는 우리 단지 사업 안정성',
+    title: 'M-DEENO | 재건축 분담금, 실제로 얼마나 늘어날까요?',
+    description: '공사비 상승 시 내 분담금 변화를 30초 만에 분석합니다',
     url: 'https://mdeeno.com',
     siteName: 'M-DEENO',
     images: [
