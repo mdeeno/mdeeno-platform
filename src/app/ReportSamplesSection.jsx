@@ -325,7 +325,8 @@ export default function ReportSamplesSection() {
                 <span className={`${styles.sampleRiskBadge} ${styles.badgeR2}`}>R2 — 중위험</span>
               </div>
               <div className={styles.sampleCardBody}>
-                <p className={styles.sampleCardLabel}>R1–R2 위험 등급 대상 · 분담금 리스크 파악이 목적</p>
+                <p className={styles.sampleCardHeadline}>지금 상황 파악용</p>
+                <p className={styles.sampleCardLabel}>괜찮은지 확인하고 싶은 분 · R1–R2 위험 등급 대상</p>
                 <p className={styles.sampleCardPrice}>
                   <span className={styles.officialPrice}>39,000원</span>{' '}
                   29,000원{' '}
@@ -365,7 +366,8 @@ export default function ReportSamplesSection() {
                 <span className={`${styles.sampleRiskBadge} ${styles.badgeR3}`}>R3 — 고위험</span>
               </div>
               <div className={styles.sampleCardBody}>
-                <p className={styles.sampleCardLabel}>R3–R4 위험 등급 대상 · 총회 전 실전 전략 필요</p>
+                <p className={styles.sampleCardHeadline}>R3·R4 나온 분 필수</p>
+                <p className={styles.sampleCardLabel}>대응 안 하면 손해입니다 · 총회 전 실전 전략 필요</p>
                 <p className={styles.sampleCardPrice}>
                   <span className={styles.officialPrice}>149,000원</span>{' '}
                   99,000원{' '}

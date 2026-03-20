@@ -204,6 +204,14 @@
   text-align: left;
 }
 
+.heroChildNote {
+  margin-top: 16px;
+  font-size: 0.82rem;
+  color: #64748b;
+  text-align: left;
+  font-weight: 500;
+}
+
 .primaryBtn {
   display: inline-block;
   background-color: var(--primary);
@@ -1194,6 +1202,65 @@
 }
 
 /* ── Urgency Section ── */
+/* ── 결과 기대감 섹션 ── */
+.resultPreview {
+  padding: 64px 20px;
+  background: #f8fafc;
+}
+
+.resultPreviewGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 960px;
+  margin: 0 auto 32px;
+}
+
+.resultPreviewCard {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px 20px;
+  border: 1.5px solid var(--border-color);
+  transition: transform 0.2s ease;
+}
+
+.resultPreviewCard:hover {
+  transform: translateY(-2px);
+}
+
+.resultR4 { border-left: 4px solid var(--danger); }
+.resultR3 { border-left: 4px solid var(--grade-r3); }
+.resultR2 { border-left: 4px solid #f59e0b; }
+.resultR1 { border-left: 4px solid #16a34a; }
+
+.resultBadge {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+
+.resultR4 .resultBadge { color: var(--danger); }
+.resultR3 .resultBadge { color: var(--grade-r3); }
+.resultR2 .resultBadge { color: #f59e0b; }
+.resultR1 .resultBadge { color: #16a34a; }
+
+.resultDesc {
+  font-size: 0.88rem;
+  color: var(--text-main);
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+/* ── 리포트 카드 헤드라인 ── */
+.sampleCardHeadline {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
 .urgencySection {
   background: #0f172a;
   padding: 64px 20px;
@@ -1657,6 +1724,19 @@
     text-align: center;
   }
 
+  .heroChildNote {
+    text-align: center;
+  }
+
+  .resultPreview {
+    padding: 40px 16px;
+  }
+
+  .resultPreviewGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
   .btnGroup > div {
     width: 100%;
   }
@@ -1975,6 +2055,10 @@
 
   .spLabel {
     font-size: 0.78rem;
+  }
+
+  .resultPreviewGrid {
+    grid-template-columns: 1fr;
   }
 
   /* 긴급 섹션 */

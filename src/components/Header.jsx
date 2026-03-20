@@ -57,7 +57,7 @@ export default function Header() {
             로그인
           </Link>
           <Link href="/member" className={styles.startBtn}>
-            무료 분석 시작
+            30초 무료 진단 시작
           </Link>
         </div>
 
@@ -104,7 +104,7 @@ export default function Header() {
             className={styles.mobileStartBtn}
             onClick={toggleMenu}
           >
-            무료 분석 시작
+            30초 무료 진단 시작
           </Link>
         </nav>
       </div>

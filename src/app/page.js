@@ -11,21 +11,27 @@ export default function Home() {
         <div className={styles.heroInner}>
           <div className={styles.heroContent}>
             <h1 className={styles.title}>
-              재건축 분담금,
+              이거 모르고 총회 들어가면
               <br />
-              <span className={styles.highlight}>실제로 얼마나 늘어날까요?</span>
+              <span className={styles.highlight}>수억 손해봅니다</span>
             </h1>
 
             <p className={styles.subtitle}>
-              공사비 10% 오르면 내 분담금은? 30초면 확인합니다.
+              공사비 10% 오르면 분담금 최대 8,000만원 증가합니다.
+              <br />
+              지금 내 위험도를 확인하세요.
             </p>
 
             <div className={styles.btnGroup}>
               <Link href="/member" className={styles.primaryBtn}>
-                내 분담금 무료 분석하기
+                내 분담금 위험도 확인하기
               </Link>
               <p className={styles.heroBtnNote}>무료 · 회원가입 불필요 · 30초 완료</p>
             </div>
+
+            <p className={styles.heroChildNote}>
+              부모님 댁 재건축, 자녀분이 대신 확인해 보세요
+            </p>
 
             <Link href="/sample-report" className={styles.heroSubLink}>
               리포트 샘플 보기 →
@@ -147,6 +153,44 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── 결과 기대감 ── */}
+      <section className={styles.resultPreview}>
+        <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>분석하면 이런 결과를 알 수 있습니다</h2>
+          <div className={styles.resultPreviewGrid}>
+            <div className={`${styles.resultPreviewCard} ${styles.resultR4}`}>
+              <span className={styles.resultBadge}>R4 최고위험</span>
+              <p className={styles.resultDesc}>
+                공사비 10% 상승 시 분담금 +8,670만원, 자산 손실 구간 진입
+              </p>
+            </div>
+            <div className={`${styles.resultPreviewCard} ${styles.resultR3}`}>
+              <span className={styles.resultBadge}>R3 고위험</span>
+              <p className={styles.resultDesc}>
+                추가 분담금 +5,500만원, 총회 대응 필요
+              </p>
+            </div>
+            <div className={`${styles.resultPreviewCard} ${styles.resultR2}`}>
+              <span className={styles.resultBadge}>R2 중위험</span>
+              <p className={styles.resultDesc}>
+                상황에 따라 손실 가능, 모니터링 권장
+              </p>
+            </div>
+            <div className={`${styles.resultPreviewCard} ${styles.resultR1}`}>
+              <span className={styles.resultBadge}>R1 관리가능</span>
+              <p className={styles.resultDesc}>
+                현재 안정, 정기 모니터링 권장
+              </p>
+            </div>
+          </div>
+          <div className={styles.sectionCta}>
+            <Link href="/member" className={styles.sectionCtaBtn}>
+              내 위험 등급 확인하기 →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── 시뮬레이션 예시 ── */}
       <section className={styles.cases}>
         <div className={styles.container}>
@@ -230,13 +274,14 @@ export default function Home() {
             </div>
           </div>
           <p className={styles.urgencyText}>
-            공사비가 5%만 올라가도<br />
-            조합원 추가 분담금은 크게 늘어납니다.
+            공사비는 계속 오르고 있습니다.<br />
+            이미 분담금이 확정된 단지도 많습니다.<br />
+            총회 이후에는 늦습니다.
           </p>
           <Link href="/member" className={styles.urgencyBtn}>
-            내 분담금 무료 분석하기
+            내 분담금 위험도 확인하기
           </Link>
-          <p className={styles.urgencyNote}>회원가입 불필요 · 30초 완료</p>
+          <p className={styles.urgencyNote}>무료 · 회원가입 불필요 · 30초 완료</p>
         </div>
       </section>
 
@@ -291,7 +336,7 @@ export default function Home() {
           </div>
           <div className={styles.sectionCta}>
             <Link href="/member" className={styles.sectionCtaBtn}>
-              내 분담금 무료 분석하기 →
+              내 분담금 위험도 확인하기 →
             </Link>
           </div>
         </div>
