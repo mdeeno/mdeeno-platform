@@ -1391,10 +1391,23 @@
   accent-color: var(--primary);
 }
 
+.modalServiceIntro {
+  font-size: 0.82rem;
+  color: #6b7280;
+  margin: 0 0 8px;
+  text-align: center;
+}
+
 .modalPrivacyText {
   font-size: 0.85rem;
   color: #4b5563;
   line-height: 1.55;
+}
+
+.modalPrivacyLink {
+  color: var(--primary);
+  text-decoration: underline;
+  font-size: 0.82rem;
 }
 
 .modalError {

@@ -1493,6 +1493,12 @@
   text-align: left;
 }
 
+.landingLeadPrivacyLink {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: underline;
+  font-size: 0.82rem;
+}
+
 .landingLeadError {
   margin-top: 10px;
   font-size: 0.82rem;

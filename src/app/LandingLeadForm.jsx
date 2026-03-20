@@ -132,7 +132,8 @@ export default function LandingLeadForm() {
                   onChange={(e) => { setPrivacyAgreed(e.target.checked); setError(''); }}
                 />
                 <span className={styles.landingLeadPrivacyText}>
-                  개인정보 수집·이용에 동의합니다 (이메일·휴대폰 번호 수집, 출시 안내 목적)
+                  개인정보 수집·이용에 동의합니다 (이메일·휴대폰 번호 수집, 출시 안내 목적){' '}
+                  <a href="/privacy" target="_blank" rel="noopener noreferrer" className={styles.landingLeadPrivacyLink}>개인정보처리방침</a>
                 </span>
               </label>
               <button

@@ -873,6 +873,9 @@ export default function ShockCalculatorPage() {
             <p className={styles.modalTitle}>
               {isBetaMode() ? '출시 알림 · 사전 신청' : '리포트를 받을 이메일'}
             </p>
+            <p className={styles.modalServiceIntro}>
+              M-DEENO는 재건축·재개발 조합원을 위한 분담금 리스크 분석 서비스입니다.
+            </p>
             <p className={styles.modalDesc}>
               {isBetaMode()
                 ? '이메일을 등록하시면 6월 정식 출시 시 결제 링크와 함께 우선 안내드립니다.'
@@ -968,7 +971,8 @@ export default function ShockCalculatorPage() {
                   onChange={(e) => { setIsModalPrivacyAgreed(e.target.checked); setEmailError(''); }}
                 />
                 <span className={styles.modalPrivacyText}>
-                  개인정보 수집·이용에 동의합니다 (이메일·휴대폰 번호 수집, 출시 안내 목적)
+                  개인정보 수집·이용에 동의합니다 (이메일·휴대폰 번호 수집, 출시 안내 목적){' '}
+                  <a href="/privacy" target="_blank" rel="noopener noreferrer" className={styles.modalPrivacyLink}>개인정보처리방침</a>
                 </span>
               </label>
 
