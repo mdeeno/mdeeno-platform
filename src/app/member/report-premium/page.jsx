@@ -350,7 +350,7 @@ export default function PremiumReportPaywall() {
               <span className={styles.scriptIndexTag}>미리보기</span>
             </li>
             {[
-              '공사비 인상 근거 질의 — 시나리오별 분담금 변화',
+              '공사비 인상 근거 질의 — 시나리오별 추가 분담금 변화',
               '감정평가 재검토 요구 — 종전자산 적정성 문제 제기',
               '집단 의견 표명 — 충분한 설명·자료 제공 요구',
               '표결 전 발언 — 독립 원가 검증 선행 요청',

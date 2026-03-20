@@ -62,7 +62,7 @@ export default function Home() {
       {/* ── 피해 사례 ── */}
       <section className={styles.socialProof}>
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>최근 재건축 분담금 변동 사례</h2>
+          <h2 className={styles.sectionTitle}>최근 재건축 추가 분담금 변동 사례</h2>
           <div className={styles.socialProofGrid}>
             <div className={styles.socialProofCard}>
               <div>
@@ -79,11 +79,11 @@ export default function Home() {
               <div>
                 <p className={styles.spComplex}>경기 B단지</p>
                 <p className={styles.spCause}>설계 변경 + 자재비 상승</p>
-                <p className={styles.spResult}>당초 대비 1.5배 분담금 증가</p>
+                <p className={styles.spResult}>당초 대비 1.5배 추가 분담금 증가</p>
               </div>
               <div>
                 <span className={styles.spAmount}>+50%</span>
-                <span className={styles.spLabel}>분담금 증가율</span>
+                <span className={styles.spLabel}>추가 분담금 증가율</span>
               </div>
             </div>
             <div className={styles.socialProofCard}>
@@ -150,7 +150,7 @@ export default function Home() {
       {/* ── 시뮬레이션 예시 ── */}
       <section className={styles.cases}>
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>공사비 상승 시 분담금 변화 시뮬레이션</h2>
+          <h2 className={styles.sectionTitle}>공사비 상승 시 추가 분담금 변화 시뮬레이션</h2>
           <p className={styles.caseDisclaimer}>
             아래는 M-DEENO 분석 엔진 기반 시뮬레이션 예시이며, 실제 특정 단지의 사례가 아닙니다.
           </p>
@@ -231,7 +231,7 @@ export default function Home() {
           </div>
           <p className={styles.urgencyText}>
             공사비가 5%만 올라가도<br />
-            조합원 분담금은 크게 늘어납니다.
+            조합원 추가 분담금은 크게 늘어납니다.
           </p>
           <Link href="/member" className={styles.urgencyBtn}>
             내 분담금 무료 분석하기

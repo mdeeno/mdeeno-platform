@@ -5,7 +5,7 @@ import styles from './page.module.css';
 const SEOUL_AVG_COST = 950;
 
 const STAGE_RISKS = [
-  { value: 'planning',     label: '기본계획 수립',  risk: 'R1', desc: '사업 초기 — 분담금 변동폭 가장 큰 구간' },
+  { value: 'planning',     label: '기본계획 수립',  risk: 'R1', desc: '사업 초기 — 추가 분담금 변동폭 가장 큰 구간' },
   { value: 'approval',     label: '사업시행인가',   risk: 'R2', desc: '공사비 미확정 — 인상 리스크 본격화' },
   { value: 'management',   label: '관리처분인가',   risk: 'R3', desc: '분담금 확정 시점 — 협상 마지막 기회' },
   { value: 'construction', label: '착공 / 공사 중', risk: 'R4', desc: '착공 후 추가 공사비 전가 위험 최고조' },
