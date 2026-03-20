@@ -334,9 +334,9 @@ export default function ReportSamplesSection() {
                   </span>
                 </p>
                 <ul className={styles.sampleCardFeatures}>
-                  <li>시나리오별 분담금 자동 계산 (6페이지)</li>
-                  <li>손실 시작 한계선 분석</li>
-                  <li>총회 핵심 질문 5가지 (인쇄 가능)</li>
+                  <li>시나리오별 추가 분담금 자동 계산 (6페이지)</li>
+                  <li>손실 시작 한계선 분석 (공사비 몇 % 오르면 내 자산이 깎이는지)</li>
+                  <li>총회 핵심 질문 5가지 (인쇄해서 총회장에서 바로 사용 가능)</li>
                 </ul>
                 <div className={styles.sampleCardBtns}>
                   <button
@@ -374,10 +374,10 @@ export default function ReportSamplesSection() {
                   </span>
                 </p>
                 <ul className={styles.sampleCardFeatures}>
-                  <li>20페이지 이상 심층 분석</li>
-                  <li>협상 절감 시뮬레이션 + 실행 스크립트</li>
-                  <li>총회 발언 대본 (마이크 앞에서 바로 읽기 가능)</li>
-                  <li>30일 행동 타임라인 + 체크리스트</li>
+                  <li>20페이지 이상 심층 분석 (위험 진단부터 행동 계획까지)</li>
+                  <li>협상 절감 시뮬레이션 + 실행 스크립트 (공사비 얼마나 깎을 수 있는지)</li>
+                  <li>총회 발언 대본 5종 (마이크 앞에서 바로 읽기 가능)</li>
+                  <li>30일 행동 타임라인 + 체크리스트 (총회 전 매일 할 일 정리)</li>
                 </ul>
                 <div className={styles.sampleCardBtns}>
                   <button

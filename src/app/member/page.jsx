@@ -8,10 +8,10 @@ import { isBetaMode } from '@/lib/feature-flags';
 import styles from './page.module.css';
 
 const STAGE_OPTIONS = [
-  { value: 'planning',     label: '아직 계획 단계 (공사 시작 전)' },
-  { value: 'approval',     label: '공사 계획 승인됨 (공사는 안 시작)' },
-  { value: 'management',   label: '이주·철거 준비 중 (공사 곧 시작)' },
-  { value: 'construction', label: '이미 공사가 시작됨' },
+  { value: 'planning',     label: '아직 계획 단계 — 조합설립 전후, 시공사 미선정' },
+  { value: 'approval',     label: '공사 계획 승인됨 — 시공사 선정됨, 공사 전' },
+  { value: 'management',   label: '이주·철거 준비 중 — 이주 시작 또는 이주 완료' },
+  { value: 'construction', label: '이미 공사가 시작됨 — 현재 공사 중' },
 ];
 
 const INITIAL_FORM = {
