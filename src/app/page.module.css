@@ -897,6 +897,8 @@
   border-collapse: collapse;
   font-size: 0.875rem;
   margin-bottom: 8px;
+  table-layout: auto;
+  word-break: keep-all;
 }
 
 .sampleTable thead tr {
@@ -2332,6 +2334,50 @@
 
   .sampleModal {
     max-height: 95vh;
+  }
+
+  .sampleModalBody {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .samplePage {
+    padding: 16px 12px;
+  }
+
+  .sampleTable th {
+    padding: 6px 6px;
+    font-size: 0.68rem;
+  }
+
+  .sampleTable td {
+    padding: 6px 6px;
+    font-size: 0.82rem;
+  }
+
+  .sampleShockNumber {
+    font-size: 1.7rem;
+  }
+
+  .sampleMetricLabel {
+    font-size: 0.75rem;
+    letter-spacing: 0;
+  }
+
+  .sampleMetricValue {
+    font-size: 0.9rem;
+  }
+
+  .sampleThresholdNum {
+    font-size: 1.8rem;
+  }
+
+  .samplePageSectionTitle {
+    font-size: 0.95rem;
+  }
+
+  .sampleScriptText {
+    font-size: 0.82rem;
   }
 
   /* 리드 캡처 */
