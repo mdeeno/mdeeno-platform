@@ -17,7 +17,8 @@ export default function Home() {
             </h1>
 
             <p className={styles.subtitle}>
-              공사비 10% 오르면 분담금 최대 8,000만원 증가합니다.
+              공사비 <span className={styles.subtitleAccent}>10%</span> 오르면
+              분담금 최대 <span className={styles.subtitleAccent}>8,000만원</span> 증가합니다.
               <br />
               지금 내 위험도를 확인하세요.
             </p>

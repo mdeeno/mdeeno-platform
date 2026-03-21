@@ -183,6 +183,11 @@
   word-break: keep-all;
 }
 
+.subtitleAccent {
+  color: #1e40af;
+  font-weight: 700;
+}
+
 .comment {
   text-align: center;
   padding: 3rem 1rem;
@@ -1676,16 +1681,21 @@
   }
 }
 
-/* 반응형 */
+/* =============================================
+   반응형 — 모바일 (토스 참고 미니멀 디자인)
+   ============================================= */
 @media (max-width: 768px) {
+
+  /* ── 히어로 ── */
   .hero {
-    padding: 40px 20px 32px;
+    padding: 56px 24px 48px;
+    background: #ffffff;
   }
 
   .heroInner {
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+    gap: 0;
   }
 
   .heroContent {
@@ -1700,27 +1710,35 @@
   .title {
     padding: 0;
     font-size: 26px;
-    line-height: 1.35;
-    margin-bottom: 12px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+    color: #191f28;
+    letter-spacing: -0.03em;
+  }
+
+  .highlight {
+    color: #1e40af;
   }
 
   .subtitle {
     padding: 0;
-    margin-bottom: 20px;
+    margin-bottom: 32px;
     font-size: 16px;
-    line-height: 1.6;
-    background: #fef2f2;
-    border-left: 4px solid #ef4444;
-    padding: 12px 16px;
-    border-radius: 8px;
-    color: #991b1b;
-    font-weight: 600;
-    text-align: left;
+    line-height: 1.7;
+    color: #6b7684;
+    font-weight: 400;
+    background: none;
+    border-left: none;
+    border-radius: 0;
+    text-align: center;
   }
 
   .heroSubLink {
     display: block;
     text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #6b7684;
   }
 
   .btnGroup {
@@ -1732,15 +1750,20 @@
 
   .heroBtnNote {
     text-align: center;
+    color: #b0b8c1;
+    font-size: 13px;
+    margin-top: 12px;
   }
 
   .heroChildNote {
     text-align: center;
-    font-size: 0.85rem;
+    font-size: 14px;
+    color: #8b95a1;
+    margin-top: 24px;
   }
 
   .resultPreview {
-    padding: 40px 16px;
+    padding: 56px 24px;
   }
 
   .resultPreviewGrid {
@@ -1761,26 +1784,37 @@
   }
 
   .primaryBtn {
-    padding: 16px 24px;
-    font-size: 18px;
+    padding: 17px 24px;
+    font-size: 17px;
     font-weight: 700;
-    min-height: 52px;
-    border-radius: 12px;
-    box-shadow: 0 4px 14px rgba(30, 64, 175, 0.35);
+    min-height: 54px;
+    border-radius: 16px;
+    box-shadow: none;
+    background: #1e40af;
+    letter-spacing: -0.01em;
+  }
+
+  .primaryBtn:hover {
+    box-shadow: none;
   }
 
   .secondaryBtn {
     padding: 15px 24px;
-    font-size: 1rem;
+    font-size: 15px;
+    border-radius: 12px;
   }
 
-  .heroBtnNote {
-    font-size: 0.82rem;
+  /* ── 섹션 공통 ── */
+  .sectionTitle {
+    font-size: 22px;
+    margin-bottom: 32px;
+    color: #191f28;
+    letter-spacing: -0.02em;
+    line-height: 1.4;
   }
 
-  /* 섹션 공통 */
   .audience {
-    padding: 40px 16px;
+    padding: 56px 24px;
   }
 
   .audienceGrid {
@@ -1788,25 +1822,25 @@
   }
 
   .features {
-    padding: 40px 16px;
+    padding: 56px 24px;
   }
 
   .cases {
-    padding: 40px 16px;
+    padding: 56px 24px;
   }
 
   .reportSamples {
-    padding: 40px 16px;
+    padding: 56px 24px;
   }
 
   .compareSection {
-    padding: 40px 16px;
+    padding: 56px 24px;
   }
 
   .compareTable th,
   .compareTable td {
-    padding: 10px 10px;
-    font-size: 0.85rem;
+    padding: 12px 10px;
+    font-size: 14px;
   }
 
   .compareCheck,
@@ -1817,65 +1851,71 @@
   .sectionCtaBtn {
     display: block;
     width: 100%;
-    padding: 14px 24px;
+    padding: 16px 24px;
     font-size: 16px;
     font-weight: 700;
-    border-radius: 10px;
+    border-radius: 14px;
     text-align: center;
     box-sizing: border-box;
-    min-height: 48px;
+    min-height: 52px;
+  }
+
+  .sectionCta {
+    margin-top: 36px;
   }
 
   .landingLeadBenefit {
     font-size: 0.875rem;
   }
 
+  .card {
+    padding: 28px 22px;
+    border-radius: 16px;
+  }
+
   .card p {
-    font-size: 0.875rem;
+    font-size: 15px;
     word-break: keep-all;
+    color: #6b7684;
+    line-height: 1.65;
   }
 
   .caseNote {
-    font-size: 0.875rem;
+    font-size: 14px;
+    color: #8b95a1;
   }
 
   .urgencyStats {
-    gap: 32px;
+    gap: 40px;
   }
 
   .urgencyStatNum {
-    font-size: 1.8rem;
-  }
-
-  .sectionTitle {
-    font-size: 1.5rem;
-    margin-bottom: 28px;
+    font-size: 32px;
+    letter-spacing: -0.02em;
   }
 
   .sectionSubtitle {
-    margin-top: -16px;
-    margin-bottom: 28px;
-    font-size: 0.88rem;
+    margin-top: -20px;
+    margin-bottom: 32px;
+    font-size: 14px;
+    color: #8b95a1;
   }
 
   .grid {
     grid-template-columns: 1fr;
     padding: 0;
-    gap: 16px;
-  }
-
-  .card {
-    padding: 24px 20px;
+    gap: 14px;
   }
 
   .iconWrapper {
-    font-size: 2rem;
-    margin-bottom: 14px;
+    font-size: 1.8rem;
+    margin-bottom: 12px;
   }
 
   .cardTitle {
-    font-size: 1.1rem;
+    font-size: 17px;
     margin-bottom: 8px;
+    color: #191f28;
   }
 
   /* 사례 분석 */
@@ -1885,11 +1925,12 @@
   }
 
   .caseCard {
-    padding: 22px 18px;
+    padding: 24px 20px;
+    border-radius: 16px;
   }
 
   .caseRegion {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
   .caseStats {
@@ -1898,7 +1939,8 @@
   }
 
   .caseStat {
-    padding: 10px 8px;
+    padding: 12px 10px;
+    border-radius: 12px;
   }
 
   .caseStatValue {
@@ -1907,67 +1949,119 @@
 
   /* 소셜 프루프 */
   .socialProof {
-    padding: 40px 16px;
+    padding: 56px 24px;
   }
 
   .socialProofEyebrow {
     margin-bottom: 20px;
-    font-size: 0.82rem;
+    font-size: 14px;
+    color: #6b7684;
   }
 
   .socialProofGrid {
     grid-template-columns: 1fr;
     max-width: 100%;
-    gap: 10px;
+    gap: 12px;
   }
 
   .socialProofCard {
-    padding: 18px 16px;
+    padding: 20px 20px;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
     text-align: left;
+    border-radius: 16px;
+    border-top: none;
+    border: 1px solid #e5e7eb;
+  }
+
+  .spComplex {
+    font-size: 14px;
+  }
+
+  .spCause {
+    font-size: 13px;
+    color: #8b95a1;
+  }
+
+  .spResult {
+    font-size: 13px;
   }
 
   .spAmount {
-    font-size: 1.5rem;
+    font-size: 24px;
     margin-bottom: 0;
     flex-shrink: 0;
+    color: #191f28;
+  }
+
+  .spLabel {
+    font-size: 12px;
+    color: #8b95a1;
+  }
+
+  .socialProofSource {
+    font-size: 12px;
+    color: #b0b8c1;
   }
 
   /* 긴급 섹션 */
   .urgencySection {
-    padding: 48px 16px;
+    padding: 64px 24px;
   }
 
   .urgencyText {
-    font-size: 1.25rem;
-    margin-bottom: 24px;
+    font-size: 20px;
+    margin-bottom: 28px;
+    line-height: 1.5;
   }
 
   .urgencyBtn {
     width: 100%;
-    padding: 15px 24px;
+    padding: 17px 24px;
+    font-size: 16px;
     text-align: center;
     box-sizing: border-box;
+    border-radius: 14px;
+  }
+
+  .urgencyNote {
+    font-size: 13px;
   }
 
   /* 리드 캡처 */
   .landingLead {
-    padding: 48px 16px;
+    padding: 64px 24px;
   }
 
   .landingLeadTitle {
-    font-size: 1.4rem;
+    font-size: 22px;
+    line-height: 1.35;
   }
 
   .landingLeadDesc {
-    font-size: 0.85rem;
-    margin-bottom: 20px;
+    font-size: 14px;
+    margin-bottom: 24px;
+    color: rgba(255, 255, 255, 0.55);
   }
 
   .landingLeadBenefit {
-    font-size: 0.82rem;
+    font-size: 14px;
+  }
+
+  /* 결과 기대감 카드 */
+  .resultPreviewCard {
+    padding: 20px 16px;
+    border-radius: 14px;
+  }
+
+  .resultBadge {
+    font-size: 13px;
+  }
+
+  .resultDesc {
+    font-size: 14px;
+    line-height: 1.5;
   }
 
   /* 샘플 리포트 */
@@ -1979,14 +2073,25 @@
   .sampleCoverThumb {
     min-height: 120px;
     padding: 18px 12px;
+    border-radius: 14px 14px 0 0;
+  }
+
+  .sampleCard {
+    border-radius: 14px;
   }
 
   .sampleCardBody {
-    padding: 14px 12px;
+    padding: 16px 14px;
   }
 
   .sampleCardBtns {
-    gap: 6px;
+    gap: 8px;
+  }
+
+  .previewBtn,
+  .applyBtn {
+    border-radius: 10px;
+    min-height: 44px;
   }
 
   .sampleMetricRow {
@@ -1995,6 +2100,12 @@
 
   .sampleMetric {
     min-width: calc(50% - 5px);
+  }
+
+  /* 비교표 */
+  .compareTable {
+    border-radius: 12px;
+    overflow: hidden;
   }
 }
 
@@ -2010,38 +2121,39 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 12px 20px;
+    padding: 12px 24px;
     padding-bottom: calc(12px + env(safe-area-inset-bottom));
-    background: #ffffff;
-    border-top: 1px solid #e5e7eb;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
     z-index: 50;
   }
 
   .stickyBottomBtn {
     display: block;
     width: 100%;
-    padding: 14px 24px;
-    background: var(--primary);
+    padding: 16px 24px;
+    background: #1e40af;
     color: #ffffff;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 700;
-    border-radius: 10px;
+    border-radius: 14px;
     text-align: center;
     text-decoration: none;
-    min-height: 48px;
+    min-height: 52px;
     box-sizing: border-box;
-    box-shadow: 0 2px 8px rgba(30, 64, 175, 0.3);
     transition: background 0.2s ease;
+    letter-spacing: -0.01em;
   }
 
   .stickyBottomBtn:hover {
-    background: var(--primary-hover);
+    background: #1e3a8a;
   }
 
   /* sticky CTA 높이만큼 하단 여백 */
   .wrapper {
-    padding-bottom: 80px;
+    padding-bottom: 84px;
   }
 }
 
@@ -2055,79 +2167,48 @@
 @media (max-width: 480px) {
   /* 히어로 */
   .hero {
-    padding: 28px 16px 20px;
-  }
-
-  .compareSection {
-    padding: 28px 12px;
+    padding: 44px 20px 36px;
   }
 
   .title {
     font-size: 24px;
-    line-height: 1.35;
-    margin-bottom: 10px;
-  }
-
-  .subtitleEyebrow {
-    font-size: 0.75rem;
-    margin-bottom: 6px;
+    line-height: 1.4;
+    margin-bottom: 12px;
   }
 
   .subtitle {
     font-size: 15px;
-    margin-bottom: 18px;
-    line-height: 1.55;
+    margin-bottom: 28px;
+    line-height: 1.65;
   }
 
   .primaryBtn {
     padding: 16px 20px;
-    font-size: 17px;
+    font-size: 16px;
     min-height: 52px;
-  }
-
-  .secondaryBtn {
-    padding: 12px 20px;
-    font-size: 0.95rem;
+    border-radius: 14px;
   }
 
   .heroBtnNote {
-    font-size: 0.78rem;
+    font-size: 12px;
   }
 
   /* 소셜 프루프 */
   .socialProof {
-    padding: 28px 12px;
-  }
-
-  .socialProofEyebrow {
-    font-size: 0.82rem;
-    margin-bottom: 14px;
+    padding: 48px 20px;
   }
 
   .socialProofGrid {
-    gap: 8px;
-  }
-
-  .socialProofCard {
-    padding: 14px 12px;
     gap: 10px;
   }
 
-  .spComplex {
-    font-size: 0.82rem;
-  }
-
-  .spCause {
-    font-size: 0.78rem;
-    margin-bottom: 0;
+  .socialProofCard {
+    padding: 16px 16px;
+    gap: 14px;
   }
 
   .spAmount {
-    font-size: 1.3rem;
-  }
-
-  .spLabel {
-    font-size: 0.78rem;
+    font-size: 22px;
   }
 
   .resultPreviewGrid {
@@ -2136,71 +2217,53 @@
 
   /* 긴급 섹션 */
   .urgencySection {
-    padding: 36px 14px;
+    padding: 48px 20px;
   }
 
   .urgencyText {
-    font-size: 1.05rem;
-    margin-bottom: 20px;
+    font-size: 18px;
+    margin-bottom: 24px;
   }
 
   .urgencyBtn {
-    padding: 14px 20px;
-    font-size: 0.95rem;
+    padding: 16px 20px;
+    font-size: 15px;
   }
 
   /* 기능 소개 */
   .features {
-    padding: 36px 12px;
+    padding: 48px 20px;
   }
 
   .sectionTitle {
-    font-size: 1.25rem;
-    margin-bottom: 20px;
+    font-size: 20px;
+    margin-bottom: 24px;
   }
 
   .card {
-    padding: 20px 16px;
-  }
-
-  .iconWrapper {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
+    padding: 22px 18px;
   }
 
   .cardTitle {
-    font-size: 1rem;
+    font-size: 16px;
     margin-bottom: 6px;
   }
 
   .card p {
-    font-size: 0.85rem;
+    font-size: 14px;
   }
 
   /* 사례 분석 */
   .cases {
-    padding: 36px 12px;
+    padding: 48px 20px;
   }
 
   .caseCard {
-    padding: 18px 14px;
-  }
-
-  .caseRegion {
-    margin-bottom: 10px;
-  }
-
-  .caseStats {
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-
-  .caseStat {
-    padding: 8px 6px;
+    padding: 20px 16px;
   }
 
   .caseStatLabel {
-    font-size: 0.78rem;
+    font-size: 12px;
   }
 
   .caseStatValue {
@@ -2208,18 +2271,17 @@
   }
 
   .caseNote {
-    font-size: 0.82rem;
+    font-size: 13px;
+  }
+
+  /* 비교표 */
+  .compareSection {
+    padding: 48px 20px;
   }
 
   /* 샘플 리포트 */
   .reportSamples {
-    padding: 36px 12px;
-  }
-
-  .sectionSubtitle {
-    margin-top: -12px;
-    margin-bottom: 20px;
-    font-size: 0.82rem;
+    padding: 48px 20px;
   }
 
   .sampleGrid {
@@ -2237,7 +2299,7 @@
   }
 
   .sampleCardBody {
-    padding: 14px 12px 16px;
+    padding: 16px 14px 18px;
   }
 
   .sampleCardBtns {
@@ -2249,10 +2311,7 @@
     width: 100%;
     text-align: center;
     box-sizing: border-box;
-  }
-
-  .sampleCardPrice {
-    font-size: 0.95rem;
+    border-radius: 10px;
   }
 
   .sampleModal {
@@ -2261,19 +2320,19 @@
 
   /* 리드 캡처 */
   .landingLead {
-    padding: 36px 12px;
+    padding: 48px 20px;
   }
 
   .landingLeadTitle {
-    font-size: 1.25rem;
+    font-size: 20px;
   }
 
   .landingLeadDesc {
-    font-size: 0.82rem;
-    margin-bottom: 16px;
+    font-size: 13px;
+    margin-bottom: 20px;
   }
 
   .landingLeadBenefit {
-    font-size: 0.8rem;
+    font-size: 13px;
   }
 }
