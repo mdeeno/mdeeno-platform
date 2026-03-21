@@ -92,7 +92,7 @@
 }
 
 .mockupEyebrow {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: #64748b;
   margin-bottom: 12px;
@@ -136,7 +136,7 @@
 }
 
 .mockupStatLabel {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: #64748b;
   font-weight: 600;
 }
@@ -148,7 +148,7 @@
 }
 
 .mockupNote {
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   color: #94a3b8;
   text-align: center;
 }
@@ -168,7 +168,7 @@
 }
 
 .subtitleEyebrow {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #64748b;
   letter-spacing: 0.05em;
@@ -191,8 +191,8 @@
 .comment {
   text-align: center;
   padding: 3rem 1rem;
-  font-size: 0.85rem;
-  color: #888;
+  font-size: 0.875rem;
+  color: #8b95a1;
   word-break: keep-all;
 }
 
@@ -206,14 +206,14 @@
 .heroBtnNote {
   margin-top: 10px;
   margin-bottom: 0;
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   color: #64748b;
   text-align: left;
 }
 
 .heroChildNote {
   margin-top: 16px;
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   color: #64748b;
   text-align: left;
   font-weight: 500;
@@ -302,7 +302,7 @@
 
 .cardExample {
   margin-top: 8px;
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: var(--primary);
   font-weight: 600;
   background: var(--secondary);
@@ -383,14 +383,14 @@
 
 .caseDisclaimer {
   text-align: center;
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   color: #94a3b8;
   margin-top: -20px;
   margin-bottom: 36px;
 }
 
 .caseRegion {
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   color: #94a3b8;
@@ -399,7 +399,7 @@
 }
 
 .caseCondition {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: #64748b;
   margin-bottom: 18px;
 }
@@ -420,7 +420,7 @@
 
 .caseStatLabel {
   display: block;
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: #64748b;
   margin-bottom: 6px;
@@ -439,7 +439,7 @@
 }
 
 .caseNote {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: #64748b;
   line-height: 1.7;
 }
@@ -447,9 +447,9 @@
 .caseBadge {
   display: inline-block;
   margin-top: 12px;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 800;
-  color: #93c5fd;
+  color: #60a5fa;
   background: rgba(37, 99, 235, 0.15);
   padding: 4px 10px;
   border-radius: 4px;
@@ -504,7 +504,7 @@
   right: 16px;
   background: var(--primary);
   color: #ffffff;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 800;
   padding: 4px 12px;
   border-radius: 20px;
@@ -533,7 +533,7 @@
 }
 
 .sampleCoverEyebrow {
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   font-weight: 800;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -541,11 +541,11 @@
 }
 
 .sampleCoverEyebrowDark {
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   font-weight: 800;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .sampleCoverTitle {
@@ -561,14 +561,14 @@
 }
 
 .sampleCoverSub {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: var(--primary);
   margin-bottom: 8px;
 }
 
 .sampleCoverSubDark {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: #93c5fd;
   margin-bottom: 8px;
@@ -578,7 +578,7 @@
 .sampleRiskBadge {
   display: inline-block;
   padding: 3px 10px;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 900;
   letter-spacing: 0.3px;
   border-radius: 4px;
@@ -598,7 +598,7 @@
 }
 
 .sampleCardLabel {
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: var(--primary);
   margin-bottom: 6px;
@@ -613,7 +613,7 @@
 }
 
 .betaTag {
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: #dc2626;
   background: #fff1f2;
@@ -622,7 +622,7 @@
 }
 
 .officialPrice {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   font-weight: 500;
   color: #94a3b8;
   text-decoration: line-through;
@@ -658,7 +658,7 @@
   left: 0;
   color: #2563eb;
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
 }
 
 .sampleCardBtns {
@@ -807,7 +807,7 @@
 }
 
 .samplePageEyebrow {
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -816,7 +816,7 @@
 }
 
 .samplePageLogoLight {
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   font-weight: 900;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -825,7 +825,7 @@
 }
 
 .samplePageEyebrowLight {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 800;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -854,7 +854,7 @@
   flex-direction: column;
   gap: 3px;
   margin-bottom: 12px;
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   color: #64748b;
 }
 
@@ -863,12 +863,12 @@
   flex-direction: column;
   gap: 3px;
   margin-bottom: 12px;
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.45);
 }
 
 .samplePageSectionEyebrow {
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -884,7 +884,7 @@
 }
 
 .samplePageNote {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: #64748b;
   border-top: 1px solid #f1f5f9;
   padding-top: 10px;
@@ -895,7 +895,7 @@
 .sampleTable {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   margin-bottom: 8px;
 }
 
@@ -935,7 +935,7 @@
 }
 
 .sampleShockLabel {
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   color: #64748b;
   margin-bottom: 16px;
 }
@@ -956,7 +956,7 @@
 
 .sampleMetricLabel {
   display: block;
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   color: #94a3b8;
   font-weight: 700;
   text-transform: uppercase;
@@ -994,7 +994,7 @@
 }
 
 .sampleThresholdDesc {
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   color: #64748b;
   line-height: 1.6;
 }
@@ -1024,7 +1024,7 @@
 
 .sampleQuestionNum {
   flex-shrink: 0;
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   font-weight: 900;
   color: var(--primary);
   background: #dbeafe;
@@ -1052,7 +1052,7 @@
 }
 
 .sampleScriptLabel {
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: var(--primary);
   margin-bottom: 7px;
@@ -1101,7 +1101,7 @@
 }
 
 .blurOverlayText {
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: #0f172a;
   text-align: center;
@@ -1118,7 +1118,7 @@
 }
 
 .spResult {
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   color: var(--danger);
   font-weight: 700;
   margin-top: 6px;
@@ -1172,14 +1172,14 @@
 }
 
 .spComplex {
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   font-weight: 800;
   color: #0f172a;
   margin-bottom: 6px;
 }
 
 .spCause {
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: #64748b;
   margin-bottom: 14px;
@@ -1196,7 +1196,7 @@
 }
 
 .spLabel {
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   color: #64748b;
   font-weight: 600;
   display: block;
@@ -1205,7 +1205,7 @@
 
 .socialProofSource {
   text-align: center;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: #94a3b8;
   margin-top: 16px;
 }
@@ -1244,7 +1244,7 @@
 
 .resultBadge {
   display: inline-block;
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 800;
   margin-bottom: 10px;
   letter-spacing: 0.02em;
@@ -1299,7 +1299,7 @@
 }
 
 .urgencyStatLabel {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.6);
   font-weight: 600;
 }
@@ -1332,7 +1332,7 @@
 
 .urgencyNote {
   margin-top: 12px;
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.6);
 }
 
@@ -1408,7 +1408,7 @@
 }
 
 .landingLeadEyebrow {
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1530,7 +1530,7 @@
 }
 
 .landingLeadPhoneLabel {
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.7);
   font-weight: 500;
 }
@@ -1541,7 +1541,7 @@
 }
 
 .landingLeadPhoneHint {
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.45);
   margin: 4px 0 0;
   text-align: center;
@@ -1566,7 +1566,7 @@
 }
 
 .landingLeadPrivacyText {
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.6);
   line-height: 1.5;
   text-align: left;
@@ -1575,17 +1575,17 @@
 .landingLeadPrivacyLink {
   color: rgba(255, 255, 255, 0.8);
   text-decoration: underline;
-  font-size: 0.82rem;
+  font-size: 0.875rem;
 }
 
 .landingLeadError {
   margin-top: 10px;
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   color: #fca5a5;
 }
 
 .landingLeadAlt {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.45);
   margin-top: 4px;
 }
@@ -1753,7 +1753,7 @@
   .heroBtnNote {
     text-align: center;
     color: #8b95a1;
-    font-size: 13px;
+    font-size: 14px;
     margin-top: 10px;
   }
 
@@ -1786,10 +1786,10 @@
   }
 
   .primaryBtn {
-    padding: 17px 24px;
+    padding: 18px 24px;
     font-size: 17px;
     font-weight: 700;
-    min-height: 54px;
+    min-height: 56px;
     border-radius: 16px;
     box-shadow: none;
     background: #1e40af;
@@ -1854,13 +1854,13 @@
   .sectionCtaBtn {
     display: block;
     width: 100%;
-    padding: 16px 24px;
-    font-size: 16px;
+    padding: 18px 24px;
+    font-size: 17px;
     font-weight: 700;
     border-radius: 14px;
     text-align: center;
     box-sizing: border-box;
-    min-height: 52px;
+    min-height: 56px;
   }
 
   .sectionCta {
@@ -1990,7 +1990,7 @@
   }
 
   .spCause {
-    font-size: 13px;
+    font-size: 14px;
     color: #8b95a1;
   }
 
@@ -2006,7 +2006,7 @@
   }
 
   .spLabel {
-    font-size: 13px;
+    font-size: 14px;
     color: #8b95a1;
   }
 
@@ -2028,15 +2028,16 @@
 
   .urgencyBtn {
     width: 100%;
-    padding: 17px 24px;
-    font-size: 16px;
+    padding: 18px 24px;
+    font-size: 17px;
     text-align: center;
     box-sizing: border-box;
     border-radius: 14px;
+    min-height: 56px;
   }
 
   .urgencyNote {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   /* 리드 캡처 */
@@ -2105,7 +2106,7 @@
   .previewBtn,
   .applyBtn {
     border-radius: 10px;
-    min-height: 44px;
+    min-height: 48px;
   }
 
   .sampleMetricRow {
@@ -2147,15 +2148,15 @@
   .stickyBottomBtn {
     display: block;
     width: 100%;
-    padding: 16px 24px;
+    padding: 18px 24px;
     background: #1e40af;
     color: #ffffff;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 700;
     border-radius: 14px;
     text-align: center;
     text-decoration: none;
-    min-height: 52px;
+    min-height: 56px;
     box-sizing: border-box;
     transition: background 0.2s ease;
     letter-spacing: -0.01em;
@@ -2181,12 +2182,12 @@
 @media (max-width: 480px) {
   /* 히어로 */
   .hero {
-    padding: 44px 20px 36px;
+    padding: 44px 24px 36px;
   }
 
   .title {
-    font-size: 24px;
-    line-height: 1.4;
+    font-size: 28px;
+    line-height: 1.35;
     margin-bottom: 12px;
   }
 
@@ -2197,19 +2198,19 @@
   }
 
   .primaryBtn {
-    padding: 16px 20px;
-    font-size: 16px;
-    min-height: 52px;
+    padding: 18px 24px;
+    font-size: 17px;
+    min-height: 56px;
     border-radius: 14px;
   }
 
   .heroBtnNote {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   /* 소셜 프루프 */
   .socialProof {
-    padding: 48px 20px;
+    padding: 48px 24px;
   }
 
   .socialProofGrid {
@@ -2231,7 +2232,7 @@
 
   /* 긴급 섹션 */
   .urgencySection {
-    padding: 48px 20px;
+    padding: 48px 24px;
   }
 
   .urgencyText {

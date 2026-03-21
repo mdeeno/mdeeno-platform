@@ -172,7 +172,7 @@
   right: 16px;
   background: #1e40af;
   color: #ffffff;
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   font-weight: 800;
   padding: 3px 10px;
   border-radius: 20px;
@@ -235,7 +235,7 @@
 
 .bottomCtaNote {
   margin-top: 12px;
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.5);
 }
 
@@ -256,7 +256,7 @@
   }
 
   .heroSub {
-    font-size: 0.85rem;
+    font-size: 0.875rem;
     margin-bottom: 22px;
   }
 
@@ -279,7 +279,7 @@
   .compareTable th,
   .compareTable td {
     padding: 10px 10px;
-    font-size: 0.85rem;
+    font-size: 0.875rem;
   }
 
   .compareCheck,
@@ -321,12 +321,12 @@
   }
 
   .desc {
-    font-size: 0.85rem;
+    font-size: 0.875rem;
     line-height: 1.6;
   }
 
   .heroSub {
-    font-size: 0.82rem;
+    font-size: 0.875rem;
     margin-bottom: 18px;
   }
 

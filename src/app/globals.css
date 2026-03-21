@@ -29,7 +29,7 @@
   --font-number: 44px;
 
   /* ── 버튼/터치 영역 ── */
-  --btn-min-height: 52px;
+  --btn-min-height: 56px;
   --touch-min: 48px;
 }
 
@@ -46,8 +46,8 @@
 /* ── Typography scale — mobile (small) ── */
 @media (max-width: 480px) {
   :root {
-    --font-h1: 24px;
-    --font-h2: 20px;
+    --font-h1: 28px;
+    --font-h2: 22px;
     --font-body: 16px;
     --font-number: 28px;
   }

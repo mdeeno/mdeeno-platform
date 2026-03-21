@@ -1,7 +1,7 @@
 .container {
   max-width: 640px;
   margin: 0 auto;
-  padding: 56px 20px 80px;
+  padding: 56px 24px 80px;
 }
 
 /* ── Loading ── */
@@ -19,7 +19,7 @@
 }
 
 .eyebrow {
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -52,7 +52,7 @@
 }
 
 .contextLabel {
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -95,7 +95,7 @@
 }
 
 .contextItem span {
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   color: #64748b;
   font-weight: 600;
 }
@@ -150,7 +150,7 @@
 }
 
 .premiumNudgeSkip {
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   color: #94a3b8;
   margin: 0;
 }
@@ -165,7 +165,7 @@
 }
 
 .contentsHeading {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   font-weight: 800;
   color: #0f172a;
   margin-bottom: 18px;
@@ -204,7 +204,7 @@
 
 .contentsDesc {
   display: block;
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   color: #64748b;
   line-height: 1.5;
 }
@@ -259,7 +259,7 @@
   border: 1px solid #fde047;
   border-radius: 8px;
   padding: 10px 14px;
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: #854d0e;
   text-align: center;
@@ -292,14 +292,14 @@
 }
 
 .priceOriginal {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.55);
   font-weight: 500;
   text-decoration: line-through;
 }
 
 .priceBadge {
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   font-weight: 800;
   background: var(--primary);
   color: #ffffff;
@@ -313,7 +313,7 @@
   padding: 13px 16px;
   border: 1.5px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
-  font-size: 0.95rem;
+  font-size: 1rem;
   background: rgba(255, 255, 255, 0.07);
   color: #f1f5f9;
   outline: none;
@@ -335,7 +335,7 @@
 }
 
 .fieldError {
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   color: #fca5a5;
   margin-top: -6px;
   margin-bottom: 10px;
@@ -354,7 +354,7 @@
   align-items: flex-start;
   gap: 10px;
   cursor: pointer;
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.75);
   line-height: 1.5;
 }
@@ -368,7 +368,7 @@
 }
 
 .socialProof {
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.65);
   text-align: center;
   margin-bottom: 14px;
@@ -401,7 +401,7 @@
 }
 
 .ctaHint {
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.45);
   text-align: center;
   margin-top: -8px;
@@ -409,7 +409,7 @@
 }
 
 .ctaNote {
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.65);
   text-align: center;
   line-height: 1.55;
@@ -417,7 +417,7 @@
 }
 
 .disclaimer {
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.45);
   line-height: 1.6;
   text-align: center;
@@ -443,7 +443,7 @@
 }
 
 .compareEyebrow {
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: #64748b;
   margin-bottom: 6px;
@@ -459,7 +459,7 @@
 .compareTable {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   margin-bottom: 16px;
 }
 
@@ -492,7 +492,7 @@
 
 .colName {
   display: block;
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   font-weight: 800;
   margin-bottom: 3px;
   color: #0f172a;
@@ -510,7 +510,7 @@
 
 .colGrade {
   display: inline-block;
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   font-weight: 700;
   padding: 2px 7px;
   border-radius: 20px;
@@ -520,7 +520,7 @@
 
 .groupRow td {
   background: #f1f5f9;
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: #64748b;
   padding: 7px 8px;
@@ -532,7 +532,7 @@
   display: block;
   font-weight: 600;
   color: #334155;
-  font-size: 0.84rem;
+  font-size: 0.875rem;
 }
 
 .checkYes {
@@ -552,7 +552,7 @@
 }
 
 .upsellLink {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: var(--primary);
   font-weight: 700;
   text-decoration: none;
@@ -568,7 +568,7 @@
 }
 
 .backLink {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: #94a3b8;
   font-weight: 600;
   text-decoration: none;
@@ -581,7 +581,7 @@
 @media (max-width: 768px) {
   .container {
     max-width: 100%;
-    padding: 40px 16px 60px;
+    padding: 40px 24px 60px;
   }
 
   .hero {
@@ -639,7 +639,7 @@
   }
 
   .compareTable {
-    font-size: 0.82rem;
+    font-size: 0.875rem;
   }
 
   .compareTable th,
@@ -651,7 +651,7 @@
 /* ── Mobile ── */
 @media (max-width: 480px) {
   .container {
-    padding: 32px 20px 48px;
+    padding: 32px 24px 48px;
   }
 
   .hero {
@@ -659,13 +659,13 @@
   }
 
   .hero h1 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     margin-bottom: 8px;
     word-break: keep-all;
   }
 
   .eyebrow {
-    font-size: 0.82rem;
+    font-size: 0.875rem;
     margin-bottom: 8px;
   }
 
@@ -701,7 +701,7 @@
   .premiumNudgeBtn {
     padding: 14px 24px;
     font-size: 1rem;
-    min-height: 48px;
+    min-height: 56px;
     width: 100%;
     box-sizing: border-box;
   }
@@ -737,7 +737,7 @@
   .purchaseBtn {
     padding: 16px 20px;
     font-size: 1rem;
-    min-height: 52px;
+    min-height: 56px;
   }
 
   .successBox {
@@ -755,7 +755,7 @@
   }
 
   .compareTable {
-    font-size: 0.82rem;
+    font-size: 0.875rem;
   }
 
   .compareTable th,
@@ -765,7 +765,7 @@
 }
 
 .guarantee {
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   color: var(--success, #16a34a);
   text-align: center;
   margin: 12px 0 0;
