@@ -1968,11 +1968,18 @@
     padding: 20px 20px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
     text-align: left;
     border-radius: 16px;
     border-top: none;
     border: 1px solid #e5e7eb;
+  }
+
+  .socialProofCard > div:last-child {
+    text-align: right;
+    flex-shrink: 0;
+    min-width: 80px;
   }
 
   .spComplex {
@@ -2151,9 +2158,9 @@
     background: #1e3a8a;
   }
 
-  /* sticky CTA 높이만큼 하단 여백 */
+  /* sticky CTA 높이만큼 하단 여백 (면책조항 포함) */
   .wrapper {
-    padding-bottom: 84px;
+    padding-bottom: 120px;
   }
 }
 
