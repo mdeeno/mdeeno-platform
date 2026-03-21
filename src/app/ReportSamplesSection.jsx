@@ -34,30 +34,26 @@ function BasicSamplePages() {
         <table className={styles.sampleTable}>
           <thead>
             <tr>
-              <th>시나리오</th>
-              <th>공사비 변동</th>
-              <th>예상 분담금</th>
-              <th>위험도</th>
+              <th>공사비</th>
+              <th>분담금</th>
+              <th>위험</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>현재 기준</td>
-              <td>0%</td>
-              <td>2.10억 원</td>
+              <td>현재</td>
+              <td>2.10억</td>
               <td className={styles.tdSafe}>안정</td>
             </tr>
             <tr>
-              <td>+10% 시나리오</td>
               <td>+10%</td>
-              <td>2.85억 원</td>
-              <td className={styles.tdWarn}>중위험</td>
+              <td>2.85억</td>
+              <td className={styles.tdWarn}>주의</td>
             </tr>
             <tr className={styles.tableRowHighlight}>
-              <td>+20% 시나리오</td>
               <td>+20%</td>
-              <td>3.62억 원</td>
-              <td className={styles.tdDanger}>고위험</td>
+              <td>3.62억</td>
+              <td className={styles.tdDanger}>위험</td>
             </tr>
           </tbody>
         </table>
@@ -80,26 +76,26 @@ function BasicSamplePages() {
         <table className={styles.sampleTable}>
           <thead>
             <tr>
-              <th>공사비 변동</th>
-              <th>순자산 변화</th>
-              <th>손실 여부</th>
+              <th>공사비</th>
+              <th>순자산</th>
+              <th>판정</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>+10%</td>
-              <td>+1,850만 원</td>
-              <td className={styles.tdSafe}>안전 구간</td>
+              <td>+1,850만</td>
+              <td className={styles.tdSafe}>안전</td>
             </tr>
             <tr className={styles.tableRowHighlight}>
               <td>+16.5%</td>
-              <td>0원 (한계선)</td>
-              <td className={styles.tdWarn}>경계 구간</td>
+              <td>0원</td>
+              <td className={styles.tdWarn}>한계선</td>
             </tr>
             <tr className={styles.tableRowHighlight}>
               <td>+20%</td>
-              <td>-2,480만 원</td>
-              <td className={styles.tdDanger}>잠식 시작</td>
+              <td>-2,480만</td>
+              <td className={styles.tdDanger}>잠식</td>
             </tr>
           </tbody>
         </table>
@@ -220,30 +216,30 @@ function PremiumSamplePages() {
         <table className={styles.sampleTable}>
           <thead>
             <tr>
-              <th>협상 전략</th>
-              <th>절감 예상액</th>
+              <th>전략</th>
+              <th>절감액</th>
               <th>난이도</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>원가 검증 요청</td>
-              <td className={styles.tdSafe}>-2,140만 원</td>
+              <td>원가 검증</td>
+              <td className={styles.tdSafe}>-2,140만</td>
               <td className={styles.tdSafe}>낮음</td>
             </tr>
             <tr>
-              <td>마감재 수준 협의</td>
-              <td className={styles.tdWarn}>-850만 원</td>
+              <td>마감재 협의</td>
+              <td className={styles.tdWarn}>-850만</td>
               <td className={styles.tdWarn}>중간</td>
             </tr>
             <tr>
-              <td>공기 단축 인센티브</td>
-              <td className={styles.tdWarn}>-420만 원</td>
+              <td>공기 단축</td>
+              <td className={styles.tdWarn}>-420만</td>
               <td className={styles.tdWarn}>중간</td>
             </tr>
             <tr>
-              <td style={{ fontWeight: 800 }}>전략 합산</td>
-              <td style={{ fontWeight: 800, color: '#16a34a' }}>-3,410만 원</td>
+              <td style={{ fontWeight: 800 }}>합산</td>
+              <td style={{ fontWeight: 800, color: '#16a34a' }}>-3,410만</td>
               <td>—</td>
             </tr>
           </tbody>
