@@ -1737,7 +1737,7 @@
   }
 
   .problemText span {
-    font-size: 0.75rem;
+    font-size: 0.82rem;
   }
 
   .trustSection {
@@ -1824,7 +1824,8 @@
   .nextBtn,
   .submitBtn {
     padding: 14px 24px;
-    font-size: 0.95rem;
+    font-size: 1rem;
+    min-height: 52px;
   }
 
   .backBtn {
@@ -1858,7 +1859,8 @@
 
   .ctaBtn {
     padding: 14px 24px;
-    font-size: 0.95rem;
+    font-size: 1rem;
+    min-height: 52px;
     min-width: unset;
     width: 100%;
     box-sizing: border-box;
@@ -1929,7 +1931,7 @@
   }
 
   .subtitle {
-    font-size: 0.88rem;
+    font-size: 0.92rem;
   }
 
   .problemSection {

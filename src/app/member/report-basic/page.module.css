@@ -19,7 +19,7 @@
 }
 
 .eyebrow {
-  font-size: 0.7rem;
+  font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -52,7 +52,7 @@
 }
 
 .contextLabel {
-  font-size: 0.7rem;
+  font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -95,7 +95,7 @@
 }
 
 .contextItem span {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   color: #64748b;
   font-weight: 600;
 }
@@ -150,7 +150,7 @@
 }
 
 .premiumNudgeSkip {
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   color: #94a3b8;
   margin: 0;
 }
@@ -299,7 +299,7 @@
 }
 
 .priceBadge {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 800;
   background: var(--primary);
   color: #ffffff;
@@ -401,7 +401,7 @@
 }
 
 .ctaHint {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: rgba(255, 255, 255, 0.45);
   text-align: center;
   margin-top: -8px;
@@ -417,7 +417,7 @@
 }
 
 .disclaimer {
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   color: rgba(255, 255, 255, 0.45);
   line-height: 1.6;
   text-align: center;
@@ -443,7 +443,7 @@
 }
 
 .compareEyebrow {
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #64748b;
   margin-bottom: 6px;
@@ -510,7 +510,7 @@
 
 .colGrade {
   display: inline-block;
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 700;
   padding: 2px 7px;
   border-radius: 20px;
@@ -520,7 +520,7 @@
 
 .groupRow td {
   background: #f1f5f9;
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #64748b;
   padding: 7px 8px;
@@ -665,12 +665,12 @@
   }
 
   .eyebrow {
-    font-size: 0.72rem;
+    font-size: 0.82rem;
     margin-bottom: 8px;
   }
 
   .subtitle {
-    font-size: 0.84rem;
+    font-size: 0.9rem;
     line-height: 1.6;
   }
 
@@ -699,8 +699,9 @@
   }
 
   .premiumNudgeBtn {
-    padding: 12px 24px;
-    font-size: 0.9rem;
+    padding: 14px 24px;
+    font-size: 1rem;
+    min-height: 48px;
     width: 100%;
     box-sizing: border-box;
   }
@@ -730,12 +731,13 @@
 
   .input {
     padding: 12px 14px;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .purchaseBtn {
-    padding: 14px 20px;
-    font-size: 0.95rem;
+    padding: 16px 20px;
+    font-size: 1rem;
+    min-height: 52px;
   }
 
   .successBox {
@@ -753,7 +755,7 @@
   }
 
   .compareTable {
-    font-size: 0.75rem;
+    font-size: 0.82rem;
   }
 
   .compareTable th,

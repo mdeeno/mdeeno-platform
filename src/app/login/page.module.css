@@ -22,7 +22,7 @@
 }
 
 .eyebrow {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -39,7 +39,7 @@
 }
 
 .desc {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: #64748b;
   line-height: 1.7;
   margin-bottom: 32px;
@@ -48,15 +48,17 @@
 .ctaBtn {
   display: block;
   width: 100%;
-  padding: 14px 24px;
+  padding: 16px 24px;
   background: #1e40af;
   color: #ffffff;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 800;
   border-radius: 10px;
   text-decoration: none;
   transition: background 0.15s;
   margin-bottom: 14px;
+  min-height: 52px;
+  box-sizing: border-box;
 }
 
 .ctaBtn:hover {

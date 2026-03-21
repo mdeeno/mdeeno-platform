@@ -1800,8 +1800,9 @@
 
   .secondaryBtn {
     padding: 15px 24px;
-    font-size: 15px;
+    font-size: 16px;
     border-radius: 12px;
+    min-height: 48px;
   }
 
   /* ── 섹션 공통 ── */
@@ -2008,7 +2009,7 @@
   }
 
   .socialProofSource {
-    font-size: 12px;
+    font-size: 13px;
     color: #b0b8c1;
   }
 
@@ -2188,7 +2189,7 @@
   }
 
   .subtitle {
-    font-size: 15px;
+    font-size: 16px;
     margin-bottom: 28px;
     line-height: 1.65;
   }
@@ -2201,7 +2202,7 @@
   }
 
   .heroBtnNote {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   /* 소셜 프루프 */
@@ -2238,7 +2239,8 @@
 
   .urgencyBtn {
     padding: 16px 20px;
-    font-size: 15px;
+    font-size: 16px;
+    min-height: 52px;
   }
 
   /* 기능 소개 */

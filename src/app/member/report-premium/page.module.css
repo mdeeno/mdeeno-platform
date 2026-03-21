@@ -19,7 +19,7 @@
 }
 
 .eyebrow {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -65,7 +65,7 @@
   position: absolute;
   left: 0;
   color: var(--success);
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   top: 1px;
 }
 
@@ -86,7 +86,7 @@
 }
 
 .contextLabel {
-  font-size: 0.7rem;
+  font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -129,7 +129,7 @@
 }
 
 .contextItem span {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   color: #64748b;
   font-weight: 600;
 }
@@ -150,7 +150,7 @@
 }
 
 .previewLabel {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -183,7 +183,7 @@
 }
 
 .pageLogoLight {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 900;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -192,7 +192,7 @@
 }
 
 .pageEyebrow {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -201,7 +201,7 @@
 }
 
 .pageEyebrowLight {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -228,7 +228,7 @@
   display: flex;
   flex-direction: column;
   gap: 3px;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: rgba(255, 255, 255, 0.45);
   margin-bottom: 14px;
 }
@@ -237,7 +237,7 @@
 .riskBadge {
   display: inline-block;
   padding: 2px 10px;
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 900;
   letter-spacing: 0.5px;
   border-radius: 3px;
@@ -256,7 +256,7 @@
 }
 
 .shockLabel {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: #64748b;
   margin-bottom: 16px;
 }
@@ -277,7 +277,7 @@
 
 .metricLabel {
   display: block;
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   color: #94a3b8;
   font-weight: 700;
   text-transform: uppercase;
@@ -311,7 +311,7 @@
 .previewTable th {
   padding: 7px 10px;
   text-align: left;
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 700;
 }
 
@@ -321,7 +321,7 @@
 }
 
 .previewNote {
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   color: #64748b;
   border-top: 1px solid #f1f5f9;
   padding-top: 10px;
@@ -356,7 +356,7 @@
 }
 
 .scriptIndexNum {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 900;
   color: var(--primary);
   flex-shrink: 0;
@@ -372,7 +372,7 @@
 }
 
 .scriptIndexTag {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #ffffff;
   background: var(--primary);
@@ -382,7 +382,7 @@
 }
 
 .scriptIndexLock {
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   flex-shrink: 0;
 }
 
@@ -396,7 +396,7 @@
 }
 
 .scriptLabel {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -505,7 +505,7 @@
 }
 
 .ctaPriceBadge {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 800;
   background: var(--primary);
   color: #ffffff;
@@ -514,7 +514,7 @@
 }
 
 .ctaDisclaimer {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: rgba(255, 255, 255, 0.5);
   line-height: 1.6;
   text-align: center;
@@ -578,7 +578,7 @@
 }
 
 .ctaHint {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: rgba(255, 255, 255, 0.45);
   text-align: center;
   margin-top: 8px;
@@ -633,7 +633,7 @@
 }
 
 .socialProof {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: rgba(255, 255, 255, 0.45);
   margin-bottom: 16px;
   text-align: center;
@@ -641,7 +641,7 @@
 
 .ctaNote {
   margin-top: 16px;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: rgba(255, 255, 255, 0.35);
 }
 
@@ -692,7 +692,7 @@
 }
 
 .contentSectionLabel {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -724,7 +724,7 @@
   position: absolute;
   left: 0;
   color: var(--danger);
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   top: 3px;
 }
 
@@ -754,7 +754,7 @@
 }
 
 .savingsNote {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: rgba(255, 255, 255, 0.6);
   line-height: 1.55;
 }
@@ -878,7 +878,7 @@
   }
 
   .eyebrow {
-    font-size: 0.72rem;
+    font-size: 0.82rem;
     margin-bottom: 8px;
   }
 
@@ -888,7 +888,7 @@
   }
 
   .subtitle {
-    font-size: 0.84rem;
+    font-size: 0.9rem;
     line-height: 1.55;
     margin-bottom: 18px;
   }
@@ -945,7 +945,7 @@
   }
 
   .metricLabel {
-    font-size: 0.72rem;
+    font-size: 0.82rem;
   }
 
   .metricValue {
@@ -978,12 +978,13 @@
 
   .ctaInput {
     padding: 12px 14px;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .ctaBtn {
-    padding: 13px 20px;
-    font-size: 0.95rem;
+    padding: 16px 20px;
+    font-size: 1rem;
+    min-height: 52px;
   }
 
   .contentSection {
@@ -1058,7 +1059,7 @@
   }
 
   .compareTable {
-    font-size: 0.75rem;
+    font-size: 0.82rem;
   }
 
   .compareTable th,
@@ -1077,7 +1078,7 @@
 }
 
 .compareEyebrow {
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: var(--primary);
   margin-bottom: 6px;
@@ -1108,7 +1109,7 @@
 }
 
 .gradeGuideTitle {
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #64748b;
   margin-bottom: 10px;
@@ -1128,7 +1129,7 @@
 
 .gradeBadge {
   flex-shrink: 0;
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 900;
   color: #ffffff;
   padding: 2px 6px;
@@ -1138,7 +1139,7 @@
 
 .gradeLabel {
   display: block;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #1e293b;
   line-height: 1.3;
@@ -1146,7 +1147,7 @@
 
 .gradeDesc {
   display: block;
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   color: #64748b;
   line-height: 1.4;
 }
@@ -1208,7 +1209,7 @@
 
 .colGrade {
   display: inline-block;
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 700;
   padding: 2px 8px;
   border-radius: 20px;
@@ -1218,7 +1219,7 @@
 
 .groupRow td {
   background: #f1f5f9;
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #64748b;
   padding: 7px 10px;
@@ -1236,7 +1237,7 @@
 
 .featureDesc {
   display: block;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: #64748b;
   margin-top: 2px;
   font-weight: 400;
