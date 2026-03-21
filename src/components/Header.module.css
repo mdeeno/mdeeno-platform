@@ -127,115 +127,86 @@
 .mobileNav {
   display: flex;
   flex-direction: column;
-  padding: 40px 24px;
-  gap: 12px;
+  padding: 32px 24px;
+  gap: 4px;
 }
 
 .mobileNav a {
-  font-size: 1.2rem;
+  font-size: 17px;
   font-weight: 600;
-  color: var(--text-main);
-  padding: 10px 0;
+  color: #191f28;
+  padding: 14px 16px;
+  border-radius: 12px;
+  transition: background 0.15s ease;
+}
+
+.mobileNav a:hover {
+  background: #f9fafb;
 }
 
 /* 모바일 메뉴 현재 페이지 강조 */
 .mobileActive {
-  color: #2563EB !important;
-  border-left: 3px solid #2563EB;
-  padding-left: 12px !important;
+  color: #1e40af !important;
+  background: #eff6ff;
 }
 
 .divider {
   border: none;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid #f1f5f9;
   margin: 8px 0;
 }
 
 .mobileStartBtn {
-  background-color: var(--primary);
+  background-color: #1e40af;
   color: white !important;
   text-align: center;
-  padding: 16px;
-  border-radius: 8px;
-  margin-top: 10px;
+  padding: 17px;
+  border-radius: 14px;
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 /* --- 반응형 미디어 쿼리 --- */
 @media (max-width: 768px) {
-  .actions {
-    display: none !important;
+  .container {
+    padding: 0 20px;
+    height: 56px;
   }
 
-  .hamburger {
-    display: flex !important;
-  }
-
-  .mobileMenu {
-    display: block;
-  }
-
+  /* 데스크톱 nav, actions 숨김 → 햄버거 메뉴로 대체 */
   .nav {
-    display: flex;
-    gap: 8px;
-  }
-
-  /* 데스크톱 스타일 리셋 */
-  .navItem {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-
-  .navActive {
-    border-bottom: none;
-  }
-
-  /* 외부 링크는 모바일에서 숨김 */
-  .nav .navItem:last-child {
     display: none;
   }
 
-  .nav .navItem {
-    display: inline-block;
-    font-size: 0.82rem;
-    font-weight: 700;
-    padding: 10px 14px;
-    border: 1.5px solid var(--border-color);
-    border-radius: 6px;
-    white-space: nowrap;
-    color: var(--text-main);
-    min-height: 44px;
-    box-sizing: border-box;
+  .actions {
+    display: none;
   }
 
-  .nav .navItem:first-child {
-    background: var(--primary);
-    color: #fff;
-    border-color: var(--primary);
+  .hamburger {
+    display: flex;
   }
 
-  .nav .navActive {
-    border-color: var(--primary);
-    color: var(--primary);
+  .mobileMenu {
+    top: 56px;
   }
 
-  .nav .navItem:first-child.navActive {
-    background: var(--primary);
-    color: #fff;
+  .menuOpen {
+    height: calc(100vh - 56px);
+  }
+
+  .logo {
+    font-size: 1.3rem;
   }
 }
 
 @media (max-width: 480px) {
   .container {
-    padding: 0 12px;
-    height: 56px;
+    padding: 0 16px;
   }
 
   .logo {
-    font-size: 1.25rem;
-  }
-
-  .nav .navItem {
-    font-size: 0.75rem;
-    padding: 9px 12px;
+    font-size: 1.2rem;
   }
 }
