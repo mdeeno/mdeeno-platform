@@ -343,6 +343,13 @@ export default function Home() {
       </section>
 
       <LandingLeadForm />
+
+      {/* ── Sticky Bottom CTA (모바일) ── */}
+      <div className={styles.stickyBottomCTA}>
+        <Link href="/member" className={styles.stickyBottomBtn}>
+          내 분담금 위험도 확인하기
+        </Link>
+      </div>
     </div>
   );
 }
