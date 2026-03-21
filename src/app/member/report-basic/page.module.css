@@ -651,7 +651,7 @@
 /* ── Mobile ── */
 @media (max-width: 480px) {
   .container {
-    padding: 32px 14px 48px;
+    padding: 32px 20px 48px;
   }
 
   .hero {
@@ -659,8 +659,9 @@
   }
 
   .hero h1 {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
     margin-bottom: 8px;
+    word-break: keep-all;
   }
 
   .eyebrow {

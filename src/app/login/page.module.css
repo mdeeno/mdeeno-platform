@@ -81,6 +81,12 @@
   }
 
   .title {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
+    word-break: keep-all;
+  }
+
+  .ctaBtn {
+    min-height: 52px;
+    font-size: 1rem;
   }
 }

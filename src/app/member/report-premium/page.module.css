@@ -870,7 +870,7 @@
 /* ── Mobile ───────────────────────────────────────────────── */
 @media (max-width: 480px) {
   .wrapper {
-    padding: 32px 14px 48px;
+    padding: 32px 20px 48px;
   }
 
   .intro {
@@ -883,7 +883,8 @@
   }
 
   .title {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
+    word-break: keep-all;
   }
 
   .subtitle {

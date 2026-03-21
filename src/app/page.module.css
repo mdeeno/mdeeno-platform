@@ -1992,7 +1992,7 @@
   }
 
   .spResult {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .spAmount {
@@ -2003,7 +2003,7 @@
   }
 
   .spLabel {
-    font-size: 12px;
+    font-size: 13px;
     color: #8b95a1;
   }
 
@@ -2089,6 +2089,10 @@
 
   .sampleCardBody {
     padding: 16px 14px;
+  }
+
+  .sampleCardPrice {
+    font-size: 1.25rem;
   }
 
   .sampleCardBtns {
