@@ -355,6 +355,7 @@
   font-size: 1.25rem;
   font-weight: 700;
   margin-bottom: 12px;
+  word-break: keep-all;
 }
 
 /* ── 실제 재건축 사례 분석 ── */
@@ -1407,7 +1408,7 @@
 }
 
 .landingLeadEyebrow {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1421,6 +1422,7 @@
   color: #f1f5f9;
   margin-bottom: 10px;
   line-height: 1.25;
+  word-break: keep-all;
 }
 
 .landingLeadDesc {
@@ -1750,7 +1752,7 @@
 
   .heroBtnNote {
     text-align: center;
-    color: #b0b8c1;
+    color: #8b95a1;
     font-size: 13px;
     margin-top: 10px;
   }
@@ -2010,7 +2012,7 @@
 
   .socialProofSource {
     font-size: 13px;
-    color: #b0b8c1;
+    color: #8b95a1;
   }
 
   /* 긴급 섹션 */
@@ -2276,7 +2278,7 @@
   }
 
   .caseStatLabel {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .caseStatValue {
@@ -2341,11 +2343,11 @@
   }
 
   .landingLeadDesc {
-    font-size: 13px;
+    font-size: 14px;
     margin-bottom: 20px;
   }
 
   .landingLeadBenefit {
-    font-size: 13px;
+    font-size: 14px;
   }
 }

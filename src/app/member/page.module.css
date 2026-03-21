@@ -1706,7 +1706,7 @@
 /* ── Large Mobile / Small Tablet (481-600px) ── */
 @media (max-width: 600px) {
   .page {
-    padding: 36px 14px 72px;
+    padding: 36px 16px 72px;
   }
 
   .header {
@@ -1753,7 +1753,7 @@
   }
 
   .trustCause {
-    font-size: 0.72rem;
+    font-size: 0.82rem;
     margin-bottom: 6px;
   }
 
@@ -1762,7 +1762,7 @@
   }
 
   .trustLabel {
-    font-size: 0.72rem;
+    font-size: 0.82rem;
   }
 
   /* Step Progress */
@@ -1772,13 +1772,13 @@
   }
 
   .stepDot {
-    width: 30px;
-    height: 30px;
-    font-size: 0.75rem;
+    width: 32px;
+    height: 32px;
+    font-size: 0.82rem;
   }
 
   .stepLabel {
-    font-size: 0.75rem;
+    font-size: 0.82rem;
   }
 
   .stepLine {
