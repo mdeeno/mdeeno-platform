@@ -18,11 +18,15 @@
   align-items: center;
 }
 
-.logo {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: #1e40af;
-  letter-spacing: -0.5px;
+.logoLink {
+  display: flex;
+  align-items: center;
+}
+
+.logoImg {
+  height: 32px;
+  width: auto;
+  display: block;
 }
 
 .nav {
@@ -210,8 +214,8 @@
     display: flex !important;
   }
 
-  .logo {
-    font-size: 1.25rem;
+  .logoImg {
+    height: 28px;
   }
 }
 

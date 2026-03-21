@@ -16,10 +16,10 @@
   margin-bottom: 32px;
 }
 
-.logo {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: var(--text-main);
+.logoImg {
+  height: 28px;
+  width: auto;
+  display: block;
   margin-bottom: 4px;
 }
 
@@ -98,8 +98,8 @@
     margin-bottom: 18px;
   }
 
-  .logo {
-    font-size: 1.1rem;
+  .logoImg {
+    height: 24px;
   }
 
   .desc {

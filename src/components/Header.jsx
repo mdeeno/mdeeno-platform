@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './Header.module.css';
 import { TECH_URL } from '@/lib/constants';
 
@@ -23,8 +24,15 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <Link href="/" className={styles.logo}>
-          M-DEENO
+        <Link href="/" className={styles.logoLink}>
+          <Image
+            src="/logo.png"
+            alt="M-DEENO"
+            width={256}
+            height={40}
+            className={styles.logoImg}
+            priority
+          />
         </Link>
 
         {/* 데스크톱 메뉴 */}

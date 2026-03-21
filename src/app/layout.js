@@ -15,6 +15,10 @@ export const metadata = {
       'naver-site-verification': ['905d72e9887519789a9582161fb78f72480e8152'],
     },
   },
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
   openGraph: {
     title: 'M-DEENO | 재건축 분담금, 실제로 얼마나 늘어날까요?',
     description: '공사비 상승 시 내 분담금 변화를 30초 만에 분석합니다',

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -6,7 +7,13 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.info}>
-          <h2 className={styles.logo}>M-DEENO</h2>
+          <Image
+            src="/logo-sm.png"
+            alt="M-DEENO"
+            width={204}
+            height={32}
+            className={styles.logoImg}
+          />
           <p className={styles.desc}>재건축 분담금 리스크 분석 서비스</p>
         </div>
         <div className={styles.links}>
