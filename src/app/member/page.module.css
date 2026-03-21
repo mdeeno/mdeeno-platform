@@ -1386,9 +1386,10 @@
 .modalPrivacyRow input[type="checkbox"] {
   margin-top: 2px;
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   accent-color: var(--primary);
+  cursor: pointer;
 }
 
 .modalServiceIntro {

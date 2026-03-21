@@ -63,7 +63,7 @@ export default function ReportsPage() {
                   <td className={styles.compareCheck}>&#10003;</td>
                 </tr>
                 <tr>
-                  <td>총회 발언 스크립트 5종</td>
+                  <td>총회 발언 스크립트 5종 (마이크 앞에서 바로 읽기 가능)</td>
                   <td className={styles.compareMiss}>&#10007;</td>
                   <td className={styles.compareCheck}>&#10003;</td>
                 </tr>
