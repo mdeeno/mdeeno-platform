@@ -28,8 +28,8 @@ export default function Header() {
           <Image
             src="/logo.png"
             alt="M-DEENO"
-            width={256}
-            height={40}
+            width={154}
+            height={24}
             className={styles.logoImg}
             priority
           />

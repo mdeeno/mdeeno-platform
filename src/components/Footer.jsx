@@ -10,8 +10,8 @@ export default function Footer() {
           <Image
             src="/logo-sm.png"
             alt="M-DEENO"
-            width={204}
-            height={32}
+            width={141}
+            height={22}
             className={styles.logoImg}
           />
           <p className={styles.desc}>재건축 분담금 리스크 분석 서비스</p>

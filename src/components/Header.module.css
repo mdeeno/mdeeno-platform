@@ -24,7 +24,7 @@
 }
 
 .logoImg {
-  height: 32px;
+  height: 24px;
   width: auto;
   display: block;
 }
@@ -215,7 +215,7 @@
   }
 
   .logoImg {
-    height: 28px;
+    height: 20px;
   }
 }
 
