@@ -10,7 +10,7 @@
 }
 
 .eyebrow {
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -60,7 +60,7 @@
 }
 
 .metricLabel {
-  font-size: 0.7rem;
+  font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -81,7 +81,7 @@
 }
 
 .metricSub {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: #94a3b8;
 }
 
@@ -124,13 +124,13 @@
 }
 
 .trendBarValue {
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: #374151;
 }
 
 .trendBarYear {
-  font-size: 0.7rem;
+  font-size: 0.875rem;
   color: #94a3b8;
 }
 
@@ -165,7 +165,7 @@
   left: 14px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: #e63946;
 }
 
@@ -275,7 +275,7 @@
   }
 
   .eyebrow {
-    font-size: 0.65rem;
+    font-size: 0.875rem;
     margin-bottom: 8px;
   }
 
@@ -285,7 +285,7 @@
   }
 
   .desc {
-    font-size: 0.85rem;
+    font-size: 0.875rem;
     line-height: 1.65;
   }
 
@@ -324,7 +324,7 @@
   }
 
   .riskItem {
-    font-size: 0.82rem;
+    font-size: 0.875rem;
     padding: 12px 14px 12px 38px;
   }
 
@@ -339,7 +339,7 @@
   }
 
   .ctaDesc {
-    font-size: 0.82rem;
+    font-size: 0.875rem;
     margin-bottom: 20px;
   }
 

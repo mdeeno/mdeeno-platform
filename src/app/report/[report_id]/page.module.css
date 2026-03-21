@@ -36,7 +36,7 @@
 }
 
 .eyebrow {
-  font-size: 0.7rem;
+  font-size: 0.875rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -59,7 +59,7 @@
 }
 
 .date {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: #94a3b8;
 }
 
@@ -105,7 +105,7 @@
 }
 
 .metricLabel {
-  font-size: 0.68rem;
+  font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -120,7 +120,7 @@
 }
 
 .metricUnit {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #94a3b8;
 }
@@ -253,7 +253,7 @@
 
 /* ── Disclaimer ───────────────────────────────────────────── */
 .disclaimer {
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   color: #94a3b8;
   text-align: center;
   line-height: 1.6;

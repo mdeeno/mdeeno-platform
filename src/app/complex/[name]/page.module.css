@@ -10,7 +10,7 @@
 }
 
 .eyebrow {
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -86,7 +86,7 @@
 }
 
 .costCardEyebrow {
-  font-size: 0.68rem;
+  font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -102,13 +102,13 @@
 }
 
 .costCardUnit {
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #64748b;
 }
 
 .costCardSub {
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   color: #94a3b8;
   margin-top: 4px;
 }
@@ -133,7 +133,7 @@
 }
 
 .costRowLabel {
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: #64748b;
   white-space: nowrap;
@@ -158,7 +158,7 @@
 }
 
 .costRowVal {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   font-weight: 800;
   color: #0f172a;
   text-align: right;
@@ -166,7 +166,7 @@
 }
 
 .costNote {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: #64748b;
   margin-top: 16px;
   padding-top: 14px;
@@ -191,7 +191,7 @@
 }
 
 .stageRiskBadge {
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   font-weight: 900;
   letter-spacing: 0.05em;
 }
@@ -203,7 +203,7 @@
 }
 
 .stageRiskDesc {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: #475569;
   line-height: 1.5;
 }
@@ -232,7 +232,7 @@
 }
 
 .rangeBigLabel {
-  font-size: 0.68rem;
+  font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -267,7 +267,7 @@
 }
 
 .rangeNote {
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   color: #94a3b8;
   line-height: 1.55;
   border-top: 1px solid #e2e8f0;
@@ -305,7 +305,7 @@
   left: 14px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: #e63946;
 }
 
@@ -335,7 +335,7 @@
 }
 
 .strategyDesc {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: #64748b;
   line-height: 1.65;
 }
@@ -354,7 +354,7 @@
 }
 
 .participationEyebrow {
-  font-size: 0.68rem;
+  font-size: 0.875rem;
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -395,14 +395,14 @@
 }
 
 .statUnit {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: #64748b;
   margin-top: -2px;
 }
 
 .statLabel {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: #64748b;
   margin-top: 6px;
   font-weight: 600;
@@ -420,7 +420,7 @@
 }
 
 .participationNote {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: #94a3b8;
 }
 
@@ -461,7 +461,7 @@
 }
 
 .overviewLabel {
-  font-size: 0.68rem;
+  font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -481,7 +481,7 @@
 }
 
 .currentBadge {
-  font-size: 0.6rem;
+  font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0;
 }
@@ -504,7 +504,7 @@
 
 /* ── Range Box Label ──────────────────────────────────────── */
 .rangeBoxLabel {
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -585,7 +585,7 @@
   }
 
   .eyebrow {
-    font-size: 0.65rem;
+    font-size: 0.875rem;
     margin-bottom: 8px;
   }
 
@@ -595,7 +595,7 @@
   }
 
   .desc {
-    font-size: 0.85rem;
+    font-size: 0.875rem;
   }
 
   .ctaBtnTop {
@@ -639,7 +639,7 @@
   }
 
   .costRowVal {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
   }
 
   .stageRiskGrid {
@@ -648,7 +648,7 @@
   }
 
   .stageRiskName {
-    font-size: 0.82rem;
+    font-size: 0.875rem;
   }
 
   .rangeBigVal {
