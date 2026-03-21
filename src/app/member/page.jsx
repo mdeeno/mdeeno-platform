@@ -274,7 +274,7 @@ export default function ShockCalculatorPage() {
         </h1>
         <p className={styles.subtitle}>
           내 돈이 얼마나 깎이는지 · 위험 등급 · 다른 단지와 공사비 비교까지<br />
-          1분 안에 전문가처럼 진단합니다.
+          1분이면 내 단지 리스크를 바로 확인할 수 있습니다.
         </p>
         <p className={styles.privacyNotice}>
           입력하신 정보는 분석에만 사용되며, 외부에 공유되지 않습니다.
