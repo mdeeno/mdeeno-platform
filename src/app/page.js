@@ -2,6 +2,7 @@ import Link from 'next/link';
 import styles from './page.module.css';
 import LandingLeadForm from './LandingLeadForm';
 import ReportSamplesSection from './ReportSamplesSection';
+import StickyMobileCTA from './StickyMobileCTA';
 
 export default function Home() {
   return (
@@ -108,11 +109,7 @@ export default function Home() {
           <p className={styles.socialProofSource}>
             (사)주거환경연구원 정비사업 공사비 실태조사(2024, 65개 구역 실측) 기반 시뮬레이션 예시
           </p>
-          <div className={styles.sectionCta}>
-            <Link href="/member" className={styles.sectionCtaBtn}>
-              내 단지는 어떤 상황인지 확인하기 →
-            </Link>
-          </div>
+          {/* CTA 제거 — 다음 섹션으로 자연스럽게 이어짐 */}
         </div>
       </section>
 
@@ -335,22 +332,13 @@ export default function Home() {
               </tbody>
             </table>
           </div>
-          <div className={styles.sectionCta}>
-            <Link href="/member" className={styles.sectionCtaBtn}>
-              내 분담금 위험도 확인하기 →
-            </Link>
-          </div>
+          {/* CTA 제거 — 아래 리드 캡처 폼으로 자연스럽게 이어짐 */}
         </div>
       </section>
 
       <LandingLeadForm />
 
-      {/* ── Sticky Bottom CTA (모바일) ── */}
-      <div className={styles.stickyBottomCTA}>
-        <Link href="/member" className={styles.stickyBottomBtn}>
-          내 분담금 위험도 확인하기
-        </Link>
-      </div>
+      <StickyMobileCTA />
     </div>
   );
 }

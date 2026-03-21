@@ -1688,7 +1688,7 @@
 
   /* ── 히어로 ── */
   .hero {
-    padding: 56px 24px 48px;
+    padding: 36px 24px 40px;
     background: #ffffff;
   }
 
@@ -1709,9 +1709,9 @@
 
   .title {
     padding: 0;
-    font-size: 26px;
-    line-height: 1.4;
-    margin-bottom: 16px;
+    font-size: 28px;
+    line-height: 1.35;
+    margin-bottom: 14px;
     color: #191f28;
     letter-spacing: -0.03em;
   }
@@ -1722,10 +1722,10 @@
 
   .subtitle {
     padding: 0;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
     font-size: 16px;
-    line-height: 1.7;
-    color: #6b7684;
+    line-height: 1.65;
+    color: #4e5968;
     font-weight: 400;
     background: none;
     border-left: none;
@@ -1736,9 +1736,9 @@
   .heroSubLink {
     display: block;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 16px;
     font-size: 14px;
-    color: #6b7684;
+    color: #8b95a1;
   }
 
   .btnGroup {
@@ -1752,14 +1752,14 @@
     text-align: center;
     color: #b0b8c1;
     font-size: 13px;
-    margin-top: 12px;
+    margin-top: 10px;
   }
 
   .heroChildNote {
     text-align: center;
     font-size: 14px;
     color: #8b95a1;
-    margin-top: 24px;
+    margin-top: 20px;
   }
 
   .resultPreview {
