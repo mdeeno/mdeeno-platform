@@ -19,7 +19,7 @@ function BasicSamplePages() {
         </h3>
         <div className={styles.samplePageMeta}>
           <span>분석 단지: OO아파트</span>
-          <span>종전자산: 5.0억 원</span>
+          <span>종전자산: 7.2억 원</span>
           <span>발행일: 2026.03.05</span>
         </div>
         <span className={`${styles.sampleRiskBadge} ${styles.badgeR2}`}>
@@ -44,25 +44,25 @@ function BasicSamplePages() {
             <tr>
               <td>현재 기준</td>
               <td>0%</td>
-              <td>1.20억 원</td>
+              <td>2.10억 원</td>
               <td className={styles.tdSafe}>안정</td>
             </tr>
             <tr>
               <td>+10% 시나리오</td>
               <td>+10%</td>
-              <td>1.32억 원</td>
+              <td>2.85억 원</td>
               <td className={styles.tdWarn}>중위험</td>
             </tr>
             <tr className={styles.tableRowHighlight}>
               <td>+20% 시나리오</td>
               <td>+20%</td>
-              <td>1.44억 원</td>
+              <td>3.62억 원</td>
               <td className={styles.tdDanger}>고위험</td>
             </tr>
           </tbody>
         </table>
         <p className={styles.samplePageNote}>
-          공사비 20% 상승 시 내 자산의 28.8%가 추가로 나감 — 협상 대응 필요
+          공사비 20% 상승 시 내 자산의 21.1%가 추가로 나감 — 협상 대응 필요
         </p>
       </div>
 
@@ -71,7 +71,7 @@ function BasicSamplePages() {
         <p className={styles.samplePageSectionEyebrow}>섹션 02</p>
         <h4 className={styles.samplePageSectionTitle}>손실이 시작되는 한계선 분석</h4>
         <div className={styles.sampleThresholdBox}>
-          <div className={styles.sampleThresholdNum}>+14.8%</div>
+          <div className={styles.sampleThresholdNum}>+16.5%</div>
           <div className={styles.sampleThresholdDesc}>
             공사비가 이 수준을 초과하는 순간<br />
             순자산이 감소하기 시작합니다
@@ -88,17 +88,17 @@ function BasicSamplePages() {
           <tbody>
             <tr>
               <td>+10%</td>
-              <td>+240만 원</td>
+              <td>+1,850만 원</td>
               <td className={styles.tdSafe}>안전 구간</td>
             </tr>
             <tr className={styles.tableRowHighlight}>
-              <td>+14.8%</td>
+              <td>+16.5%</td>
               <td>0원 (한계선)</td>
               <td className={styles.tdWarn}>경계 구간</td>
             </tr>
             <tr className={styles.tableRowHighlight}>
               <td>+20%</td>
-              <td>-1,440만 원</td>
+              <td>-2,480만 원</td>
               <td className={styles.tdDanger}>잠식 시작</td>
             </tr>
           </tbody>
@@ -187,7 +187,7 @@ function PremiumSamplePages() {
       <div className={styles.samplePage}>
         <p className={styles.samplePageSectionEyebrow}>핵심 요약</p>
         <h4 className={styles.samplePageSectionTitle}>핵심 위험 지표</h4>
-        <div className={styles.sampleShockNumber}>+1,200만원</div>
+        <div className={styles.sampleShockNumber}>+8,700만원</div>
         <p className={styles.sampleShockLabel}>
           공사비 10% 상승 시 추가 예상 손실
         </p>
@@ -195,7 +195,7 @@ function PremiumSamplePages() {
           <div className={styles.sampleMetric}>
             <span className={styles.sampleMetricLabel}>추가 손실 비율</span>
             <span className={`${styles.sampleMetricValue} ${styles.valueDanger}`}>
-              24.0%
+              36.2%
             </span>
           </div>
           <div className={styles.sampleMetric}>
@@ -207,7 +207,7 @@ function PremiumSamplePages() {
           <div className={styles.sampleMetric}>
             <span className={styles.sampleMetricLabel}>공사비 깎기 가능</span>
             <span className={`${styles.sampleMetricValue} ${styles.valueSafe}`}>
-              ~264만원
+              ~2,140만원
             </span>
           </div>
         </div>
@@ -228,22 +228,22 @@ function PremiumSamplePages() {
           <tbody>
             <tr>
               <td>원가 검증 요청</td>
-              <td className={styles.tdSafe}>-264만 원</td>
+              <td className={styles.tdSafe}>-2,140만 원</td>
               <td className={styles.tdSafe}>낮음</td>
             </tr>
             <tr>
               <td>마감재 수준 협의</td>
-              <td className={styles.tdWarn}>-105만 원</td>
+              <td className={styles.tdWarn}>-850만 원</td>
               <td className={styles.tdWarn}>중간</td>
             </tr>
             <tr>
               <td>공기 단축 인센티브</td>
-              <td className={styles.tdWarn}>-52만 원</td>
+              <td className={styles.tdWarn}>-420만 원</td>
               <td className={styles.tdWarn}>중간</td>
             </tr>
             <tr>
               <td style={{ fontWeight: 800 }}>전략 합산</td>
-              <td style={{ fontWeight: 800, color: '#16a34a' }}>-421만 원</td>
+              <td style={{ fontWeight: 800, color: '#16a34a' }}>-3,410만 원</td>
               <td>—</td>
             </tr>
           </tbody>
